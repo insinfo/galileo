@@ -1,0 +1,25 @@
+name: galileo_hot
+description: Supports hot reloading/hot code push of galileo servers on file changes.
+version: 3.0.0
+author: Isaque Neves <insinfo2008@gmail.com>
+homepage: https://github.com/insinfo/galileo.git
+#publish_to: none
+
+environment:
+  sdk: ">=2.10.0 <3.0.0"
+
+dependencies:
+  galileo_framework:  ^3.0.0
+  galileo_websocket: ^3.0.0   
+  charcode: ^1.0.0
+  glob: ^2.0.0
+  html_builder: ^1.0.0
+  io: ^0.3.5
+  path: ^1.0.0
+  vm_service_lib: ^3.22.2+1
+  watcher: ^1.0.0
+
+dev_dependencies:
+  http: ^0.13.0
+  logging: ^1.0.0
+  pedantic: ^1.0.0

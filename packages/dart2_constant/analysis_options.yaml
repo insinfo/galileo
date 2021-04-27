@@ -1,0 +1,5 @@
+analyzer:
+  strong-mode: true
+  errors:
+    deprecated_member_use: ignore
+

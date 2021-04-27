@@ -1,0 +1,5 @@
+included: true
+ # - "./include.yaml"
+hello: world
+foo:
+  version: bar

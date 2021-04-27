@@ -1,0 +1,14 @@
+name: dart2_constant
+version: 1.0.1-dev
+description: A polyfill for Dart 2 constant names.
+author: Dart Team <misc@dartlang.org>
+homepage: https://github.com/dart-lang/dart2_constant
+
+environment:
+  sdk: '>=1.24.0 <2.0.0'
+
+dev_dependencies:
+  args: "^1.0.0"
+  analyzer: ">=0.30.0 <0.32.0"
+  dart_style: "^1.0.0"
+  path: "^1.0.0"

@@ -1,0 +1,20 @@
+name: galileo_production
+version: 2.0.0
+description: Helpers for concurrency, message-passing, rotating loggers, and other production functionality in galileo.
+author: Isaque Neves <insinfo2008@gmail.com>
+homepage: https://github.com/insinfo/galileo.git
+#publish_to: none
+
+environment:
+  sdk: ">=2.10.0 <3.0.0"
+
+dependencies:
+  galileo_container: ^2.2.1
+  galileo_framework: ^3.0.0
+  args: ^2.0.0 #2.1.0 Null safety
+  io: ^0.3.5 # 1.0.0  Null safety
+  logging: ^1.0.0 # 1.0.1  Null safety
+  galileo_pub_sub: ^3.0.0
+
+dev_dependencies:
+  pedantic: ^1.11.0 # Null safety
