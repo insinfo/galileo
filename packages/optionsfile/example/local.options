@@ -1,0 +1,3 @@
+# These values will be used unless overridden in local.options
+port=2000
+hostname=www.google.com

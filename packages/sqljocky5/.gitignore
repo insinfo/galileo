@@ -1,0 +1,17 @@
+.children
+.project
+.idea
+*.iml
+examples
+docs
+.dart_tool
+.packages
+.pub
+packages
+pubspec.lock
+*~
+out
+javaspeed/build
+javaspeed/gradle
+javaspeed/.gradle
+connection.options

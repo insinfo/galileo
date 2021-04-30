@@ -1,5 +1,5 @@
 name: galileo_framework
-version: 3.0.0
+version: 3.0.1
 description: A high-powered HTTP server with dependency injection, routing and much more.
 author: Isaque Neves <insinfo2008@gmail.com>
 homepage: https://github.com/insinfo/galileo.git
@@ -15,11 +15,11 @@ dependencies:
   charcode: ^1.0.0 #1.2.0  Null safety
   galileo_combinator: ^1.1.0
   file: ^6.1.0 #6.1.0 Null safety
-  http_parser: ^4.0.0
+  http_parser: '>3.1.4 <4.0.0'
   #http_server: ^0.9.0
   galileo_http_server: ^1.0.0 #1.0.0 Null safety
   http2: ^2.0.0 #2.0.0  Null safety
-  logging: ^1.0.0 # 1.0.1 Null safety
+  logging: '>0.0.1 <2.0.0' # 1.0.1  Null safety
   matcher: ^0.12.0 # 0.12.10  Null safety
   galileo_merge_map: ^1.0.2
 
@@ -35,7 +35,7 @@ dependencies:
   stack_trace: ^1.0.0 # 1.10.0  Null safety
   string_scanner: ^1.0.0 #1.1.0 Null safety
   tuple: ^2.0.0 #Null safety
-  uuid: ^3.0.1 #uuid: ^3.0.4  Null safety
+  uuid: '>2.0.0 <3.5.4'  #uuid: ^3.0.4  Null safety
 
 dev_dependencies:
   http: ^0.13.0 #0.13.1 Null safety

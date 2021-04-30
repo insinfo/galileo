@@ -1,0 +1,5 @@
+# These values will be used unless overridden in local.options
+port=1000
+hostname=localhost
+user=arnold
+type=simple
