@@ -1,22 +1,20 @@
 import 'dart:io';
-import 'package:angel_framework/angel_framework.dart';
-import 'package:angel_container/mirrors.dart';
-import 'package:angel_test/angel_test.dart';
-import 'package:angel_websocket/server.dart';
+import 'package:galileo_framework/galileo_framework.dart';
+import 'package:galileo_container/mirrors.dart';
+import 'package:galileo_test/galileo_test.dart';
+import 'package:galileo_websocket/server.dart';
 import 'package:test/test.dart';
 
 void main() {
-  Angel app;
+  Galileo app;
   TestClient client;
 
   setUp(() async {
-    app = Angel(reflector: MirrorsReflector())
+    app = Galileo(reflector: MirrorsReflector())
       ..get('/hello', (req, res) => 'Hello')
       ..get('/user_info', (req, res) => {'u': req.uri.userInfo})
       ..get(
-          '/error',
-          (req, res) => throw AngelHttpException.forbidden(message: 'Test')
-            ..errors.addAll(['foo', 'bar']))
+          '/error', (req, res) => throw GalileoHttpException.forbidden(message: 'Test')..errors.addAll(['foo', 'bar']))
       ..get('/body', (req, res) {
         res
           ..write('OK')
@@ -44,10 +42,9 @@ void main() {
               index: ([params]) async => [
                     <String, dynamic>{'michael': 'jackson'}
                   ],
-              create: (data, [params]) async =>
-                  <String, dynamic>{'foo': 'bar'}));
+              create: (data, [params]) async => <String, dynamic>{'foo': 'bar'}));
 
-    var ws = AngelWebSocket(app);
+    var ws = GalileoWebSocket(app);
     await app.configure(ws.configureServer);
     app.all('/ws', ws.handleRequest);
 
@@ -84,13 +81,13 @@ void main() {
       });
     });
 
-    test('isAngelHttpException', () async {
+    test('isGalileoHttpException', () async {
       var res = await client.get('/error');
       print(res.body);
-      expect(res, isAngelHttpException());
+      expect(res, isGalileoHttpException());
       expect(
           res,
-          isAngelHttpException(
+          isGalileoHttpException(
               statusCode: 403, message: 'Test', errors: ['foo', 'bar']));
     });
 
@@ -123,8 +120,8 @@ void main() {
     test('hasHeader', () async {
       var res = await client.get('/hello');
       expect(res, hasHeader('server'));
-      expect(res, hasHeader('server', 'angel'));
-      expect(res, hasHeader('server', ['angel']));
+      expect(res, hasHeader('server', 'galileo'));
+      expect(res, hasHeader('server', ['galileo']));
     });
 
     test('hasValidBody+hasContentType', () async {

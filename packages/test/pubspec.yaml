@@ -1,41 +1,21 @@
-author: Tobe O <thosakwe@gmail.com>
-description: Testing utility library for the galileo framework. Use with package:test.
-homepage: https://github.com/galileo-dart/test.git
 name: galileo_test
-version: 3.0.0
-publish_to: none
+description: Testing utility library for the galileo framework. Use with package:test.
+author: Isaque Neves <insinfo2008@gmail.com>
+homepage: https://github.com/insinfo/galileo
+version: 3.0.1
+
 environment: 
   sdk: ">=2.10.0 <3.0.0"
 dependencies: 
-  galileo_client:
-    git: 
-      url: https://github.com/insinfo/galileo.git
-      ref: sdk-2.12.x
-      path: packages/client
-  galileo_framework:
-    git: 
-      url: https://github.com/insinfo/galileo.git
-      ref: sdk-2.12.x
-      path: packages/framework
-  galileo_http_exception:
-    git: 
-      url: https://github.com/insinfo/galileo.git
-      ref: sdk-2.12.x
-      path: packages/http_exception
-  galileo_validate:
-    git: 
-      url: https://github.com/insinfo/galileo.git
-      ref: sdk-2.12.x
-      path: packages/validate
-  galileo_websocket:
-    git: 
-      url: https://github.com/insinfo/galileo.git
-      ref: sdk-2.12.x
-      path: packages/websocket
-  http: ^0.13.0
-  matcher: ^0.12.0
-  mock_request: ^1.0.0
-  web_socket_channel: ^1.2.0
+  galileo_client:    
+  galileo_framework:   
+  galileo_http_exception:    
+  galileo_validate:   
+  galileo_websocket: ^3.0.1  
+  http: ^0.13.3 #Null safety
+  matcher: ^0.12.10 #Null safety
+  galileo_mock_request: ^1.0.8
+  web_socket_channel: ^2.1.0 #Null safety
 dev_dependencies: 
   test: ^1.15.7
   

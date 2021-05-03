@@ -1,6 +1,6 @@
 name: galileo_websocket
 description: Support for using pkg:galileo_client with WebSockets. Designed for galileo.
-version: 3.0.0
+version: 3.0.1
 author: Isaque Neves <insinfo2008@gmail.com>
 homepage: https://github.com/insinfo/galileo.git
 
@@ -14,11 +14,11 @@ dependencies:
   galileo_client: ^3.0.0 
   galileo_framework: ^3.0.0  
   galileo_http_exception: ^2.0.1 
-  http: ^0.13.0
+  http: ^0.13.3 #Null safety
   galileo_merge_map: 
-  meta: 
-  stream_channel: ^2.0.0
-  web_socket_channel: ^1.2.0
+  meta: ^1.3.0 #Null safety
+  stream_channel: ^2.1.0 #Null safety
+  web_socket_channel: ^2.1.0 #Null safety
 
 dev_dependencies:
   galileo_container: ^2.2.1     

@@ -1,0 +1,15 @@
+name: galileo_html_builder
+description: Build HTML AST's and render them to HTML. This can be used as an internal DSL, i.e. for a templating engine.
+version: 2.0.0
+author: Isaque Neves <insinfo2008@gmail.com>
+homepage: https://github.com/insinfo/galileo
+
+environment:
+  sdk: ">=2.10.0 <3.0.0"
+
+dependencies:
+  collection: ^1.15.0 #Null safety
+
+dev_dependencies:
+  html: ^0.15.0 #Null safety
+  test: ^1.17.3 #Null safety

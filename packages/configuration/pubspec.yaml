@@ -1,6 +1,6 @@
 name: galileo_configuration
 description: Automatic YAML application configuration loader for galileo, with .env support.
-version: 3.0.0
+version: 3.0.2
 author: Isaque Neves <insinfo2008@gmail.com>
 homepage: https://github.com/insinfo/galileo.git
 #publish_to: none
@@ -9,11 +9,10 @@ environment:
 
 dependencies:
   galileo_framework: ^3.0.0
-  dotenv: ^3.0.0-nullsafety.0
-#  file: ^5.0.0
+  dotenv: ^3.0.0-nullsafety.0  #Null safety
   galileo_merge_map: ^1.0.2
   yaml: ^3.1.0 #Null safety
-  file:
+  file: ^6.1.0  #Null safety
 
 dev_dependencies:  
   logging:

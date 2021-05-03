@@ -1,5 +1,5 @@
 name: galileo_range_header
-version: 3.0.0
+version: 3.0.1
 description: Range header parser for Dart. Beyond parsing, a stream transformer is included.
 author: Isaque Neves <insinfo2008@gmail.com>
 homepage: https://github.com/insinfo/galileo.git
@@ -8,15 +8,15 @@ environment:
   sdk: ">=2.10.0 <3.0.0"
 
 dependencies:
-  async: ^2.0.0 # 2.5.0 Null safety
-  charcode: ^1.2.0
+  async: ^2.6.1 # Null safety
+  charcode: ^1.2.0 # Null safety
   quiver: ^3.0.1 # Null safety
-  source_span: ^1.0.0 # 1.8.1 Null safety
-  string_scanner: ^1.0.0 # 1.1.0 Null safety
+  source_span: ^1.8.1 #  Null safety
+  string_scanner: ^1.1.0  # Null safety
 
 dev_dependencies:
   galileo_framework:
-  #galileo_static: 
+  galileo_static: 
   file:
   http_parser: 
   logging: 

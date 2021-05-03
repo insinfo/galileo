@@ -1,11 +1,11 @@
 name: galileo_http_exception
-version: 2.0.1
+version: 2.0.2
 description: Exception class that can be serialized to JSON and serialized to clients.
 author: Isaque Neves <insinfo2008@gmail.com>
 homepage: https://github.com/insinfo/galileo.git
 
 environment:
-  sdk: ">=2.10.0 <3.0.0"
+  sdk: '>=2.12.0 <3.0.0'
   
 dev_dependencies:
   pedantic: ^1.11.0

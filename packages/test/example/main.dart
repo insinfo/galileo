@@ -1,21 +1,19 @@
 import 'dart:io';
-import 'package:angel_framework/angel_framework.dart';
-import 'package:angel_test/angel_test.dart';
-import 'package:angel_validate/angel_validate.dart';
-import 'package:angel_websocket/server.dart';
+import 'package:galileo_framework/galileo_framework.dart';
+import 'package:galileo_test/galileo_test.dart';
+import 'package:galileo_validate/galileo_validate.dart';
+import 'package:galileo_websocket/server.dart';
 import 'package:test/test.dart';
 
 main() {
-  Angel app;
+  Galileo app;
   TestClient client;
 
   setUp(() async {
-    app = new Angel()
+    app = new Galileo()
       ..get('/hello', (req, res) => 'Hello')
-      ..get(
-          '/error',
-          (req, res) => throw new AngelHttpException.forbidden(message: 'Test')
-            ..errors.addAll(['foo', 'bar']))
+      ..get('/error',
+          (req, res) => throw new GalileoHttpException.forbidden(message: 'Test')..errors.addAll(['foo', 'bar']))
       ..get('/body', (req, res) {
         res
           ..write('OK')
@@ -45,7 +43,7 @@ main() {
                   ],
               create: (data, [params]) async => {'foo': 'bar'}));
 
-    var ws = new AngelWebSocket(app);
+    var ws = new GalileoWebSocket(app);
     await app.configure(ws.configureServer);
     app.all('/ws', ws.handleRequest);
 
@@ -67,20 +65,16 @@ main() {
       });
 
       test('post', () async {
-        final response =
-            await client.post(Uri.parse('/hello'), body: {'foo': 'baz'});
+        final response = await client.post(Uri.parse('/hello'), body: {'foo': 'baz'});
         expect(response, allOf(hasStatus(200), isJson({'bar': 'baz'})));
       });
     });
 
-    test('isAngelHttpException', () async {
+    test('isGalileoHttpException', () async {
       var res = await client.get(Uri.parse('/error'));
       print(res.body);
-      expect(res, isAngelHttpException());
-      expect(
-          res,
-          isAngelHttpException(
-              statusCode: 403, message: 'Test', errors: ['foo', 'bar']));
+      expect(res, isGalileoHttpException());
+      expect(res, isGalileoHttpException(statusCode: 403, message: 'Test', errors: ['foo', 'bar']));
     });
 
     test('hasBody', () async {
@@ -92,8 +86,8 @@ main() {
     test('hasHeader', () async {
       var res = await client.get(Uri.parse('/hello'));
       expect(res, hasHeader('server'));
-      expect(res, hasHeader('server', 'angel'));
-      expect(res, hasHeader('server', ['angel']));
+      expect(res, hasHeader('server', 'galileo'));
+      expect(res, hasHeader('server', ['galileo']));
     });
 
     test('hasValidBody+hasContentType', () async {

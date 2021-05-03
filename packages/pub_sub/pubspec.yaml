@@ -1,5 +1,5 @@
 name: galileo_pub_sub
-version: 3.0.0
+version: 3.0.1
 description: Keep application instances in sync with a simple pub/sub API.
 author: Isaque Neves <insinfo2008@gmail.com>
 homepage: https://github.com/insinfo/galileo.git
@@ -8,9 +8,9 @@ environment:
   sdk: ">=2.10.0 <3.0.0"
 
 dependencies:
-  json_rpc_2: ^2.0.0
-  stream_channel: ">=1.0.0 <3.0.0"
-  uuid: ^3.0.1
+  json_rpc_2: ^3.0.0 #Null safety
+  stream_channel: ^2.1.0  #Null safety
+  uuid: ^3.0.4 #Null safety
 
 dev_dependencies:
   pedantic: ^1.11.0

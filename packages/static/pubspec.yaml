@@ -1,6 +1,6 @@
 name: galileo_static
 description: Static server middleware for galileo. Also capable of serving Range responses.
-version: 3.0.0
+version: 3.0.1
 homepage: https://github.com/insinfo/galileo.git
 author: Isaque Neves <insinfo2008@gmail.com>
 
@@ -11,14 +11,14 @@ environment:
 dependencies:
   galileo_framework: ^3.0.0    
   convert: ^3.0.0 #Null safety
-  crypto: ^3.0.0 # 3.0.1 Null safety
-  file: ^6.1.0 # 6.1.0 Null safety
-  http_parser: ^4.0.0 #4.0.0 Null safety
-  path: ^1.4.2 #1.8.0 Null safety
+  crypto: ^3.0.1 #  Null safety
+  file: ^6.1.0 #  Null safety
+  http_parser: ^4.0.0 # Null safety
+  path: ^1.8.0 # Null safety
   galileo_range_header: ^3.0.0
 
 dev_dependencies:
-  #galileo_test:    
+  galileo_test:  
   http:
   logging: ^1.0.0
   matcher: ^0.12.0

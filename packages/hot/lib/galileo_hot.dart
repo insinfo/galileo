@@ -10,13 +10,15 @@ import 'package:galileo_websocket/server.dart';
 import 'package:charcode/ascii.dart';
 import 'package:glob/glob.dart';
 import 'package:glob/list_local_fs.dart';
-import 'package:html_builder/elements.dart';
-import 'package:html_builder/html_builder.dart';
+import 'package:galileo_html_builder/elements.dart';
+import 'package:galileo_html_builder/galileo_html_builder.dart';
 import 'package:io/ansi.dart';
 import 'package:path/path.dart' as p;
-import 'package:vm_service_lib/vm_service_lib.dart' as vm;
-import 'package:vm_service_lib/vm_service_lib_io.dart' as vm;
+//import 'package:vm_service_lib/vm_service_lib.dart' as vm;
+//import 'package:vm_service_lib/vm_service_lib_io.dart' as vm;
 import 'package:watcher/watcher.dart';
+import 'package:vm_service/vm_service.dart' as vm;
+import 'package:vm_service/vm_service_io.dart' as vm;
 
 /// A utility class that watches the filesystem for changes, and starts new instances of an Galileo server.
 class HotReloader {
@@ -172,6 +174,7 @@ class HotReloader {
       } else {
         uri = uri.replace(scheme: 'ws');
       }
+
       _client = await vm.vmServiceConnectUri(uri.toString());
       _vmachine ??= await _client.getVM();
       _mainIsolate ??= _vmachine.isolates.first;

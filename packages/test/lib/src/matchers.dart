@@ -2,16 +2,14 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:matcher/matcher.dart';
-import 'package:angel_http_exception/angel_http_exception.dart';
-import 'package:angel_validate/angel_validate.dart';
+import 'package:galileo_http_exception/galileo_http_exception.dart';
+import 'package:galileo_validate/galileo_validate.dart';
 
-/// Expects a response to be a JSON representation of an `AngelHttpException`.
+/// Expects a response to be a JSON representation of an `GalileoHttpException`.
 ///
 /// You can optionally check for a matching [message], [statusCode] and [errors].
-Matcher isAngelHttpException(
-        {String message, int statusCode, Iterable<String> errors: const []}) =>
-    new _IsAngelHttpException(
-        message: message, statusCode: statusCode, errors: errors);
+Matcher isGalileoHttpException({String message, int statusCode, Iterable<String> errors: const []}) =>
+    new _IsGalileoHttpException(message: message, statusCode: statusCode, errors: errors);
 
 /// Expects a given response, when parsed as JSON,
 /// to equal a desired value.
@@ -52,8 +50,7 @@ class _IsJson extends Matcher {
 
   @override
   bool matches(item, Map matchState) =>
-      item is http.Response &&
-      equals(value).matches(json.decode(item.body), matchState);
+      item is http.Response && equals(value).matches(json.decode(item.body), matchState);
 }
 
 class _HasBody extends Matcher {
@@ -62,8 +59,7 @@ class _HasBody extends Matcher {
   _HasBody(this.body);
 
   @override
-  Description describe(Description description) =>
-      description.add('has body $body');
+  Description describe(Description description) => description.add('has body $body');
 
   @override
   bool matches(item, Map matchState) {
@@ -86,9 +82,7 @@ class _HasContentType extends Matcher {
 
   @override
   Description describe(Description description) {
-    var str = contentType is ContentType
-        ? ((contentType as ContentType).value)
-        : contentType.toString();
+    var str = contentType is ContentType ? ((contentType as ContentType).value) : contentType.toString();
     return description.add('has content type ' + str);
   }
 
@@ -99,11 +93,9 @@ class _HasContentType extends Matcher {
 
       if (contentType is ContentType) {
         var compare = ContentType.parse(item.headers['content-type']);
-        return equals(contentType.mimeType)
-            .matches(compare.mimeType, matchState);
+        return equals(contentType.mimeType).matches(compare.mimeType, matchState);
       } else {
-        return equals(contentType.toString())
-            .matches(item.headers['content-type'], matchState);
+        return equals(contentType.toString()).matches(item.headers['content-type'], matchState);
       }
     } else {
       return false;
@@ -129,14 +121,11 @@ class _HasHeader extends Matcher {
   bool matches(item, Map matchState) {
     if (item is http.Response) {
       if (value == true) {
-        return contains(key.toLowerCase())
-            .matches(item.headers.keys, matchState);
+        return contains(key.toLowerCase()).matches(item.headers.keys, matchState);
       } else {
         if (!item.headers.containsKey(key.toLowerCase())) return false;
         Iterable v = value is Iterable ? (value as Iterable) : [value];
-        return v
-            .map((x) => x.toString())
-            .every(item.headers[key.toLowerCase()].split(',').contains);
+        return v.map((x) => x.toString()).every(item.headers[key.toLowerCase()].split(',').contains);
       }
     } else {
       return false;
@@ -155,9 +144,7 @@ class _HasStatus extends Matcher {
   }
 
   @override
-  bool matches(item, Map matchState) =>
-      item is http.Response &&
-      equals(status).matches(item.statusCode, matchState);
+  bool matches(item, Map matchState) => item is http.Response && equals(status).matches(item.statusCode, matchState);
 }
 
 class _HasValidBody extends Matcher {
@@ -166,8 +153,7 @@ class _HasValidBody extends Matcher {
   _HasValidBody(this.validator);
 
   @override
-  Description describe(Description description) =>
-      description.add('matches validation schema ${validator.rules}');
+  Description describe(Description description) => description.add('matches validation schema ${validator.rules}');
 
   @override
   bool matches(item, Map matchState) {
@@ -181,22 +167,21 @@ class _HasValidBody extends Matcher {
   }
 }
 
-class _IsAngelHttpException extends Matcher {
+class _IsGalileoHttpException extends Matcher {
   String message;
   int statusCode;
   final List<String> errors = [];
 
-  _IsAngelHttpException(
-      {this.message, this.statusCode, Iterable<String> errors: const []}) {
+  _IsGalileoHttpException({this.message, this.statusCode, Iterable<String> errors: const []}) {
     this.errors.addAll(errors ?? []);
   }
 
   @override
   Description describe(Description description) {
     if (message?.isNotEmpty != true && statusCode == null && errors.isEmpty)
-      return description.add('is an Angel HTTP Exception');
+      return description.add('is an Galileo HTTP Exception');
     else {
-      var buf = new StringBuffer('is an Angel HTTP Exception with');
+      var buf = new StringBuffer('is an Galileo HTTP Exception with');
 
       if (statusCode != null) buf.write(' status code $statusCode');
 
@@ -224,22 +209,18 @@ class _IsAngelHttpException extends Matcher {
       final jsons = json.decode(item.body);
 
       if (jsons is Map && jsons['isError'] == true) {
-        var exc = new AngelHttpException.fromMap(jsons);
+        var exc = new GalileoHttpException.fromMap(jsons);
         print(exc.toJson());
 
         if (message?.isNotEmpty != true && statusCode == null && errors.isEmpty)
           return true;
         else {
-          if (statusCode != null) if (!equals(statusCode)
-              .matches(exc.statusCode, matchState)) return false;
+          if (statusCode != null) if (!equals(statusCode).matches(exc.statusCode, matchState)) return false;
 
-          if (message?.isNotEmpty == true) if (!equals(message)
-              .matches(exc.message, matchState)) return false;
+          if (message?.isNotEmpty == true) if (!equals(message).matches(exc.message, matchState)) return false;
 
           if (errors.isNotEmpty) {
-            if (!errors
-                .every((err) => contains(err).matches(exc.errors, matchState)))
-              return false;
+            if (!errors.every((err) => contains(err).matches(exc.errors, matchState))) return false;
           }
 
           return true;

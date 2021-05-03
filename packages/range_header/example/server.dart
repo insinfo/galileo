@@ -48,7 +48,7 @@ class _RangingVirtualDirectory extends VirtualDirectory {
 
       if (header.items.length == 1) {
         var item = header.items[0];
-        Stream<Uint8List> stream;
+        Stream<List<int>> stream;
         int len = 0, total = await file.length();
 
         if (item.start == -1) {
@@ -69,7 +69,7 @@ class _RangingVirtualDirectory extends VirtualDirectory {
           }
         }
 
-        res.contentType = new MediaType.parse(app.mimeTypeResolver.lookup(file.path) ?? 'application/octet-stream');
+        res.contentType = MediaType.parse(app.mimeTypeResolver.lookup(file.path) ?? 'application/octet-stream');
         res.statusCode = HttpStatus.partialContent;
         res.headers[HttpHeaders.contentLengthHeader] = len.toString();
         res.headers[HttpHeaders.contentRangeHeader] = 'bytes ' + item.toContentRange(total);
@@ -77,11 +77,11 @@ class _RangingVirtualDirectory extends VirtualDirectory {
         return false;
       } else {
         var totalFileSize = await file.length();
-        var transformer = new RangeHeaderTransformer(
+        var transformer = RangeHeaderTransformer(
             header, app.mimeTypeResolver.lookup(file.path) ?? 'application/octet-stream', await file.length());
         res.statusCode = HttpStatus.partialContent;
         res.headers[HttpHeaders.contentLengthHeader] = transformer.computeContentLength(totalFileSize).toString();
-        res.contentType = new MediaType('multipart', 'byteranges', {'boundary': transformer.boundary});
+        res.contentType = MediaType('multipart', 'byteranges', {'boundary': transformer.boundary});
         await file.openRead().cast<List<int>>().transform(transformer).pipe(res);
         return false;
       }

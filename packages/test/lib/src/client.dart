@@ -1,15 +1,15 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
-import 'package:angel_client/base_angel_client.dart' as client;
-import 'package:angel_client/io.dart' as client;
-import 'package:angel_framework/angel_framework.dart';
-import 'package:angel_framework/http.dart';
-import 'package:angel_websocket/io.dart' as client;
+import 'package:galileo_client/base_galileo_client.dart' as client;
+import 'package:galileo_client/io.dart' as client;
+import 'package:galileo_framework/galileo_framework.dart';
+import 'package:galileo_framework/http.dart';
+import 'package:galileo_websocket/io.dart' as client;
 import 'package:http/http.dart' as http hide StreamedResponse;
 import 'package:http/io_client.dart' as http;
 import 'package:http/src/streamed_response.dart';
-import 'package:mock_request/mock_request.dart';
+import 'package:galileo_mock_request/galileo_mock_request.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 import 'package:web_socket_channel/io.dart';
 //import 'package:uuid/uuid.dart';
@@ -23,10 +23,7 @@ const Map<String, String> _writeHeaders = const {
 final Uuid _uuid = new Uuid();*/
 
 /// Shorthand for bootstrapping a [TestClient].
-Future<TestClient> connectTo(Angel app,
-    {Map initialSession,
-    bool autoDecodeGzip: true,
-    bool useZone: false}) async {
+Future<TestClient> connectTo(Galileo app, {Map initialSession, bool autoDecodeGzip: true, bool useZone: false}) async {
   print("Load configuration");
   if (!app.environment.isProduction) {
     app.configuration.putIfAbsent('testMode', () => true);
@@ -36,17 +33,16 @@ Future<TestClient> connectTo(Angel app,
     print("Load plugins");
     await plugin(app);
   }
-  return new TestClient(app,
-      autoDecodeGzip: autoDecodeGzip != false, useZone: useZone)
+  return new TestClient(app, autoDecodeGzip: autoDecodeGzip != false, useZone: useZone)
     ..session.addAll(initialSession ?? {});
 }
 
-/// An `angel_client` that sends mock requests to a server, rather than actual HTTP transactions.
-class TestClient extends client.BaseAngelClient {
+/// An `galileo_client` that sends mock requests to a server, rather than actual HTTP transactions.
+class TestClient extends client.BaseGalileoClient {
   final Map<String, client.Service> _services = {};
 
   /// Session info to be sent to the server on every request.
-  final HttpSession session = new MockHttpSession(id: 'angel-test-client');
+  final HttpSession session = new MockHttpSession(id: 'galileo-test-client');
 
   /// A list of cookies to be sent to and received from the server.
   final List<Cookie> cookies = [];
@@ -55,16 +51,15 @@ class TestClient extends client.BaseAngelClient {
   final bool autoDecodeGzip;
 
   /// The server instance to mock.
-  final Angel server;
+  final Galileo server;
 
   @override
   String authToken;
 
-  AngelHttp _http;
+  GalileoHttp _http;
 
-  TestClient(this.server, {this.autoDecodeGzip: true, bool useZone: false})
-      : super(http.IOClient(), '/') {
-    _http = AngelHttp(server, useZone: useZone);
+  TestClient(this.server, {this.autoDecodeGzip: true, bool useZone: false}) : super(http.IOClient(), '/') {
+    _http = GalileoHttp(server, useZone: useZone);
   }
 
   Future close() {
@@ -74,8 +69,7 @@ class TestClient extends client.BaseAngelClient {
 
   /// Opens a WebSockets connection to the server. This will automatically bind the server
   /// over HTTP, if it is not already listening. Unfortunately, WebSockets cannot be mocked (yet!).
-  Future<client.WebSockets> websocket(
-      {String path: '/ws', Duration timeout}) async {
+  Future<client.WebSockets> websocket({String path: '/ws', Duration timeout}) async {
     if (_http.server == null) await _http.startServer();
     var url = _http.uri.replace(scheme: 'ws', path: path);
     var ws = _MockWebSockets(this, url.toString());
@@ -91,8 +85,7 @@ class TestClient extends client.BaseAngelClient {
       // Attempt to send as Basic auth
       var encoded = base64Url.encode(utf8.encode(request.url.userInfo));
       rq.headers.add('authorization', 'Basic $encoded');
-    } else if (rq.headers.value('authorization')?.startsWith('Basic ') ==
-        true) {
+    } else if (rq.headers.value('authorization')?.startsWith('Basic ') == true) {
       var encoded = rq.headers.value('authorization').substring(6);
       var decoded = utf8.decode(base64Url.decode(encoded));
       var oldRq = rq;
@@ -101,8 +94,7 @@ class TestClient extends client.BaseAngelClient {
       rq = newRq;
     }
 
-    if (authToken?.isNotEmpty == true)
-      rq.headers.add('authorization', 'Bearer $authToken');
+    if (authToken?.isNotEmpty == true) rq.headers.add('authorization', 'Bearer $authToken');
 
     rq..cookies.addAll(cookies)..session.addAll(session);
 
@@ -123,8 +115,7 @@ class TestClient extends client.BaseAngelClient {
 
     Stream<List<int>> stream = rs;
 
-    if (autoDecodeGzip != false &&
-        rs.headers['content-encoding']?.contains('gzip') == true) {
+    if (autoDecodeGzip != false && rs.headers['content-encoding']?.contains('gzip') == true) {
       stream = stream.transform(gzip.decoder);
     }
 
@@ -138,9 +129,7 @@ class TestClient extends client.BaseAngelClient {
         contentLength: rs.contentLength,
         isRedirect: rs.headers['location'] != null,
         headers: extractedHeaders,
-        persistentConnection:
-            rq.headers.value('connection')?.toLowerCase()?.trim() ==
-                'keep-alive',
+        persistentConnection: rq.headers.value('connection')?.toLowerCase()?.trim() == 'keep-alive',
         //|| keepAliveState,
         reasonPhrase: rs.reasonPhrase);
   }
@@ -150,29 +139,24 @@ class TestClient extends client.BaseAngelClient {
 
   @override
   Stream<String> authenticateViaPopup(String url, {String eventName: 'token'}) {
-    throw UnsupportedError(
-        'MockClient does not support authentication via popup.');
+    throw UnsupportedError('MockClient does not support authentication via popup.');
   }
 
   @override
-  Future configure(client.AngelConfigurer configurer) =>
-      Future.sync(() => configurer(this));
+  Future configure(client.GalileoConfigurer configurer) => Future.sync(() => configurer(this));
 
   @override
-  client.Service<Id, Data> service<Id, Data>(String path,
-      {Type type, client.AngelDeserializer<Data> deserializer}) {
+  client.Service<Id, Data> service<Id, Data>(String path, {Type type, client.GalileoDeserializer<Data> deserializer}) {
     String uri = path.toString().replaceAll(_straySlashes, "");
-    return _services.putIfAbsent(uri,
-            () => _MockService<Id, Data>(this, uri, deserializer: deserializer))
+    return _services.putIfAbsent(uri, () => _MockService<Id, Data>(this, uri, deserializer: deserializer))
         as client.Service<Id, Data>;
   }
 }
 
-class _MockService<Id, Data> extends client.BaseAngelService<Id, Data> {
+class _MockService<Id, Data> extends client.BaseGalileoService<Id, Data> {
   final TestClient _app;
 
-  _MockService(this._app, String basePath,
-      {client.AngelDeserializer<Data> deserializer})
+  _MockService(this._app, String basePath, {client.GalileoDeserializer<Data> deserializer})
       : super(null, _app, basePath, deserializer: deserializer);
 
   @override
@@ -194,8 +178,7 @@ class _MockWebSockets extends client.WebSockets {
   Future<WebSocketChannel> getConnectedWebSocket() async {
     Map<String, String> headers = {};
 
-    if (app.authToken?.isNotEmpty == true)
-      headers['authorization'] = 'Bearer ${app.authToken}';
+    if (app.authToken?.isNotEmpty == true) headers['authorization'] = 'Bearer ${app.authToken}';
 
     var socket = await WebSocket.connect(baseUrl.toString(), headers: headers);
     return IOWebSocketChannel(socket);
