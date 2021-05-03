@@ -1,0 +1,12 @@
+[Unit]
+Description=`angel` server
+
+[Service]
+Environment=ANGEL_ENV=production
+User=vagrant
+WorkingDirectory=/home/vagrant/app # Path to `angel` project
+ExecStart=/usr/lib/dart/bin/dart bin/prod.dart
+Restart=always # Restart process on crash
+
+[Install]
+WantedBy=multi-user.target

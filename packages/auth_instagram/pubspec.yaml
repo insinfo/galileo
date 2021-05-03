@@ -1,0 +1,10 @@
+name: angel_auth_instagram
+version: 1.0.0
+description: angel_auth strategy for Instagram OAuth2 login.
+author: Tobe O <thosakwe@gmail.com>
+homepage: https://github.com/angel-dart/auth_instagram
+environment:
+  sdk: ">=1.19.0"
+dependencies:
+  angel_auth: ^1.0.0
+  instagram: ^1.0.0-beta

@@ -1,0 +1,5 @@
+# Production configuration, will only be loaded when $ANGEL_ENV=production
+#
+# This YAML will be merged with what is found in default.yaml, so no need to redefine shared config
+debug: false
+jwt_secret: "15M6L803U270U2gKD0L15m5u3V1Oa542"

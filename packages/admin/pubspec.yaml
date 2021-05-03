@@ -1,0 +1,12 @@
+name: angel_admin
+version: 0.0.0
+dependencies:
+  angel_auth: ^1.0.0
+  angel_framework: ^1.0.0
+  angel_jael: ^1.0.0
+  angel_seo: ^1.0.0
+  angel_static: ^1.0.0
+  angel_validate: ^1.0.0
+dev_dependencies:
+  angel_file_service: ^1.0.0
+  logging: ^0.11.0

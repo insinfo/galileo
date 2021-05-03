@@ -1,0 +1,8 @@
+{
+    "plugins": [ "sharing", "versions" ],
+    "pluginsConfig": {
+        "versions": {
+            "type": "branches"
+        }
+    }
+}

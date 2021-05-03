@@ -1,0 +1,39 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+  config.vm.box = "ubuntu/xenial64"
+
+  config.vm.provision "shell", inline: <<-ROOT_PROVISION
+    #!/usr/bin/env bash
+
+    # Install nginx.
+    # Link our nginx config in, so we can serve our application.
+    apt-get update
+    apt-get install -y nginx
+    ln -s /home/vagrant/angel.conf /etc/nginx/sites-enabled/angel.conf
+    service nginx reload
+
+    # Install Dart
+    apt-get install -y apt-transport-https
+    sh -c 'curl https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -'
+    sh -c 'curl https://storage.googleapis.com/download.dartlang.org/linux/debian/dart_stable.list > /etc/apt/sources.list.d/dart_stable.list'
+    apt-get update
+    apt-get install -y dart
+
+    # Add Dart to PATH
+    echo 'PATH="/usr/lib/dart/bin:$PATH"' >> ~/.bashrc
+    source ~/.bashrc
+
+    # Finally, link our new service.
+    ln -s /home/vagrant/angel.service /etc/systemd/system/angel.service
+    systemctl daemon-reload
+    systemctl enable angel
+  ROOT_PROVISION
+  
+  # Run user-provisioning script.
+  config.vm.provision "shell", path: "user-provision.sh", privileged: false, keep_color: true
+
+  # Start the service, after all set-up is done.
+  config.vm.provision "shell", inline: "service angel start"
+end

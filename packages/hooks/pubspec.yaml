@@ -1,0 +1,8 @@
+name: angel_hooks
+environment:
+  sdk: ">=2.0.0 <3.0.0"
+dependencies:
+  angel_framework: ^2.0.0-alpha
+  json_god: ^2.0.0-beta
+dev_dependencies:
+  test: ^1.0.0

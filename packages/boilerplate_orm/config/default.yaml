@@ -1,0 +1,10 @@
+# Default configuration; loaded at startup
+debug: true
+foo: $FOO # Key from environment
+jwt_secret: "5E5S168GO00714812k2Lo473u0620DF8"
+postgres: # TODO: Put your PostgreSQL credentials here
+  host: 127.0.0.1
+  port: 5432
+  database: angel
+  username: postgres
+  password: password
