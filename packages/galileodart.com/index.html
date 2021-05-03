@@ -201,7 +201,7 @@
                         <a class="navbar-item" href="https://github.com/insinfo/galileo/tree/master/packages/gitbook" target="_blank">
                             Docs
                         </a>
-                        <a class="navbar-item" target="_blank" href="https://github.com/insinfo/galileo/tree/master/packages/examples-v2">
+                        <a class="navbar-item" target="_blank" href="https://github.com/insinfo/galileo/tree/master/packages/examples">
                             Examples
                         </a>
 
@@ -310,8 +310,8 @@
                 <pre style="margin-bottom: -3em">
                     <code class="bash" style="text-align: left; width: fit-content; margin: auto;">
 # Install the Galileo CLI, and scaffold a project.
-$ pub global activate Galileo_cli
-$ Galileo init hello
+$ pub global activate galileo_cli
+$ galileo init hello
                     </code>
                 </pre>
             </div>
@@ -414,12 +414,12 @@ class AccountsController extends Controller {
                     to work together, seamlessly.
                     <br><br>
                     And thanks to its
-                    <a href="https://github.com/Galileo-dart/test" target="_blank">unit testing support</a>,
+                    <a href="https://github.com/insinfo/galileo/tree/master/packages/test" target="_blank">unit testing support</a>,
                     you can ensure that your product works as expected, before hitting production.
                     Spend less time worrying about unforeseen bugs, and more time getting your
                     product to market.
                 </div>
-                <a href="https://docs.galileodart.com/v/2.x/guides/testing" class="button is-light" target="_blank">
+                <a href="https://github.com/insinfo/galileo/blob/master/packages/gitbook/guides/testing.md" class="button is-light" target="_blank">
                     Learn about testing...
                 </a>
             </div>
@@ -453,7 +453,7 @@ void main() {
                 <div>
                     <p class="heading">Latest Version</p>
                     <div class="title">
-                        <a class="tags has-addons" href="https://pub.dartlang.org/packages/Galileo_framework"
+                        <a class="tags has-addons" href="https://pub.dev/packages/galileo_framework"
                             target="_blank">
                             <span class="tag is-dark">pub</span>
                             <span class="tag is-info pub-version">...</span>
@@ -465,7 +465,7 @@ void main() {
                 <div>
                     <p class="heading">Status</p>
                     <div class="title">
-                        <a class="tags has-addons" href="https://pub.dartlang.org/packages/Galileo_framework"
+                        <a class="tags has-addons" href="https://pub.dev/packages/galileo_framework"
                             target="_blank">
                             <span class="tag is-dark">build</span>
                             <span class="tag build-status">...</span>
@@ -486,7 +486,7 @@ void main() {
                 <div>
                     <p class="heading">License</p>
                     <div class="title">
-                        <a class="tags has-addons" href="https://github.com/Galileo-dart/framework/blob/master/LICENSE"
+                        <a class="tags has-addons" href="https://github.com/insinfo/galileo/blob/master/LICENSE"
                             target="_blank">
                             <span class="tag is-dark">
                                 license
@@ -527,12 +527,12 @@ void main() {
                 $(this).html(html);
             });
 
-            $.getJSON('https://api.github.com/repos/Galileo-dart/Galileo', function (repo) {
+            $.getJSON('https://api.github.com/repos/insinfo/galileo', function (repo) {
                 $('.stargazers').text(repo.stargazers_count.toLocaleString());
             });
 
             var pubUrl = 'https://cors-anywhere.herokuapp.com/';
-            pubUrl += 'https://pub.dartlang.org/api/packages/Galileo_framework';
+            pubUrl += 'https://pub.dev/api/packages/galileo_framework';
 
             $.getJSON(pubUrl, function (res) {
                 var versions = res.versions;
@@ -541,7 +541,7 @@ void main() {
             });
 
             var travisUrl = 'https://cors-anywhere.herokuapp.com/';
-            travisUrl += 'https://travis-ci.org/Galileo-dart/framework.svg?branch=master';
+            travisUrl += 'https://travis-ci.org/insinfo/galileo/framework.svg?branch=master';
             $.get(travisUrl, function (res) {
                 var status = res.querySelectorAll('g text')[2].textContent;
                 var buildClass;
