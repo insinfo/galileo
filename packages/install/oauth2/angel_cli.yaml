@@ -1,0 +1,2 @@
+templates:
+  - lib/src/models/*.dart

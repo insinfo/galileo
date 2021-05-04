@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:args/command_runner.dart';
 import 'package:dart_style/dart_style.dart';
 import 'package:io/ansi.dart';
-import 'package:prompts/prompts.dart' as prompts;
+import 'package:galileo_prompts/galileo_prompts.dart' as prompts;
 import 'package:pubspec_parse/pubspec_parse.dart';
 import 'package:recase/recase.dart';
 import '../../util.dart';
@@ -17,11 +17,9 @@ class PluginCommand extends Command {
 
   PluginCommand() {
     argParser
-      ..addOption('name',
-          abbr: 'n', help: 'Specifies a name for the plug-in class.')
+      ..addOption('name', abbr: 'n', help: 'Specifies a name for the plug-in class.')
       ..addOption('output-dir',
-          help: 'Specifies a directory to create the plug-in class in.',
-          defaultsTo: 'lib/src/config/plugins');
+          help: 'Specifies a directory to create the plug-in class in.', defaultsTo: 'lib/src/config/plugins');
   }
 
   @override
@@ -34,33 +32,27 @@ class PluginCommand extends Command {
       name = prompts.get('Name of plug-in class');
     }
 
-    List<MakerDependency> deps = [
-      const MakerDependency('angel_framework', '^2.0.0')
-    ];
+    List<MakerDependency> deps = [const MakerDependency('galileo_framework', '^3.0.2')];
 
     var rc = new ReCase(name);
-    final pluginDir = new Directory.fromUri(
-        Directory.current.uri.resolve(argResults['output-dir'] as String));
-    final pluginFile =
-        new File.fromUri(pluginDir.uri.resolve("${rc.snakeCase}.dart"));
+    final pluginDir = new Directory.fromUri(Directory.current.uri.resolve(argResults['output-dir'] as String));
+    final pluginFile = new File.fromUri(pluginDir.uri.resolve("${rc.snakeCase}.dart"));
     if (!await pluginFile.exists()) await pluginFile.create(recursive: true);
-    await pluginFile.writeAsString(
-        new DartFormatter().format(_generatePlugin(pubspec, rc)));
+    await pluginFile.writeAsString(new DartFormatter().format(_generatePlugin(pubspec, rc)));
 
     if (deps.isNotEmpty) await depend(deps);
 
-    print(green.wrap(
-        '$checkmark Successfully generated plug-in file "${pluginFile.absolute.path}".'));
+    print(green.wrap('$checkmark Successfully generated plug-in file "${pluginFile.absolute.path}".'));
   }
 
   String _generatePlugin(Pubspec pubspec, ReCase rc) {
     return '''
 library ${pubspec.name}.src.config.plugins.${rc.snakeCase};
 
-import 'package:angel_framework/angel_framework.dart';
+import 'package:galileo_framework/galileo_framework.dart';
 
-AngelConfigurer ${rc.camelCase}() {
-  return (Angel app) async {
+galileoConfigurer ${rc.camelCase}() {
+  return (galileo app) async {
     // Work some magic...
   };
 }

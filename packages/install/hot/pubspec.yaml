@@ -1,0 +1,7 @@
+name: hot
+version: 1.0.0
+description: "`package:angel_hot` hot-reloading boilerplate generator."
+dependencies:
+  angel_framework: ^1.1.0-alpha
+dev_dependencies:
+  angel_hot: ^1.1.0-alpha

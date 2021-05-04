@@ -1,6 +1,6 @@
 # galileo_cli
 
-![Screenshot of Terminal](screenshots/screenshot.png)
+![Screenshot of Terminal](screenshots/screenshot.jpg)
 
 Command-line tools for the galileo framework.
 Includes functionality such as:

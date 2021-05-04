@@ -1,0 +1,8 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="migrate:refresh" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application" folderName="Migrations" singleton="true">
+    <option name="arguments" value="refresh" />
+    <option name="filePath" value="$PROJECT_DIR$/tool/migrate.dart" />
+    <option name="workingDirectory" value="$PROJECT_DIR$" />
+    <method />
+  </configuration>
+</component>

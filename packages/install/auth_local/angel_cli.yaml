@@ -1,0 +1,23 @@
+templates:
+  - lib/src/auth/local.dart
+values:
+  service:
+    type: prompt
+    default: "api/users"
+    description: Path to users service
+  model:
+    type: prompt
+    default: User
+    description: Name of user model class
+  model_path:
+    type: prompt
+    default: "../models/user.dart"
+    description: "Path to user model, relative to \"lib/src/auth\""
+  password_field:
+    type: prompt
+    default: password
+    description: Name of the password field on the user model
+  username_field:
+    type: prompt
+    default: username
+    description: Name of the username field on the user model

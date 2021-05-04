@@ -1,0 +1,12 @@
+name: galileo_isolate
+version: 3.0.0
+author: Isaque Neves <insinfo2008@gmail.com>
+description: Utility functions and classes related to the 'dart:isolate' library.
+homepage: https://github.com/insinfo/galileo/tree/master/packages/isolate
+
+environment:
+  sdk: '>=2.10.0 <3.0.0'
+
+dev_dependencies:
+  pedantic: ^1.11.0 #Null safety
+  test: ^1.17.3 #Null safety

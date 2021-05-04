@@ -9,14 +9,10 @@ class NginxCommand extends Command {
   String get name => 'nginx';
 
   @override
-  String get description =>
-      'Generates a NGINX configuration for a reverse proxy + static server.';
+  String get description => 'Generates a NGINX configuration for a reverse proxy + static server.';
 
   NginxCommand() {
-    argParser.addOption('out',
-        abbr: 'o',
-        help:
-            'An optional output file to write to; otherwise prints to stdout.');
+    argParser.addOption('out', abbr: 'o', help: 'An optional output file to write to; otherwise prints to stdout.');
   }
 
   @override
@@ -28,7 +24,7 @@ server {
   root ${p.absolute(webPath)}; # Set to your static files directory
   
   location / {
-    try_files \$uri @proxy; # Try to serve static files; fallback to proxied Angel server
+    try_files \$uri @proxy; # Try to serve static files; fallback to proxied galileo server
   }
   
   location @proxy {
@@ -45,8 +41,7 @@ server {
       var file = new File(argResults['out'] as String);
       await file.create(recursive: true);
       await file.writeAsString(nginxText);
-      print(green.wrap(
-          "$checkmark Successfully generated nginx configuration in '${file.path}'."));
+      print(green.wrap("$checkmark Successfully generated nginx configuration in '${file.path}'."));
     }
   }
 }

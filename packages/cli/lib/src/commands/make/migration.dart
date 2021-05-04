@@ -3,9 +3,9 @@ import 'dart:io';
 import 'package:args/command_runner.dart';
 import 'package:code_builder/code_builder.dart';
 import 'package:dart_style/dart_style.dart';
-import 'package:inflection2/inflection2.dart';
+import 'package:inflection3/inflection3.dart';
 import 'package:io/ansi.dart';
-import 'package:prompts/prompts.dart' as prompts;
+import 'package:galileo_prompts/galileo_prompts.dart' as prompts;
 import 'package:recase/recase.dart';
 import '../../util.dart';
 import 'maker.dart';
@@ -19,11 +19,9 @@ class MigrationCommand extends Command {
 
   MigrationCommand() {
     argParser
-      ..addOption('name',
-          abbr: 'n', help: 'Specifies a name for the model class.')
+      ..addOption('name', abbr: 'n', help: 'Specifies a name for the model class.')
       ..addOption('output-dir',
-          help: 'Specifies a directory to create the migration class in.',
-          defaultsTo: 'tool/migrations');
+          help: 'Specifies a directory to create the migration class in.', defaultsTo: 'tool/migrations');
   }
 
   @override
@@ -35,13 +33,12 @@ class MigrationCommand extends Command {
       name = prompts.get('Name of model class');
     }
 
-    var deps = [const MakerDependency('angel_migration', '^2.0.0')];
+    var deps = [const MakerDependency('galileo_migration', '^3.0.2')];
     var rc = new ReCase(name);
 
     var migrationLib = new Library((migrationLib) {
       migrationLib
-        ..directives.add(new Directive.import(
-            'package:angel_migration.dart/angel_migration.dart'))
+        ..directives.add(new Directive.import('package:galileo_migration.dart/galileo_migration.dart'))
         ..body.add(new Class((migrationClazz) {
           migrationClazz
             ..name = '${rc.pascalCase}Migration'
@@ -62,15 +59,12 @@ class MigrationCommand extends Command {
                 // (table) { ... }
                 var callback = new Method((callback) {
                   callback
-                    ..requiredParameters
-                        .add(new Parameter((b) => b..name = 'table'))
+                    ..requiredParameters.add(new Parameter((b) => b..name = 'table'))
                     ..body = new Block((block) {
                       var table = refer('table');
 
                       block.addExpression(
-                        (table.property('serial').call([literal('id')]))
-                            .property('primaryKey')
-                            .call([]),
+                        (table.property('serial').call([literal('id')])).property('primaryKey').call([]),
                       );
 
                       block.addExpression(
@@ -115,18 +109,13 @@ class MigrationCommand extends Command {
     });
 
     // Save migration file
-    var migrationDir = new Directory.fromUri(
-        Directory.current.uri.resolve(argResults['output-dir'] as String));
-    var migrationFile =
-        new File.fromUri(migrationDir.uri.resolve('${rc.snakeCase}.dart'));
-    if (!await migrationFile.exists())
-      await migrationFile.create(recursive: true);
+    var migrationDir = new Directory.fromUri(Directory.current.uri.resolve(argResults['output-dir'] as String));
+    var migrationFile = new File.fromUri(migrationDir.uri.resolve('${rc.snakeCase}.dart'));
+    if (!await migrationFile.exists()) await migrationFile.create(recursive: true);
 
-    await migrationFile.writeAsString(new DartFormatter()
-        .format(migrationLib.accept(new DartEmitter()).toString()));
+    await migrationFile.writeAsString(new DartFormatter().format(migrationLib.accept(new DartEmitter()).toString()));
 
-    print(green.wrap(
-        '$checkmark Created migration file "${migrationFile.absolute.path}".'));
+    print(green.wrap('$checkmark Created migration file "${migrationFile.absolute.path}".'));
 
     await depend(deps);
   }

@@ -3,7 +3,7 @@ import "dart:io";
 import "package:args/command_runner.dart";
 import 'package:io/ansi.dart';
 import 'package:path/path.dart' as p;
-import 'package:prompts/prompts.dart' as prompts;
+import 'package:galileo_prompts/galileo_prompts.dart' as prompts;
 import 'package:recase/recase.dart';
 import '../random_string.dart' as rs;
 import '../util.dart';
@@ -18,7 +18,7 @@ class InitCommand extends Command {
   String get name => "init";
 
   @override
-  String get description => "Initializes a new Angel project in the current directory.";
+  String get description => "Initializes a new galileo project in the current directory.";
 
   InitCommand() {
     argParser
@@ -30,7 +30,7 @@ class InitCommand extends Command {
   @override
   run() async {
     Directory projectDir = Directory(argResults.rest.isEmpty ? "." : argResults.rest[0]);
-    print("Creating new Angel project in ${projectDir.absolute.path}...");
+    print("Creating new galileo project in ${projectDir.absolute.path}...");
     await _cloneRepo(projectDir);
     // await preBuild(projectDir);
     var secret = rs.randomAlphaNumeric(32);
@@ -46,32 +46,29 @@ class InitCommand extends Command {
         : p.basenameWithoutExtension(projectDir.absolute.uri.normalizePath().toFilePath());
 
     name = ReCase(name).snakeCase;
-    print('Renaming project from "angel" to "$name"...');
-    await renamePubspec(projectDir, 'angel', name);
-    await renameDartFiles(projectDir, 'angel', name);
+    print('Renaming project from "galileo" to "$name"...');
+    await renamePubspec(projectDir, 'galileo', name);
+    await renameDartFiles(projectDir, 'galileo', name);
 
     if (argResults['pub-get'] != false && argResults['offline'] == false) {
       print('Now running pub get...');
       await _pubGet(projectDir);
     }
 
-    print(green.wrap("$checkmark Successfully initialized Angel project."));
+    print(green.wrap("$checkmark Successfully initialized galileo project."));
 
     stdout
       ..writeln()
-      ..writeln('Congratulations! You are ready to start developing with Angel!')
+      ..writeln('Congratulations! You are ready to start developing with galileo!')
       ..write('To start the server (with ')
       ..write(cyan.wrap('hot-reloading'))
       ..write('), run ')
       ..write(magenta.wrap('`dart --observe bin/dev.dart`'))
       ..writeln(' in your terminal.')
       ..writeln()
-      ..writeln('Find more documentation about Angel:')
-      ..writeln('  * https://angel-dart.github.io')
-      ..writeln('  * https://github.com/angel-dart/angel/wiki')
-      ..writeln('  * https://www.youtube.com/playlist?list=PLl3P3tmiT-frEV50VdH_cIrA2YqIyHkkY')
-      ..writeln('  * https://medium.com/the-angel-framework')
-      ..writeln('  * https://dart.academy/tag/angel')
+      ..writeln('Find more documentation about galileo:')
+      ..writeln('  * https://galileodart.com')
+      ..writeln('  * https://github.com/insinfo/galileo')
       ..writeln()
       ..writeln('Happy coding!');
   }
@@ -128,7 +125,7 @@ class InitCommand extends Command {
       var boilerplate = prompts.choose('Choose a project type before continuing', boilerplates);
 
       // Ultimately, we want a clone of every boilerplate locally on the system.
-      var boilerplateRootDir = Directory(p.join(angelDir.path, 'boilerplates'));
+      var boilerplateRootDir = Directory(p.join(galileoDir.path, 'boilerplates'));
       var boilerplateBasename = p.basenameWithoutExtension(boilerplate.url);
       if (boilerplate.ref != null) boilerplateBasename += '.${boilerplate.ref}';
       boilerplateDir = Directory(p.join(boilerplateRootDir.path, boilerplateBasename));
@@ -203,7 +200,7 @@ class InitCommand extends Command {
       await boilerplateDir.delete(recursive: true).catchError((_) => null);
 
       if (e is! String) {
-        print(red.wrap("$ballot Could not initialize Angel project."));
+        print(red.wrap("$ballot Could not initialize galileo project."));
       }
       rethrow;
     }
@@ -233,7 +230,7 @@ Future preBuild(Directory projectDir) async {
   if (buildCode != 0) throw Exception('Failed to pre-build resources.');
 }
 
-const RepoArchiveLocation = "https://github.com/angel-dart";
+const RepoArchiveLocation = "https://github.com/insinfo/galileo";
 const RepoLocation = "https://github.com/insinfo";
 
 const BoilerplateInfo graphQLBoilerplate = const BoilerplateInfo(
@@ -245,21 +242,21 @@ const BoilerplateInfo graphQLBoilerplate = const BoilerplateInfo(
 
 const BoilerplateInfo ormBoilerplate = const BoilerplateInfo(
   'ORM',
-  "A starting point for applications that use Angel's ORM.",
+  "A starting point for applications that use galileo's ORM.",
   '${RepoLocation}/boilerplates.git',
   ref: 'orm-sdk-2.12.x',
 );
 
 const BoilerplateInfo basicBoilerplate = const BoilerplateInfo(
     'Basic',
-    'Minimal starting point for Angel 2.x - A simple server with only a few additional packages.',
+    'Minimal starting point for galileo 2.x - A simple server with only a few additional packages.',
     '${RepoLocation}/boilerplates.git',
     ref: 'basic-sdk-2.12.x');
 
 const BoilerplateInfo legacyBoilerplate = const BoilerplateInfo(
   'Legacy',
-  'Minimal starting point for applications running Angel 1.1.x.',
-  '${RepoArchiveLocation}/angel.git',
+  'Minimal starting point for applications running galileo 1.1.x.',
+  '${RepoArchiveLocation}/galileo.git',
   ref: '1.1.x',
 );
 

@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:args/command_runner.dart';
 import 'package:dart_style/dart_style.dart';
 import 'package:io/ansi.dart';
-import 'package:prompts/prompts.dart' as prompter;
+import 'package:galileo_prompts/galileo_prompts.dart' as prompter;
 import 'package:pubspec_parse/pubspec_parse.dart';
 import 'package:recase/recase.dart';
 import '../../util.dart';
@@ -17,14 +17,9 @@ class TestCommand extends Command {
 
   TestCommand() {
     argParser
-      ..addFlag('run-configuration',
-          help: 'Generate a run configuration for JetBrains IDE\'s.',
-          defaultsTo: true)
-      ..addOption('name',
-          abbr: 'n', help: 'Specifies a name for the plug-in class.')
-      ..addOption('output-dir',
-          help: 'Specifies a directory to create the plug-in class in.',
-          defaultsTo: 'test');
+      ..addFlag('run-configuration', help: 'Generate a run configuration for JetBrains IDE\'s.', defaultsTo: true)
+      ..addOption('name', abbr: 'n', help: 'Specifies a name for the plug-in class.')
+      ..addOption('output-dir', help: 'Specifies a directory to create the plug-in class in.', defaultsTo: 'test');
   }
 
   @override
@@ -38,34 +33,29 @@ class TestCommand extends Command {
     }
 
     List<MakerDependency> deps = [
-      const MakerDependency('angel_framework', '^2.0.0'),
-      const MakerDependency('angel_test', '^2.0.0', dev: true),
-      const MakerDependency('test', '^1.0.0', dev: true),
+      const MakerDependency('galileo_framework', '^3.0.2'),
+      const MakerDependency('galileo_test', '^3.0.2', dev: true),
+      const MakerDependency('test', '^1.17.3', dev: true),
     ];
 
     var rc = new ReCase(name);
-    final testDir = new Directory.fromUri(
-        Directory.current.uri.resolve(argResults['output-dir'] as String));
-    final testFile =
-        new File.fromUri(testDir.uri.resolve("${rc.snakeCase}_test.dart"));
+    final testDir = new Directory.fromUri(Directory.current.uri.resolve(argResults['output-dir'] as String));
+    final testFile = new File.fromUri(testDir.uri.resolve("${rc.snakeCase}_test.dart"));
     if (!await testFile.exists()) await testFile.create(recursive: true);
-    await testFile
-        .writeAsString(new DartFormatter().format(_generateTest(pubspec, rc)));
+    await testFile.writeAsString(new DartFormatter().format(_generateTest(pubspec, rc)));
 
     if (deps.isNotEmpty) await depend(deps);
 
-    print(green.wrap(
-        '$checkmark Successfully generated test file "${testFile.absolute.path}".'));
+    print(green.wrap('$checkmark Successfully generated test file "${testFile.absolute.path}".'));
 
     if (argResults['run-configuration'] as bool) {
-      final runConfig = new File.fromUri(Directory.current.uri
-          .resolve('.idea/runConfigurations/${name}_Tests.xml'));
+      final runConfig = new File.fromUri(Directory.current.uri.resolve('.idea/runConfigurations/${name}_Tests.xml'));
 
       if (!await runConfig.exists()) await runConfig.create(recursive: true);
       await runConfig.writeAsString(_generateRunConfiguration(name, rc));
 
-      print(green.wrap(
-          '$checkmark Successfully generated run configuration "$name Tests" at "${runConfig.absolute.path}".'));
+      print(green
+          .wrap('$checkmark Successfully generated run configuration "$name Tests" at "${runConfig.absolute.path}".'));
     }
   }
 
@@ -85,15 +75,15 @@ class TestCommand extends Command {
     return '''
 import 'dart:io';
 import 'package:${pubspec.name}/${pubspec.name}.dart' as ${pubspec.name};
-import 'package:angel_framework/angel_framework.dart';
-import 'package:angel_test/angel_test.dart';
+import 'package:galileo_framework/galileo_framework.dart';
+import 'package:galileo_test/galileo_test.dart';
 import 'package:test/test.dart';
 
 main() async {
   TestClient client;
 
   setUp(() async {
-    var app = new Angel();
+    var app = new galileo();
     await app.configure(${pubspec.name}.configureServer);
     client = await connectTo(app);
   });

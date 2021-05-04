@@ -2,9 +2,9 @@ import 'dart:io';
 import 'package:args/command_runner.dart';
 import 'package:code_builder/code_builder.dart';
 import 'package:dart_style/dart_style.dart';
-import 'package:inflection2/inflection2.dart';
+import 'package:inflection3/inflection3.dart';
 import 'package:io/ansi.dart';
-import 'package:prompts/prompts.dart' as prompts;
+import 'package:galileo_prompts/galileo_prompts.dart' as prompts;
 import 'package:pubspec_parse/pubspec_parse.dart';
 import 'package:recase/recase.dart';
 import '../service_generators/service_generators.dart';
@@ -16,19 +16,14 @@ class ServiceCommand extends Command {
   String get name => 'service';
 
   @override
-  String get description => 'Generates an Angel service.';
+  String get description => 'Generates an galileo service.';
 
   ServiceCommand() {
     argParser
-      ..addFlag('typed',
-          abbr: 't',
-          help: 'Wrap the generated service in a `TypedService` instance.',
-          negatable: false)
-      ..addOption('name',
-          abbr: 'n', help: 'Specifies a name for the service file.')
+      ..addFlag('typed', abbr: 't', help: 'Wrap the generated service in a `TypedService` instance.', negatable: false)
+      ..addOption('name', abbr: 'n', help: 'Specifies a name for the service file.')
       ..addOption('output-dir',
-          help: 'Specifies a directory to create the service file.',
-          defaultsTo: 'lib/src/services');
+          help: 'Specifies a directory to create the service file.', defaultsTo: 'lib/src/services');
   }
 
   @override
@@ -41,15 +36,12 @@ class ServiceCommand extends Command {
       name = prompts.get('Name of service');
     }
 
-    List<MakerDependency> deps = [
-      const MakerDependency('angel_framework', '^2.0.0')
-    ];
+    List<MakerDependency> deps = [const MakerDependency('galileo_framework', '^3.0.2')];
 
     // '${pubspec.name}.src.services.${rc.snakeCase}'
     var rc = new ReCase(name);
     var serviceLib = new Library((serviceLib) {
-      var generator = prompts.choose(
-          'Choose which type of service to create', serviceGenerators);
+      var generator = prompts.choose('Choose which type of service to create', serviceGenerators);
 
 //      if (generator == null) {
 //        _pen.red();
@@ -64,42 +56,37 @@ class ServiceCommand extends Command {
 
       if (generator.goesFirst) {
         generator.applyToLibrary(serviceLib, name, rc.snakeCase);
-        serviceLib.directives.add(new Directive.import(
-            'package:angel_framework/angel_framework.dart'));
+        serviceLib.directives.add(new Directive.import('package:galileo_framework/galileo_framework.dart'));
       } else {
-        serviceLib.directives.add(new Directive.import(
-            'package:angel_framework/angel_framework.dart'));
+        serviceLib.directives.add(new Directive.import('package:galileo_framework/galileo_framework.dart'));
         generator.applyToLibrary(serviceLib, name, rc.snakeCase);
       }
 
       if (argResults['typed'] as bool) {
-        serviceLib.directives
-            .add(new Directive.import('../models/${rc.snakeCase}.dart'));
+        serviceLib.directives.add(new Directive.import('../models/${rc.snakeCase}.dart'));
       }
 
       // configureServer() {}
       serviceLib.body.add(new Method((configureServer) {
         configureServer
           ..name = 'configureServer'
-          ..returns = refer('AngelConfigurer');
+          ..returns = refer('galileoConfigurer');
 
         configureServer.body = new Block((block) {
-          generator.applyToConfigureServer(
-              serviceLib, configureServer, block, name, rc.snakeCase);
+          generator.applyToConfigureServer(serviceLib, configureServer, block, name, rc.snakeCase);
 
-          // return (Angel app) async {}
+          // return (galileo app) async {}
           var closure = new Method((closure) {
             closure
               ..modifier = MethodModifier.async
               ..requiredParameters.add(new Parameter((b) => b
                 ..name = 'app'
-                ..type = refer('Angel')));
+                ..type = refer('galileo')));
             closure.body = new Block((block) {
               generator.beforeService(serviceLib, block, name, rc.snakeCase);
 
               // app.use('/api/todos', new MapService());
-              var service = generator.createInstance(
-                  serviceLib, closure, name, rc.snakeCase);
+              var service = generator.createInstance(serviceLib, closure, name, rc.snakeCase);
 
               if (argResults['typed'] as bool) {
                 var tb = new TypeReference((b) => b
@@ -120,16 +107,12 @@ class ServiceCommand extends Command {
       }));
     });
 
-    final outputDir = new Directory.fromUri(
-        Directory.current.uri.resolve(argResults['output-dir'] as String));
-    final serviceFile =
-        new File.fromUri(outputDir.uri.resolve("${rc.snakeCase}.dart"));
+    final outputDir = new Directory.fromUri(Directory.current.uri.resolve(argResults['output-dir'] as String));
+    final serviceFile = new File.fromUri(outputDir.uri.resolve("${rc.snakeCase}.dart"));
     if (!await serviceFile.exists()) await serviceFile.create(recursive: true);
-    await serviceFile.writeAsString(new DartFormatter()
-        .format(serviceLib.accept(new DartEmitter()).toString()));
+    await serviceFile.writeAsString(new DartFormatter().format(serviceLib.accept(new DartEmitter()).toString()));
 
-    print(green.wrap(
-        '$checkmark Successfully generated service file "${serviceFile.absolute.path}".'));
+    print(green.wrap('$checkmark Successfully generated service file "${serviceFile.absolute.path}".'));
 
     if (deps.isNotEmpty) await depend(deps);
   }

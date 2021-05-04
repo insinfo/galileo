@@ -1,27 +1,31 @@
-#author: Tobe O <thosakwe@gmail.com>
-description: Command-line tools for the galileo framework, including scaffolding.
-homepage: https://github.com/insinfo/galileo/packages/galileo_cli
 name: galileo_cli
+description: Command-line tools for the galileo framework, including scaffolding.
 version: 3.0.0
+homepage: https://github.com/insinfo/galileo/tree/master/packages/cli
+author: Isaque Neves <insinfo2008@gmail.com>
+
 environment: 
   sdk: ">=2.10.0 <3.0.0"
+
 dependencies: 
-  analyzer: ^1.1.0
-  args: ^2.0.0
-  code_builder: ^3.0.0
-  dart_style: ^1.0.0
-  glob: ^2.0.0
-  http: ^0.13.0
-  io: ^0.3.5
-  inflection2: ^0.4.2
-  mustache4dart2: ^0.1.0
-  path: ^1.0.0
-  prompts: ^1.3.1
-  pubspec_parse: ^1.0.0
-  quiver: ^3.0.0
-  recase: ^3.0.1
-  shutdown: ^0.4.0
-  watcher: ^1.0.0
-  yaml: ^3.0.0
+  analyzer: ^1.5.0 #Null safety
+  args: ^2.1.0 #Null safety
+  code_builder: ^4.0.0 #Null safety
+  dart_style: ^2.0.1 #Null safety
+  glob: ^2.0.1 #Null safety
+  http: ^0.13.3 #Null safety
+  io: ^1.0.0 #Null safety
+  inflection3: ^0.5.3+2 #Null safety
+  galileo_mustache4dart: ^3.0.0
+  #mustache_template: ^2.0.0 #Null safety
+  path: ^1.8.0 #Null safety
+  galileo_prompts: ^2.0.0 #Null safety
+  pubspec_parse: ^1.0.0  #Null safety
+  quiver: ^3.0.1  #Null safety
+  recase: ^4.0.0 #Null safety
+  shutdown: ^0.4.3 #Null safety
+  watcher: ^1.0.0 #Null safety
+  yaml: ^3.1.0 #Null safety
+  
 executables: 
   galileo: galileo

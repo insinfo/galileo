@@ -1,0 +1,15 @@
+templates:
+  - lib/src/auth.dart
+values:
+  service:
+    type: prompt
+    default: "api/users"
+    description: Path to users service
+  model:
+    type: prompt
+    default: User
+    description: Name of user model class
+  model_path:
+    type: prompt
+    default: "models/user.dart"
+    description: "Path to user model, relative to \"lib/src\""

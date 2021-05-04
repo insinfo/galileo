@@ -1,0 +1,37 @@
+builders:
+  galileo_serialize:
+    import: "package:galileo_serialize_generator/galileo_serialize_generator.dart"
+    builder_factories:
+      - jsonModelBuilder
+      - serializerBuilder
+    auto_apply: root_package
+    build_to: cache
+    build_extensions:
+      .dart:
+        - ".galileo_serialize.g.part"
+        - ".galileo_serialize_serializer.g.part"
+    applies_builders: ["source_gen|combining_builder", "source_gen|part_cleanup"]
+    runs_before: ["galileo_orm_generator|galileo_orm"]
+  typescript:
+    import: "package:galileo_serialize_generator/galileo_serialize_generator.dart"
+    builder_factories:
+      - typescriptDefinitionBuilder
+    auto_apply: root_package
+    build_to: source
+    build_extensions:
+      .dart:
+        - ".d.ts"
+# targets:
+#   _book:
+#     sources:
+#       - "test/models/book.dart"
+#       - "test/models/has_map.dart"
+#       - "test/models/goat.dart"
+#       - "test/models/game_pad_button.dart"
+#       - "test/models/with_enum.dart"
+#   $default:
+#     dependencies:
+#       - "galileo_serialize_generator:_book"
+#     sources:
+#       - "test/models/author.dart"
+#       - "test/models/game_pad.dart"

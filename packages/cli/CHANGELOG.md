@@ -1,3 +1,6 @@
+# 3.0.0
+- update dependencies
+
 # 2.1.7+1
 * Fix a bug where new directories were not being created in
 `init`.
@@ -5,7 +8,7 @@
 # 2.1.7
 * Fix a bug where `ArgResults.arguments` was used in `init` instead of the
 intended `ArgResults.rest`.
-* Stop including `package:angel_model` imports in `make model`.
+* Stop including `package:galileo_model` imports in `make model`.
 * Update dependencies in `make` commands.
 * Fix `make model` to generate ORM + migration by default.
 * Fix `MakerDependency` logic to print missing dependencies.
@@ -20,7 +23,7 @@ intended `ArgResults.rest`.
 
 # 2.1.5
 * Add `shared` boilerplates.
-* Remove uncecessary `angel_model` imports.
+* Remove uncecessary `galileo_model` imports.
 
 # 2.1.4+1
 * Patch `part of 'path'` renames.
@@ -40,7 +43,7 @@ intended `ArgResults.rest`.
 * Edit the way `rename` runs, leaving no corner unturned.
 
 # 2.1.0
-* Deprecate `angel install`.
+* Deprecate `galileo install`.
 * Rename projects using `snake_case`.
 * `init` now fetches from `master`.
 * Remove the `1.x` option.
@@ -85,5 +88,5 @@ The `rename` command will now replace *all* occurrences
 of the old project names with the new one in `config/`
 YAML files, and also operates on the glob `config/**/*.yaml`.
 
-Changed the call to run `angel start` to run `dart bin/server.dart` instead, after an
+Changed the call to run `galileo start` to run `dart bin/server.dart` instead, after an
 `init` command.

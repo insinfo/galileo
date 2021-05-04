@@ -6,7 +6,7 @@ import 'package:dart_style/dart_style.dart';
 import 'package:glob/glob.dart';
 import 'package:glob/list_local_fs.dart';
 import 'package:io/ansi.dart';
-import 'package:prompts/prompts.dart' as prompts;
+import 'package:galileo_prompts/galileo_prompts.dart' as prompts;
 import 'package:recase/recase.dart';
 import '../util.dart';
 import 'pub.dart';
@@ -71,8 +71,7 @@ renamePubspec(Directory dir, String oldName, String newName) async {
 
   if (await pubspecFile.exists()) {
     var contents = await pubspecFile.readAsString(), oldContents = contents;
-    contents =
-        contents.replaceAll(RegExp('name:\\s*$oldName'), 'name: $newName');
+    contents = contents.replaceAll(RegExp('name:\\s*$oldName'), 'name: $newName');
 
     if (contents != oldContents) {
       await pubspecFile.writeAsString(contents);
@@ -95,8 +94,7 @@ renameDartFiles(Directory dir, String oldName, String newName) async {
   try {
     await for (var yamlFile in configGlob.list(root: dir.absolute.path)) {
       if (yamlFile is File) {
-        print(
-            'Replacing occurrences of "$oldName" with "$newName" in file "${yamlFile.absolute.path}"...');
+        print('Replacing occurrences of "$oldName" with "$newName" in file "${yamlFile.absolute.path}"...');
         if (yamlFile is File) {
           var contents = (yamlFile as File).readAsStringSync();
           contents = contents.replaceAll(oldName, newName);
@@ -127,8 +125,7 @@ renameDartFiles(Directory dir, String oldName, String newName) async {
       if (visitor.replace.isNotEmpty) {
         visitor.replace.forEach((range, replacement) {
           if (range.first is int) {
-            contents = contents.replaceRange(
-                range.first as int, range.last as int, replacement);
+            contents = contents.replaceRange(range.first as int, range.last as int, replacement);
           } else if (range.first is String) {
             contents = contents.replaceAll(range.first as String, replacement);
           }
@@ -175,8 +172,7 @@ class RenamingVisitor extends RecursiveAstVisitor {
     var name = ctx.name.name;
 
     if (name.startsWith(oldName)) {
-      replace[[ctx.offset, ctx.end]] =
-          'library ' + name.replaceFirst(oldName, newName) + ';';
+      replace[[ctx.offset, ctx.end]] = 'library ' + name.replaceFirst(oldName, newName) + ';';
     }
   }
 
@@ -186,8 +182,7 @@ class RenamingVisitor extends RecursiveAstVisitor {
       var name = ctx.libraryName.name;
 
       if (name.startsWith(oldName)) {
-        replace[[ctx.offset, ctx.end]] =
-            'part of ' + name.replaceFirst(oldName, newName) + ';';
+        replace[[ctx.offset, ctx.end]] = 'part of ' + name.replaceFirst(oldName, newName) + ';';
       }
     }
   }

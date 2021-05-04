@@ -1,4 +1,4 @@
-library angel_cli.commands;
+library galileo_cli.commands;
 
 export "deploy.dart";
 export "doctor.dart";

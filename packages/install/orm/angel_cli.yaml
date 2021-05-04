@@ -1,0 +1,8 @@
+templates:
+  - tool/build_actions_orm.dart
+  - tool/migrate.dart
+values:
+  inputs:
+    type: prompt
+    description: Glob representing model files
+    default: "lib/src/models/*.dart"

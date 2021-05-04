@@ -1,0 +1,5 @@
+name: pretty_logging
+version: 1.0.0
+description: A helper function to print pretty log messages to the console.
+dev_dependencies:
+  console: ^3.0.0

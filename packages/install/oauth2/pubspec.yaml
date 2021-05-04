@@ -1,0 +1,5 @@
+name: oauth2
+version: 1.0.0
+description: Generates common models for in-house OAuth 2.0.
+dependencies:
+  angel_oauth2: ^1.0.0-alpha
