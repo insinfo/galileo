@@ -1,6 +1,6 @@
 import 'dart:collection';
-import 'package:angel_orm/angel_orm.dart';
-import 'package:angel_migration/angel_migration.dart';
+import 'package:galileo_orm/galileo_orm.dart';
+import 'package:galileo_migration/galileo_migration.dart';
 import 'package:charcode/ascii.dart';
 
 abstract class PostgresGenerator {
@@ -40,8 +40,7 @@ abstract class PostgresGenerator {
 
     if (column.indexType == IndexType.unique)
       buf.write(' UNIQUE');
-    else if (column.indexType == IndexType.primaryKey)
-      buf.write(' PRIMARY KEY');
+    else if (column.indexType == IndexType.primaryKey) buf.write(' PRIMARY KEY');
 
     for (var ref in column.externalReferences) {
       buf.write(' ' + compileReference(ref));
@@ -51,8 +50,7 @@ abstract class PostgresGenerator {
   }
 
   static String compileReference(MigrationColumnReference ref) {
-    var buf = new StringBuffer(
-        'REFERENCES "${ref.foreignTable}"("${ref.foreignKey}")');
+    var buf = new StringBuffer('REFERENCES "${ref.foreignTable}"("${ref.foreignKey}")');
     if (ref.behavior != null) buf.write(' ' + ref.behavior);
     return buf.toString();
   }
@@ -63,8 +61,7 @@ class PostgresTable extends Table {
 
   @override
   MigrationColumn declareColumn(String name, Column column) {
-    if (_columns.containsKey(name))
-      throw new StateError('Cannot redeclare column "$name".');
+    if (_columns.containsKey(name)) throw new StateError('Cannot redeclare column "$name".');
     var col = new MigrationColumn.from(column);
     _columns[name] = col;
     return col;
@@ -125,8 +122,7 @@ class PostgresAlterTable extends Table implements MutableTable {
 
   @override
   MigrationColumn declareColumn(String name, Column column) {
-    if (_columns.containsKey(name))
-      throw new StateError('Cannot redeclare column "$name".');
+    if (_columns.containsKey(name)) throw new StateError('Cannot redeclare column "$name".');
     var col = new MigrationColumn.from(column);
     _columns[name] = col;
     return col;
@@ -144,9 +140,7 @@ class PostgresAlterTable extends Table implements MutableTable {
 
   @override
   void changeColumnType(String name, ColumnType type, {int length}) {
-    _stack.add('ALTER COLUMN "$name" TYPE ' +
-        PostgresGenerator.columnType(
-            new MigrationColumn(type, length: length)));
+    _stack.add('ALTER COLUMN "$name" TYPE ' + PostgresGenerator.columnType(new MigrationColumn(type, length: length)));
   }
 
   @override

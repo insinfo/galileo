@@ -1,21 +1,21 @@
-Based on [this discussion](https://github.com/angel-dart/angel/issues/49).
+Based on [this discussion](https://github.com/galileo-dart/galileo/issues/49).
 
-Based on the changelog, up to `1.1.0`: https://pub.dartlang.org/packages/angel_framework/versions/1.1.1#-changelog-tab-
+Based on the chgalileoog, up to `1.1.0`: https://pub.dartlang.org/packages/galileo_framework/versions/1.1.1#-chgalileoog-tab-
 
 # Main Points
-* `angel_diagnostics` is deprecated - instead just pass a `Logger` and set it as `app.logger`.
-* Removed `AngelFatalError`, and subsequently `fatalErrorStream`.
+* `galileo_diagnostics` is deprecated - instead just pass a `Logger` and set it as `app.logger`.
+* Removed `GalileoFatalError`, and subsequently `fatalErrorStream`.
   * Errors are automatically create `500`. Set `app.logger` to see output.
-  * `angel_errors` is no longer useful.
+  * `galileo_errors` is no longer useful.
 * Removed all `@deprecated` members.
 * Removed @Hooked, beforeProcessed, and afterProcessed.
 * Made injections in RequestContext private.
-* Renamed properties in AngelBase to configuration.
+* Renamed properties in GalileoBase to configuration.
 * Added support for pattern matching and other injections via `@Parameter()`
-* Officially deprecated properties in Angel.
+* Officially deprecated properties in Galileo.
 * Fixed a bug where cached routes would not heed the request method. #173
 * Reworked error handling logic; now, errors will not automatically default to sending JSON.
-* Removed the onController stream from Angel.
+* Removed the onController stream from Galileo.
 * Controllers now longer use call, which has now been renamed to configureServer.
 
 ## Notes
@@ -25,11 +25,11 @@ Migration in itself will be pretty easy to achieve. Plugins and services haven't
 
 # What should I use instead of `X`?
 In 1.1.0, the following were completely removed:
-    * `Angel.after`,
-    * `Angel.before`
-    * `Angel.justBeforeStart`
-    * `Angel.justBeforeStop`
-    * `Angel.fatalErrorStream`
+    * `Galileo.after`,
+    * `Galileo.before`
+    * `Galileo.justBeforeStart`
+    * `Galileo.justBeforeStop`
+    * `Galileo.fatalErrorStream`
 
  * There is no replacement for `before`/`after`. This way, it is easier to keep track of the order request handlers run. responseFinalizers are still in place.
 

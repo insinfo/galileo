@@ -12,7 +12,7 @@ import '../util.dart';
 import 'make/maker.dart';
 
 class InstallCommand extends Command {
-  static const String repo = 'https://github.com/insinfo/galileo/install.git';
+  static const String repo = 'https://github.com/insinfo/galileo/tree/master/packages/install'; //.git
   static final Directory installRepo = Directory.fromUri(homeDir.uri.resolve('./.galileo/addons'));
 
   @override

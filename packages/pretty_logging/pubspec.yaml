@@ -1,12 +1,15 @@
-name: pretty_logging
-version: 2.0.0
+name: galileo_pretty_logging
+version: 3.0.0
 description: Standalone helper for colorful logging output, using pkg:io AnsiCode.
-author: Tobe Osakwe <thosakwe@gmail.com>
-homepage: https://github.com/angel-dart/pretty_logging
+author: Isaque Neves <insinfo2008@gmail.com>
+homepage: https://github.com/insinfo/galileo/tree/master/packages/pretty_logging
+
 environment:
-  sdk: ">=2.10.0 <3.0.0"
+  sdk: '>=2.12.0 <3.0.0'
+
 dependencies:
-  io: ^1.0.0
-  logging: ^1.0.0
+  io: ^1.0.0 #Null safety
+  logging: ^1.0.1 #Null safety
+
 dev_dependencies:
-  pedantic: ^1.0.0
+  pedantic: ^1.11.0 #Null safety

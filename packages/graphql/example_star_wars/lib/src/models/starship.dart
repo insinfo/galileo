@@ -1,5 +1,5 @@
-import 'package:angel_model/angel_model.dart';
-import 'package:angel_serialize/angel_serialize.dart';
+import 'package:galileo_model/galileo_model.dart';
+import 'package:galileo_serialize/galileo_serialize.dart';
 import 'package:graphql_schema/graphql_schema.dart';
 part 'starship.g.dart';
 

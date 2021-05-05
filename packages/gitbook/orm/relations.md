@@ -1,7 +1,7 @@
 Relational modeling is one of the most commonly-used features of sql databases -
 after all, it *is* the namesake of the term "relational database."
 
-Angel supports the following kinds of relations by means of annotations on fields:
+Galileo supports the following kinds of relations by means of annotations on fields:
 * `@hasOne` (one-to-one)
 * `@hasMany` (one-to-many)
 * `@belongsTo` (one-to-one)
@@ -36,7 +36,7 @@ may be bound to multiple copies of each other. For example, in a school database
 could be registered to multiple classes, and each class could have multiple students taking it.
 
 This is typically handled by creating a third table, which joins the two together.
-In the Angel ORM, this is relatively straightforward:
+In the Galileo ORM, this is relatively straightforward:
 
 ```dart
 @orm

@@ -11,7 +11,7 @@ now-obsolete, variable-specific logic in `coerceArgumentValues`.
 * Thanks @deep-guarav and @micimize!
 
 # 1.0.2
-* https://github.com/angel-dart/graphql/pull/32
+* https://github.com/galileo-dart/graphql/pull/32
 
 # 1.0.1
 * Fix a bug where `globalVariables` were not being properly passed

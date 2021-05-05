@@ -1,10 +1,9 @@
 import 'dart:async';
-import 'package:angel_orm/angel_orm.dart';
+import 'package:galileo_orm/galileo_orm.dart';
 import 'package:test/test.dart';
 import 'models/tree.dart';
 
-hasManyTests(FutureOr<QueryExecutor> Function() createExecutor,
-    {FutureOr<void> Function(QueryExecutor) close}) {
+hasManyTests(FutureOr<QueryExecutor> Function() createExecutor, {FutureOr<void> Function(QueryExecutor) close}) {
   QueryExecutor executor;
   Tree appleTree;
   int treeId;
@@ -70,9 +69,7 @@ hasManyTests(FutureOr<QueryExecutor> Function() createExecutor,
     });
 
     test('returns empty on false subquery', () async {
-      var tq = new TreeQuery()
-        ..where.id.equals(treeId)
-        ..fruits.where.commonName.equals('Kiwi');
+      var tq = new TreeQuery()..where.id.equals(treeId)..fruits.where.commonName.equals('Kiwi');
       var tree = await tq.getOne(executor);
       expect(tree.fruits, isEmpty);
     });

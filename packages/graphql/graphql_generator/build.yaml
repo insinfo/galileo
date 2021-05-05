@@ -9,6 +9,6 @@ builders:
       .dart:
         - graphql_generator.g.part
     required_inputs:
-      - angel_serialize.g.part
+      - galileo_serialize.g.part
     applies_builders:
       - source_gen|combining_builder

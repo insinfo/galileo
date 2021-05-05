@@ -1,4 +1,4 @@
-`package:angel_framework` has nice support for injecting values from HTTP headers, query string, and session/cookie values, as well as pattern-matching for request handlers. 
+`package:galileo_framework` has nice support for injecting values from HTTP headers, query string, and session/cookie values, as well as pattern-matching for request handlers. 
 
 These act as a clean shorthand for commonly-used
 functionality.
@@ -55,4 +55,4 @@ Supports:
 * `required`
 * custom `error` message
 
-https://www.dartdocs.org/documentation/angel_framework/latest/angel_framework/Parameter-class.html
+https://www.dartdocs.org/documentation/galileo_framework/latest/galileo_framework/Parameter-class.html

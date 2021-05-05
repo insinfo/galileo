@@ -11,7 +11,7 @@
 * Add `graphQLWS` handler, and support subscriptions.
 
 # 1.0.0-beta
-* Angel RC updates.
+* Galileo RC updates.
 
 # 1.0.0-alpha
 * First official release.

@@ -1,4 +1,4 @@
-import 'package:angel_http_exception/angel_http_exception.dart';
+import 'package:galileo_http_exception/galileo_http_exception.dart';
 import 'package:logging/logging.dart';
 import 'package:io/ansi.dart';
 
@@ -10,7 +10,7 @@ void prettyLog(LogRecord record) {
 
   if (record.error != null) {
     var err = record.error;
-    if (err is AngelHttpException && err.statusCode != 500) return;
+    if (err is GalileoHttpException && err.statusCode != 500) return;
     print(code.wrap(record.toString() + '\n'));
     print(code.wrap(err.toString()));
 

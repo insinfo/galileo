@@ -1,9 +1,9 @@
-library angel_orm.generator.models.car;
+library galileo_orm.generator.models.car;
 
-import 'package:angel_migration/angel_migration.dart';
-import 'package:angel_model/angel_model.dart';
-import 'package:angel_orm/angel_orm.dart';
-import 'package:angel_serialize/angel_serialize.dart';
+import 'package:galileo_migration/galileo_migration.dart';
+import 'package:galileo_model/galileo_model.dart';
+import 'package:galileo_orm/galileo_orm.dart';
+import 'package:galileo_serialize/galileo_serialize.dart';
 part 'car.g.dart';
 
 @serializable

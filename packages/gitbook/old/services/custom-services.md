@@ -21,7 +21,7 @@ class MyService extends Service {
 }
 ```
 
-Alternatively, consider using [service hooks](hooks.md). They are the preferred method of modifying Angel services because they do not depend on service implementations.
+Alternatively, consider using [service hooks](hooks.md). They are the preferred method of modifying Galileo services because they do not depend on service implementations.
 
 _Note_: The convention for the `remove` method on services is that if `id == null`, _all entries in the store should be removed_. Obviously, this does not work very well in production, so only allow this to occur on the server side. Common service providers will disable this for clients, unless you explicitly set a flag dictating so.
 

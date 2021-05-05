@@ -1,27 +1,27 @@
-name: angel_orm_mysql
-version: 0.0.0
-description: MySQL support for Angel's ORM. Includes functionality for querying and transactions.
-author: Tobe O <thosakwe@gmail.com>
-homepage: https://github.com/angel-dart/orm
+name: galileo_orm_mysql
+version: 3.0.1
+description: MySQL support for galileo's ORM. Includes functionality for querying and transactions.
+author: Isaque Neves <insinfo2008@gmail.com>
+homepage: https://github.com/insinfo/galileo/tree/master/packages/orm
+
 environment:
-  sdk: '>=2.10.0 <2.12.0'
+  sdk: '>=2.10.0 <3.0.0'
+
 dependencies:
-  angel_orm: #^2.1.0-beta
-    path: ../angel_orm
-  logging: ^0.11.0
-  pool: ^1.0.0
-  sqljocky5: ^2.2.1
+  galileo_orm: ^3.0.0     
+  logging: ^1.0.1 #Null safety
+  pool: ^1.5.0 #Null safety
+  galileo_sqljocky5: ^3.0.0 #Null safety
+
 dev_dependencies:
-  angel_migration: #^2.0.0
-    path: ../angel_migration
-  angel_orm_generator: #^2.1.0-beta
-    path: ../angel_orm_generator
-  angel_orm_test:
-    path: ../angel_orm_test
-  build_runner: ^1.0.0
-  test: ^1.0.0
+  galileo_migration: ^3.0.0     
+  galileo_orm_generator: ^3.0.1     
+  galileo_orm_test: ^3.0.0     
+  build_runner: ^2.0.2 #Null safety
+  test: ^1.17.3  #Null safety
+
 #dependency_overrides:
-#  angel_migration:
-#    path: ../angel_migration
-#  angel_orm_generator:
-#    path: ../angel_orm_generator
+#  galileo_migration:
+#    path: ../galileo_migration
+#  galileo_orm_generator:
+#    path: ../galileo_orm_generator

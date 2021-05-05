@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:angel_framework/angel_framework.dart';
-import 'package:body_parser/body_parser.dart';
+import 'package:galileo_framework/galileo_framework.dart';
+
 import 'package:http/src/base_client.dart' as http;
 import 'package:http/src/multipart_file.dart' as http;
 import 'package:http/src/multipart_request.dart' as http;
@@ -21,8 +21,7 @@ class VirusTotalScanner {
   Duration checkInterval;
   String endpoint;
 
-  VirusTotalScanner(this.apiKey, this.client,
-      {this.checkInterval, this.endpoint, this.minPositives}) {
+  VirusTotalScanner(this.apiKey, this.client, {this.checkInterval, this.endpoint, this.minPositives}) {
     this.checkInterval ??= const Duration(seconds: 5);
     this.endpoint ??= 'https://www.virustotal.com/vtapi/v2';
     this.minPositives ??= 3;
@@ -30,19 +29,16 @@ class VirusTotalScanner {
 
   /// Virus-scans all files uploaded within this request.
   Future<bool> handleRequest(RequestContext req, ResponseContext res) async {
-    for (var file in await req.lazyFiles()) {
-      if (await scanFile(file))
-        throw new AngelHttpException.badRequest(
-            message: 'Malicious upload blocked.');
+    for (var file in await req.uploadedFiles) {
+      if (await scanFile(file)) throw new GalileoHttpException.badRequest(message: 'Malicious upload blocked.');
     }
 
     return true;
   }
 
   /// Queries VirusTotal, and returns `true` if a file is malicious in nature.
-  Future<bool> scanFile(FileUploadInfo file) async {
-    var rq =
-        new http.MultipartRequest('POST', Uri.parse('$endpoint/file/scan'));
+  Future<bool> scanFile(UploadedFile file) async {
+    var rq = new http.MultipartRequest('POST', Uri.parse('$endpoint/file/scan'));
 
     rq.headers.addAll({
       'accept': 'application/json',
@@ -55,32 +51,28 @@ class VirusTotalScanner {
     // Add actual file
     rq.files.add(new http.MultipartFile(
       'file',
-      new Stream<List<int>>.fromIterable([file.data]),
-      file.data.length,
+      file.data,
+      (await file.data.first).length,
       filename: file.filename,
-      contentType: new MediaType.parse(file.mimeType),
+      contentType: file.contentType,
     ));
 
-    var rs =
-        await client.send(rq).then<http.Response>(http.Response.fromStream);
+    var rs = await client.send(rq).then<http.Response>(http.Response.fromStream);
 
-    if (new MediaType.parse(rs.headers['content-type']).mimeType !=
-        'application/json') {
-      throw new StateError(
-          'VirusTotal did not response with JSON (status: ${rs.statusCode}). Response: "${rs.body}"');
+    if (new MediaType.parse(rs.headers['content-type']).mimeType != 'application/json') {
+      throw new StateError('VirusTotal did not response with JSON (status: ${rs.statusCode}). Response: "${rs.body}"');
     }
 
-    var json = JSON.decode(rs.body);
+    var json = jsonDecode(rs.body);
     var scanId = json['scan_id'];
 
     if (scanId == null)
-      throw new StateError(
-          'VirusTotal did not send the ID of a scan report. Did you provide an API key?');
+      throw new StateError('VirusTotal did not send the ID of a scan report. Did you provide an API key?');
 
     var c = new Completer<bool>();
 
     callback(_) async {
-      var rs = await client.post('$endpoint/url/report', headers: {
+      var rs = await client.post(Uri.tryParse('$endpoint/url/report'), headers: {
         'accept': 'application/json',
         'accept-encoding': 'gzip',
       }, body: {
@@ -88,13 +80,12 @@ class VirusTotalScanner {
         'resource': scanId,
       });
 
-      if (new MediaType.parse(rs.headers['content-type']).mimeType !=
-          'application/json') {
+      if (new MediaType.parse(rs.headers['content-type']).mimeType != 'application/json') {
         throw new StateError(
             'VirusTotal did not response with JSON (status: ${rs.statusCode}). Response: "${rs.body}"');
       }
 
-      var json = JSON.decode(rs.body);
+      var json = jsonDecode(rs.body);
 
       if (json['positives'] is int) {
         int positives = json['positives'];

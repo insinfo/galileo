@@ -1,10 +1,10 @@
 import 'dart:async';
-import 'package:angel_framework/angel_framework.dart';
-import 'package:angel_validate/server.dart';
+import 'package:galileo_framework/galileo_framework.dart';
+import 'package:galileo_validate/server.dart';
 import 'package:logging/logging.dart';
 import 'package:uuid/uuid.dart';
 
-Future configureServer(Angel app) async {
+Future configureServer(Galileo app) async {
   var scans = <_VirusScan>[];
   var uuid = new Uuid();
 
@@ -13,39 +13,27 @@ Future configureServer(Angel app) async {
   });
 
   // Create file scan...
-  app.post(
-      '/file/scan',
-      waterfall([
-        validate(requireApiKey),
-        (RequestContext req) async {
-          var file = req.files.first;
-          var scan = new _VirusScan(
-              uuid.v4(), file.filename.endsWith('.virus') ? 50 : 0);
-          scans.add(scan);
-          return {'scan_id': scan.id};
-        }
-      ]));
+  app.chain([validate(requireApiKey)]).post('/file/scan', (RequestContext req, ResponseContext resp) async {
+    var file = req.uploadedFiles.first;
+    var scan = new _VirusScan(uuid.v4(), file.filename.endsWith('.virus') ? 50 : 0);
+    scans.add(scan);
+    return {'scan_id': scan.id};
+  });
 
   var requireResource = requireApiKey.extend({
     'resource*': isNonEmptyString,
   });
 
-  app.post(
-      '/url/report',
-      waterfall([
-        validate(requireResource),
-        (RequestContext req) async {
-          var scanId = req.body['resource'];
-          var scan = scans.firstWhere(
-            (s) => s.id == scanId,
-            orElse: () => throw new AngelHttpException.notFound(
-                message: 'Unknown resource.'),
-          );
-          return {'positives': scan.positives};
-        }
-      ]));
+  app.chain([validate(requireResource)]).post('/url/report/:id', (RequestContext req, ResponseContext resp) async {
+    var scanId = req.params['id']; //req.body['resource'];
+    var scan = scans.firstWhere(
+      (s) => s.id == scanId,
+      orElse: () => throw new GalileoHttpException.notFound(message: 'Unknown resource.'),
+    );
+    return {'positives': scan.positives};
+  });
 
-  app.use(() => throw new AngelHttpException.notFound());
+  // app.use(() => throw new GalileoHttpException.notFound());
 
   app.logger = new Logger('mock_virus_total');
 }

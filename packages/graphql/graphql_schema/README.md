@@ -1,6 +1,6 @@
 # graphql_schema
 [![Pub](https://img.shields.io/pub/v/graphql_schema.svg)](https://pub.dartlang.org/packages/graphql_schema)
-[![build status](https://travis-ci.org/angel-dart/graphql.svg)](https://travis-ci.org/angel-dart/graphql)
+[![build status](https://travis-ci.org/galileo-dart/graphql.svg)](https://travis-ci.org/galileo-dart/graphql)
 
 An implementation of GraphQL's type system in Dart. Supports any platform where Dart runs.
 The decisions made in the design of this library were done to make the experience

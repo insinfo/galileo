@@ -1,47 +1,50 @@
 import 'dart:io';
-import 'package:angel_file_security/angel_file_security.dart';
-import 'package:angel_framework/angel_framework.dart';
+import 'package:galileo_file_security/galileo_file_security.dart';
+import 'package:galileo_framework/galileo_framework.dart';
+import 'package:galileo_framework/http.dart';
 import 'package:http/src/multipart_file.dart' as http;
 import 'package:http/src/multipart_request.dart' as http;
 import 'package:http/http.dart' as http;
 import 'package:logging/logging.dart';
 import 'package:test/test.dart';
+import '../lib/src/virus_total.dart';
 import 'mock_virus_total.dart' as mock_virus_total;
 
 main() {
-  Angel app;
-  HttpServer mockServer;
+  Galileo app;
+  GalileoHttp mockServer;
   http.Client client;
   Uri uploadEndpoint;
+  GalileoHttp server;
 
   setUp(() async {
-    app = new Angel()..lazyParseBodies = true;
+    app = new Galileo();
+    server = GalileoHttp(app);
 
-    var mock = new Angel();
+    var mock = new Galileo();
     await mock.configure(mock_virus_total.configureServer);
-    mockServer = await mock.startServer();
+    await mockServer.startServer();
 
     var virusScanner = new VirusTotalScanner(
       'foo',
       new http.Client(),
-      endpoint: 'http://${mockServer.address.address}:${mockServer.port}',
+      endpoint: mockServer.uri.toString(),
       checkInterval: const Duration(seconds: 1),
     );
 
     print('Mock virus total: ${virusScanner.endpoint}');
 
-    app.post('/upload', waterfall([
+    app.chain([
       virusScanner.handleRequest,
-      'OK',
-    ]));
+    ]).post('/upload', (req, rep) => 'OK');
 
-    app.use(() => throw new AngelHttpException.notFound());
+    //app.use(() => throw new GalileoHttpException.notFound());
 
     app.shutdownHooks.add((_) async {
       virusScanner.client.close();
     });
 
-    app.logger = new Logger('angel');
+    app.logger = new Logger('galileo');
 
     Logger.root.onRecord.listen(
       (rec) {
@@ -53,14 +56,13 @@ main() {
 
     client = new http.Client();
 
-    var server = await app.startServer();
-    uploadEndpoint =
-        Uri.parse('http://${server.address.address}:${server.port}/upload');
+    await server.startServer();
+    uploadEndpoint = server.uri;
     print('virus_scan_test listening at $uploadEndpoint');
   });
 
   tearDown(() async {
-    await mockServer.close(force: true);
+    await mockServer.close();
     await app.close();
     client.close();
   });

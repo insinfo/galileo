@@ -1,0 +1,193 @@
+// Copyright (c) 2013-present, Iván Zaera Avellón - izaera@gmail.com
+
+// This library is dually licensed under LGPL 3 and MPL 2.0. See file LICENSE for more information.
+
+// This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0. If a copy of
+// the MPL was not distributed with this file, you can obtain one at http://mozilla.org/MPL/2.0/.
+
+library cipher.stream.salsa20;
+
+import "dart:typed_data";
+
+import "package:cipher/src/ufixnum.dart";
+import "package:cipher/params/key_parameter.dart";
+import "package:cipher/params/parameters_with_iv.dart";
+import "package:cipher/stream/base_stream_cipher.dart";
+
+/// Implementation of Daniel J. Bernstein's Salsa20 stream cipher, Snuffle 2005.
+class Salsa20Engine extends BaseStreamCipher {
+
+  static const _STATE_SIZE = 16;
+
+  static final _sigma = new Uint8List.fromList( "expand 32-byte k".codeUnits );
+  static final _tau = new Uint8List.fromList( "expand 16-byte k".codeUnits );
+
+  Uint8List _workingKey  = null;
+  Uint8List _workingIV   = null;
+
+  final _state = new List<int>(_STATE_SIZE);
+  final _buffer = new List<int>(_STATE_SIZE);
+
+  final _keyStream  = new Uint8List(_STATE_SIZE * 4);
+  var _keyStreamOffset = 0;
+
+  var _initialised = false;
+
+  final String algorithmName = "Salsa20";
+
+  void reset() {
+    if( _workingKey!=null ) {
+      _setKey(_workingKey, _workingIV);
+    }
+  }
+
+  void init( bool forEncryption, ParametersWithIV<KeyParameter> params ) {
+    var uparams = params.parameters;
+    var iv = params.iv;
+    if( iv == null || iv.length != 8 ) {
+        throw new ArgumentError("Salsa20 requires exactly 8 bytes of IV");
+    }
+
+    _workingIV = iv;
+    _workingKey = uparams.key;
+
+    _setKey( _workingKey, _workingIV );
+  }
+
+  int returnByte( int inp ) {
+    if (_keyStreamOffset == 0) {
+      _generateKeyStream(_keyStream);
+
+      if (++_state[8] == 0) {
+        ++_state[9];
+      }
+    }
+
+    var out = clip8(_keyStream[_keyStreamOffset] ^ inp);
+    _keyStreamOffset = (_keyStreamOffset + 1) & 63;
+
+    return out;
+  }
+
+  void processBytes( Uint8List inp, int inpOff, int len, Uint8List out, int outOff ) {
+    if( !_initialised ) {
+      throw new StateError( "Salsa20 not initialized: please call init() first" );
+    }
+
+    if( (inpOff + len) > inp.length ) {
+      throw new ArgumentError( "Input buffer too short or requested length too long" );
+    }
+
+    if( (outOff + len) > out.length ) {
+      throw new ArgumentError( "Output buffer too short or requested length too long" );
+    }
+
+    for( var i=0 ; i<len ; i++ ) {
+      if( _keyStreamOffset==0 ) {
+        _generateKeyStream(_keyStream);
+
+        if( ++_state[8] == 0 ) {
+          ++_state[9];
+        }
+      }
+
+      out[i+outOff] = clip8(_keyStream[_keyStreamOffset] ^ inp[i + inpOff]);
+      _keyStreamOffset = (_keyStreamOffset + 1) & 63;
+    }
+  }
+
+
+  void _setKey( Uint8List keyBytes, Uint8List ivBytes ) {
+    _workingKey = keyBytes;
+    _workingIV  = ivBytes;
+
+    _keyStreamOffset = 0;
+    int offset = 0;
+    Uint8List constants;
+
+    // Key
+    _state[1] = unpack32(_workingKey,  0, Endianness.LITTLE_ENDIAN);
+    _state[2] = unpack32(_workingKey,  4, Endianness.LITTLE_ENDIAN);
+    _state[3] = unpack32(_workingKey,  8, Endianness.LITTLE_ENDIAN);
+    _state[4] = unpack32(_workingKey, 12, Endianness.LITTLE_ENDIAN);
+
+    if( _workingKey.length == 32 ) {
+      constants = _sigma;
+      offset = 16;
+    } else {
+      constants = _tau;
+    }
+
+    _state[11] = unpack32(_workingKey, offset     , Endianness.LITTLE_ENDIAN);
+    _state[12] = unpack32(_workingKey, offset +  4, Endianness.LITTLE_ENDIAN);
+    _state[13] = unpack32(_workingKey, offset +  8, Endianness.LITTLE_ENDIAN);
+    _state[14] = unpack32(_workingKey, offset + 12, Endianness.LITTLE_ENDIAN);
+    _state[0 ] = unpack32(constants,  0, Endianness.LITTLE_ENDIAN);
+    _state[5 ] = unpack32(constants,  4, Endianness.LITTLE_ENDIAN);
+    _state[10] = unpack32(constants,  8, Endianness.LITTLE_ENDIAN);
+    _state[15] = unpack32(constants, 12, Endianness.LITTLE_ENDIAN);
+
+    // IV
+    _state[6] = unpack32(_workingIV, 0, Endianness.LITTLE_ENDIAN);
+    _state[7] = unpack32(_workingIV, 4, Endianness.LITTLE_ENDIAN);
+    _state[8] = _state[9] = 0;
+
+    _initialised = true;
+  }
+
+  void _generateKeyStream( Uint8List output ) {
+    _salsa20Core(20, _state, _buffer);
+    var outOff = 0;
+    for(var x in _buffer) {
+      pack32(x, output, outOff, Endianness.LITTLE_ENDIAN);
+      outOff += 4;
+    }
+  }
+
+  /// The Salsa20 core function
+  void _salsa20Core( int rounds, List<int> input, List<int> x ) {
+    x.setAll( 0, input );
+
+    for( var i=rounds ; i>0 ; i-=2 ) {
+      x[ 4] ^= crotl32((x[ 0]+x[12]), 7);
+      x[ 8] ^= crotl32((x[ 4]+x[ 0]), 9);
+      x[12] ^= crotl32((x[ 8]+x[ 4]),13);
+      x[ 0] ^= crotl32((x[12]+x[ 8]),18);
+      x[ 9] ^= crotl32((x[ 5]+x[ 1]), 7);
+      x[13] ^= crotl32((x[ 9]+x[ 5]), 9);
+      x[ 1] ^= crotl32((x[13]+x[ 9]),13);
+      x[ 5] ^= crotl32((x[ 1]+x[13]),18);
+      x[14] ^= crotl32((x[10]+x[ 6]), 7);
+      x[ 2] ^= crotl32((x[14]+x[10]), 9);
+      x[ 6] ^= crotl32((x[ 2]+x[14]),13);
+      x[10] ^= crotl32((x[ 6]+x[ 2]),18);
+      x[ 3] ^= crotl32((x[15]+x[11]), 7);
+      x[ 7] ^= crotl32((x[ 3]+x[15]), 9);
+      x[11] ^= crotl32((x[ 7]+x[ 3]),13);
+      x[15] ^= crotl32((x[11]+x[ 7]),18);
+      x[ 1] ^= crotl32((x[ 0]+x[ 3]), 7);
+      x[ 2] ^= crotl32((x[ 1]+x[ 0]), 9);
+      x[ 3] ^= crotl32((x[ 2]+x[ 1]),13);
+      x[ 0] ^= crotl32((x[ 3]+x[ 2]),18);
+      x[ 6] ^= crotl32((x[ 5]+x[ 4]), 7);
+      x[ 7] ^= crotl32((x[ 6]+x[ 5]), 9);
+      x[ 4] ^= crotl32((x[ 7]+x[ 6]),13);
+      x[ 5] ^= crotl32((x[ 4]+x[ 7]),18);
+      x[11] ^= crotl32((x[10]+x[ 9]), 7);
+      x[ 8] ^= crotl32((x[11]+x[10]), 9);
+      x[ 9] ^= crotl32((x[ 8]+x[11]),13);
+      x[10] ^= crotl32((x[ 9]+x[ 8]),18);
+      x[12] ^= crotl32((x[15]+x[14]), 7);
+      x[13] ^= crotl32((x[12]+x[15]), 9);
+      x[14] ^= crotl32((x[13]+x[12]),13);
+      x[15] ^= crotl32((x[14]+x[13]),18);
+    }
+
+    for (int i = 0; i < _STATE_SIZE; ++i) {
+      x[i] = sum32(x[i], input[i]);
+    }
+  }
+
+}
+
+

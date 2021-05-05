@@ -1,7 +1,7 @@
 import 'dart:async';
-import 'package:angel_migration/angel_migration.dart';
-import 'package:postgres/postgres.dart';
-import 'package:angel_migration_runner/src/postgres/table.dart';
+import 'package:galileo_migration/galileo_migration.dart';
+import 'package:galileo_postgres/galileo_postgres.dart';
+import 'package:galileo_migration_runner/src/postgres/table.dart';
 
 class PostgresSchema extends Schema {
   final int _indent;
@@ -49,10 +49,8 @@ class PostgresSchema extends Schema {
   }
 
   @override
-  void create(String tableName, void callback(Table table)) =>
-      _create(tableName, callback, false);
+  void create(String tableName, void callback(Table table)) => _create(tableName, callback, false);
 
   @override
-  void createIfNotExists(String tableName, void callback(Table table)) =>
-      _create(tableName, callback, true);
+  void createIfNotExists(String tableName, void callback(Table table)) => _create(tableName, callback, true);
 }

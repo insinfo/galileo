@@ -1,4 +1,4 @@
-import 'package:angel_framework/angel_framework.dart';
+import 'package:galileo_framework/galileo_framework.dart';
 import 'package:http_parser/http_parser.dart';
 
 /// Returns a simple [RequestHandler] that renders the GraphiQL visual interface for GraphQL.
@@ -42,7 +42,7 @@ String renderGraphiql(
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Angel GraphQL</title>
+    <title>Galileo GraphQL</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/graphiql/0.11.11/graphiql.min.css">
     <style>
         html, body {

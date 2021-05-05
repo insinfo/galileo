@@ -1,36 +1,36 @@
-![Logo](https://github.com/angel-dart/graphql/raw/master/img/angel_logo.png)
+![Logo](https://github.com/galileo-dart/graphql/raw/master/img/galileo_logo.png)
 
 <div style="text-align: center">
 <hr>
-<a href="https://pub.dartlang.org/packages/angel_graphql" rel="nofollow"><img src="https://img.shields.io/pub/v/angel_graphql.svg" alt="Pub" data-canonical-src="https://img.shields.io/pub/v/angel_graphql.svg" style="max-width:100%;"></a>
-<a href="https://travis-ci.org/angel-dart/graphql" rel="nofollow"><img src="https://travis-ci.org/angel-dart/graphql.svg" alt="Pub" data-canonical-src="https://img.shields.io/pub/v/angel_graphql.svg" style="max-width:100%;"></a>
+<a href="https://pub.dartlang.org/packages/galileo_graphql" rel="nofollow"><img src="https://img.shields.io/pub/v/galileo_graphql.svg" alt="Pub" data-canonical-src="https://img.shields.io/pub/v/galileo_graphql.svg" style="max-width:100%;"></a>
+<a href="https://travis-ci.org/galileo-dart/graphql" rel="nofollow"><img src="https://travis-ci.org/galileo-dart/graphql.svg" alt="Pub" data-canonical-src="https://img.shields.io/pub/v/galileo_graphql.svg" style="max-width:100%;"></a>
 </div>
 
 * [Installation](#installation)
 * [Usage](#usage)
 * [Subscriptions](#subscriptions)
-* [Integration with Angel `Service`s](#using-services)
+* [Integration with Galileo `Service`s](#using-services)
 * [Documenting API's](#documentation)
 * [Deprecated - Mirrors Usage](#mirrors)
 
 A complete implementation of the official
 [GraphQL specification](http://facebook.github.io/graphql/October2016/#sec-Language) - these
-are the [Angel framework](https://angel-dart.github.io)-specific
+are the [Galileo framework](https://galileo-dart.github.io)-specific
 bindings.
 
 The goal of this project is to provide to server-side
-users of Dart an alternative to REST API's. `package:angel_graphql`, which, when combined with the allows
+users of Dart an alternative to REST API's. `package:galileo_graphql`, which, when combined with the allows
 server-side Dart users to build backends with GraphQL and
 virtually any database imaginable.
 
 ## Installation
-To install `package:angel_graphql`, add the following to your
+To install `package:galileo_graphql`, add the following to your
 `pubspec.yaml`:
 
 ```yaml
 dependencies:
-    angel_framework: ^2.0.0-alpha
-    angel_graphql: ^1.0.0-alpha
+    galileo_framework: ^2.0.0-alpha
+    galileo_graphql: ^1.0.0-alpha
 ```
 
 ## Usage
@@ -53,13 +53,13 @@ You can use the `convertDartType` helper to wrap your existing
 effort.
 
 ```dart
-import 'package:angel_framework/angel_framework.dart';
-import 'package:angel_graphql/angel_graphql.dart';
+import 'package:galileo_framework/galileo_framework.dart';
+import 'package:galileo_graphql/galileo_graphql.dart';
 import 'package:graphql_schema/graphql_schema.dart';
 import 'package:graphql_server/graphql_server.dart';
 import 'package:graphql_server/mirrors.dart';
 
-Future configureServer(Angel app) async {
+Future configureServer(Galileo app) async {
     var queryType = objectType(
         'Query',
         description: 'A simple API that manages your to-do list.',
@@ -125,13 +125,13 @@ print('Access graphiql at $graphiqlUri');
 Visit your `/graphiql` endpoint, and you'll see the `graphiql`
 UI, ready-to-go!
 
-![Graphiql screenshot](https://github.com/angel-dart/graphql/raw/master/img/angel_graphql.png)
+![Graphiql screenshot](https://github.com/galileo-dart/graphql/raw/master/img/galileo_graphql.png)
 
 Now you're ready to build a GraphQL API!
 
 ## Subscriptions
 Example:
-https://github.com/angel-dart/graphql/blob/master/angel_graphql/example/subscription.dart
+https://github.com/galileo-dart/graphql/blob/master/galileo_graphql/example/subscription.dart
 
 In GraphQL, as of the June 2018 spec, clients can subscribe to streams of events
 from the server. In your schema, all you need to do is return a `Stream` from a `resolve`
@@ -187,13 +187,13 @@ app.get('/graphiql',
 **https://github.com/apollographql/subscriptions-transport-ws/issues/551**
 
 ## Using Services
-What would Angel be without services? For those unfamiliar - in Angel,
+What would Galileo be without services? For those unfamiliar - in Galileo,
 `Service` is a base class that implements CRUD functionality, and serves
-as the database interface within an Angel application. They are well-suited
+as the database interface within an Galileo application. They are well-suited
 for NoSQL or other databases without a schema (they can be used with
 SQL, but that's not their primary focus).
 
-`package:angel_graphql` has functionality to resolve fields by interacting with
+`package:galileo_graphql` has functionality to resolve fields by interacting with
 services.
 
 Consider our previous example, and note the calls to
@@ -239,7 +239,7 @@ Using `package:graphql_generator`, you can generate GraphQL schemas for concrete
 types:
 
 ```dart
-configureServer(Angel app) async {
+configureServer(Galileo app) async {
   var schema = graphQLSchema(
     queryType: objectType('Query', fields: [
       field('todos', listOf(todoGraphQLType), resolve: (_, __) => ...)
@@ -293,5 +293,5 @@ You can also manually provide documentation for
 parameters and endpoints, via a `description` parameter on almost
 all related functions.
 
-See [`package:graphql_schema`](https://github.com/angel-dart/graphql/tree/master/graphql_schema)
+See [`package:graphql_schema`](https://github.com/galileo-dart/graphql/tree/master/graphql_schema)
 for more documentation.

@@ -1,15 +1,15 @@
-import 'package:angel_eventsource/server.dart';
-import 'package:angel_framework/angel_framework.dart';
-import 'package:angel_framework/http.dart';
-import 'package:angel_websocket/server.dart';
-import 'package:eventsource/eventsource.dart';
+import 'package:galileo_eventsource/server.dart';
+import 'package:galileo_framework/galileo_framework.dart';
+import 'package:galileo_framework/http.dart';
+import 'package:galileo_websocket/server.dart';
+import 'package:eventsource_dart/eventsource_dart.dart';
 import 'package:logging/logging.dart';
 import 'pretty_logging.dart';
 
 main() async {
-  var app = new Angel();
-  var ws = new AngelWebSocket(app);
-  var events = new AngelEventSourcePublisher(ws);
+  var app = new Galileo();
+  var ws = new GalileoWebSocket(app);
+  var events = new GalileoEventSourcePublisher(ws);
 
   await app.configure(ws.configureServer);
 
@@ -17,9 +17,9 @@ main() async {
   app.all('/ws', ws.handleRequest);
   app.get('/events', events.handleRequest);
 
-  app.logger = new Logger('angel_eventsource')..onRecord.listen(prettyLog);
+  app.logger = new Logger('galileo_eventsource')..onRecord.listen(prettyLog);
 
-  var http = new AngelHttp(app);
+  var http = new GalileoHttp(app);
   var server = await http.startServer('127.0.0.1', 3000);
   var url = Uri.parse('http://${server.address.address}:${server.port}');
   print('Listening at $url');

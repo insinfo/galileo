@@ -1,4 +1,4 @@
-import 'package:angel_framework/angel_framework.dart';
+import 'package:galileo_framework/galileo_framework.dart';
 import 'package:graphql_schema/graphql_schema.dart';
 export 'src/graphiql.dart';
 export 'src/graphql_http.dart';

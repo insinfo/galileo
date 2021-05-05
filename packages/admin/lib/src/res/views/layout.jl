@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<declare config=angel_admin_configuration>
+<declare config=galileo_admin_configuration>
     <html>
         <head>
             <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -27,7 +27,7 @@
                     box-shadow: 0 0 10px grey;
                 }
             </style>
-            <title>{{ title }} | {{ angel_admin_title }}</title>
+            <title>{{ title }} | {{ galileo_admin_title }}</title>
             <style for-each=config.styles as="style">
                 {{- style }}
             </style>
@@ -52,12 +52,12 @@
 
                         <header class="mdc-drawer__header">
                           <div class="mdc-drawer__header-content">
-                            {{ angel_admin_username }}
+                            {{ galileo_admin_username }}
                           </div>
                         </header>
 
                         <nav id="icon-with-text-demo" class="mdc-drawer__content mdc-list">
-                          <a class="mdc-list-item mdc-list-item--activated" href=angel_admin_root>
+                          <a class="mdc-list-item mdc-list-item--activated" href=galileo_admin_root>
                             <i class="material-icons mdc-list-item__graphic" aria-hidden="true">dashboard</i>
                             Dashboard
                           </a>

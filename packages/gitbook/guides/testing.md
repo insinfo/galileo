@@ -9,13 +9,13 @@
 
 ## Testing
 
-Dart already has fantastic testing support, through a library of [testing helpers](https://github.com/angel-dart/test) that will make test writing faster. The following functions are exported by [`package:angel_test`](https://github.com/angel-dart/test), and will make your testing much easier.
+Dart already has fantastic testing support, through a library of [testing helpers](https://github.com/galileo-dart/test) that will make test writing faster. The following functions are exported by [`package:galileo_test`](https://github.com/galileo-dart/test), and will make your testing much easier.
 
 ### connectTo
 
-[Full definition](https://www.dartdocs.org/documentation/angel_test/latest/angel_test/connectTo.html)
+[Full definition](https://www.dartdocs.org/documentation/galileo_test/latest/galileo_test/connectTo.html)
 
-This function will start `app` on an available port, and return a `TestClient` instance \(based on [`package:angel_client`](https://github.com/angel-dart/client)\) configured to send requests to the server. The client also supports session manipulation.
+This function will start `app` on an available port, and return a `TestClient` instance \(based on [`package:galileo_client`](https://github.com/galileo-dart/client)\) configured to send requests to the server. The client also supports session manipulation.
 
 ```dart
 main() {
@@ -46,10 +46,10 @@ A `Matcher` that asserts the given `http.Response` has the given `status` code.
 
 ### More Matchers
 
-The complete set of `angel_test` Matchers can be found [here](https://www.dartdocs.org/documentation/angel_test/latest/angel_test/angel_test-library.html).
+The complete set of `galileo_test` Matchers can be found [here](https://www.dartdocs.org/documentation/galileo_test/latest/galileo_test/galileo_test-library.html).
 
 ## Next Up...
 
-1. Find out how to [handle errors](error-handling.md) in an Angel application.
-2. Learn how to use the handy [Angel CLI](https://github.com/angel-dart/cli).
+1. Find out how to [handle errors](error-handling.md) in an Galileo application.
+2. Learn how to use the handy [Galileo CLI](https://github.com/galileo-dart/cli).
 

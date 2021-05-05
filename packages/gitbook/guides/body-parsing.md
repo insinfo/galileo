@@ -1,5 +1,5 @@
 Interactive Web applications typically require some type of user input (whether that user is a human,
-machine, or otherwise is irrelevant). Angel features built-in support for parsing request bodies with the
+machine, or otherwise is irrelevant). Galileo features built-in support for parsing request bodies with the
 following content types:
 * `application/x-www-form-urlencoded`
 * `application/json`
@@ -29,7 +29,7 @@ app.post('/my_form', (req, res) async {
 ```
 
 ## Handling File Uploads
-In the case of `multipart/form-data`, Angel will also populate the `uploadedFiles` field.
+In the case of `multipart/form-data`, Galileo will also populate the `uploadedFiles` field.
 The `UploadedFile` wrapper class provides mechanisms for reading content types, metadata, and
 accessing the contents of an uploaded file as a `Stream<List<int>>`:
 
@@ -52,7 +52,7 @@ You can set `bodyAsObject`, `bodyAsMap`, or `bodyAsList` exactly
 once:
 
 ```dart
-Future<void> unzipPlugin(Angel app) async {
+Future<void> unzipPlugin(Galileo app) async {
     app.fallback((req, res) async {
         if (!req.hasParsedBody
             && req.contentType.mimeType == 'application/zip') {

@@ -1,5 +1,5 @@
 import 'package:logging/logging.dart';
-import 'package:pretty_logging/pretty_logging.dart';
+import 'package:galileo_pretty_logging/galileo_pretty_logging.dart';
 
 void main() {
   Logger.root

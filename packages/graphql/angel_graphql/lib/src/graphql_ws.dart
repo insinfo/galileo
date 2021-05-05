@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:io';
-import 'package:angel_framework/angel_framework.dart';
-import 'package:angel_framework/http.dart';
+import 'package:galileo_framework/galileo_framework.dart';
+import 'package:galileo_framework/http.dart';
 import 'package:graphql_schema/graphql_schema.dart';
 import 'package:graphql_server/graphql_server.dart';
 import 'package:graphql_server/subscriptions_transport_ws.dart' as stw;
@@ -25,7 +25,7 @@ RequestHandler graphQLWS(GraphQL graphQL, {Duration keepAliveInterval}) {
           if (protocols.contains('graphql-ws')) {
             return 'graphql-ws';
           } else {
-            throw AngelHttpException.badRequest(
+            throw GalileoHttpException.badRequest(
                 message: 'Only the "graphql-ws" protocol is allowed.');
           }
         });
@@ -35,11 +35,11 @@ RequestHandler graphQLWS(GraphQL graphQL, {Duration keepAliveInterval}) {
             _GraphQLWSServer(client, graphQL, req, res, keepAliveInterval);
         await server.done;
       } else {
-        throw AngelHttpException.badRequest(
+        throw GalileoHttpException.badRequest(
             message: 'The `graphQLWS` endpoint only accepts WebSockets.');
       }
     } else {
-      throw AngelHttpException.badRequest(
+      throw GalileoHttpException.badRequest(
           message: 'The `graphQLWS` endpoint only accepts HTTP/1.1 requests.');
     }
   };

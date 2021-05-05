@@ -1,0 +1,16 @@
+name: instagram_dart
+version: 3.0.0
+description: Dart Instagram client library.
+author: Isaque Neves <insinfo2008@gmail.com>
+homepage: https://github.com/insinfo/galileo/tree/master/packages/instagram_dart
+environment:
+  sdk: ">=1.19.0 <3.0.0"
+
+dependencies:
+  oauth2: ^2.0.0 #Null safety
+  owl: ^0.4.0
+
+dev_dependencies:
+  build_runner: ^0.3.0
+  owl_codegen: ^0.2.1
+  test: ^0.12.0

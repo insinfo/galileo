@@ -2,9 +2,9 @@ import 'dart:async';
 import 'package:args/command_runner.dart';
 import 'runner.dart';
 
-/// Runs the Angel Migration CLI.
+/// Runs the galileo Migration CLI.
 Future runMigrations(MigrationRunner migrationRunner, List<String> args) {
-  var cmd = new CommandRunner('migration_runner', 'Executes Angel migrations.')
+  var cmd = new CommandRunner('migration_runner', 'Executes Galileo migrations.')
     ..addCommand(new _UpCommand(migrationRunner))
     ..addCommand(new _RefreshCommand(migrationRunner))
     ..addCommand(new _ResetCommand(migrationRunner))
@@ -44,8 +44,7 @@ class _RefreshCommand extends Command {
   _RefreshCommand(this.migrationRunner);
 
   String get name => 'refresh';
-  String get description =>
-      'Resets the database, and then re-runs all migrations.';
+  String get description => 'Resets the database, and then re-runs all migrations.';
 
   final MigrationRunner migrationRunner;
 

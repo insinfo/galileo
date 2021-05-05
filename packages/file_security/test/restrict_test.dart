@@ -1,5 +1,6 @@
-import 'package:angel_file_security/angel_file_security.dart';
-import 'package:angel_framework/angel_framework.dart';
+import 'package:galileo_file_security/galileo_file_security.dart';
+import 'package:galileo_framework/galileo_framework.dart';
+import 'package:galileo_framework/http.dart';
 import 'package:http/src/multipart_file.dart' as http;
 import 'package:http/src/multipart_request.dart' as http;
 import 'package:http/http.dart' as http;
@@ -7,27 +8,28 @@ import 'package:http_parser/http_parser.dart';
 import 'package:test/test.dart';
 
 main() {
-  Angel app;
+  Galileo app;
   http.Client client;
   Uri uploadEndpoint;
+  GalileoHttp server;
 
   setUp(() async {
-    app = new Angel()..lazyParseBodies = true;
+    app = new Galileo();
+    server = GalileoHttp(app);
 
-    app
-        .chain(restrictFileUploads(
-          maxFiles: 1,
-          maxFileSize: 1000,
-          allowedExtensions: ['.txt'],
-          allowedContentTypes: ['text/plain'],
-        ))
-        .post('/upload', () => 'OK');
+    app.chain([
+      FileSecurityMiddleware(
+        maxFiles: 1,
+        maxFileSize: 1000,
+        allowedExtensions: ['.txt'],
+        allowedContentTypes: ['text/plain'],
+      ).handleRequest
+    ]).post('/upload', (req, resp) => 'OK');
 
     client = new http.Client();
 
-    var server = await app.startServer();
-    uploadEndpoint =
-        Uri.parse('http://${server.address.address}:${server.port}/upload');
+    await server.startServer();
+    uploadEndpoint = server.uri;
   });
 
   tearDown(() async {

@@ -1,6 +1,6 @@
 # data_loader
 [![Pub](https://img.shields.io/pub/v/data_loader.svg)](https://pub.dartlang.org/packages/data_loader)
-[![build status](https://travis-ci.org/angel-dart/graphql.svg)](https://travis-ci.org/angel-dart/graphql)
+[![build status](https://travis-ci.org/galileo-dart/graphql.svg)](https://travis-ci.org/galileo-dart/graphql)
 
 
 Batch and cache database lookups. Works well with GraphQL.
@@ -17,7 +17,7 @@ dependencies:
 
 ## Usage
 Complete example:
-https://github.com/angel-dart/graphql/blob/master/data_loader/example/main.dart
+https://github.com/galileo-dart/graphql/blob/master/data_loader/example/main.dart
 
 ```dart
 var userLoader = new DataLoader((key) => myBatchGetUsers(keys));

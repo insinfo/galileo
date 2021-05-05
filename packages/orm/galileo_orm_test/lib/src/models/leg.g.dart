@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of angel_orm_generator.test.models.leg;
+part of galileo_orm_generator.test.models.leg;
 
 // **************************************************************************
 // MigrationGenerator
@@ -50,16 +50,8 @@ class LegQuery extends Query<Leg, LegQueryWhere> {
     trampoline ??= Set();
     trampoline.add(tableName);
     _where = LegQueryWhere(this);
-    leftJoin(
-        _foot = FootQuery(trampoline: trampoline, parent: this), 'id', 'leg_id',
-        additionalFields: const [
-          'id',
-          'created_at',
-          'updated_at',
-          'leg_id',
-          'n_toes'
-        ],
-        trampoline: trampoline);
+    leftJoin(_foot = FootQuery(trampoline: trampoline, parent: this), 'id', 'leg_id',
+        additionalFields: const ['id', 'created_at', 'updated_at', 'leg_id', 'n_toes'], trampoline: trampoline);
   }
 
   @override
@@ -102,8 +94,7 @@ class LegQuery extends Query<Leg, LegQueryWhere> {
         updatedAt: (row[2] as DateTime),
         name: (row[3] as String));
     if (row.length > 4) {
-      model = model.copyWith(
-          foot: FootQuery.parseRow(row.skip(4).take(5).toList()));
+      model = model.copyWith(foot: FootQuery.parseRow(row.skip(4).take(5).toList()));
     }
     return model;
   }
@@ -315,12 +306,7 @@ class Leg extends _Leg {
   @override
   String name;
 
-  Leg copyWith(
-      {String id,
-      DateTime createdAt,
-      DateTime updatedAt,
-      _Foot foot,
-      String name}) {
+  Leg copyWith({String id, DateTime createdAt, DateTime updatedAt, _Foot foot, String name}) {
     return Leg(
         id: id ?? this.id,
         createdAt: createdAt ?? this.createdAt,
@@ -375,12 +361,7 @@ class Foot extends _Foot {
   @override
   double nToes;
 
-  Foot copyWith(
-      {String id,
-      DateTime createdAt,
-      DateTime updatedAt,
-      int legId,
-      double nToes}) {
+  Foot copyWith({String id, DateTime createdAt, DateTime updatedAt, int legId, double nToes}) {
     return Foot(
         id: id ?? this.id,
         createdAt: createdAt ?? this.createdAt,
@@ -453,9 +434,7 @@ class LegSerializer extends Codec<Leg, Map> {
                 ? (map['updated_at'] as DateTime)
                 : DateTime.parse(map['updated_at'].toString()))
             : null,
-        foot: map['foot'] != null
-            ? FootSerializer.fromMap(map['foot'] as Map)
-            : null,
+        foot: map['foot'] != null ? FootSerializer.fromMap(map['foot'] as Map) : null,
         name: map['name'] as String);
   }
 
@@ -474,13 +453,7 @@ class LegSerializer extends Codec<Leg, Map> {
 }
 
 abstract class LegFields {
-  static const List<String> allFields = <String>[
-    id,
-    createdAt,
-    updatedAt,
-    foot,
-    name
-  ];
+  static const List<String> allFields = <String>[id, createdAt, updatedAt, foot, name];
 
   static const String id = 'id';
 
@@ -548,13 +521,7 @@ class FootSerializer extends Codec<Foot, Map> {
 }
 
 abstract class FootFields {
-  static const List<String> allFields = <String>[
-    id,
-    createdAt,
-    updatedAt,
-    legId,
-    nToes
-  ];
+  static const List<String> allFields = <String>[id, createdAt, updatedAt, legId, nToes];
 
   static const String id = 'id';
 

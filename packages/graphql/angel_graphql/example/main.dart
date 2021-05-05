@@ -1,23 +1,23 @@
 // ignore_for_file: deprecated_member_use
-import 'package:angel_framework/angel_framework.dart';
-import 'package:angel_framework/http.dart';
-import 'package:angel_graphql/angel_graphql.dart';
-import 'package:angel_serialize/angel_serialize.dart';
+import 'package:galileo_framework/galileo_framework.dart';
+import 'package:galileo_framework/http.dart';
+import 'package:galileo_graphql/galileo_graphql.dart';
+import 'package:galileo_serialize/galileo_serialize.dart';
 import 'package:graphql_schema/graphql_schema.dart';
 import 'package:graphql_server/graphql_server.dart';
 import 'package:graphql_server/mirrors.dart';
 import 'package:logging/logging.dart';
 
 main() async {
-  var logger = Logger('angel_graphql');
-  var app = Angel(
+  var logger = Logger('galileo_graphql');
+  var app = Galileo(
       logger: logger
         ..onRecord.listen((rec) {
           print(rec);
           if (rec.error != null) print(rec.error);
           if (rec.stackTrace != null) print(rec.stackTrace);
         }));
-  var http = AngelHttp(app);
+  var http = GalileoHttp(app);
 
   var todoService = app.use('api/todos', MapService());
 

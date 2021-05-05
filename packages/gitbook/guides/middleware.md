@@ -11,7 +11,7 @@
 
 ## Middleware
 
-Sometimes, it becomes to recycle code to run on multiple routes. Angel allows for this in the form of _middleware_. Middleware are frequently used as authorization filters, or to serialize database data for use in subsequent routes. Middleware in Angel can be any route handler, whether a function or arbitrary data. You can also throw exceptions in middleware.
+Sometimes, it becomes to recycle code to run on multiple routes. Galileo allows for this in the form of _middleware_. Middleware are frequently used as authorization filters, or to serialize database data for use in subsequent routes. Middleware in Galileo can be any route handler, whether a function or arbitrary data. You can also throw exceptions in middleware.
 
 ### Denying Requests via Middleware
 
@@ -48,14 +48,14 @@ app.get('/', chain([
   },
 ]));
 
-// The `middleware: ` parameter is used internally by `package:angel_route`.
+// The `middleware: ` parameter is used internally by `package:galileo_route`.
 // Avoid using it when you can.
 app.get('/', 'world!', middleware: [someListOfMiddleware]);
 ```
 
 Though this might at first seem redundant, there are actually reasons for all three existing.
 
-By convention, though, follow these *readability* rules when building Angel servers:
+By convention, though, follow these *readability* rules when building Galileo servers:
 * Routes with no middleware should not use `chain`, `app.chain`, or `middleware. Self-explanatory.
 * Routes with one middleware and one handler should use `app.chain([...])` when:
   * The construction of all the middleware does not take more than one line.
@@ -74,7 +74,7 @@ app.fallback((req, res) async => res.close());
 
 For more complicated middleware, you can also create a class.
 
-Canonically, when using a class as a request handler, it should provide a `handleRequest(RequestContext, ResponseContext)` method. This pattern is seen throughout many Angel plugins, such as `VirtualDirectory` or `Proxy`.
+Canonically, when using a class as a request handler, it should provide a `handleRequest(RequestContext, ResponseContext)` method. This pattern is seen throughout many Galileo plugins, such as `VirtualDirectory` or `Proxy`.
 
 The reason for this is that a name like `handleRequest` makes it very clear to anyone reading the code what it is supposed to do.
 This is the same rationale behind [controllers](controllers.md) providing a `configureServer` method.
@@ -140,5 +140,5 @@ app.get('/the-route', chain([
 
 ## Next Up...
 
-Take a good look at [controllers](controllers.md) in Angel!
+Take a good look at [controllers](controllers.md) in Galileo!
 

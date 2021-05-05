@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/type.dart';
-import 'package:angel_model/angel_model.dart';
-import 'package:angel_orm/angel_orm.dart';
-import 'package:angel_serialize_generator/angel_serialize_generator.dart';
+import 'package:galileo_model/galileo_model.dart';
+import 'package:galileo_orm/galileo_orm.dart';
+import 'package:galileo_serialize_generator/galileo_serialize_generator.dart';
 import 'package:build/build.dart';
 import 'package:code_builder/code_builder.dart';
 import 'package:dart_style/dart_style.dart';
@@ -11,10 +11,8 @@ import 'package:source_gen/source_gen.dart' hide LibraryBuilder;
 import 'orm_build_context.dart';
 
 Builder migrationBuilder(BuilderOptions options) {
-  return SharedPartBuilder([
-    MigrationGenerator(
-        autoSnakeCaseNames: options.config['auto_snake_case_names'] != false)
-  ], 'angel_migration');
+  return SharedPartBuilder(
+      [MigrationGenerator(autoSnakeCaseNames: options.config['auto_snake_case_names'] != false)], 'galileo_migration');
 }
 
 class MigrationGenerator extends GeneratorForAnnotation<Orm> {
@@ -29,45 +27,40 @@ class MigrationGenerator extends GeneratorForAnnotation<Orm> {
   const MigrationGenerator({this.autoSnakeCaseNames = true});
 
   @override
-  Future<String> generateForAnnotatedElement(
-      Element element, ConstantReader annotation, BuildStep buildStep) async {
+  Future<String> generateForAnnotatedElement(Element element, ConstantReader annotation, BuildStep buildStep) async {
     if (element is! ClassElement) {
       throw 'Only classes can be annotated with @ORM().';
     }
 
-    var generateMigrations =
-        annotation.peek('generateMigrations')?.boolValue ?? true;
+    var generateMigrations = annotation.peek('generateMigrations')?.boolValue ?? true;
 
     if (!generateMigrations) {
       return null;
     }
 
     var resolver = await buildStep.resolver;
-    var ctx = await buildOrmContext({}, element as ClassElement, annotation,
-        buildStep, resolver, autoSnakeCaseNames != false);
-    var lib = generateMigrationLibrary(
-        ctx, element as ClassElement, resolver, buildStep);
+    var ctx = await buildOrmContext(
+        {}, element as ClassElement, annotation, buildStep, resolver, autoSnakeCaseNames != false);
+    var lib = generateMigrationLibrary(ctx, element as ClassElement, resolver, buildStep);
     if (lib == null) return null;
     return DartFormatter().format(lib.accept(DartEmitter()).toString());
   }
 
-  Library generateMigrationLibrary(OrmBuildContext ctx, ClassElement element,
-      Resolver resolver, BuildStep buildStep) {
+  Library generateMigrationLibrary(OrmBuildContext ctx, ClassElement element, Resolver resolver, BuildStep buildStep) {
     return Library((lib) {
       lib.body.add(Class((clazz) {
         clazz
           ..name = '${ctx.buildContext.modelClassName}Migration'
           ..extend = refer('Migration')
-          ..methods
-              .addAll([buildUpMigration(ctx, lib), buildDownMigration(ctx)]);
+          ..methods.addAll([buildUpMigration(ctx, lib), buildDownMigration(ctx)]);
       }));
     });
   }
 
   Method buildUpMigration(OrmBuildContext ctx, LibraryBuilder lib) {
     return Method((meth) {
-      var autoIdAndDateFields = const TypeChecker.fromRuntime(Model)
-          .isAssignableFromType(ctx.buildContext.clazz.thisType);
+      var autoIdAndDateFields =
+          const TypeChecker.fromRuntime(Model).isAssignableFromType(ctx.buildContext.clazz.thisType);
       meth
         ..name = 'up'
         ..annotations.add(refer('override'))
@@ -98,9 +91,8 @@ class MigrationGenerator extends GeneratorForAnnotation<Orm> {
                 //   }
                 // }
 
-                // Fix from: https://github.com/angel-dart/angel/issues/114#issuecomment-505525729
-                if (!(col.indexType == IndexType.primaryKey ||
-                    (autoIdAndDateFields != false && name == 'id'))) {
+                // Fix from: https://github.com/galileo-dart/galileo/issues/114#issuecomment-505525729
+                if (!(col.indexType == IndexType.primaryKey || (autoIdAndDateFields != false && name == 'id'))) {
                   // Check for relationships that might duplicate
                   for (var rName in ctx.relations.keys) {
                     var relationship = ctx.relations[rName];
@@ -185,17 +177,13 @@ class MigrationGenerator extends GeneratorForAnnotation<Orm> {
                 var type = defaultValue.type;
                 Expression defaultExpr;
 
-                if (const TypeChecker.fromRuntime(RawSql)
-                    .isAssignableFromType(defaultValue.type)) {
-                  var value =
-                      ConstantReader(defaultValue).read('value').stringValue;
-                  defaultExpr =
-                      refer('RawSql').constInstance([literalString(value)]);
+                if (const TypeChecker.fromRuntime(RawSql).isAssignableFromType(defaultValue.type)) {
+                  var value = ConstantReader(defaultValue).read('value').stringValue;
+                  defaultExpr = refer('RawSql').constInstance([literalString(value)]);
                 } else if (type is InterfaceType && type.element.isEnum) {
                   // Default to enum index.
                   try {
-                    var index =
-                        ConstantReader(defaultValue).read('index')?.intValue;
+                    var index = ConstantReader(defaultValue).read('index')?.intValue;
                     if (index != null) defaultExpr = literalNum(index);
                   } catch (_) {
                     // Extremely weird error occurs here: `Not an instance of int`.
@@ -212,8 +200,7 @@ class MigrationGenerator extends GeneratorForAnnotation<Orm> {
                 }
               }
 
-              if (col.indexType == IndexType.primaryKey ||
-                  (autoIdAndDateFields != false && name == 'id')) {
+              if (col.indexType == IndexType.primaryKey || (autoIdAndDateFields != false && name == 'id')) {
                 cascade.add(refer('primaryKey').call([]));
               } else if (col.indexType == IndexType.unique) {
                 cascade.add(refer('unique').call([]));
@@ -242,15 +229,14 @@ class MigrationGenerator extends GeneratorForAnnotation<Orm> {
               var relationship = r;
 
               if (relationship.type == RelationshipType.belongsTo) {
-                // Fix from https://github.com/angel-dart/angel/issues/116#issuecomment-505546479
+                // Fix from https://github.com/galileo-dart/galileo/issues/116#issuecomment-505546479
                 // var key = relationship.localKey;
 
                 // var field = table.property('integer').call([literal(key)]);
                 // // .references('user', 'id').onDeleteCascade()
                 var columnTypeType = refer('ColumnType');
                 var key = relationship.localKey;
-                var keyType = relationship
-                    .foreign.columns[relationship.foreignKey].type.name;
+                var keyType = relationship.foreign.columns[relationship.foreignKey].type.name;
 
                 var field = table.property('declare').call([
                   literal(key),
@@ -265,8 +251,7 @@ class MigrationGenerator extends GeneratorForAnnotation<Orm> {
                 ]);
 
                 if (relationship.cascadeOnDelete != false &&
-                    const [RelationshipType.hasOne, RelationshipType.belongsTo]
-                        .contains(relationship.type)) {
+                    const [RelationshipType.hasOne, RelationshipType.belongsTo].contains(relationship.type)) {
                   ref = ref.property('onDeleteCascade').call([]);
                 }
                 closureBody.addExpression(ref);
@@ -293,16 +278,12 @@ class MigrationGenerator extends GeneratorForAnnotation<Orm> {
         ..body = Block((b) {
           var named = <String, Expression>{};
 
-          if (ctx.relations.values.any((r) =>
-              r.type == RelationshipType.hasOne ||
-              r.type == RelationshipType.hasMany ||
-              r.isManyToMany)) {
+          if (ctx.relations.values
+              .any((r) => r.type == RelationshipType.hasOne || r.type == RelationshipType.hasMany || r.isManyToMany)) {
             named['cascade'] = literalTrue;
           }
 
-          b.addExpression(_schema
-              .property('drop')
-              .call([literalString(ctx.tableName)], named));
+          b.addExpression(_schema.property('drop').call([literalString(ctx.tableName)], named));
         });
     });
   }

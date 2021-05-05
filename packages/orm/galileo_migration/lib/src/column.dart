@@ -1,4 +1,4 @@
-import 'package:angel_orm/angel_orm.dart';
+import 'package:galileo_orm/galileo_orm.dart';
 
 class MigrationColumn extends Column {
   final List<MigrationColumnReference> _references = [];
@@ -14,11 +14,9 @@ class MigrationColumn extends Column {
 
   get defaultValue => _defaultValue;
 
-  List<MigrationColumnReference> get externalReferences =>
-      new List<MigrationColumnReference>.unmodifiable(_references);
+  List<MigrationColumnReference> get externalReferences => new List<MigrationColumnReference>.unmodifiable(_references);
 
-  MigrationColumn(ColumnType type,
-      {bool isNullable: true, int length, IndexType indexType, defaultValue})
+  MigrationColumn(ColumnType type, {bool isNullable: true, int length, IndexType indexType, defaultValue})
       : super(type: type, length: length) {
     _nullable = isNullable;
     _index = indexType;
@@ -28,9 +26,7 @@ class MigrationColumn extends Column {
   factory MigrationColumn.from(Column column) => column is MigrationColumn
       ? column
       : new MigrationColumn(column.type,
-          isNullable: column.isNullable,
-          length: column.length,
-          indexType: column.indexType);
+          isNullable: column.isNullable, length: column.length, indexType: column.indexType);
 
   MigrationColumn notNull() => this.._nullable = false;
 
@@ -55,8 +51,7 @@ class MigrationColumnReference {
 
   String get behavior => _behavior;
 
-  StateError _locked() =>
-      new StateError('Cannot override existing "$_behavior" behavior.');
+  StateError _locked() => new StateError('Cannot override existing "$_behavior" behavior.');
 
   void onDeleteCascade() {
     if (_behavior != null) throw _locked();

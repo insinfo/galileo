@@ -1,9 +1,9 @@
 # graphql_server
 [![Pub](https://img.shields.io/pub/v/graphql_server.svg)](https://pub.dartlang.org/packages/graphql_server)
-[![build status](https://travis-ci.org/angel-dart/graphql.svg)](https://travis-ci.org/angel-dart/graphql)
+[![build status](https://travis-ci.org/galileo-dart/graphql.svg)](https://travis-ci.org/galileo-dart/graphql)
 
 Base package for implementing GraphQL servers.
-You might prefer [`package:angel_graphql`](https://github.com/angel-dart/graphql),
+You might prefer [`package:galileo_graphql`](https://github.com/galileo-dart/graphql),
 the fastest way to implement GraphQL backends in Dart.
 
 `package:graphql_server` does not require any specific
@@ -37,9 +37,9 @@ https://pub.dartlang.org/documentation/graphql_server/latest/graphql_server/Grap
 If you're looking for functionality like `graphQLHttp`
 in `graphql-js`, that is not included in this package, because
 it is typically specific to the framework/platform you are using.
-The `graphQLHttp` implementation in `package:angel_graphql` is
+The `graphQLHttp` implementation in `package:galileo_graphql` is
 a good example:
-https://github.com/angel-dart/graphql/blob/master/angel_graphql/lib/src/graphql_http.dart
+https://github.com/galileo-dart/graphql/blob/master/galileo_graphql/lib/src/graphql_http.dart
 
 ## Subscriptions
 GraphQL queries involving `subscription` operations can return
@@ -92,7 +92,7 @@ abstract class. `Server` will handle the transport and communication,
 but again, ultimately, emitting subscription events is up to your
 implementation.
 
-Here's a snippet from `graphQLWS` in `package:angel_graphql`.
+Here's a snippet from `graphQLWS` in `package:galileo_graphql`.
 It runs within the context of one single request:
 
 ```dart
@@ -103,8 +103,8 @@ var server =
 await server.done;
 ```
 
-See `graphQLWS` in `package:angel_graphql` for a good example:
-https://github.com/angel-dart/graphql/blob/master/angel_graphql/lib/src/graphql_ws.dart
+See `graphQLWS` in `package:galileo_graphql` for a good example:
+https://github.com/galileo-dart/graphql/blob/master/galileo_graphql/lib/src/graphql_ws.dart
 
 ## Introspection
 Introspection of a GraphQL schema allows clients to query the schema itself,

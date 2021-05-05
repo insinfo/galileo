@@ -7,11 +7,11 @@
 * Allow any `Map<String, dynamic>` as body, not just `Map<String, String>`.
 
 # 2.0.1
-* Change `BaseAngelClient` constructor to accept `dynamic` instead of `String` for `baseUrl.
+* Change `BasegGalileoClient` constructor to accept `dynamic` instead of `String` for `baseUrl.
 
 # 2.0.0
 * Deprecate `basePath` in favor of `baseUrl`.
-* `Angel` now extends `http.Client`.
+* `galileo` now extends `http.Client`.
 * Deprecate `auth_types`.
 
 # 2.0.0-alpha.2
@@ -23,7 +23,7 @@
 
 # 2.0.0-alpha
 * Depend on Dart 2.
-* Depend on Angel 2.
+* Depend on galileo 2.
 * Remove `dart2_constant`.
 
 # 1.2.0+2

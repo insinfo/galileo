@@ -1,7 +1,7 @@
 Before starting with the ORM, it is highly recommended to familiar one's self with
-`package:angel_serialize`, as it is the foundation for `package:angel_orm`:
+`package:galileo_serialize`, as it is the foundation for `package:galileo_orm`:
 
-https://github.com/angel-dart/serialize
+https://github.com/galileo-dart/serialize
 
 To enable the ORM for a given model, simply add the `@orm` annotation to its definition:
 

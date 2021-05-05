@@ -1,9 +1,9 @@
 language: dart
 script: bash tool/.travis.sh
 before_script:
-  - psql -c 'create database angel_orm_test;' -U postgres
-  - psql -c 'create database angel_orm_service_test;' -U postgres
-  - psql -c "CREATE USER angel_orm WITH PASSWORD 'angel_orm';" -U postgres
+  - psql -c 'create database galileo_orm_test;' -U postgres
+  - psql -c 'create database galileo_orm_service_test;' -U postgres
+  - psql -c "CREATE USER galileo_orm WITH PASSWORD 'galileo_orm';" -U postgres
 services:
   - postgresql
 addons:

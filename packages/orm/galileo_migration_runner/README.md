@@ -1,2 +1,2 @@
 # migration
-A PostgreSQL database migration framework built on Angel's ORM.
+A PostgreSQL database migration framework built on Galileo's ORM.

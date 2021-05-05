@@ -1,10 +1,13 @@
+# 3.0.1
+- update dependencies
+
 # 2.1.0-beta.2
 * Support for custom SQL expressions.
 
 # 2.1.0-beta.1
 * `OrmBuildContext` caching is now local to a `Builder`, so `watch`
 *should* finally always run when required. Should resolve
-[#85](https://github.com/angel-dart/orm/issues/85).
+[#85](https://github.com/galileo-dart/orm/issues/85).
 
 # 2.1.0-beta
 * Relationships have always generated subqueries; now these subqueries are
@@ -61,7 +64,7 @@ available as `Query` objects on generated classes.
 * Add JSON/JSONB support for Maps.
 
 # 2.0.0-dev.2
-* Changes to work with `package:angel_orm@2.0.0-dev.15`.
+* Changes to work with `package:galileo_orm@2.0.0-dev.15`.
 
 # 2.0.0-dev.1
 * Generate migration files.

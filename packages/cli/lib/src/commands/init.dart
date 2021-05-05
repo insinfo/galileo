@@ -249,7 +249,7 @@ const BoilerplateInfo ormBoilerplate = const BoilerplateInfo(
 
 const BoilerplateInfo basicBoilerplate = const BoilerplateInfo(
     'Basic',
-    'Minimal starting point for galileo 2.x - A simple server with only a few additional packages.',
+    'Minimal starting point for galileo 3.x - A simple server with only a few additional packages.',
     '${RepoLocation}/boilerplates.git',
     ref: 'basic-sdk-2.12.x');
 

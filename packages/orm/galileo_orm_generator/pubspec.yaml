@@ -1,58 +1,34 @@
 name: galileo_orm_generator
-version: 3.0.0
+version: 3.0.1
 description: Code generators for galileo's ORM. Generates query builder classes.
-author: Tobe O <thosakwe@gmail.com>
-homepage: https://github.com/galileo-dart/orm
-publish_to: none
+author: Isaque Neves <insinfo2008@gmail.com>
+homepage: https://github.com/insinfo/galileo/tree/master/packages/orm
+
 environment:
   sdk: '>=2.10.0 <3.0.0'
+  
 dependencies:
-  analyzer: ">=0.35.0 <2.0.0"
-  galileo_model:
-    git: 
-      url: https://github.com/insinfo/galileo.git
-      ref: sdk-2.12.x
-      path: packages/model
-  galileo_serialize:
-    git: 
-      url: https://github.com/insinfo/galileo.git
-      ref: sdk-2.12.x
-      path: packages/serialize/galileo_serialize
-  galileo_orm:
-    git: 
-      url: https://github.com/insinfo/galileo.git
-      ref: sdk-2.12.x
-      path: packages/orm/galileo_orm
-  galileo_serialize_generator:
-    git: 
-      url: https://github.com/insinfo/galileo.git
-      ref: sdk-2.12.x
-      path: packages/serialize/galileo_serialize_generator
-  build: ^1.0.0
-  build_config: ^0.4.0
-  code_builder: ^3.0.0
-  dart_style: ^1.0.0
-  inflection2: ^0.4.2
-  meta: ^1.0.0
-  path: ^1.0.0
-  recase: ^3.0.1
-  source_gen: ^0.9.0
+  analyzer: ^1.5.0
+  galileo_model: ^2.0.0   
+  galileo_serialize: ^3.0.0 
+  galileo_orm: ^3.0.0   
+  galileo_serialize_generator: ^3.0.0
+  build: ^2.0.1 #Null safety
+  build_config: ^1.0.0  #Null safety
+  code_builder: ^4.0.0 #Null safety
+  dart_style: ^2.0.1 #Null safety
+  inflection3: ^0.5.3+2 #Null safety
+  meta: ^1.3.0 #Null safety
+  path: ^1.8.0 #Null safety
+  recase: ^4.0.0 #Null safety
+  source_gen: ^1.0.0  #Null safety
+
 dev_dependencies:
-  galileo_framework:
-    git: 
-      url: https://github.com/insinfo/galileo.git
-      ref: sdk-2.12.x
-      path: packages/framework
-  galileo_migration:
-    git: 
-      url: https://github.com/insinfo/galileo.git
-      ref: sdk-2.12.x
-      path: packages/orm/galileo_migration
+  galileo_framework: ^3.0.2     
+  galileo_migration: ^3.0.0     
   #galileo_test: ^1.0.0
-  build_runner: ^1.11.5
-  collection: ^1.0.0
-  pedantic: ^1.11.0
-  postgres:
-    git: 
-      url: https://github.com/insinfo/postgresql-dart
-  test: ^1.16.5
+  build_runner: ^2.0.2 #Null safety
+  collection: ^1.15.0 #Null safety
+  pedantic: ^1.11.0 #Null safety
+  galileo_postgres: ^3.0.0 #Null safety
+  test: ^1.17.3 #Null safety

@@ -1,13 +1,12 @@
-import 'package:angel_migration/angel_migration.dart';
-import 'package:angel_migration_runner/angel_migration_runner.dart';
-import 'package:angel_migration_runner/postgres.dart';
-import 'package:angel_orm/angel_orm.dart';
-import 'package:postgres/postgres.dart';
-import '../../angel_migration/example/todo.dart';
+import 'package:galileo_migration/galileo_migration.dart';
+import 'package:galileo_migration_runner/galileo_migration_runner.dart';
+import 'package:galileo_migration_runner/postgres.dart';
+import 'package:galileo_orm/galileo_orm.dart';
+import 'package:galileo_postgres/galileo_postgres.dart';
+import '../../galileo_migration/example/todo.dart';
 
 var migrationRunner = new PostgresMigrationRunner(
-  new PostgreSQLConnection('127.0.0.1', 5432, 'test',
-      username: 'postgres', password: 'postgres'),
+  new PostgreSQLConnection('127.0.0.1', 5432, 'test', username: 'postgres', password: 'postgres'),
   migrations: [
     new UserMigration(),
     new TodoMigration(),

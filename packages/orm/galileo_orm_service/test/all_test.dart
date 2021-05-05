@@ -1,10 +1,10 @@
 import 'dart:async';
 import 'dart:io';
-import 'package:angel_framework/angel_framework.dart';
-import 'package:angel_orm_postgres/angel_orm_postgres.dart';
-import 'package:angel_orm_service/angel_orm_service.dart';
+import 'package:galileo_framework/galileo_framework.dart';
+import 'package:galileo_orm_postgres/galileo_orm_postgres.dart';
+import 'package:galileo_orm_service/galileo_orm_service.dart';
 import 'package:logging/logging.dart';
-import 'package:postgres/postgres.dart';
+import 'package:galileo_postgres/galileo_postgres.dart';
 import 'package:test/test.dart';
 import 'pokemon.dart';
 
@@ -14,7 +14,7 @@ void main() {
   Service<int, Pokemon> pokemonService;
 
   setUp(() async {
-    var conn = PostgreSQLConnection('localhost', 5432, 'angel_orm_service_test',
+    var conn = PostgreSQLConnection('localhost', 5432, 'galileo_orm_service_test',
         username: Platform.environment['POSTGRES_USERNAME'] ?? 'postgres',
         password: Platform.environment['POSTGRES_PASSWORD'] ?? 'password');
     hierarchicalLoggingEnabled = true;
@@ -46,11 +46,8 @@ void main() {
   });
 
   test('create', () async {
-    var blaziken = await pokemonService.create(Pokemon(
-        species: 'Blaziken',
-        level: 100,
-        type1: PokemonType.fire,
-        type2: PokemonType.fighting));
+    var blaziken = await pokemonService
+        .create(Pokemon(species: 'Blaziken', level: 100, type1: PokemonType.fire, type2: PokemonType.fighting));
     print(blaziken);
     expect(blaziken.id, isNotNull);
     expect(blaziken.species, 'Blaziken');
@@ -165,7 +162,7 @@ void main() {
             () => pokemonService.findOne({
                   'query': {PokemonFields.level: pikachu.level * 3}
                 }),
-            throwsA(TypeMatcher<AngelHttpException>()));
+            throwsA(TypeMatcher<GalileoHttpException>()));
       });
 
       test('nonexistent throws 404', () {
@@ -173,7 +170,7 @@ void main() {
             () => pokemonService.findOne({
                   'query': {PokemonFields.type1: PokemonType.poison}
                 }),
-            throwsA(TypeMatcher<AngelHttpException>()));
+            throwsA(TypeMatcher<GalileoHttpException>()));
       });
     });
 
@@ -184,32 +181,26 @@ void main() {
       });
 
       test('nonexistent throws 404', () {
-        expect(() => pokemonService.read(999),
-            throwsA(TypeMatcher<AngelHttpException>()));
+        expect(() => pokemonService.read(999), throwsA(TypeMatcher<GalileoHttpException>()));
       });
     });
 
     test('readMany', () async {
-      expect(pokemonService.readMany([giratina.idAsInt, pikachu.idAsInt]),
-          completion([giratina, pikachu]));
-      expect(
-          pokemonService.readMany([giratina.idAsInt]), completion([giratina]));
+      expect(pokemonService.readMany([giratina.idAsInt, pikachu.idAsInt]), completion([giratina, pikachu]));
+      expect(pokemonService.readMany([giratina.idAsInt]), completion([giratina]));
       expect(pokemonService.readMany([pikachu.idAsInt]), completion([pikachu]));
       expect(() => pokemonService.readMany([]), throwsArgumentError);
     });
 
     group('update', () {
       test('default', () async {
-        expect(
-            await pokemonService.update(
-                giratina.idAsInt, giratina.copyWith(name: 'Hello')),
+        expect(await pokemonService.update(giratina.idAsInt, giratina.copyWith(name: 'Hello')),
             giratina.copyWith(name: 'Hello'));
       });
 
       test('nonexistent throws 404', () {
-        expect(
-            () => pokemonService.update(999, giratina.copyWith(name: 'Hello')),
-            throwsA(TypeMatcher<AngelHttpException>()));
+        expect(() => pokemonService.update(999, giratina.copyWith(name: 'Hello')),
+            throwsA(TypeMatcher<GalileoHttpException>()));
       });
     });
 
@@ -220,13 +211,12 @@ void main() {
       });
 
       test('nonexistent throws 404', () {
-        expect(() => pokemonService.remove(999),
-            throwsA(TypeMatcher<AngelHttpException>()));
+        expect(() => pokemonService.remove(999), throwsA(TypeMatcher<GalileoHttpException>()));
       });
 
       test('cannot remove all unless explicitly set', () async {
         expect(() => pokemonService.remove(null, {'provider': Providers.rest}),
-            throwsA(TypeMatcher<AngelHttpException>()));
+            throwsA(TypeMatcher<GalileoHttpException>()));
       });
     });
   });

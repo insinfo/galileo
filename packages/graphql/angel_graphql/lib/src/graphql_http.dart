@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
-import 'package:angel_framework/angel_framework.dart';
-import 'package:angel_validate/server.dart';
+import 'package:galileo_framework/galileo_framework.dart';
+import 'package:galileo_validate/server.dart';
 import 'package:graphql_parser/graphql_parser.dart';
 import 'package:graphql_schema/graphql_schema.dart';
 import 'package:graphql_server/graphql_server.dart';
@@ -85,14 +85,14 @@ RequestHandler graphQLHttp(GraphQL graphQL,
           var fields = await req.parseBody().then((_) => req.bodyAsMap);
           var operations = fields['operations'] as String;
           if (operations == null) {
-            throw AngelHttpException.badRequest(
+            throw GalileoHttpException.badRequest(
                 message: 'Missing "operations" field.');
           }
           var map = fields.containsKey('map')
               ? json.decode(fields['map'] as String)
               : null;
           if (map is! Map) {
-            throw AngelHttpException.badRequest(
+            throw GalileoHttpException.badRequest(
                 message: '"map" field must decode to a JSON object.');
           }
           var variables = Map<String, dynamic>.from(globalVariables);
@@ -100,13 +100,13 @@ RequestHandler graphQLHttp(GraphQL graphQL,
             var file = req.uploadedFiles
                 .firstWhere((f) => f.name == entry.key, orElse: () => null);
             if (file == null) {
-              throw AngelHttpException.badRequest(
+              throw GalileoHttpException.badRequest(
                   message:
                       '"map" contained key "${entry.key}", but no uploaded file '
                       'has that name.');
             }
             if (entry.value is! List) {
-              throw AngelHttpException.badRequest(
+              throw GalileoHttpException.badRequest(
                   message:
                       'The value for "${entry.key}" in the "map" field was not a JSON array.');
             }
@@ -120,7 +120,7 @@ RequestHandler graphQLHttp(GraphQL graphQL,
                   var parent = subPaths.take(i).join('.');
                   if (_num.hasMatch(name)) {
                     if (current is! List) {
-                      throw AngelHttpException.badRequest(
+                      throw GalileoHttpException.badRequest(
                           message:
                               'Object "$parent" is not a JSON array, but the '
                               '"map" field contained a mapping to $parent.$name.');
@@ -128,7 +128,7 @@ RequestHandler graphQLHttp(GraphQL graphQL,
                     (current as List)[int.parse(name)] = file;
                   } else {
                     if (current is! Map) {
-                      throw AngelHttpException.badRequest(
+                      throw GalileoHttpException.badRequest(
                           message:
                               'Object "$parent" is not a JSON object, but the '
                               '"map" field contained a mapping to $parent.$name.');
@@ -137,7 +137,7 @@ RequestHandler graphQLHttp(GraphQL graphQL,
                   }
                 }
               } else {
-                throw AngelHttpException.badRequest(
+                throw GalileoHttpException.badRequest(
                     message:
                         'All array values in the "map" field must begin with "variables.".');
               }
@@ -149,17 +149,17 @@ RequestHandler graphQLHttp(GraphQL graphQL,
             globalVariables: variables,
           ));
         } else {
-          throw AngelHttpException.badRequest();
+          throw GalileoHttpException.badRequest();
         }
       } else {
-        throw AngelHttpException.badRequest();
+        throw GalileoHttpException.badRequest();
       }
     } on ValidationException catch (e) {
       var errors = <GraphQLExceptionError>[GraphQLExceptionError(e.message)];
 
       errors.addAll(e.errors.map((ee) => GraphQLExceptionError(ee)).toList());
       return GraphQLException(errors).toJson();
-    } on AngelHttpException catch (e) {
+    } on GalileoHttpException catch (e) {
       var errors = <GraphQLExceptionError>[GraphQLExceptionError(e.message)];
 
       errors.addAll(e.errors.map((ee) => GraphQLExceptionError(ee)).toList());

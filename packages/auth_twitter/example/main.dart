@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:angel_auth/angel_auth.dart';
-import 'package:angel_auth_twitter/angel_auth_twitter.dart';
-import 'package:angel_framework/angel_framework.dart';
-import 'package:angel_framework/http.dart';
+import 'package:Galileo_auth/Galileo_auth.dart';
+import 'package:Galileo_auth_twitter/Galileo_auth_twitter.dart';
+import 'package:Galileo_framework/Galileo_framework.dart';
+import 'package:Galileo_framework/http.dart';
 import 'package:logging/logging.dart';
 
 class _User {
@@ -15,9 +15,9 @@ class _User {
 }
 
 main() async {
-  var app = Angel();
-  var http = AngelHttp(app);
-  var auth = AngelAuth<_User>(
+  var app = Galileo();
+  var http = GalileoHttp(app);
+  var auth = GalileoAuth<_User>(
     jwtKey: 'AUTH_TWITTER_SECRET',
     allowCookie: false,
     serializer: (user) async => user.handle,
@@ -30,16 +30,13 @@ main() async {
 
   auth.strategies['twitter'] = TwitterStrategy(
     ExternalAuthOptions(
-      clientId: Platform.environment['TWITTER_CLIENT_ID'] ??
-          'qlrBWXneoSYZKS2bT4TGHaNaV',
-      clientSecret: Platform.environment['TWITTER_CLIENT_SECRET'] ??
-          'n2oA0ZtR7TzYincpMYElRpyYovAQlhYizTkTm2x5QxjH6mLVyE',
-      redirectUri: Platform.environment['TWITTER_REDIRECT_URI'] ??
-          'http://localhost:3000/auth/twitter/callback',
+      clientId: Platform.environment['TWITTER_CLIENT_ID'] ?? 'qlrBWXneoSYZKS2bT4TGHaNaV',
+      clientSecret:
+          Platform.environment['TWITTER_CLIENT_SECRET'] ?? 'n2oA0ZtR7TzYincpMYElRpyYovAQlhYizTkTm2x5QxjH6mLVyE',
+      redirectUri: Platform.environment['TWITTER_REDIRECT_URI'] ?? 'http://localhost:3000/auth/twitter/callback',
     ),
     (twit, req, res) async {
-      var response = await twit.twitterClient
-          .get('https://api.twitter.com/1.1/account/verify_credentials.json');
+      var response = await twit.twitterClient.get('https://api.twitter.com/1.1/account/verify_credentials.json');
       var userData = json.decode(response.body) as Map;
       return _User(userData['screen_name'] as String);
     },
@@ -62,7 +59,7 @@ main() async {
       '/auth/twitter/callback',
       auth.authenticate(
         'twitter',
-        AngelAuthOptions(
+        GalileoAuthOptions(
           callback: (req, res, jwt) {
             return res.redirect('/home?token=$jwt');
           },
@@ -82,7 +79,7 @@ main() async {
     ]),
   );
 
-  app.logger = Logger('angel_auth_twitter')
+  app.logger = Logger('Galileo_auth_twitter')
     ..onRecord.listen((rec) {
       print(rec);
       if (rec.error != null) print(rec.error);

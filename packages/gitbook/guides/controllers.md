@@ -10,13 +10,13 @@
 
 ## Controllers
 
-Angel has built-in support for controllers. This is yet another way to define routes in a manageable group, and can be leveraged to structure your application in the [MVC](https://en.wikipedia.org/wiki/Model–view–controller) format. You can also use the [`group()`](basic-routing.md#route-groups) method of any [`Router`](https://www.dartdocs.org/documentation/angel_common/latest/angel_framework/Router-class.html).
+Galileo has built-in support for controllers. This is yet another way to define routes in a manageable group, and can be leveraged to structure your application in the [MVC](https://en.wikipedia.org/wiki/Model–view–controller) format. You can also use the [`group()`](basic-routing.md#route-groups) method of any [`Router`](https://www.dartdocs.org/documentation/galileo_common/latest/galileo_framework/Router-class.html).
 
 The metadata on controller classes is processed via reflection _only once_, at startup. Do not believe that your controllers will be crippled by reflection during request handling, because that possibility is eliminated by [pre-injecting dependencies](dependency-injection.md).
 
 ```dart
-import 'package:angel_framework/angel_framework.dart';
-import 'package:angel_container/mirrors.dart';
+import 'package:galileo_framework/galileo_framework.dart';
+import 'package:galileo_container/mirrors.dart';
 
 @Expose("/todos")
 class TodoController extends Controller {
@@ -32,12 +32,12 @@ class TodoController extends Controller {
 }
 
 main() async {
-  Angel app = new Angel(reflector: MirrorsReflector());
+  Galileo app = new Galileo(reflector: MirrorsReflector());
   await app.configure(new TodoController().configureServer);
 }
 ```
 
-Rather than extending from `Routable`, controllers act as [plugins](https://github.com/angel-dart/angel/wiki/Using-Plug-ins) when called. This pseudo-plugin will wire all your routes for you.
+Rather than extending from `Routable`, controllers act as [plugins](https://github.com/galileo-dart/galileo/wiki/Using-Plug-ins) when called. This pseudo-plugin will wire all your routes for you.
 
 ### @Expose\(\)
 
@@ -80,7 +80,7 @@ class FooController extends Controller {
 }
 
 main() async {
-  Angel app = new Angel();
+  Galileo app = new Galileo();
 
   app.get("/some/path", (req, res) async => res.redirectToAction("FooController@bar", {"id": 1337}));
 }
@@ -125,13 +125,13 @@ class UserController extends Controller {
 }
 
 main() async {
-  Angel app = new Angel();
+  Galileo app = new Galileo();
   await app.configure(new UserController().configureServer);
 }
 ```
 
 ## Next Up...
 
-1. How to [handle parse request bodies](body-parsing.md) with Angel
-2. [Using Angel Plug-ins](using-plug-ins.md)
+1. How to [handle parse request bodies](body-parsing.md) with Galileo
+2. [Using Galileo Plug-ins](using-plug-ins.md)
 

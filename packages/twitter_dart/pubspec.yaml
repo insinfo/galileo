@@ -1,0 +1,16 @@
+name: twitter_dart
+description: Twitter API Library
+author: Isaque Neves <insinfo2008@gmail.com> 
+homepage: https://github.com/sh4869/twitter.dart 
+version: 3.0.0
+
+environment:
+  sdk: ">=2.10.0 <3.0.0"
+
+dependencies:
+  #oauth:    
+  oauth1: ^2.0.0 #Null safety
+  http: ^0.13.3 #Null safety
+
+dev_dependencies:
+  test: ^1.17.3  #Null safety

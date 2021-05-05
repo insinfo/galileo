@@ -1,3 +1,7 @@
+# 3.0.0
+
+- update dependencies
+
 # 2.1.0-beta.3
 * Remove parentheses from `AS` when renaming raw `expressions`.
 
@@ -121,11 +125,11 @@ target all services.
 * Removed `lib/server.dart`
 
 # 1.0.0-alpha+10
-* Split into `angel_orm.dart` and `server.dart`. Prevents DDC failures.
+* Split into `galileo_orm.dart` and `server.dart`. Prevents DDC failures.
 
 # 1.0.0-alpha+7
 * Added a `@belongsToMany` annotation class.
-* Resolved [#20](https://github.com/angel-dart/orm/issues/20). The
+* Resolved [#20](https://github.com/insinfo/galileo/issues/20). The
 `PostgreSQLConnectionPool` keeps track of which connections have been opened now.
 
 # 1.0.0-alpha+6

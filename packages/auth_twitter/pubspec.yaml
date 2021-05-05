@@ -1,28 +1,19 @@
 name: "galileo_auth_twitter"
-#author: "Tobe O <thosakwe@gmail.com>"
 description: "package:galileo_auth strategy for Twitter login. Auto-signs requests."
+homepage: "https://github.com/insinfo/galileo/tree/master/packages/auth_twitter"
+version: 3.0.0
+author: Isaque Neves <insinfo2008@gmail.com>
+
 environment:
   sdk: ">=2.10.0 <3.0.0"
-homepage: "https://github.com/galileo-dart/auth_twitter.git"
-version: 3.0.0
-publish_to: none
+
 dependencies:
-  galileo_auth:
-    git: 
-      url: https://github.com/insinfo/galileo.git
-      ref: sdk-2.12.x
-      path: packages/auth
-  galileo_framework:
-    git: 
-      url: https://github.com/insinfo/galileo.git
-      ref: sdk-2.12.x
-      path: packages/framework
+  galileo_auth:   
+  galileo_framework:    
   http: ^0.13.0
   path: ^1.0.0
-  twitter:
-    git: 
-      url: https://github.com/insinfo/twitter.dart.git
-      ref: sdk-2.12.x
+  twitter:    
+
 dev_dependencies:
   logging: ^1.0.0
   pedantic: ^1.11.0

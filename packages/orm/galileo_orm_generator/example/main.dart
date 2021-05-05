@@ -1,9 +1,9 @@
 import 'dart:async';
-import 'package:angel_migration/angel_migration.dart';
-import 'package:angel_model/angel_model.dart';
-import 'package:angel_orm/angel_orm.dart';
-import 'package:angel_orm/src/query.dart';
-import 'package:angel_serialize/angel_serialize.dart';
+import 'package:galileo_migration/galileo_migration.dart';
+import 'package:galileo_model/galileo_model.dart';
+import 'package:galileo_orm/galileo_orm.dart';
+import 'package:galileo_orm/src/query.dart';
+import 'package:galileo_serialize/galileo_serialize.dart';
 part 'main.g.dart';
 
 main() async {
@@ -21,12 +21,10 @@ class _FakeExecutor extends QueryExecutor {
   const _FakeExecutor();
 
   @override
-  Future<List<List>> query(
-      String tableName, String query, Map<String, dynamic> substitutionValues,
+  Future<List<List>> query(String tableName, String query, Map<String, dynamic> substitutionValues,
       [returningFields]) async {
     var now = DateTime.now();
-    print(
-        '_FakeExecutor received query: $query and values: $substitutionValues');
+    print('_FakeExecutor received query: $query and values: $substitutionValues');
     return [
       [1, 'Rich', 'Person', 100000.0, now, now]
     ];

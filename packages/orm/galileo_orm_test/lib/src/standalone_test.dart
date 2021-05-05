@@ -1,12 +1,11 @@
 import 'dart:async';
-import 'package:angel_orm/angel_orm.dart';
+import 'package:galileo_orm/galileo_orm.dart';
 import 'package:test/test.dart';
 import 'models/car.dart';
 
 final DateTime y2k = new DateTime.utc(2000, 1, 1);
 
-standaloneTests(FutureOr<QueryExecutor> Function() createExecutor,
-    {FutureOr<void> Function(QueryExecutor) close}) {
+standaloneTests(FutureOr<QueryExecutor> Function() createExecutor, {FutureOr<void> Function(QueryExecutor) close}) {
   close ??= (_) => null;
   test('to where', () {
     var query = new CarQuery();
@@ -15,8 +14,7 @@ standaloneTests(FutureOr<QueryExecutor> Function() createExecutor,
       ..recalledAt.lessThanOrEqualTo(y2k, includeTime: false);
     var whereClause = query.where.compile(tableName: 'cars');
     print('Where clause: $whereClause');
-    expect(whereClause,
-        'cars.family_friendly = TRUE AND cars.recalled_at <= \'2000-01-01\'');
+    expect(whereClause, 'cars.family_friendly = TRUE AND cars.recalled_at <= \'2000-01-01\'');
   });
 
   test('parseRow', () {
@@ -144,7 +142,7 @@ standaloneTests(FutureOr<QueryExecutor> Function() createExecutor,
         });
 
         test('update car', () async {
-          var cloned = ferrari.copyWith(make: 'Angel');
+          var cloned = ferrari.copyWith(make: 'galileo');
           var query = new CarQuery()..values.copyFrom(cloned);
           var car = await query.updateOne(executor);
           print(car.toJson());
@@ -175,19 +173,14 @@ standaloneTests(FutureOr<QueryExecutor> Function() createExecutor,
 
     test('insert car', () async {
       var recalledAt = new DateTime.now();
-      var beetle = new Car(
-          make: 'Beetle',
-          description: 'Herbie',
-          familyFriendly: true,
-          recalledAt: recalledAt);
+      var beetle = new Car(make: 'Beetle', description: 'Herbie', familyFriendly: true, recalledAt: recalledAt);
       var query = new CarQuery()..values.copyFrom(beetle);
       var car = await query.insert(executor);
       print(car.toJson());
       expect(car.make, beetle.make);
       expect(car.description, beetle.description);
       expect(car.familyFriendly, beetle.familyFriendly);
-      expect(dateYmdHms.format(car.recalledAt),
-          dateYmdHms.format(beetle.recalledAt));
+      expect(dateYmdHms.format(car.recalledAt), dateYmdHms.format(beetle.recalledAt));
     });
   });
 }

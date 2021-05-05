@@ -1,7 +1,7 @@
 name: dart2_constant
 version: 1.0.1-dev
 description: A polyfill for Dart 2 constant names.
-author: Dart Team <misc@dartlang.org>
+author: Isaque Neves <insinfo2008@gmail.com>
 homepage: https://github.com/dart-lang/dart2_constant
 
 environment:

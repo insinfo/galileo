@@ -27,7 +27,7 @@ doc/api/
 pubspec.lock
 .idea
 
-lib/angel_client.js
+lib/galileo_client.js
 *.sum
 
 # Logs

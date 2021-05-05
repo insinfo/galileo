@@ -1,6 +1,6 @@
 // ignore_for_file: deprecated_member_use_from_same_package
 import 'dart:mirrors';
-import 'package:angel_serialize/angel_serialize.dart';
+import 'package:galileo_serialize/galileo_serialize.dart';
 import 'package:graphql_schema/graphql_schema.dart';
 import 'package:recase/recase.dart';
 
@@ -16,7 +16,7 @@ T mirrorsFieldResolver<T>(objectValue, String fieldName,
 
 /// Reflects upon a given [type] and dynamically generates a [GraphQLType] that corresponds to it.
 ///
-/// This function is aware of the annotations from `package:angel_serialize`, and works seamlessly
+/// This function is aware of the annotations from `package:galileo_serialize`, and works seamlessly
 /// with them.
 @deprecated
 GraphQLType convertDartType(Type type, [List<Type> typeArguments]) {

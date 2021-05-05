@@ -1,24 +1,24 @@
 name: galileo_auth
-description: A complete authentication plugin for galileo. Includes support for stateless JWT tokens, Basic Auth, and more.
-version: 3.0.0
+description: A complete authentication plugin for Galileo. Includes support for stateless JWT tokens, Basic Auth, and more.
+version: 3.0.1
 author: Isaque Neves <insinfo2008@gmail.com>
-homepage: https://github.com/insinfo/galileo.git
-#publish_to: none
+homepage: https://github.com/insinfo/galileo/tree/master/packages/auth
+
 environment:
   sdk: ">=2.10.0 <3.0.0"
 
 dependencies:
-  galileo_framework: ^3.0.0
-  charcode: ^1.0.0
-  collection: ^1.0.0
-  crypto: ^3.0.0
-  http_parser: ^4.0.0
-  meta: ^1.0.0
-  quiver: ^3.0.1
+  galileo_framework: ^3.0.2 
+  charcode: ^1.2.0 #Null safety
+  collection: ^1.15.0 #Null safety
+  crypto: ^3.0.1 #Null safety
+  http_parser: ^4.0.0 #Null safety
+  meta: ^1.3.0 #Null safety
+  quiver: ^3.0.1 #Null safety
 
 dev_dependencies:
-  http: ^0.13.0
-  io: ^1.0.0
-  logging: ^1.0.0
-  pedantic: ^1.0.0
-  test: ^1.15.7
+  http: ^0.13.3 #Null safety
+  io: ^1.0.0  #Null safety
+  logging: ^1.0.1 #Null safety
+  pedantic: ^1.11.0 #Null safety
+  test: ^1.17.3 #Null safety

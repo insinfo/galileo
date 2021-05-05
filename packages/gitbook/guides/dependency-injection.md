@@ -1,12 +1,12 @@
 # Dependency-Injection
 
-Angel uses a [container hierarchy](https://github.com/angel-dart/container) for DI.
+Galileo uses a [container hierarchy](https://github.com/galileo-dart/container) for DI.
 Dependency injection makes it easier to build applications with multiple moving parts, because logic can be contained in one location and reused at another place in your application.
 
 ## Adding a Singleton
 
 ```dart
-Future<void> myPlugin(Angel app) async  {
+Future<void> myPlugin(Galileo app) async  {
   app.container.registerSingleton(SomeClass("foo"));
   app.container.registerSingleton<SomeAbstractClass>(MyImplClass());
   app.container.registerFactory((_) => SomeClass("foo"));
@@ -31,7 +31,7 @@ var collection = db.collection('pets');
 ```
 
 ## In Routes and Controllers
-In Angel 2.0, by wrapping a function in a call to `ioc`, you can automatically
+In Galileo 2.0, by wrapping a function in a call to `ioc`, you can automatically
 inject the dependencies of any route handler.
 
 ```dart
@@ -54,7 +54,7 @@ class MyController extends Controller {
 As you can imagine, this is very useful for managing things such as database connections.
 
 ```dart
-configureServer(Angel app) async {
+configureServer(Galileo app) async {
   var db = Db("mongodb://localhost:27017/db");
   await db.open();
   app.container.registerSingleton(db);
@@ -74,7 +74,7 @@ class ApiController extends Controller {
 ```dart
 @Expose('/controller')
 class MyController {
-  final AngelAuth auth;
+  final GalileoAuth auth;
   final Db db;
 
   MyController(this.auth, this.db);
@@ -94,12 +94,12 @@ main() async {
 ```
 
 ## Enabling `dart:mirrors` or other Reflection
-By default, Angel will use the `EmptyReflector()` to power its `Container` instances,
+By default, Galileo will use the `EmptyReflector()` to power its `Container` instances,
 which has no support for `dart:mirrors`, so that it can be used in contexts where Dart
 reflection is not available.
 
-However, by using a different `Reflector`, you can use the full power of Angel's DI system.
-`angel init` projects use the `MirrorsReflector()` by default.
+However, by using a different `Reflector`, you can use the full power of Galileo's DI system.
+`galileo init` projects use the `MirrorsReflector()` by default.
 
 If your application is using any sort of functionality reliant on annotations or reflection,
 either include the MirrorsReflector, or use a static reflector variant.
@@ -109,10 +109,10 @@ The following use cases require reflection:
 * Use of dependency injection into **constructors**, whether in controllers or plain `container.make` calls
 * Use of the `ioc` function in any route
 
-The `MirrorsReflector` from `package:angel_container/mirrors.dart` is by far the most convenient pattern,
+The `MirrorsReflector` from `package:galileo_container/mirrors.dart` is by far the most convenient pattern,
 so use it if possible.
 
 However, the following alternatives exist:
-* Generation via `package:angel_container_generator`
+* Generation via `package:galileo_container_generator`
 * Creating an instance of `StaticReflector`
 * Manually implementing the `Reflector` interface (cumbersome; not recommended)

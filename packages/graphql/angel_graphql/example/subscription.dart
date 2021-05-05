@@ -1,19 +1,19 @@
 // Inspired by:
 // https://www.apollographql.com/docs/apollo-server/features/subscriptions/#subscriptions-example
 
-import 'package:angel_file_service/angel_file_service.dart';
-import 'package:angel_framework/angel_framework.dart';
-import 'package:angel_framework/http.dart';
-import 'package:angel_graphql/angel_graphql.dart';
+import 'package:galileo_file_service/galileo_file_service.dart';
+import 'package:galileo_framework/galileo_framework.dart';
+import 'package:galileo_framework/http.dart';
+import 'package:galileo_graphql/galileo_graphql.dart';
 import 'package:file/local.dart';
 import 'package:graphql_schema/graphql_schema.dart';
 import 'package:graphql_server/graphql_server.dart';
 import 'package:logging/logging.dart';
 
 main() async {
-  var logger = Logger('angel_graphql');
-  var app = Angel(logger: logger);
-  var http = AngelHttp(app);
+  var logger = Logger('galileo_graphql');
+  var app = Galileo(logger: logger);
+  var http = GalileoHttp(app);
   app.logger.onRecord.listen((rec) {
     print(rec);
     if (rec.error != null) print(rec.error);

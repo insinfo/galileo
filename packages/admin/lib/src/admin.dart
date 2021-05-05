@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'dart:isolate';
-import 'package:angel_auth/angel_auth.dart';
-import 'package:angel_framework/angel_framework.dart';
-import 'package:angel_jael/angel_jael.dart';
-import 'package:angel_seo/angel_seo.dart';
+import 'package:galileo_auth/galileo_auth.dart';
+import 'package:galileo_framework/galileo_framework.dart';
+import 'package:galileo_jael/galileo_jael.dart';
+import 'package:galileo_seo/galileo_seo.dart';
 import 'package:file/file.dart';
 import 'package:html/parser.dart' as html;
 import 'package:logging/logging.dart';
@@ -12,22 +12,17 @@ import 'package:path/path.dart' as p;
 import 'service_configuration.dart';
 
 class Admin<User> {
-  final Logger logger = new Logger('angel_admin');
+  final Logger logger = new Logger('galileo_admin');
   final FileSystem fileSystem;
   final AdminConfiguration<User> configuration;
   final bool cacheViews;
 
-  Admin(
-      {@required this.fileSystem,
-      @required this.configuration,
-      this.cacheViews: false});
+  Admin({@required this.fileSystem, @required this.configuration, this.cacheViews: false});
 
-  AngelConfigurer configureServer({String publicPath}) {
+  galileoConfigurer configureServer({String publicPath}) {
     return (app) async {
-      var assetDirectoryUri = await Isolate
-          .resolvePackageUri(Uri.parse('package:angel_admin/src/res/assets'));
-      var viewsDirectoryUri = await Isolate
-          .resolvePackageUri(Uri.parse('package:angel_admin/src/res/views'));
+      var assetDirectoryUri = await Isolate.resolvePackageUri(Uri.parse('package:galileo_admin/src/res/assets'));
+      var viewsDirectoryUri = await Isolate.resolvePackageUri(Uri.parse('package:galileo_admin/src/res/views'));
 
       logger.config('Assets: $assetDirectoryUri');
       logger.config('Views: $viewsDirectoryUri');
@@ -35,13 +30,13 @@ class Admin<User> {
       var assetDirectory = fileSystem.directory(assetDirectoryUri);
       var viewsDirectory = fileSystem.directory(viewsDirectoryUri);
       var oldViewGenerator = app.viewGenerator;
-      var tempApp = new Angel();
+      var tempApp = new galileo();
       await tempApp.configure(jael(viewsDirectory, cacheViews: cacheViews));
       var jaelViewGenerator = tempApp.viewGenerator;
       tempApp.close();
 
       app.viewGenerator = (name, [params]) async {
-        if (params == null && params['angel_admin_touched'] != true) {
+        if (params == null && params['galileo_admin_touched'] != true) {
           return await oldViewGenerator(name, params);
         } else {
           var contents = await jaelViewGenerator(name, params);
@@ -54,12 +49,11 @@ class Admin<User> {
       var handlers = <dynamic>[
         requireAuth,
         (User user, ResponseContext res) {
-          res.renderParams['angel_admin_configuration'] = configuration;
-          res.renderParams['angel_admin_root'] = publicPath ?? '/';
-          res.renderParams['angel_admin_title'] = configuration.title;
-          res.renderParams['angel_admin_username'] =
-              configuration.getUsername(user);
-          return res.renderParams['angel_admin_touched'] = true;
+          res.renderParams['galileo_admin_configuration'] = configuration;
+          res.renderParams['galileo_admin_root'] = publicPath ?? '/';
+          res.renderParams['galileo_admin_title'] = configuration.title;
+          res.renderParams['galileo_admin_username'] = configuration.getUsername(user);
+          return res.renderParams['galileo_admin_touched'] = true;
         },
       ];
 
@@ -70,11 +64,11 @@ class Admin<User> {
         router.get('/', dashboard(publicPath));
 
         router.all('*', (ResponseContext res) {
-          res.renderParams.remove('angel_admin_configuration');
-          res.renderParams.remove('angel_admin_root');
-          res.renderParams.remove('angel_admin_title');
-          res.renderParams.remove('angel_admin_touched');
-          res.renderParams.remove('angel_admin_username');
+          res.renderParams.remove('galileo_admin_configuration');
+          res.renderParams.remove('galileo_admin_root');
+          res.renderParams.remove('galileo_admin_title');
+          res.renderParams.remove('galileo_admin_touched');
+          res.renderParams.remove('galileo_admin_username');
           return true;
         });
       }
@@ -109,7 +103,7 @@ typedef String AdminConfigurationGetUsername<User>(User user);
 
 class AdminConfiguration<User> {
   final String title;
-  final AngelAuth<User> auth;
+  final galileoAuth<User> auth;
   final AdminConfigurationGetUsername<User> getUsername;
   final Map<String, ServiceConfiguration> services;
   final List middleware;

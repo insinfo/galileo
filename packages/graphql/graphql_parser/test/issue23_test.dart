@@ -5,7 +5,7 @@ import 'package:test/test.dart';
 /// parses both documents, and makes sure that $memberId has
 /// a valid value.
 ///
-/// Resolves https://github.com/angel-dart/graphql/issues/23.
+/// Resolves https://github.com/galileo-dart/graphql/issues/23.
 void main() {
   void testStr<T>(String name, String text) {
     test('name', () {

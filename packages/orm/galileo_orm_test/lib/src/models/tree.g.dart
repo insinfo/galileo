@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of angel_orm_generator.test.models.tree;
+part of galileo_orm_generator.test.models.tree;
 
 // **************************************************************************
 // MigrationGenerator
@@ -50,16 +50,8 @@ class TreeQuery extends Query<Tree, TreeQueryWhere> {
     trampoline ??= Set();
     trampoline.add(tableName);
     _where = TreeQueryWhere(this);
-    leftJoin(_fruits = FruitQuery(trampoline: trampoline, parent: this), 'id',
-        'tree_id',
-        additionalFields: const [
-          'id',
-          'created_at',
-          'updated_at',
-          'tree_id',
-          'common_name'
-        ],
-        trampoline: trampoline);
+    leftJoin(_fruits = FruitQuery(trampoline: trampoline, parent: this), 'id', 'tree_id',
+        additionalFields: const ['id', 'created_at', 'updated_at', 'tree_id', 'common_name'], trampoline: trampoline);
   }
 
   @override
@@ -102,10 +94,8 @@ class TreeQuery extends Query<Tree, TreeQueryWhere> {
         updatedAt: (row[2] as DateTime),
         rings: (row[3] as int));
     if (row.length > 4) {
-      model = model.copyWith(
-          fruits: [FruitQuery.parseRow(row.skip(4).take(5).toList())]
-              .where((x) => x != null)
-              .toList());
+      model =
+          model.copyWith(fruits: [FruitQuery.parseRow(row.skip(4).take(5).toList())].where((x) => x != null).toList());
     }
     return model;
   }
@@ -129,10 +119,7 @@ class TreeQuery extends Query<Tree, TreeQueryWhere> {
           return out..add(model);
         } else {
           var l = out[idx];
-          return out
-            ..[idx] = l.copyWith(
-                fruits: List<_Fruit>.from(l.fruits ?? [])
-                  ..addAll(model.fruits ?? []));
+          return out..[idx] = l.copyWith(fruits: List<_Fruit>.from(l.fruits ?? [])..addAll(model.fruits ?? []));
         }
       });
     });
@@ -148,10 +135,7 @@ class TreeQuery extends Query<Tree, TreeQueryWhere> {
           return out..add(model);
         } else {
           var l = out[idx];
-          return out
-            ..[idx] = l.copyWith(
-                fruits: List<_Fruit>.from(l.fruits ?? [])
-                  ..addAll(model.fruits ?? []));
+          return out..[idx] = l.copyWith(fruits: List<_Fruit>.from(l.fruits ?? [])..addAll(model.fruits ?? []));
         }
       });
     });
@@ -167,10 +151,7 @@ class TreeQuery extends Query<Tree, TreeQueryWhere> {
           return out..add(model);
         } else {
           var l = out[idx];
-          return out
-            ..[idx] = l.copyWith(
-                fruits: List<_Fruit>.from(l.fruits ?? [])
-                  ..addAll(model.fruits ?? []));
+          return out..[idx] = l.copyWith(fruits: List<_Fruit>.from(l.fruits ?? [])..addAll(model.fruits ?? []));
         }
       });
     });
@@ -354,12 +335,7 @@ class FruitQueryValues extends MapQueryValues {
 
 @generatedSerializable
 class Tree extends _Tree {
-  Tree(
-      {this.id,
-      this.createdAt,
-      this.updatedAt,
-      this.rings,
-      List<_Fruit> fruits})
+  Tree({this.id, this.createdAt, this.updatedAt, this.rings, List<_Fruit> fruits})
       : this.fruits = List.unmodifiable(fruits ?? []);
 
   /// A unique identifier corresponding to this item.
@@ -380,12 +356,7 @@ class Tree extends _Tree {
   @override
   List<_Fruit> fruits;
 
-  Tree copyWith(
-      {String id,
-      DateTime createdAt,
-      DateTime updatedAt,
-      int rings,
-      List<_Fruit> fruits}) {
+  Tree copyWith({String id, DateTime createdAt, DateTime updatedAt, int rings, List<_Fruit> fruits}) {
     return Tree(
         id: id ?? this.id,
         createdAt: createdAt ?? this.createdAt,
@@ -400,8 +371,7 @@ class Tree extends _Tree {
         other.createdAt == createdAt &&
         other.updatedAt == updatedAt &&
         other.rings == rings &&
-        ListEquality<_Fruit>(DefaultEquality<_Fruit>())
-            .equals(other.fruits, fruits);
+        ListEquality<_Fruit>(DefaultEquality<_Fruit>()).equals(other.fruits, fruits);
   }
 
   @override
@@ -421,8 +391,7 @@ class Tree extends _Tree {
 
 @generatedSerializable
 class Fruit extends _Fruit {
-  Fruit(
-      {this.id, this.createdAt, this.updatedAt, this.treeId, this.commonName});
+  Fruit({this.id, this.createdAt, this.updatedAt, this.treeId, this.commonName});
 
   /// A unique identifier corresponding to this item.
   @override
@@ -442,12 +411,7 @@ class Fruit extends _Fruit {
   @override
   String commonName;
 
-  Fruit copyWith(
-      {String id,
-      DateTime createdAt,
-      DateTime updatedAt,
-      int treeId,
-      String commonName}) {
+  Fruit copyWith({String id, DateTime createdAt, DateTime updatedAt, int treeId, String commonName}) {
     return Fruit(
         id: id ?? this.id,
         createdAt: createdAt ?? this.createdAt,
@@ -522,8 +486,7 @@ class TreeSerializer extends Codec<Tree, Map> {
             : null,
         rings: map['rings'] as int,
         fruits: map['fruits'] is Iterable
-            ? List.unmodifiable(((map['fruits'] as Iterable).whereType<Map>())
-                .map(FruitSerializer.fromMap))
+            ? List.unmodifiable(((map['fruits'] as Iterable).whereType<Map>()).map(FruitSerializer.fromMap))
             : null);
   }
 
@@ -542,13 +505,7 @@ class TreeSerializer extends Codec<Tree, Map> {
 }
 
 abstract class TreeFields {
-  static const List<String> allFields = <String>[
-    id,
-    createdAt,
-    updatedAt,
-    rings,
-    fruits
-  ];
+  static const List<String> allFields = <String>[id, createdAt, updatedAt, rings, fruits];
 
   static const String id = 'id';
 
@@ -616,13 +573,7 @@ class FruitSerializer extends Codec<Fruit, Map> {
 }
 
 abstract class FruitFields {
-  static const List<String> allFields = <String>[
-    id,
-    createdAt,
-    updatedAt,
-    treeId,
-    commonName
-  ];
+  static const List<String> allFields = <String>[id, createdAt, updatedAt, treeId, commonName];
 
   static const String id = 'id';
 

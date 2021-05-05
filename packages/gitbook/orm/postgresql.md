@@ -1,12 +1,12 @@
-PostgreSQL support is provided by way of `package:angel_orm_postgres`.
+PostgreSQL support is provided by way of `package:galileo_orm_postgres`.
 The `PostgreSQLExecutor` implements `QueryExecutor`, and takes care of
 running prepared queries, and passing values to the database server.
 
-`angel init` projects using the ORM include helpers like this to load app
+`galileo init` projects using the ORM include helpers like this to load app
 configuration into a database connection:
 
 ```dart
-Future<void> configureServer(Angel app) async {
+Future<void> configureServer(Galileo app) async {
   var connection = await connectToPostgres(app.configuration);
   await connection.open();
 

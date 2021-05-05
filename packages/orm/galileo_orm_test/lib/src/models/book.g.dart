@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of angel_orm.generator.models.book;
+part of galileo_orm.generator.models.book;
 
 // **************************************************************************
 // MigrationGenerator
@@ -14,12 +14,8 @@ class BookMigration extends Migration {
       table.timeStamp('created_at');
       table.timeStamp('updated_at');
       table.varChar('name');
-      table
-          .declare('author_id', ColumnType('serial'))
-          .references('authors', 'id');
-      table
-          .declare('partner_author_id', ColumnType('serial'))
-          .references('authors', 'id');
+      table.declare('author_id', ColumnType('serial')).references('authors', 'id');
+      table.declare('partner_author_id', ColumnType('serial')).references('authors', 'id');
     });
   }
 
@@ -55,14 +51,10 @@ class BookQuery extends Query<Book, BookQueryWhere> {
     trampoline ??= Set();
     trampoline.add(tableName);
     _where = BookQueryWhere(this);
-    join(_author = AuthorQuery(trampoline: trampoline, parent: this),
-        'author_id', 'id',
-        additionalFields: const ['id', 'created_at', 'updated_at', 'name'],
-        trampoline: trampoline);
-    join(_partnerAuthor = AuthorQuery(trampoline: trampoline, parent: this),
-        'partner_author_id', 'id',
-        additionalFields: const ['id', 'created_at', 'updated_at', 'name'],
-        trampoline: trampoline);
+    join(_author = AuthorQuery(trampoline: trampoline, parent: this), 'author_id', 'id',
+        additionalFields: const ['id', 'created_at', 'updated_at', 'name'], trampoline: trampoline);
+    join(_partnerAuthor = AuthorQuery(trampoline: trampoline, parent: this), 'partner_author_id', 'id',
+        additionalFields: const ['id', 'created_at', 'updated_at', 'name'], trampoline: trampoline);
   }
 
   @override
@@ -86,14 +78,7 @@ class BookQuery extends Query<Book, BookQueryWhere> {
 
   @override
   get fields {
-    return const [
-      'id',
-      'created_at',
-      'updated_at',
-      'author_id',
-      'partner_author_id',
-      'name'
-    ];
+    return const ['id', 'created_at', 'updated_at', 'author_id', 'partner_author_id', 'name'];
   }
 
   @override
@@ -114,12 +99,10 @@ class BookQuery extends Query<Book, BookQueryWhere> {
         updatedAt: (row[2] as DateTime),
         name: (row[5] as String));
     if (row.length > 6) {
-      model = model.copyWith(
-          author: AuthorQuery.parseRow(row.skip(6).take(4).toList()));
+      model = model.copyWith(author: AuthorQuery.parseRow(row.skip(6).take(4).toList()));
     }
     if (row.length > 10) {
-      model = model.copyWith(
-          partnerAuthor: AuthorQuery.parseRow(row.skip(10).take(4).toList()));
+      model = model.copyWith(partnerAuthor: AuthorQuery.parseRow(row.skip(10).take(4).toList()));
     }
     return model;
   }
@@ -144,8 +127,7 @@ class BookQueryWhere extends QueryWhere {
         createdAt = DateTimeSqlExpressionBuilder(query, 'created_at'),
         updatedAt = DateTimeSqlExpressionBuilder(query, 'updated_at'),
         authorId = NumericSqlExpressionBuilder<int>(query, 'author_id'),
-        partnerAuthorId =
-            NumericSqlExpressionBuilder<int>(query, 'partner_author_id'),
+        partnerAuthorId = NumericSqlExpressionBuilder<int>(query, 'partner_author_id'),
         name = StringSqlExpressionBuilder(query, 'name');
 
   final NumericSqlExpressionBuilder<int> id;
@@ -328,13 +310,7 @@ class AuthorQueryValues extends MapQueryValues {
 
 @generatedSerializable
 class Book extends _Book {
-  Book(
-      {this.id,
-      this.createdAt,
-      this.updatedAt,
-      this.author,
-      this.partnerAuthor,
-      this.name});
+  Book({this.id, this.createdAt, this.updatedAt, this.author, this.partnerAuthor, this.name});
 
   /// A unique identifier corresponding to this item.
   @override
@@ -358,12 +334,7 @@ class Book extends _Book {
   String name;
 
   Book copyWith(
-      {String id,
-      DateTime createdAt,
-      DateTime updatedAt,
-      _Author author,
-      _Author partnerAuthor,
-      String name}) {
+      {String id, DateTime createdAt, DateTime updatedAt, _Author author, _Author partnerAuthor, String name}) {
     return Book(
         id: id ?? this.id,
         createdAt: createdAt ?? this.createdAt,
@@ -417,8 +388,7 @@ class Author extends _Author {
   @override
   final String name;
 
-  Author copyWith(
-      {String id, DateTime createdAt, DateTime updatedAt, String name}) {
+  Author copyWith({String id, DateTime createdAt, DateTime updatedAt, String name}) {
     return Author(
         id: id ?? this.id,
         createdAt: createdAt ?? this.createdAt,
@@ -489,12 +459,8 @@ class BookSerializer extends Codec<Book, Map> {
                 ? (map['updated_at'] as DateTime)
                 : DateTime.parse(map['updated_at'].toString()))
             : null,
-        author: map['author'] != null
-            ? AuthorSerializer.fromMap(map['author'] as Map)
-            : null,
-        partnerAuthor: map['partner_author'] != null
-            ? AuthorSerializer.fromMap(map['partner_author'] as Map)
-            : null,
+        author: map['author'] != null ? AuthorSerializer.fromMap(map['author'] as Map) : null,
+        partnerAuthor: map['partner_author'] != null ? AuthorSerializer.fromMap(map['partner_author'] as Map) : null,
         name: map['name'] as String);
   }
 
@@ -514,14 +480,7 @@ class BookSerializer extends Codec<Book, Map> {
 }
 
 abstract class BookFields {
-  static const List<String> allFields = <String>[
-    id,
-    createdAt,
-    updatedAt,
-    author,
-    partnerAuthor,
-    name
-  ];
+  static const List<String> allFields = <String>[id, createdAt, updatedAt, author, partnerAuthor, name];
 
   static const String id = 'id';
 
@@ -589,12 +548,7 @@ class AuthorSerializer extends Codec<Author, Map> {
 }
 
 abstract class AuthorFields {
-  static const List<String> allFields = <String>[
-    id,
-    createdAt,
-    updatedAt,
-    name
-  ];
+  static const List<String> allFields = <String>[id, createdAt, updatedAt, name];
 
   static const String id = 'id';
 

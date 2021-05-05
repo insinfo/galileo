@@ -1,23 +1,22 @@
 import 'dart:async';
-import 'package:angel_framework/angel_framework.dart';
-import 'package:angel_websocket/server.dart';
-import 'package:eventsource/eventsource.dart';
-import 'package:eventsource/src/encoder.dart';
-import 'package:eventsource/publisher.dart';
+import 'package:galileo_framework/galileo_framework.dart';
+import 'package:galileo_websocket/server.dart';
+import 'package:eventsource_dart/eventsource_dart.dart';
+import 'package:eventsource_dart/src/encoder.dart';
+import 'package:eventsource_dart/publisher.dart';
 import 'package:stream_channel/stream_channel.dart';
 
-class AngelEventSourcePublisher {
-  final AngelWebSocket webSocketDriver;
+class GalileoEventSourcePublisher {
+  final GalileoWebSocket webSocketDriver;
 
   final String channel;
 
   int _count = 0;
 
-  AngelEventSourcePublisher(this.webSocketDriver, {this.channel: ''});
+  GalileoEventSourcePublisher(this.webSocketDriver, {this.channel: ''});
 
   Future handleRequest(RequestContext req, ResponseContext res) async {
-    if (!req.accepts('text/event-stream', strict: false))
-      throw new AngelHttpException.badRequest();
+    if (!req.accepts('text/event-stream', strict: false)) throw new GalileoHttpException.badRequest();
 
     res.headers.addAll({
       'cache-control': 'no-cache, no-store, must-revalidate',
@@ -25,13 +24,11 @@ class AngelEventSourcePublisher {
       'connection': 'keep-alive',
     });
 
-    var acceptsGzip =
-        (req.headers['accept-encoding']?.contains('gzip') == true);
+    var acceptsGzip = (req.headers['accept-encoding']?.contains('gzip') == true);
 
     if (acceptsGzip) res.headers['content-encoding'] = 'gzip';
 
-    var eventSink = new EventSourceEncoder(compressed: acceptsGzip)
-        .startChunkedConversion(res);
+    var eventSink = new EventSourceEncoder(compressed: acceptsGzip).startChunkedConversion(res);
 
     // Listen for events.
     var ctrl = new StreamChannelController();

@@ -1,4 +1,4 @@
-import 'package:angel_framework/angel_framework.dart';
+import 'package:galileo_framework/galileo_framework.dart';
 import 'package:graphql_schema/graphql_schema.dart';
 
 Map<String, dynamic> _fetchRequestInfo(Map<String, dynamic> arguments) {
@@ -13,7 +13,7 @@ Map<String, dynamic> _getQuery(Map<String, dynamic> arguments) {
   return f.isEmpty ? null : f;
 }
 
-/// A GraphQL resolver that `index`es an Angel service.
+/// A GraphQL resolver that `index`es an Galileo service.
 ///
 /// The arguments passed to the resolver will be forwarded to the service, and the
 /// service will receive [Providers.graphql].
@@ -28,7 +28,7 @@ GraphQLFieldResolver<List<Value>, Serialized>
   };
 }
 
-/// A GraphQL resolver that calls `findOne` on an Angel service.
+/// A GraphQL resolver that calls `findOne` on an Galileo service.
 ///
 /// The arguments passed to the resolver will be forwarded to the service, and the
 /// service will receive [Providers.graphql].
@@ -43,7 +43,7 @@ GraphQLFieldResolver<Value, Serialized>
   };
 }
 
-/// A GraphQL resolver that `read`s a single value from an Angel service.
+/// A GraphQL resolver that `read`s a single value from an Galileo service.
 ///
 /// This resolver should be used on a field with at least the following inputs:
 /// * `id`: a [graphQLId] or [graphQLString]
@@ -62,7 +62,7 @@ GraphQLFieldResolver<Value, Serialized>
   };
 }
 
-/// A GraphQL resolver that `creates` a single value in an Angel service.
+/// A GraphQL resolver that `creates` a single value in an Galileo service.
 ///
 /// This resolver should be used on a field with at least the following input:
 /// * `data`: a [GraphQLObjectType] corresponding to the format of `data` to be passed to `create`
@@ -80,7 +80,7 @@ GraphQLFieldResolver<Value, Serialized>
   };
 }
 
-/// A GraphQL resolver that `modifies` a single value from an Angel service.
+/// A GraphQL resolver that `modifies` a single value from an Galileo service.
 ///
 /// This resolver should be used on a field with at least the following inputs:
 /// * `id`: a [graphQLId] or [graphQLString]
@@ -100,7 +100,7 @@ GraphQLFieldResolver<Value, Serialized>
   };
 }
 
-/// A GraphQL resolver that `update`s a single value from an Angel service.
+/// A GraphQL resolver that `update`s a single value from an Galileo service.
 ///
 /// This resolver should be used on a field with at least the following inputs:
 /// * `id`: a [graphQLId] or [graphQLString]
@@ -123,7 +123,7 @@ GraphQLFieldResolver<Value, Serialized>
   };
 }
 
-/// A GraphQL resolver that `remove`s a single value from an Angel service.
+/// A GraphQL resolver that `remove`s a single value from an Galileo service.
 ///
 /// This resolver should be used on a field with at least the following inputs:
 /// * `id`: a [graphQLId] or [graphQLString]

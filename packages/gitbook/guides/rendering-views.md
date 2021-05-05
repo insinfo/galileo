@@ -7,19 +7,19 @@
 
 ## Rendering Views
 
-Just like `res.render` in Express, Angel's `ResponseContext` exposes a `Future` called `render`. This invokes whichever function is assigned to your server's `viewGenerator`.
+Just like `res.render` in Express, Galileo's `ResponseContext` exposes a `Future` called `render`. This invokes whichever function is assigned to your server's `viewGenerator`.
 
-There is a Mustache templating plug-in for Angel available: [https://github.com/angel-dart/mustache](https://github.com/angel-dart/mustache)
+There is a Mustache templating plug-in for Galileo available: [https://github.com/galileo-dart/mustache](https://github.com/galileo-dart/mustache)
 
-There is also [Jael](https://github.com/angel-dart/jael), one of the few actively-developed HTML templating engines for Dart.
+There is also [Jael](https://github.com/galileo-dart/jael), one of the few actively-developed HTML templating engines for Dart.
 
-Angel support for Jael is provided through [`package:angel_jael`](https://pub.dartlang.org/packages/angel_jael).
+Galileo support for Jael is provided through [`package:galileo_jael`](https://pub.dartlang.org/packages/galileo_jael).
 
 Another is Jinja2, which was recently ported by to Dart by
 [Olzhas Suleimen](https://github.com/ykmnkmi/jinja.dart).
 
-Angel support for Jinja2 can be found here:
-https://pub.dartlang.org/packages/angel_jinja
+Galileo support for Jinja2 can be found here:
+https://pub.dartlang.org/packages/galileo_jinja
 
 ### Example
 
@@ -29,7 +29,7 @@ app.get('/view', (req, res) async => await res.render('hello', {'locals': ['foo'
 
 ### ViewGenerator
 
-Angel declares the following typedef:
+Galileo declares the following typedef:
 
 ```dart
 /// A function that asynchronously generates a view from the given path and data.
@@ -40,16 +40,16 @@ A templating plug-in can assign one of these to `app.viewGenerator` to set itsel
 
 ```dart
 import 'dart:io';
-import 'package:angel_framework/angel_framework.dart';
+import 'package:galileo_framework/galileo_framework.dart';
 
-Future<void> plugin(Angel app) async {
+Future<void> plugin(Galileo app) async {
   app.viewGenerator = (String path, [Map data]) async {
     return "Requested view $path with locals: $data";
   };
 }
 
 main() async {
-  var app = new Angel();
+  var app = new Galileo();
   await app.configure(plugin);
   await app.startServer();
 }
@@ -57,6 +57,6 @@ main() async {
 
 ## Next Up...
 
-1. Explore Angel's isomorphic [client library](https://github.com/angel-dart/client).
-2. Find out how to [test Angel applications](testing.md).
+1. Explore Galileo's isomorphic [client library](https://github.com/galileo-dart/client).
+2. Find out how to [test Galileo applications](testing.md).
 

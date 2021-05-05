@@ -1,23 +1,23 @@
-# angel_client
+# galileo_client
 
-[![Pub](https://img.shields.io/pub/v/angel_client.svg)](https://pub.dartlang.org/packages/angel_client)
-[![build status](https://travis-ci.org/angel-dart/client.svg)](https://travis-ci.org/angel-dart/client)
+[![Pub](https://img.shields.io/pub/v/galileo_client.svg)](https://pub.dartlang.org/packages/galileo_client)
+[![build status](https://travis-ci.org/galileo-dart/client.svg)](https://travis-ci.org/galileo-dart/client)
 
-Client library for the Angel framework.
-This library provides virtually the same API as an Angel server.
+Client library for the galileo framework.
+This library provides virtually the same API as an galileo server.
 The client can run in the browser, in Flutter, or on the command-line.
-In addition, the client supports `angel_auth` authentication.
+In addition, the client supports `galileo_auth` authentication.
 
 # Usage
 
 ```dart
 // Choose one or the other, depending on platform
-import 'package:angel_client/io.dart';
-import 'package:angel_client/browser.dart';
-import 'package:angel_client/flutter.dart';
+import 'package:galileo_client/io.dart';
+import 'package:galileo_client/browser.dart';
+import 'package:galileo_client/flutter.dart';
 
 main() async {
-  Angel app = new Rest("http://localhost:3000");
+  galileo app = new Rest("http://localhost:3000");
 }
 ```
 
@@ -66,7 +66,7 @@ print(auth.data); // User object
 
 Revive an existing jwt:
 ```dart
-Future<AngelAuthResult> reviveJwt(String jwt) {
+Future<galileoAuthResult> reviveJwt(String jwt) {
   return app.authenticate(credentials: {'token': jwt});
 }
 ```

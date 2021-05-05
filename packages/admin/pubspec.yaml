@@ -1,12 +1,17 @@
-name: angel_admin
-version: 0.0.0
+name: galileo_admin
+version: 3.0.0
+
+environment:
+  sdk: '>=2.10.0 <3.0.0'
+
 dependencies:
-  angel_auth: ^1.0.0
-  angel_framework: ^1.0.0
-  angel_jael: ^1.0.0
-  angel_seo: ^1.0.0
-  angel_static: ^1.0.0
-  angel_validate: ^1.0.0
+  galileo_auth: ^3.0.0 
+  galileo_framework: ^3.0.2
+  twig_dart: ^2.0.2
+  galileo_seo: ^1.0.0
+  galileo_static: ^3.0.1 
+  galileo_validate: ^3.0.0 
+
 dev_dependencies:
-  angel_file_service: ^1.0.0
-  logging: ^0.11.0
+  galileo_file_service: ^1.0.0
+  logging: ^1.0.1 #Null safety

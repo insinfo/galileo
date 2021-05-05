@@ -1,12 +1,11 @@
 import 'dart:async';
 import 'dart:io';
-import 'package:angel_orm/angel_orm.dart';
+import 'package:galileo_orm/galileo_orm.dart';
 import 'package:test/test.dart';
 import 'models/user.dart';
 import 'util.dart';
 
-manyToManyTests(FutureOr<QueryExecutor> Function() createExecutor,
-    {FutureOr<void> Function(QueryExecutor) close}) {
+manyToManyTests(FutureOr<QueryExecutor> Function() createExecutor, {FutureOr<void> Function(QueryExecutor) close}) {
   QueryExecutor executor;
   Role canPub, canSub;
   User thosakwe;

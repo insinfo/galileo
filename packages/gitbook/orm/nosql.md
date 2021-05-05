@@ -6,7 +6,7 @@ With a NoSQL databases, you can use the `Service` API (you likely already are!),
 and use `Service.map` to deal with Dart data only, rather than messing around with
 `Map`s, and risking typos and refactoring challenges.
 
-If you are using `package:angel_serialize`, this is pretty easy:
+If you are using `package:galileo_serialize`, this is pretty easy:
 
 ```dart
 abstract class _Greeting extends Model {

@@ -1,14 +1,14 @@
 # auth_oauth2
 
-[![Pub](https://img.shields.io/pub/v/angel_auth_oauth2.svg)](https://pub.dartlang.org/packages/angel_auth_oauth2)
+[![Pub](https://img.shields.io/pub/v/galileo_auth_oauth2.svg)](https://pub.dartlang.org/packages/galileo_auth_oauth2)
 
-`package:angel_auth` strategy for OAuth2 login, i.e. Facebook or Github.
+`package:galileo_auth` strategy for OAuth2 login, i.e. Facebook or Github.
 
 # Usage
 First, create an options object:
 
 ```dart
-configureServer(Angel app) async {
+configureServer(galileo app) async {
   // Load from a Map, i.e. app config:
   var opts = ExternalAuthOptions.fromMap(app.configuration['auth0'] as Map);
   
@@ -54,7 +54,7 @@ You'll also need to provide a name for this instance of the strategy.
 Consider using the name of the remote authentication provider (ex. `facebook`).
 
 ```dart
-configureServer(Angel app) {
+configureServer(galileo app) {
   auth.strategies['github'] = OAuth2Strategy(
     options,
     authorizationEndpoint,
@@ -70,19 +70,19 @@ configureServer(Angel app) {
 }
 ```
 
-Lastly, connect it to an `AngelAuth` instance, and wire it up to an `Angel` server.
+Lastly, connect it to an `galileoAuth` instance, and wire it up to an `galileo` server.
 Set up two routes:
   1. Redirect users to the external provider
   2. Acts as a callback and handles an access code
   
 In the case of the callback route, you may want to display an HTML page that closes
 a popup window. In this case, use `confirmPopupAuthentication`, which is bundled with
-`package:angel_auth`, as a `callback` function:
+`package:galileo_auth`, as a `callback` function:
 
 ```dart
-configureServer(Angel app) async {
+configureServer(galileo app) async {
   // ...
-  var auth = AngelAuth<User>();
+  var auth = galileoAuth<User>();
   auth.strategies['github'] = oauth2Strategy;
   
   // Redirect
@@ -91,7 +91,7 @@ configureServer(Angel app) async {
   // Callback
   app.get('/auth/github/callback', auth.authenticate(
     'github',
-    AngelAuthOptions(callback: confirmPopupAuthentication())
+    galileoAuthOptions(callback: confirmPopupAuthentication())
   ));
   
   // Connect the plug-in!!!
@@ -105,7 +105,7 @@ However, if your OAuth2 scopes are separated by a delimiter other than the defau
 you can add it in the `OAuth2Strategy` constructor:
 
 ```dart
-configureServer(Angel app) async {
+configureServer(galileo app) async {
   OAuth2Strategy(..., delimiter: ' ');
 }
 ```

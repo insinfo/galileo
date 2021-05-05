@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:collection';
-import 'package:angel_migration/angel_migration.dart';
-import 'package:postgres/postgres.dart';
+import 'package:galileo_migration/galileo_migration.dart';
+import 'package:galileo_postgres/galileo_postgres.dart';
 import '../runner.dart';
 import '../util.dart';
 import 'schema.dart';
@@ -12,8 +12,7 @@ class PostgresMigrationRunner implements MigrationRunner {
   final Queue<Migration> _migrationQueue = new Queue();
   bool _connected = false;
 
-  PostgresMigrationRunner(this.connection,
-      {Iterable<Migration> migrations = const [], bool connected: false}) {
+  PostgresMigrationRunner(this.connection, {Iterable<Migration> migrations = const [], bool connected: false}) {
     if (migrations?.isNotEmpty == true) migrations.forEach(addMigration);
     _connected = connected == true;
   }
@@ -67,8 +66,7 @@ class PostgresMigrationRunner implements MigrationRunner {
         migration.up(schema);
         print('Bringing up "$k"...');
         await schema.run(connection).then((_) {
-          return connection.execute(
-              'INSERT INTO MIGRATIONS (batch, path) VALUES ($batch, \'$k\');');
+          return connection.execute('INSERT INTO MIGRATIONS (batch, path) VALUES ($batch, \'$k\');');
         });
       }
     } else {
@@ -82,8 +80,7 @@ class PostgresMigrationRunner implements MigrationRunner {
 
     var r = await connection.query('SELECT MAX(batch) from migrations;');
     int curBatch = (r[0][0] ?? 0) as int;
-    r = await connection
-        .query('SELECT path from migrations WHERE batch = $curBatch;');
+    r = await connection.query('SELECT path from migrations WHERE batch = $curBatch;');
     Iterable<String> existing = r.expand((x) => x).cast<String>();
     List<String> toRun = [];
 
@@ -98,8 +95,7 @@ class PostgresMigrationRunner implements MigrationRunner {
         migration.down(schema);
         print('Bringing down "$k"...');
         await schema.run(connection).then((_) {
-          return connection
-              .execute('DELETE FROM migrations WHERE path = \'$k\';');
+          return connection.execute('DELETE FROM migrations WHERE path = \'$k\';');
         });
       }
     } else {
@@ -110,8 +106,7 @@ class PostgresMigrationRunner implements MigrationRunner {
   @override
   Future reset() async {
     await _init();
-    var r = await connection
-        .query('SELECT path from migrations ORDER BY batch DESC;');
+    var r = await connection.query('SELECT path from migrations ORDER BY batch DESC;');
     Iterable<String> existing = r.expand((x) => x).cast<String>();
     var toRun = existing.where(migrations.containsKey).toList();
 
@@ -122,8 +117,7 @@ class PostgresMigrationRunner implements MigrationRunner {
         migration.down(schema);
         print('Bringing down "$k"...');
         await schema.run(connection).then((_) {
-          return connection
-              .execute('DELETE FROM migrations WHERE path = \'$k\';');
+          return connection.execute('DELETE FROM migrations WHERE path = \'$k\';');
         });
       }
     } else {

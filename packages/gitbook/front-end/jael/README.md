@@ -1,6 +1,6 @@
 **Jael** is a simple, yet powerful, server-side HTML templating engine for Dart.
 Although it can be used in any application, it comes with first-class support for the
-[Angel](https://angel-dart.github.io) framework.
+[Galileo](https://galileo-dart.github.io) framework.
 
 Though its syntax is but a superset of HTML, it supports features such as:
 * **Custom elements**
@@ -56,6 +56,6 @@ Jael can easily be used in any application with the following two packages:
   * `package:jael`
   * `package:jael_preprocessor`
 
-However, [Angel](https://angel-dart.github.io) users only need install `package:angel_jael` to include
-templating in their server-side applications. One of Angel's goals is to make Web development faster, and having
+However, [Galileo](https://galileo-dart.github.io) users only need install `package:galileo_jael` to include
+templating in their server-side applications. One of Galileo's goals is to make Web development faster, and having
 a tool like Jael at its disposal only brings that goal even closer to fruition.

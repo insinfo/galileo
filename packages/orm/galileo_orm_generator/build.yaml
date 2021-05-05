@@ -1,6 +1,6 @@
 builders:
-  angel_orm:
-    import: "package:angel_orm_generator/angel_orm_generator.dart"
+  galileo_orm:
+    import: "package:galileo_orm_generator/galileo_orm_generator.dart"
     builder_factories:
       - migrationBuilder
       - ormBuilder
@@ -8,12 +8,12 @@ builders:
     build_to: cache
     build_extensions:
       .dart:
-        - ".angel_migration.g.part"
-        - ".angel_orm.g.part"
+        - ".galileo_migration.g.part"
+        - ".galileo_orm.g.part"
     required_inputs:
-      - angel_serialize.g.part
-      - angel_serialize_serializer.g.part
+      - galileo_serialize.g.part
+      - galileo_serialize_serializer.g.part
     applies_builders:
-      - angel_serialize_generator|angel_serialize
+      - galileo_serialize_generator|galileo_serialize
       - source_gen|combining_builder
       - source_gen|part_cleanup"

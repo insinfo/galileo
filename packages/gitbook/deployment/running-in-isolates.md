@@ -1,12 +1,12 @@
-How to run Angel in multiple isolates.
+How to run Galileo in multiple isolates.
 
 The concept is pretty simple. A normal server would look like this:
 
 ```dart
-var app = new Angel();
+var app = new Galileo();
 ```
 
-If you use the `Angel.custom` constructor, you can provide a custom `ServerGenerator`, which is
+If you use the `Galileo.custom` constructor, you can provide a custom `ServerGenerator`, which is
 a typedef for a function that binds an HTTP server:
 
 ```dart
@@ -15,12 +15,12 @@ typedef Future<HttpServer> ServerGenerator(InternetAddress address, int port);
 
 With this in mind, you can start a server passing the `shared` argument to `HttpServer.bind`:
 ```dart
-new Angel.custom((address, port) => HttpServer.bind(address, port, shared: true));
+new Galileo.custom((address, port) => HttpServer.bind(address, port, shared: true));
 ```
 
 `startShared` is a function that accomplishes this for you, since it's commonly-used functionality:
 ```dart
-new Angel.custom(startShared);
+new Galileo.custom(startShared);
 ```
 
 ## Multiple Isolates
@@ -30,7 +30,7 @@ To run in multiple isolates, the concept is simple as well:
 import 'dart:convert';
 import 'dart:io';
 import 'dart:isolate';
-import 'package:angel_framework/angel_framework.dart';
+import 'package:galileo_framework/galileo_framework.dart';
 
 main(List<String> args) async {
   int concurrency = Platform.numberOfProcessors;
@@ -46,8 +46,8 @@ main(List<String> args) async {
 
 void serverMain(int id) {
   // Start shared!!!
-  var app = new Angel();
-  var http = new AngelHttp.custom(app, startShared);
+  var app = new Galileo();
+  var http = new GalileoHttp.custom(app, startShared);
   
   app.get('/json', () => {'hello': 'world'});
 

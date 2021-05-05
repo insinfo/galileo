@@ -73,14 +73,14 @@ app.get(r'/number/:num([0-9]+(\.[0-9])?)', ...);
 You can `mount` routers, or `use` entire sub-apps.
 
 ```dart
-var app = new Angel();
+var app = new Galileo();
 app.get('/', 'Hello!');
 
 var subRouter = new Router()..get('/', 'Subroute');
 app.mount('/sub', subApp);
 // Now, you can visit /sub and receive the message "Subroute"
 
-var subApp = new Angel()..get('/hello', 'world');
+var subApp = new Galileo()..get('/hello', 'world');
 app.use('/api', subApp);
 
 // GET /api/hello returns "world"
@@ -100,7 +100,7 @@ app.group('/user/:id', (router) {
 
 ## Extended Documentation
 
-For more documentation on the router, see [its repository](https://github.com/angel-dart/route). [`package:angel_route`](https://pub.dartlang.org/packages/angel_route) has no `dart:io` or `dart:mirrors` dependency, and it also supports browser use \(both hash and push state\).
+For more documentation on the router, see [its repository](https://github.com/galileo-dart/route). [`package:galileo_route`](https://pub.dartlang.org/packages/galileo_route) has no `dart:io` or `dart:mirrors` dependency, and it also supports browser use \(both hash and push state\).
 
 ## Next Up...
 

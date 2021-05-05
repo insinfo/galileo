@@ -1,15 +1,15 @@
 # graphql_parser
 [![Pub](https://img.shields.io/pub/v/graphql_parser.svg)](https://pub.dartlang.org/packages/graphql_parser)
-[![build status](https://travis-ci.org/angel-dart/graphql.svg)](https://travis-ci.org/angel-dart/graphql)
+[![build status](https://travis-ci.org/galileo-dart/graphql.svg)](https://travis-ci.org/galileo-dart/graphql)
 
 Parses GraphQL queries and schemas.
 
 *This library is merely a parser/visitor*. Any sort of actual GraphQL API functionality must be implemented by you,
 or by a third-party package.
 
-[Angel framework](https://angel-dart.github.io)
+[Galileo framework](https://galileo-dart.github.io)
 users should consider 
-[`package:angel_graphql`](https://pub.dartlang.org/packages/angel_graphql)
+[`package:galileo_graphql`](https://pub.dartlang.org/packages/galileo_graphql)
 as a dead-simple way to add GraphQL functionality to their servers.
 
 # Installation

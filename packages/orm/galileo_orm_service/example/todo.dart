@@ -1,6 +1,6 @@
-import 'package:angel_migration/angel_migration.dart';
-import 'package:angel_serialize/angel_serialize.dart';
-import 'package:angel_orm/angel_orm.dart';
+import 'package:galileo_migration/galileo_migration.dart';
+import 'package:galileo_serialize/galileo_serialize.dart';
+import 'package:galileo_orm/galileo_orm.dart';
 part 'todo.g.dart';
 
 @serializable

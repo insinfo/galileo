@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of angel_orm_generator.test.models.order;
+part of galileo_orm_generator.test.models.order;
 
 // **************************************************************************
 // MigrationGenerator
@@ -16,9 +16,7 @@ class OrderMigration extends Migration {
       table.integer('employee_id');
       table.timeStamp('order_date');
       table.integer('shipper_id');
-      table
-          .declare('customer_id', ColumnType('serial'))
-          .references('customers', 'id');
+      table.declare('customer_id', ColumnType('serial')).references('customers', 'id');
     });
   }
 
@@ -53,10 +51,8 @@ class OrderQuery extends Query<Order, OrderQueryWhere> {
     trampoline ??= Set();
     trampoline.add(tableName);
     _where = OrderQueryWhere(this);
-    leftJoin(_customer = CustomerQuery(trampoline: trampoline, parent: this),
-        'customer_id', 'id',
-        additionalFields: const ['id', 'created_at', 'updated_at'],
-        trampoline: trampoline);
+    leftJoin(_customer = CustomerQuery(trampoline: trampoline, parent: this), 'customer_id', 'id',
+        additionalFields: const ['id', 'created_at', 'updated_at'], trampoline: trampoline);
   }
 
   @override
@@ -78,15 +74,7 @@ class OrderQuery extends Query<Order, OrderQueryWhere> {
 
   @override
   get fields {
-    return const [
-      'id',
-      'created_at',
-      'updated_at',
-      'customer_id',
-      'employee_id',
-      'order_date',
-      'shipper_id'
-    ];
+    return const ['id', 'created_at', 'updated_at', 'customer_id', 'employee_id', 'order_date', 'shipper_id'];
   }
 
   @override
@@ -109,8 +97,7 @@ class OrderQuery extends Query<Order, OrderQueryWhere> {
         orderDate: (row[5] as DateTime),
         shipperId: (row[6] as int));
     if (row.length > 7) {
-      model = model.copyWith(
-          customer: CustomerQuery.parseRow(row.skip(7).take(3).toList()));
+      model = model.copyWith(customer: CustomerQuery.parseRow(row.skip(7).take(3).toList()));
     }
     return model;
   }
@@ -151,15 +138,7 @@ class OrderQueryWhere extends QueryWhere {
 
   @override
   get expressionBuilders {
-    return [
-      id,
-      createdAt,
-      updatedAt,
-      customerId,
-      employeeId,
-      orderDate,
-      shipperId
-    ];
+    return [id, createdAt, updatedAt, customerId, employeeId, orderDate, shipperId];
   }
 }
 
@@ -217,8 +196,7 @@ class OrderQueryValues extends MapQueryValues {
 }
 
 class CustomerQuery extends Query<Customer, CustomerQueryWhere> {
-  CustomerQuery({Query parent, Set<String> trampoline})
-      : super(parent: parent) {
+  CustomerQuery({Query parent, Set<String> trampoline}) : super(parent: parent) {
     trampoline ??= Set();
     trampoline.add(tableName);
     _where = CustomerQueryWhere(this);
@@ -256,10 +234,7 @@ class CustomerQuery extends Query<Customer, CustomerQueryWhere> {
 
   static Customer parseRow(List row) {
     if (row.every((x) => x == null)) return null;
-    var model = Customer(
-        id: row[0].toString(),
-        createdAt: (row[1] as DateTime),
-        updatedAt: (row[2] as DateTime));
+    var model = Customer(id: row[0].toString(), createdAt: (row[1] as DateTime), updatedAt: (row[2] as DateTime));
     return model;
   }
 
@@ -320,14 +295,7 @@ class CustomerQueryValues extends MapQueryValues {
 
 @generatedSerializable
 class Order extends _Order {
-  Order(
-      {this.id,
-      this.createdAt,
-      this.updatedAt,
-      this.customer,
-      this.employeeId,
-      this.orderDate,
-      this.shipperId});
+  Order({this.id, this.createdAt, this.updatedAt, this.customer, this.employeeId, this.orderDate, this.shipperId});
 
   /// A unique identifier corresponding to this item.
   @override
@@ -384,8 +352,7 @@ class Order extends _Order {
 
   @override
   int get hashCode {
-    return hashObjects(
-        [id, createdAt, updatedAt, customer, employeeId, orderDate, shipperId]);
+    return hashObjects([id, createdAt, updatedAt, customer, employeeId, orderDate, shipperId]);
   }
 
   @override
@@ -415,17 +382,11 @@ class Customer extends _Customer {
   DateTime updatedAt;
 
   Customer copyWith({String id, DateTime createdAt, DateTime updatedAt}) {
-    return Customer(
-        id: id ?? this.id,
-        createdAt: createdAt ?? this.createdAt,
-        updatedAt: updatedAt ?? this.updatedAt);
+    return Customer(id: id ?? this.id, createdAt: createdAt ?? this.createdAt, updatedAt: updatedAt ?? this.updatedAt);
   }
 
   bool operator ==(other) {
-    return other is _Customer &&
-        other.id == id &&
-        other.createdAt == createdAt &&
-        other.updatedAt == updatedAt;
+    return other is _Customer && other.id == id && other.createdAt == createdAt && other.updatedAt == updatedAt;
   }
 
   @override
@@ -483,9 +444,7 @@ class OrderSerializer extends Codec<Order, Map> {
                 ? (map['updated_at'] as DateTime)
                 : DateTime.parse(map['updated_at'].toString()))
             : null,
-        customer: map['customer'] != null
-            ? CustomerSerializer.fromMap(map['customer'] as Map)
-            : null,
+        customer: map['customer'] != null ? CustomerSerializer.fromMap(map['customer'] as Map) : null,
         employeeId: map['employee_id'] as int,
         orderDate: map['order_date'] != null
             ? (map['order_date'] is DateTime
@@ -512,15 +471,7 @@ class OrderSerializer extends Codec<Order, Map> {
 }
 
 abstract class OrderFields {
-  static const List<String> allFields = <String>[
-    id,
-    createdAt,
-    updatedAt,
-    customer,
-    employeeId,
-    orderDate,
-    shipperId
-  ];
+  static const List<String> allFields = <String>[id, createdAt, updatedAt, customer, employeeId, orderDate, shipperId];
 
   static const String id = 'id';
 

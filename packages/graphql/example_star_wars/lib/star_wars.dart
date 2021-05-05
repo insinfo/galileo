@@ -1,14 +1,14 @@
 import 'dart:async';
 import 'dart:math';
-import 'package:angel_framework/angel_framework.dart';
-import 'package:angel_graphql/angel_graphql.dart';
+import 'package:galileo_framework/galileo_framework.dart';
+import 'package:galileo_graphql/galileo_graphql.dart';
 import 'package:graphql_schema/graphql_schema.dart';
 import 'package:graphql_server/graphql_server.dart';
 import 'package:graphql_server/mirrors.dart';
 import 'src/models/models.dart';
 
-Future configureServer(Angel app) async {
-  // Create standard Angel services. Note that these will also *automatically* be
+Future configureServer(Galileo app) async {
+  // Create standard Galileo services. Note that these will also *automatically* be
   // exposed via a REST API as well.
   var droidService = app.use('/api/droids', MapService());
   var humansService = app.use('/api/humans', MapService());
@@ -25,7 +25,7 @@ Future configureServer(Angel app) async {
   // Create the query type.
   //
   // Use the `resolveViaServiceIndex` helper to load data directly from an
-  // Angel service.
+  // Galileo service.
   var queryType = objectType(
     'StarWarsQuery',
     description: 'A long time ago, in a galaxy far, far away...',

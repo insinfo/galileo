@@ -1,15 +1,21 @@
-name: angel_file_security
-version: 1.1.0
+name: galileo_file_security
+version: 3.0.0
 description: Middleware for securing file uploads.
-author: Tobe O <thosakwe@gmail.com>
+author: Isaque Neves <insinfo2008@gmail.com>
+homepage: https://github.com/insinfo/galileo/tree/master/packages/file_security
+
 environment:
-  sdk: ">=1.19.0"
-homepage: https://github.com/angel-dart/file_security
+  sdk: ">=2.10.0 < 3.0.0"
+
 dependencies:
-  angel_framework: ">=1.1.0-alpha <2.0.0"
-  http: ^0.11.3
+  galileo_framework: ^3.0.0
+  http: ^0.13.3 # Null safety
+  logging: ^1.0.1 # Null safety
+  http_parser: ^4.0.0  # Null safety
+  path: ^1.8.0 # Null safety
+
 dev_dependencies:
-  angel_validate: ^1.0.0
-  angel_test: ^1.1.0-alpha
-  test: ^0.12.0
-  uuid: ^0.5.3
+  galileo_validate: ^3.0.0
+  galileo_test: ^3.0.1
+  test: ^1.17.3 # Null safety
+  uuid: ^3.0.4  #Null safety

@@ -1,11 +1,10 @@
 import 'dart:async';
-import 'package:angel_orm/angel_orm.dart';
+import 'package:galileo_orm/galileo_orm.dart';
 import 'package:test/test.dart';
 import 'models/custom_expr.dart';
 import 'util.dart';
 
-customExprTests(FutureOr<QueryExecutor> Function() createExecutor,
-    {FutureOr<void> Function(QueryExecutor) close}) {
+customExprTests(FutureOr<QueryExecutor> Function() createExecutor, {FutureOr<void> Function(QueryExecutor) close}) {
   QueryExecutor executor;
   Numbers numbersModel;
 

@@ -1,24 +1,18 @@
 name: galileo_auth_oauth2
 description: galileo_auth strategy for OAuth2 login, i.e. Facebook, Github, etc.
 version: 3.0.0
-#author: Tobe O <thosakwe@gmail.com>
-publish_to: none
+author: Isaque Neves <insinfo2008@gmail.com>
+homepage: https://github.com/insinfo/galileo/tree/master/packages/auth_oauth2
+
 environment:
   sdk: ">=2.10.0 <3.0.0"
-homepage: https://github.com/galileo-dart/auth_oauth2.git
+
 dependencies:
-  galileo_auth:
-    git: 
-      url: https://github.com/insinfo/galileo.git
-      ref: sdk-2.12.x
-      path: packages/auth
-  galileo_framework:
-    git: 
-      url: https://github.com/insinfo/galileo.git
-      ref: sdk-2.12.x
-      path: packages/framework
-  http_parser: ^4.0.0
-  oauth2: ^2.0.0
+  galileo_auth: ^3.0.1 # Null safety 
+  galileo_framework: ^3.0.2 # Null safety 
+  http_parser: ^4.0.0 # Null safety 
+  oauth2: ^2.0.0 #Null safety
+
 dev_dependencies:
-  logging: ^1.0.0
-  pedantic: ^1.0.0
+  logging: ^1.0.1 # Null safety
+  pedantic: ^1.11.0 # Null safety

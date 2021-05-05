@@ -1,11 +1,10 @@
 import 'dart:async';
-import 'package:angel_orm/angel_orm.dart';
+import 'package:galileo_orm/galileo_orm.dart';
 import 'package:test/test.dart';
 import 'models/book.dart';
 import 'util.dart';
 
-belongsToTests(FutureOr<QueryExecutor> Function() createExecutor,
-    {FutureOr<void> Function(QueryExecutor) close}) {
+belongsToTests(FutureOr<QueryExecutor> Function() createExecutor, {FutureOr<void> Function(QueryExecutor) close}) {
   QueryExecutor executor;
   Author jkRowling;
   Author jameson;
@@ -90,8 +89,7 @@ belongsToTests(FutureOr<QueryExecutor> Function() createExecutor,
     test('union', () async {
       var query1 = new BookQuery()..where.name.like('Deathly%');
       var query2 = new BookQuery()..where.authorId.equals(-1);
-      var query3 = new BookQuery()
-        ..where.name.isIn(['Goblet of Fire', 'Order of the Phoenix']);
+      var query3 = new BookQuery()..where.name.isIn(['Goblet of Fire', 'Order of the Phoenix']);
       query1
         ..union(query2)
         ..unionAll(query3);

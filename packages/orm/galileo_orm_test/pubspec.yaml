@@ -1,40 +1,22 @@
 name: galileo_orm_test
-version: 1.0.0
-publish_to: none
+version: 3.0.0
 description: Common tests for galileo ORM backends.
+author: Isaque Neves <insinfo2008@gmail.com>
+homepage: https://github.com/insinfo/galileo/tree/master/packages/orm/galileo_orm_test
+
 environment:
   sdk: '>=2.10.0 <3.0.0'
+
 dependencies:
-  galileo_migration:
-    git: 
-      url: https://github.com/insinfo/galileo.git
-      ref: sdk-2.12.x
-      path: packages/orm/galileo_migration
-  galileo_model:
-    git: 
-      url: https://github.com/insinfo/galileo.git
-      ref: sdk-2.12.x
-      path: packages/model
-  galileo_orm:
-    git: 
-      url: https://github.com/insinfo/galileo.git
-      ref: sdk-2.12.x
-      path: packages/orm/galileo_orm
-  galileo_serialize:
-    git: 
-      url: https://github.com/insinfo/galileo.git
-      ref: sdk-2.12.x
-      path: packages/serialize/galileo_serialize
-  test: ^1.15.7
+  galileo_migration: ^3.0.0   
+  galileo_model: ^2.0.0   
+  galileo_orm: ^3.0.0 
+  galileo_serialize: ^3.0.0 
+  test: ^1.17.3 #Null safety
+  collection: ^1.15.0  #Null safety
+  io: ^1.0.0  #Null safety
+
 dev_dependencies:
-  galileo_orm_generator:
-    git: 
-      url: https://github.com/insinfo/galileo.git
-      ref: sdk-2.12.x
-      path: packages/orm/galileo_orm_generator
-  galileo_framework:
-    git: 
-      url: https://github.com/insinfo/galileo.git
-      ref: sdk-2.12.x
-      path: packages/framework
-  build_runner: ^1.0.0
+  galileo_orm_generator: ^3.0.1
+  galileo_framework: ^3.0.2 
+  build_runner: ^2.0.2 #Null safety

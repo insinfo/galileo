@@ -1,6 +1,6 @@
-# angel_flutter
-[![Pub](https://img.shields.io/pub/v/angel_flutter.svg)](https://pub.dartlang.org/packages/angel_flutter)
+# galileo_flutter
+[![Pub](https://img.shields.io/pub/v/galileo_flutter.svg)](https://pub.dartlang.org/packages/galileo_flutter)
 
-Widgets and helpers for developing Flutter clients for Angel applications.
+Widgets and helpers for developing Flutter clients for Galileo applications.
 
-https://github.com/angel-dart/flutter/tree/master/angel_flutter
+https://github.com/insinfo/galileo/tree/master/packages/flutter

@@ -1,13 +1,12 @@
 import 'dart:convert';
-import 'package:angel_auth/angel_auth.dart';
-import 'package:angel_framework/angel_framework.dart';
-import 'package:angel_framework/http.dart';
-import 'package:angel_auth_oauth2/angel_auth_oauth2.dart';
+import 'package:galileo_auth/galileo_auth.dart';
+import 'package:galileo_framework/galileo_framework.dart';
+import 'package:galileo_framework/http.dart';
+import 'package:galileo_auth_oauth2/galileo_auth_oauth2.dart';
 import 'package:http_parser/http_parser.dart';
 import 'package:logging/logging.dart';
 
-var authorizationEndpoint =
-    Uri.parse('http://github.com/login/oauth/authorize');
+var authorizationEndpoint = Uri.parse('http://github.com/login/oauth/authorize');
 
 var tokenEndpoint = Uri.parse('https://github.com/login/oauth/access_token');
 
@@ -33,9 +32,9 @@ Map<String, dynamic> parseParamsFromGithub(MediaType contentType, String body) {
 
 void main() async {
   // Create the server instance.
-  var app = Angel();
-  var http = AngelHttp(app);
-  app.logger = Logger('angel')
+  var app = Galileo();
+  var http = GalileoHttp(app);
+  app.logger = Logger('galileo')
     ..onRecord.listen((rec) {
       print(rec);
       if (rec.error != null) print(rec.error);
@@ -47,8 +46,7 @@ void main() async {
   var mappedUserService = userService.map(User.parse, User.serialize);
 
   // Set up the authenticator plugin.
-  var auth =
-      AngelAuth<User>(jwtKey: 'oauth2 example secret', allowCookie: false);
+  var auth = GalileoAuth<User>(jwtKey: 'oauth2 example secret', allowCookie: false);
   auth.serializer = (user) async => user.id;
   auth.deserializer = (id) => mappedUserService.read(id.toString());
   app.fallback(auth.decodeJwt);
@@ -92,12 +90,11 @@ void main() async {
   app.get('/auth/github', auth.authenticate('github'));
   app.get(
       '/auth/github/callback',
-      auth.authenticate('github',
-          AngelAuthOptions(callback: (req, res, jwt) async {
+      auth.authenticate('github', GalileoAuthOptions(callback: (req, res, jwt) async {
         // In real-life, you might include a pop-up callback script.
         //
         // Use `confirmPopupAuthentication`, which is bundled with
-        // `package:angel_auth`.
+        // `package:galileo_auth`.
         var user = req.container.make<User>();
         res.write('Your user info: ${user.toJson()}\n\n');
         res.write('Your JWT: $jwt');
@@ -119,8 +116,7 @@ class User extends Model {
 
   User({this.id, this.githubId});
 
-  static User parse(Map map) =>
-      User(id: map['id'] as String, githubId: map['github_id'] as int);
+  static User parse(Map map) => User(id: map['id'] as String, githubId: map['github_id'] as int);
 
   static Map<String, dynamic> serialize(User user) => user.toJson();
 

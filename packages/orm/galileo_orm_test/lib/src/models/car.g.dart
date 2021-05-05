@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of angel_orm.generator.models.car;
+part of galileo_orm.generator.models.car;
 
 // **************************************************************************
 // MigrationGenerator
@@ -54,15 +54,7 @@ class CarQuery extends Query<Car, CarQueryWhere> {
 
   @override
   get fields {
-    return const [
-      'id',
-      'created_at',
-      'updated_at',
-      'make',
-      'description',
-      'family_friendly',
-      'recalled_at'
-    ];
+    return const ['id', 'created_at', 'updated_at', 'make', 'description', 'family_friendly', 'recalled_at'];
   }
 
   @override
@@ -120,15 +112,7 @@ class CarQueryWhere extends QueryWhere {
 
   @override
   get expressionBuilders {
-    return [
-      id,
-      createdAt,
-      updatedAt,
-      make,
-      description,
-      familyFriendly,
-      recalledAt
-    ];
+    return [id, createdAt, updatedAt, make, description, familyFriendly, recalledAt];
   }
 }
 
@@ -189,14 +173,7 @@ class CarQueryValues extends MapQueryValues {
 
 @generatedSerializable
 class Car extends _Car {
-  Car(
-      {this.id,
-      this.createdAt,
-      this.updatedAt,
-      this.make,
-      this.description,
-      this.familyFriendly,
-      this.recalledAt});
+  Car({this.id, this.createdAt, this.updatedAt, this.make, this.description, this.familyFriendly, this.recalledAt});
 
   /// A unique identifier corresponding to this item.
   @override
@@ -253,15 +230,7 @@ class Car extends _Car {
 
   @override
   int get hashCode {
-    return hashObjects([
-      id,
-      createdAt,
-      updatedAt,
-      make,
-      description,
-      familyFriendly,
-      recalledAt
-    ]);
+    return hashObjects([id, createdAt, updatedAt, make, description, familyFriendly, recalledAt]);
   }
 
   @override

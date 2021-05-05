@@ -1,11 +1,10 @@
-import 'package:angel_orm/angel_orm.dart';
+import 'package:galileo_orm/galileo_orm.dart';
 import 'column.dart';
 
 abstract class Table {
   MigrationColumn declareColumn(String name, Column column);
 
-  MigrationColumn declare(String name, ColumnType type) =>
-      declareColumn(name, new MigrationColumn(type));
+  MigrationColumn declare(String name, ColumnType type) => declareColumn(name, new MigrationColumn(type));
 
   MigrationColumn serial(String name) => declare(name, ColumnType.serial);
 
@@ -31,8 +30,7 @@ abstract class Table {
 
   MigrationColumn varChar(String name, {int length}) {
     if (length == null) return declare(name, ColumnType.varChar);
-    return declareColumn(
-        name, new Column(type: ColumnType.varChar, length: length));
+    return declareColumn(name, new Column(type: ColumnType.varChar, length: length));
   }
 }
 

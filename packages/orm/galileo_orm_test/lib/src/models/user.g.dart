@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of angel_orm_generator.test.models.user;
+part of galileo_orm_generator.test.models.user;
 
 // **************************************************************************
 // MigrationGenerator
@@ -91,14 +91,7 @@ class UserQuery extends Query<User, UserQueryWhere> {
 
   @override
   get fields {
-    return const [
-      'id',
-      'created_at',
-      'updated_at',
-      'username',
-      'password',
-      'email'
-    ];
+    return const ['id', 'created_at', 'updated_at', 'username', 'password', 'email'];
   }
 
   @override
@@ -121,10 +114,8 @@ class UserQuery extends Query<User, UserQueryWhere> {
         password: (row[4] as String),
         email: (row[5] as String));
     if (row.length > 6) {
-      model = model.copyWith(
-          roles: [RoleQuery.parseRow(row.skip(6).take(4).toList())]
-              .where((x) => x != null)
-              .toList());
+      model =
+          model.copyWith(roles: [RoleQuery.parseRow(row.skip(6).take(4).toList())].where((x) => x != null).toList());
     }
     return model;
   }
@@ -136,8 +127,7 @@ class UserQuery extends Query<User, UserQueryWhere> {
 
   @override
   bool canCompile(trampoline) {
-    return (!(trampoline.contains('users') &&
-        trampoline.contains('role_users')));
+    return (!(trampoline.contains('users') && trampoline.contains('role_users')));
   }
 
   @override
@@ -150,10 +140,7 @@ class UserQuery extends Query<User, UserQueryWhere> {
           return out..add(model);
         } else {
           var l = out[idx];
-          return out
-            ..[idx] = l.copyWith(
-                roles: List<_Role>.from(l.roles ?? [])
-                  ..addAll(model.roles ?? []));
+          return out..[idx] = l.copyWith(roles: List<_Role>.from(l.roles ?? [])..addAll(model.roles ?? []));
         }
       });
     });
@@ -169,10 +156,7 @@ class UserQuery extends Query<User, UserQueryWhere> {
           return out..add(model);
         } else {
           var l = out[idx];
-          return out
-            ..[idx] = l.copyWith(
-                roles: List<_Role>.from(l.roles ?? [])
-                  ..addAll(model.roles ?? []));
+          return out..[idx] = l.copyWith(roles: List<_Role>.from(l.roles ?? [])..addAll(model.roles ?? []));
         }
       });
     });
@@ -188,10 +172,7 @@ class UserQuery extends Query<User, UserQueryWhere> {
           return out..add(model);
         } else {
           var l = out[idx];
-          return out
-            ..[idx] = l.copyWith(
-                roles: List<_Role>.from(l.roles ?? [])
-                  ..addAll(model.roles ?? []));
+          return out..[idx] = l.copyWith(roles: List<_Role>.from(l.roles ?? [])..addAll(model.roles ?? []));
         }
       });
     });
@@ -271,25 +252,14 @@ class UserQueryValues extends MapQueryValues {
 }
 
 class RoleUserQuery extends Query<RoleUser, RoleUserQueryWhere> {
-  RoleUserQuery({Query parent, Set<String> trampoline})
-      : super(parent: parent) {
+  RoleUserQuery({Query parent, Set<String> trampoline}) : super(parent: parent) {
     trampoline ??= Set();
     trampoline.add(tableName);
     _where = RoleUserQueryWhere(this);
-    leftJoin(_role = RoleQuery(trampoline: trampoline, parent: this), 'role_id',
-        'id',
-        additionalFields: const ['id', 'created_at', 'updated_at', 'name'],
-        trampoline: trampoline);
-    leftJoin(_user = UserQuery(trampoline: trampoline, parent: this), 'user_id',
-        'id',
-        additionalFields: const [
-          'id',
-          'created_at',
-          'updated_at',
-          'username',
-          'password',
-          'email'
-        ],
+    leftJoin(_role = RoleQuery(trampoline: trampoline, parent: this), 'role_id', 'id',
+        additionalFields: const ['id', 'created_at', 'updated_at', 'name'], trampoline: trampoline);
+    leftJoin(_user = UserQuery(trampoline: trampoline, parent: this), 'user_id', 'id',
+        additionalFields: const ['id', 'created_at', 'updated_at', 'username', 'password', 'email'],
         trampoline: trampoline);
   }
 
@@ -331,12 +301,10 @@ class RoleUserQuery extends Query<RoleUser, RoleUserQueryWhere> {
     if (row.every((x) => x == null)) return null;
     var model = RoleUser();
     if (row.length > 2) {
-      model = model.copyWith(
-          role: RoleQuery.parseRow(row.skip(2).take(4).toList()));
+      model = model.copyWith(role: RoleQuery.parseRow(row.skip(2).take(4).toList()));
     }
     if (row.length > 6) {
-      model = model.copyWith(
-          user: UserQuery.parseRow(row.skip(6).take(6).toList()));
+      model = model.copyWith(user: UserQuery.parseRow(row.skip(6).take(6).toList()));
     }
     return model;
   }
@@ -405,14 +373,7 @@ class RoleQuery extends Query<Role, RoleQueryWhere> {
         '(SELECT role_users.role_id, users.id, users.created_at, users.updated_at, users.username, users.password, users.email FROM users LEFT JOIN role_users ON role_users.user_id=users.id)',
         'id',
         'role_id',
-        additionalFields: const [
-          'id',
-          'created_at',
-          'updated_at',
-          'username',
-          'password',
-          'email'
-        ],
+        additionalFields: const ['id', 'created_at', 'updated_at', 'username', 'password', 'email'],
         trampoline: trampoline);
   }
 
@@ -454,10 +415,8 @@ class RoleQuery extends Query<Role, RoleQueryWhere> {
         updatedAt: (row[2] as DateTime),
         name: (row[3] as String));
     if (row.length > 4) {
-      model = model.copyWith(
-          users: [UserQuery.parseRow(row.skip(4).take(6).toList())]
-              .where((x) => x != null)
-              .toList());
+      model =
+          model.copyWith(users: [UserQuery.parseRow(row.skip(4).take(6).toList())].where((x) => x != null).toList());
     }
     return model;
   }
@@ -469,8 +428,7 @@ class RoleQuery extends Query<Role, RoleQueryWhere> {
 
   @override
   bool canCompile(trampoline) {
-    return (!(trampoline.contains('roles') &&
-        trampoline.contains('role_users')));
+    return (!(trampoline.contains('roles') && trampoline.contains('role_users')));
   }
 
   @override
@@ -483,10 +441,7 @@ class RoleQuery extends Query<Role, RoleQueryWhere> {
           return out..add(model);
         } else {
           var l = out[idx];
-          return out
-            ..[idx] = l.copyWith(
-                users: List<_User>.from(l.users ?? [])
-                  ..addAll(model.users ?? []));
+          return out..[idx] = l.copyWith(users: List<_User>.from(l.users ?? [])..addAll(model.users ?? []));
         }
       });
     });
@@ -502,10 +457,7 @@ class RoleQuery extends Query<Role, RoleQueryWhere> {
           return out..add(model);
         } else {
           var l = out[idx];
-          return out
-            ..[idx] = l.copyWith(
-                users: List<_User>.from(l.users ?? [])
-                  ..addAll(model.users ?? []));
+          return out..[idx] = l.copyWith(users: List<_User>.from(l.users ?? [])..addAll(model.users ?? []));
         }
       });
     });
@@ -521,10 +473,7 @@ class RoleQuery extends Query<Role, RoleQueryWhere> {
           return out..add(model);
         } else {
           var l = out[idx];
-          return out
-            ..[idx] = l.copyWith(
-                users: List<_User>.from(l.users ?? [])
-                  ..addAll(model.users ?? []));
+          return out..[idx] = l.copyWith(users: List<_User>.from(l.users ?? [])..addAll(model.users ?? []));
         }
       });
     });
@@ -591,14 +540,7 @@ class RoleQueryValues extends MapQueryValues {
 
 @generatedSerializable
 class User extends _User {
-  User(
-      {this.id,
-      this.createdAt,
-      this.updatedAt,
-      this.username,
-      this.password,
-      this.email,
-      List<_Role> roles})
+  User({this.id, this.createdAt, this.updatedAt, this.username, this.password, this.email, List<_Role> roles})
       : this.roles = List.unmodifiable(roles ?? []);
 
   /// A unique identifier corresponding to this item.
@@ -651,14 +593,12 @@ class User extends _User {
         other.username == username &&
         other.password == password &&
         other.email == email &&
-        ListEquality<_Role>(DefaultEquality<_Role>())
-            .equals(other.roles, roles);
+        ListEquality<_Role>(DefaultEquality<_Role>()).equals(other.roles, roles);
   }
 
   @override
   int get hashCode {
-    return hashObjects(
-        [id, createdAt, updatedAt, username, password, email, roles]);
+    return hashObjects([id, createdAt, updatedAt, username, password, email, roles]);
   }
 
   @override
@@ -727,12 +667,7 @@ class Role extends _Role {
   @override
   final List<_User> users;
 
-  Role copyWith(
-      {String id,
-      DateTime createdAt,
-      DateTime updatedAt,
-      String name,
-      List<_User> users}) {
+  Role copyWith({String id, DateTime createdAt, DateTime updatedAt, String name, List<_User> users}) {
     return Role(
         id: id ?? this.id,
         createdAt: createdAt ?? this.createdAt,
@@ -747,8 +682,7 @@ class Role extends _Role {
         other.createdAt == createdAt &&
         other.updatedAt == updatedAt &&
         other.name == name &&
-        ListEquality<_User>(DefaultEquality<_User>())
-            .equals(other.users, users);
+        ListEquality<_User>(DefaultEquality<_User>()).equals(other.users, users);
   }
 
   @override
@@ -810,8 +744,7 @@ class UserSerializer extends Codec<User, Map> {
         password: map['password'] as String,
         email: map['email'] as String,
         roles: map['roles'] is Iterable
-            ? List.unmodifiable(((map['roles'] as Iterable).whereType<Map>())
-                .map(RoleSerializer.fromMap))
+            ? List.unmodifiable(((map['roles'] as Iterable).whereType<Map>()).map(RoleSerializer.fromMap))
             : null);
   }
 
@@ -832,15 +765,7 @@ class UserSerializer extends Codec<User, Map> {
 }
 
 abstract class UserFields {
-  static const List<String> allFields = <String>[
-    id,
-    createdAt,
-    updatedAt,
-    username,
-    password,
-    email,
-    roles
-  ];
+  static const List<String> allFields = <String>[id, createdAt, updatedAt, username, password, email, roles];
 
   static const String id = 'id';
 
@@ -882,22 +807,15 @@ class RoleUserSerializer extends Codec<RoleUser, Map> {
   get decoder => const RoleUserDecoder();
   static RoleUser fromMap(Map map) {
     return RoleUser(
-        role: map['role'] != null
-            ? RoleSerializer.fromMap(map['role'] as Map)
-            : null,
-        user: map['user'] != null
-            ? UserSerializer.fromMap(map['user'] as Map)
-            : null);
+        role: map['role'] != null ? RoleSerializer.fromMap(map['role'] as Map) : null,
+        user: map['user'] != null ? UserSerializer.fromMap(map['user'] as Map) : null);
   }
 
   static Map<String, dynamic> toMap(_RoleUser model) {
     if (model == null) {
       return null;
     }
-    return {
-      'role': RoleSerializer.toMap(model.role),
-      'user': UserSerializer.toMap(model.user)
-    };
+    return {'role': RoleSerializer.toMap(model.role), 'user': UserSerializer.toMap(model.user)};
   }
 }
 
@@ -947,8 +865,7 @@ class RoleSerializer extends Codec<Role, Map> {
             : null,
         name: map['name'] as String,
         users: map['users'] is Iterable
-            ? List.unmodifiable(((map['users'] as Iterable).whereType<Map>())
-                .map(UserSerializer.fromMap))
+            ? List.unmodifiable(((map['users'] as Iterable).whereType<Map>()).map(UserSerializer.fromMap))
             : null);
   }
 
@@ -967,13 +884,7 @@ class RoleSerializer extends Codec<Role, Map> {
 }
 
 abstract class RoleFields {
-  static const List<String> allFields = <String>[
-    id,
-    createdAt,
-    updatedAt,
-    name,
-    users
-  ];
+  static const List<String> allFields = <String>[id, createdAt, updatedAt, name, users];
 
   static const String id = 'id';
 

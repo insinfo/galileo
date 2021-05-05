@@ -3,17 +3,17 @@ publish_to: none
 environment:
   sdk: ">=2.10.0 <2.12.0"
 dependencies:
-  #angel_file_service: ^1.0.0
-  angel_graphql:
-    path: ../angel_graphql
-  angel_hot: #^2.0.0-alpha
+  #galileo_file_service: ^1.0.0
+  galileo_graphql:
+    path: ../galileo_graphql
+  galileo_hot: #^2.0.0-alpha
     path: ../../hot
-  angel_serialize: #^2.0.0
-    path: ../../serialize/angel_serialize
+  galileo_serialize: #^2.0.0
+    path: ../../serialize/galileo_serialize
   io: ^0.3.2
 dev_dependencies:
-  angel_serialize_generator: #^2.0.0
-    path: ../../serialize/angel_serialize_generator
+  galileo_serialize_generator: #^2.0.0
+    path: ../../serialize/galileo_serialize_generator
   build_runner: ^1.0.0
   graphql_generator:
     path: ../graphql_generator

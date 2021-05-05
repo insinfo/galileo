@@ -1,13 +1,13 @@
 # Getting Started
 In this first guide, we will:
-* Download the `angel_framework` package from Pub.
-* Launch an `AngelHttp` server.
+* Download the `galileo_framework` package from Pub.
+* Launch an `GalileoHttp` server.
 * Add some basic routes to an app.
 * Add a 404 error handler.
 
 The source code for this example can be found here:
 
-https://github.com/angel-dart/examples-v2/tree/master/docs_examples/getting_started
+https://github.com/galileo-dart/examples-v2/tree/master/docs_examples/getting_started
 
 # First Steps
 This tutorial relies on the terminal/command-line, so if
@@ -40,33 +40,33 @@ The first thing we'll need to do is create a new
 directory (folder) for our project.
 
 ```bash
-mkdir hello_angel
-cd hello_angel
+mkdir hello_galileo
+cd hello_galileo
 ```
 
 Next, we create a `pubspec.yaml` file, and enter the
 following contents:
 
 ```yaml
-name: hello_angel
+name: hello_galileo
 dependencies:
-    angel_framework: ^2.0.0
+    galileo_framework: ^2.0.0
 ```
 
 Now, just run `pub get`, which will install the
-`angel_framework` library, and its dependencies:
+`galileo_framework` library, and its dependencies:
 
 ```
 Resolving dependencies... (3.3s)
-+ angel_container 1.0.0
-+ angel_framework 2.0.0
-+ angel_http_exception 1.0.0+3
++ galileo_container 1.0.0
++ galileo_framework 2.0.0
++ galileo_http_exception 1.0.0+3
 (... more output omitted)
 Changed 33 dependencies!
 ```
 
 # Launching an HTTP Server
-Angel can speak different protocols, but more often than not,
+Galileo can speak different protocols, but more often than not,
 we'll want it to speak HTTP.
 
 Create a directory named `bin`, and a file within `bin` named
@@ -74,7 +74,7 @@ Create a directory named `bin`, and a file within `bin` named
 
 Your folder structure should now look like this:
 ```
-hello_angel
+hello_galileo
     bin/
         main.dart
     pubspec.yaml
@@ -83,12 +83,12 @@ hello_angel
 Add the following to `bin/main.dart`:
 
 ```dart
-import 'package:angel_framework/angel_framework.dart';
-import 'package:angel_framework/http.dart';
+import 'package:galileo_framework/galileo_framework.dart';
+import 'package:galileo_framework/http.dart';
 
 main() async {
-    var app = Angel();
-    var http = AngelHttp(app);
+    var app = Galileo();
+    var http = GalileoHttp(app);
     await http.startServer('localhost', 3000);
 }
 ```
@@ -127,12 +127,12 @@ app.get('/', (req, res) => res.write('Hello, world!'));
 `bin/main.dart` should now look like the following:
 
 ```dart
-import 'package:angel_framework/angel_framework.dart';
-import 'package:angel_framework/http.dart';
+import 'package:galileo_framework/galileo_framework.dart';
+import 'package:galileo_framework/http.dart';
 
 main() async {
-    var app = Angel();
-    var http = AngelHttp(app);
+    var app = Galileo();
+    var http = GalileoHttp(app);
     app.get('/', (req, res) => res.write('Hello, world!'));
     await http.startServer('localhost', 3000);
 }
@@ -159,11 +159,11 @@ It consists of the following components:
 * The call `res.write('Hello, world!')`, which is
 also the return value of the aforementioned closure.
 
-`Angel.get` is one of several methods (`addRoute`, `post`,
+`Galileo.get` is one of several methods (`addRoute`, `post`,
 `patch`, `delete`, `head`, `get`) that can be used to
 add routes that correspond to
 [HTTP methods](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html)
-to an `Angel` server instance.
+to an `Galileo` server instance.
 
 Combined with the path, `'/'`, this signifies that whenever
 a request is sent to the *root* of our server, which in
@@ -223,7 +223,7 @@ host=[localhost:3000]
 Web applications very often have users send data upstream,
 where it is then handled by the server.
 
-Angel has built-in functionality for parsing bodies of three
+Galileo has built-in functionality for parsing bodies of three
 MIME types:
 * `application/json`
 * `application/x-www-form-urlencoded`
@@ -250,7 +250,7 @@ app.post('/greet', (req, res) async {
     var name = req.bodyAsMap['name'] as String;
 
     if (name == null) {
-        throw AngelHttpException.badRequest(message: 'Missing name.');
+        throw GalileoHttpException.badRequest(message: 'Missing name.');
     } else {
         res.write('Hello, $name!');
     }
@@ -270,13 +270,13 @@ In the previous example, you might have noticed this
 line:
 
 ```dart
-throw AngelHttpException.badRequest(message: 'Missing name.');
+throw GalileoHttpException.badRequest(message: 'Missing name.');
 ```
 
-Angel handles errors thrown while calling route handlers,
+Galileo handles errors thrown while calling route handlers,
 preventing your server from crashing. Ultimately,
-all errors are wrapped in the `AngelHttpException` class, or
-sent as-is if they are already instances of `AngelHttpException`.
+all errors are wrapped in the `GalileoHttpException` class, or
+sent as-is if they are already instances of `GalileoHttpException`.
 
 By default, either an HTML page is printed, or a JSON message
 is displayed (depending on the client's `Accept` header).
@@ -285,8 +285,8 @@ i.e. rendering an error page, or logging errors through a service
 like Sentry.
 
 To add your own logic, set the `errorHandler` of your
-`Angel` instance. It is a function that accepts 3 parameters:
-* `AngelHttpException`
+`Galileo` instance. It is a function that accepts 3 parameters:
+* `GalileoHttpException`
 * `RequestContext`
 * `ResponseContext`
 
@@ -317,20 +317,20 @@ You will now see `'Oops! You forgot to include your name.'`
 printed to the console.
 
 # Conclusion
-Congratulations on creating your first Angel server!
+Congratulations on creating your first Galileo server!
 Hopefully this is just one of many more to come.
 
 The choice is now yours: either continue reading the
 other guides posted on this site, or tinker around and
 learn the ropes yourself.
 
-You can find `angel_*` packages on the Pub site, and
+You can find `galileo_*` packages on the Pub site, and
 read the documentation found in their
 respective `README` files:
 
-https://pub.dartlang.org/packages?q=dependency%3Aangel_framework
+https://pub.dartlang.org/packages?q=dependency%3Agalileo_framework
 
 Don't forget that for discussion and support, you can either
 file a Github issue, or join the Gitter chat:
 
-https://gitter.im/angel_dart/discussion
+https://gitter.im/galileo_dart/discussion

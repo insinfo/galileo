@@ -1,8 +1,8 @@
-import 'package:angel_file_service/angel_file_service.dart';
-import 'package:angel_framework/angel_framework.dart';
+import 'package:galileo_file_service/galileo_file_service.dart';
+import 'package:galileo_framework/galileo_framework.dart';
 import 'package:file/local.dart';
 
-configureServer(Angel app) async {
+configureServer(Galileo app) async {
   // Just like a normal service
   app.use(
     '/api/todos',
