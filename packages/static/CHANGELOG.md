@@ -10,7 +10,7 @@
 # 2.1.3
 * Apply lints.
 * Pin to Dart `>=2.0.0 <3.0.0`.
-* Use at least version `2.0.0-rc.0` of `angel_framework`.
+* Use at least version `2.0.0-rc.0` of `galileo_framework`.
 
 # 2.1.2+1
 * Fix a typo that prevented `Range` requests from working.
@@ -34,7 +34,7 @@
 * Handle `HEAD` requests.
 
 # 2.0.0
-* Upgrade dependencies to Angel 2 + file@5.
+* Upgrade dependencies to Galileo 2 + file@5.
 * Replace `useStream` with `useBuffer`.
 * Remove `package:intl`, just use `HttpDate` instead.
 
@@ -50,11 +50,11 @@
 * Added optional directory listings.
 
 # 1.3.0-alpha+1
-* ETags once again only encode the first 50 bytes of files. Resolves [#27](https://github.com/angel-dart/static/issues/27).
+* ETags once again only encode the first 50 bytes of files. Resolves [#27](https://github.com/galileo-dart/static/issues/27).
 
 # 1.3.0-alpha
 * Removed file transformers.
-* `VirtualDirectory` is no longer an `AngelPlugin`, and instead exposes a `handleRequest` middleware.
+* `VirtualDirectory` is no longer an `GalileoPlugin`, and instead exposes a `handleRequest` middleware.
 * Added `pushState` to `VirtualDirectory`.
 
 # 1.2.5
@@ -62,13 +62,13 @@
 * Fixed another bug where `Accept-Encoding` was not properly adhered to.
 * Setting `maxAge` to `null` will now prevent a `CachingVirtualDirectory` from sending an `Expires` header.
 * Pre-built assets can now be mass-deleted with `VirtualDirectory.cleanFromDisk()`.
-Resolves [#22](https://github.com/angel-dart/static/issues/22).
+Resolves [#22](https://github.com/galileo-dart/static/issues/22).
 
 # 1.2.4+1
 Fixed a bug where `Accept-Encoding` was not properly adhered to.
 
 # 1.2.4
-Fixes https://github.com/angel-dart/angel/issues/44.
+Fixes https://github.com/galileo-dart/galileo/issues/44.
 * MIME types will now default to `application/octet-stream`.
 * When `streamToIO` is `true`, the body will only be sent gzipped if the request explicitly allows it.
 

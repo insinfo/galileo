@@ -1,17 +1,15 @@
 name: galileo_json_god
-version: 3.0.0
-authors:
-  - Isaque Neves <insinfo2008@gmail.com>
+version: 3.0.1
+author: Isaque Neves <insinfo2008@gmail.com>
 description: Easy JSON serialization and deserialization in Dart.
-homepage: https://github.com/insinfo/galileo.git
+homepage: https://github.com/insinfo/galileo/tree/master/packages/json_god
 
 environment:
   sdk: ">=2.10.0 <3.0.0"
 
-dependencies:
-  #dart2_constant: ^1.0.0
-  logging: 
+dependencies: 
+  logging: ^1.0.1 #Null safety
 
 dev_dependencies:
-  stack_trace: ^1.0.0
-  test: any
+  stack_trace: ^1.10.0 #Null safety
+  test: ^1.17.3 #Null safety

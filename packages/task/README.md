@@ -1,11 +1,13 @@
-# task
-[![Pub](https://img.shields.io/pub/v/angel_task.svg)](https://pub.dartlang.org/packages/angel_task)
-[![build status](https://travis-ci.org/angel-dart/task.svg)](https://travis-ci.org/angel-dart/task)
+# deprecated
 
-Support for running and scheduling asynchronous tasks within Angel.
+# task
+[![Pub](https://img.shields.io/pub/v/galileo_task.svg)](https://pub.dartlang.org/packages/galileo_task)
+[![build status](https://travis-ci.org/galileo-dart/task.svg)](https://travis-ci.org/galileo-dart/task)
+
+Support for running and scheduling asynchronous tasks within Galileo.
 Parameters can be injected into scheduled tasks with the same
-[dependency injection](https://github.com/angel-dart/angel/wiki/Dependency-Injection)
-system used by Angel.
+[dependency injection](https://github.com/galileo-dart/galileo/wiki/Dependency-Injection)
+system used by Galileo.
 
 * [Installation](#installation)
 * [Usage](#usage)
@@ -16,15 +18,15 @@ In your `pubspec.yaml` file:
 
 ```yaml
   dependencies:
-    angel_framework: ^1.0.0
-    angel_task: ^1.0.0
+    galileo_framework: ^1.0.0
+    galileo_task: ^1.0.0
 ```
 
 # Usage
 ```dart
 main() async {
   var app = await createServer();
-  var scheduler = new AngelTaskScheduler(app);
+  var scheduler = new GalileoTaskScheduler(app);
 
   // Run a one-off task, with an optional delay.
   scheduler.once((Todo singleton) {
@@ -80,7 +82,7 @@ main() async {
 ```
 
 ## Multithreading
-Angel's task engine also supports communication over isolates, which allows you to run all
+Galileo's task engine also supports communication over isolates, which allows you to run all
 tasks in a separate thread from the server, without losing performance.
 
 For example, if your processor has 4 cores, you might spawn 4 total isolates:
@@ -90,13 +92,13 @@ For example, if your processor has 4 cores, you might spawn 4 total isolates:
 The master isolate can be dedicated to just running tasks, with no HTTP responsibility.
 The child isolates only have to worry about serving your application to the Web. 
 
-The `AngelTaskScheduler` has a `receivePort` that it uses to communicate with clients.
+The `GalileoTaskScheduler` has a `receivePort` that it uses to communicate with clients.
 
-To access the scheduler as a client, instantiate a `AngelTaskClient`. The constructor accepts a single
+To access the scheduler as a client, instantiate a `GalileoTaskClient`. The constructor accepts a single
 `SendPort`, which in this case comes from the scheduler.
 
 **IMPORTANT:** If you *want* to send the return value of task functions to clients, then set
-`sendReturnValues` to `true` in the `AngelTaskScheduler` constructor. If so, then the results of
+`sendReturnValues` to `true` in the `GalileoTaskScheduler` constructor. If so, then the results of
 your task callbacks will have to be primitive Dart values, serializable over SendPorts.
 
 Use this as a mechanism to query the state of the master isolate. You might find that you won't need it,
@@ -108,7 +110,7 @@ main() async {
   
   // This instance won't actually serve HTTP, we just use it for DI.
   var app = await createServer();
-  var scheduler = new AngelTaskScheduler(app);
+  var scheduler = new GalileoTaskScheduler(app);
   
   // Start listening, running tasks, etc.
   await scheduler.start();
@@ -123,7 +125,7 @@ main() async {
 void isolateMain(List args) {
   int id = args[0];
   SendPort masterPort = args[1];
-  var app = new Angel.custom(startShared);
+  var app = new Galileo.custom(startShared);
   
   // Hook up a task client, then start the server.
   app.configure(taskClientPlugin(masterPort)).then((_) async {
@@ -133,22 +135,22 @@ void isolateMain(List args) {
 }
 
 /// A simple plug-in that connects a server instance to the master task scheduler.
-AngelConfigurer taskClientPlugin(SendPort masterPort) {
-  return (Angel app) async {
-    var client = new AngelTaskClient(masterPort);
+GalileoConfigurer taskClientPlugin(SendPort masterPort) {
+  return (Galileo app) async {
+    var client = new GalileoTaskClient(masterPort);
     await master.connect(); // Await a connection...
     await master.connect(timeout: new Duration(seconds: 30)); // Optional timeout.
     
-    // If we inject the AngelTaskClient as a singleton, we can access it in routes.
+    // If we inject the GalileoTaskClient as a singleton, we can access it in routes.
     app.container.singleton(client);
     
     // We can dispatch tasks, without waiting for the result.
-    app.get('/dispatch', (AngelTaskClient client) {
+    app.get('/dispatch', (GalileoTaskClient client) {
       client.run('foo', args: ['bar']);
     });
     
     // We can also await the results of tasks.
-    app.get('/fibonacci/:number([0-9]+)', (AngelTaskClient client, String number) async {
+    app.get('/fibonacci/:number([0-9]+)', (GalileoTaskClient client, String number) async {
       var n = int.parse(number);
       var taskResult = await client.run('fibonacci', args: [n]);
       
@@ -156,10 +158,10 @@ AngelConfigurer taskClientPlugin(SendPort masterPort) {
         // Access error and stack trace on failure
         print(taskResult.error);
         print(taskResult.stack);
-        throw new AngelHttpException.notProcessable();
+        throw new GalileoHttpException.notProcessable();
       }
       
-      // If `sendReturnValues` is `true` in our `AngelTaskScheduler`, then we can
+      // If `sendReturnValues` is `true` in our `GalileoTaskScheduler`, then we can
       // also access the value returned from the task function.
       var computation = task.value;
       return {'value': computation};
@@ -172,7 +174,7 @@ AngelConfigurer taskClientPlugin(SendPort masterPort) {
 Applications of very large scale will likely run on multiple machines; in such a case, mere multi-threading
 will not do the job.
 
-Luckily, `package:angel_task` also supports communication over sockets. This can occur at the same time as
+Luckily, `package:galileo_task` also supports communication over sockets. This can occur at the same time as
 communication over isolates, so you can use both together in your application.
 
 To bind the scheduler to a socket, you must pass it to the constructor.
@@ -181,7 +183,7 @@ To bind the scheduler to a socket, you must pass it to the constructor.
 main() async {
   var socket = await ServerSocket.bind(InternetAddress.ANY_IP_V4, 5671);
   var app = await createServer();
-  var scheduler = new AngelTaskScheduler(app, socket: socket);
+  var scheduler = new GalileoTaskScheduler(app, socket: socket);
   
   // Task configuration...
   
@@ -194,12 +196,12 @@ And then, to connect a client, it's almost the same process:
 ```dart
 main() async {
   var app = await createServer();
-  var client = await AngelTaskClient.connectSocket(InternetAddress.LOOPBACK_IP_V4, 5671);
+  var client = await GalileoTaskClient.connectSocket(InternetAddress.LOOPBACK_IP_V4, 5671);
  
   // You can still inject for DI.
   //
   // Just make sure to explicitly pass the right type.
-  app.container.singleton(client, as: AngelTaskClient);
+  app.container.singleton(client, as: GalileoTaskClient);
   
 }
 ```
@@ -207,7 +209,7 @@ main() async {
 
 ## Broadcasting
 If you are multi-threading, there may be times when you want to send an impromptu message
-to all child nodes. Use `AngelTaskScheduler.broadcast` to achieve this.
+to all child nodes. Use `GalileoTaskScheduler.broadcast` to achieve this.
 
 Whatever you broadcast should be a primitive Dart value; otherwise, it will not be serializable over
 a `SendPort` or `Socket`.

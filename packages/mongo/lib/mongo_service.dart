@@ -1,4 +1,4 @@
-part of angel_mongo.services;
+part of galileo_mongo.services;
 
 /// Manipulates data from MongoDB as Maps.
 class MongoService extends Service<String, Map<String, dynamic>> {
@@ -94,7 +94,7 @@ class MongoService extends Service<String, Map<String, dynamic>> {
         .toList();
   }
 
-  static const String _NONCE_KEY = '__angel__mongo__nonce__key__';
+  static const String _NONCE_KEY = '__galileo__mongo__nonce__key__';
 
   @override
   Future<Map<String, dynamic>> create(Map<String, dynamic> data,
@@ -110,7 +110,7 @@ class MongoService extends Service<String, Map<String, dynamic>> {
           upsert: true);
       return _jsonify(result);
     } catch (e, st) {
-      throw new AngelHttpException(e, stackTrace: st);
+      throw new GalileoHttpException(e, stackTrace: st);
     }
   }
 
@@ -122,7 +122,7 @@ class MongoService extends Service<String, Map<String, dynamic>> {
     var found = await collection.findOne(_makeQuery(params));
 
     if (found == null) {
-      throw new AngelHttpException.notFound(message: errorMessage);
+      throw new GalileoHttpException.notFound(message: errorMessage);
     }
 
     return _jsonify(found, params);
@@ -135,7 +135,7 @@ class MongoService extends Service<String, Map<String, dynamic>> {
     var found = await collection.findOne(where.id(_id).and(_makeQuery(params)));
 
     if (found == null) {
-      throw new AngelHttpException.notFound(
+      throw new GalileoHttpException.notFound(
           message: 'No record found for ID ${_id.toHexString()}');
     }
 
@@ -159,7 +159,7 @@ class MongoService extends Service<String, Map<String, dynamic>> {
 
     try {
       target = await read(id, params);
-    } on AngelHttpException catch (e) {
+    } on GalileoHttpException catch (e) {
       if (e.statusCode == 404)
         return await create(data, params);
       else
@@ -177,7 +177,7 @@ class MongoService extends Service<String, Map<String, dynamic>> {
       return result;
     } catch (e, st) {
       //printDebug(e, st, 'MODIFY');
-      throw new AngelHttpException(e, stackTrace: st);
+      throw new GalileoHttpException(e, stackTrace: st);
     }
   }
 
@@ -205,7 +205,7 @@ class MongoService extends Service<String, Map<String, dynamic>> {
       return result;
     } catch (e, st) {
       //printDebug(e, st, 'UPDATE');
-      throw new AngelHttpException(e, stackTrace: st);
+      throw new GalileoHttpException(e, stackTrace: st);
     }
   }
 
@@ -216,7 +216,7 @@ class MongoService extends Service<String, Map<String, dynamic>> {
       // Remove everything...
       if (!(allowRemoveAll == true ||
           params?.containsKey('provider') != true)) {
-        throw AngelHttpException.forbidden(
+        throw GalileoHttpException.forbidden(
             message: 'Clients are not allowed to delete all items.');
       } else {
         await collection.remove(null);
@@ -232,7 +232,7 @@ class MongoService extends Service<String, Map<String, dynamic>> {
       return _jsonify(result);
     } catch (e, st) {
       //printDebug(e, st, 'REMOVE');
-      throw new AngelHttpException(e, stackTrace: st);
+      throw new GalileoHttpException(e, stackTrace: st);
     }
   }
 }

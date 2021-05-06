@@ -1,8 +1,8 @@
-library angel.src.models.user;
+library galileo.src.models.user;
 
-import 'package:angel_model/angel_model.dart';
-import 'package:angel_serialize/angel_serialize.dart';
-import 'package:angel_orm/angel_orm.dart';
+import 'package:galileo_model/galileo_model.dart';
+import 'package:galileo_serialize/galileo_serialize.dart';
+import 'package:galileo_orm/galileo_orm.dart';
 part 'user.g.dart';
 
 @serializable

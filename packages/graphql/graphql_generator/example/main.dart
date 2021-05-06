@@ -1,4 +1,4 @@
-import 'package:graphql_schema/graphql_schema.dart';
+import 'package:galileo_graphql_schema/galileo_graphql_schema.dart';
 part 'main.g.dart';
 
 @graphQLClass

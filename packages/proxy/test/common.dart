@@ -1,12 +1,12 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:angel_framework/angel_framework.dart';
-import 'package:angel_framework/http.dart';
+import 'package:galileo_framework/galileo_framework.dart';
+import 'package:galileo_framework/http.dart';
 import 'package:logging/logging.dart';
 
 Future<HttpServer> startTestServer() {
-  final app = Angel();
+  final app = Galileo();
 
   app.get('/hello', (req, res) => res.write('world'));
   app.get('/foo/bar', (req, res) => res.write('baz'));
@@ -17,7 +17,7 @@ Future<HttpServer> startTestServer() {
   });
 
   app.logger = Logger('testApp');
-  var server = AngelHttp(app);
+  var server = GalileoHttp(app);
   app.dumpTree();
 
   return server.startServer();

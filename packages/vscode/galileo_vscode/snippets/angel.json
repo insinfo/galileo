@@ -1,0 +1,115 @@
+{
+  ".source.dart": {
+    "controller": {
+      "prefix": "galileo:controller",
+      "description": "Generate an Galileo Controller.",
+      "body": [
+        "import 'package:galileo_framework/galileo_framework.dart';",
+        "",
+        "@Expose('/$1')",
+        "class $1Controller extends Controller {",
+        "   @Expose('/')",
+        "   String hello() {",
+        "       return 'Hello, world';",
+        "   }",
+        "   $2",
+        "}"
+      ]
+    },
+    "websocket_controller": {
+      "prefix": "galileo:websocket_controller",
+      "description": "Generate an Galileo WebSocketController.",
+      "body": [
+        "import 'package:galileo_websocket/server.dart';",
+        "",
+        "class $1Controller extends WebSocketController {",
+        "   $1Controller(GalileoWebSocket ws) : super(ws);",
+        "",
+        "   @ExposeWs('ping')",
+        "   void hello(WebSocketContext socket) {",
+        "       socket.send('pong', {'message': 'Hello, world!'});",
+        "   }",
+        "   $2",
+        "}"
+      ]
+    },
+    "model": {
+      "prefix": "galileo:model",
+      "description": "Generate an Galileo Model.",
+      "body": [
+        "import 'package:galileo_model/galileo_model.dart';",
+        "import 'package:galileo_serialize/galileo_serialize.dart';",
+        "part '$2.g.dart';",
+        "part '$2.serializer.g.dart';",
+        "",
+        "@serializable",
+        "abstract class _$1 extends Model {",
+        "   $3",
+        "}"
+      ]
+    },
+    "migration": {
+      "prefix": "galileo:migration",
+      "description": "Generate an Galileo ORM Migration.",
+      "body": [
+        "import 'package:galileo_migration.dart/galileo_migration.dart';",
+        "",
+        "class $1Migration extends Migration {",
+        "   @override",
+        "   void up(Schema schema) {",
+        "       schema.create('$2', (table) {",
+        "           table.serial('id').primaryKey();",
+        "           table.date('created_at');",
+        "           table.date('updated_at');",
+        "           $3",
+        "       });",
+        "   }",
+        "",
+        "   @override",
+        "   void down(Schema schema) {",
+        "       schema.drop('$2');",
+        "   }",
+        "}"
+      ]
+    },
+    "plugin": {
+      "prefix": "galileo:plugin",
+      "description": "Generate an Galileo plugin.",
+      "body": [
+        "import 'package:galileo_framework/galileo_framework.dart';",
+        "",
+        "GalileoConfigurer $1() {",
+        "   return (Galileo app) async {",
+        "       // Work some magic...",
+        "       $2",
+        "   };",
+        "}"
+      ]
+    },
+    "test_driver": {
+      "prefix": "galileo:test",
+      "description": "Generate an Galileo test driver.",
+      "body": [
+        "import 'dart:io';",
+        "import 'package:$1/$1.dart' as $1;",
+        "import 'package:galileo_framework/galileo_framework.dart';",
+        "import 'package:galileo_test/galileo_test.dart';",
+        "import 'package:test/test.dart';",
+        "",
+        "main() async {",
+        "   TestClient client;",
+        "",
+        "   setUp(() async {",
+        "       var app = new Galileo();",
+        "       await app.configure($1.configureServer);",
+        "       client = await connectTo(app);",
+        "   });",
+        "",
+        "   tearDown(() => client.close());",
+        "",
+        "   // Add your tests here...",
+        "}"
+      ]
+    }
+  }
+}

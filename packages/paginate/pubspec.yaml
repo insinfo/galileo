@@ -1,15 +1,16 @@
-name: angel_paginate
-version: 2.0.0
-description: Platform-agnostic pagination library, with custom support for the Angel framework.
-author: Tobe O <thosakwe@gmail.com>
-homepage: https://github.com/angel-dart/paginate
+name: galileo_paginate
+version: 3.0.0
+description: Platform-agnostic pagination library, with custom support for the Galileo framework.
+author: Isaque Neves <insinfo2008@gmail.com>
+homepage: https://github.com/insinfo/galileo/tree/master/packages/paginate
+
 environment:
-  sdk: ">=2.10.0 <2.12.0"
+  sdk: ">=2.10.0 <3.0.0"
+
 dependencies:
-  angel_framework: #^2.0.0-alpha
-    path: ../framework
+  galileo_framework: ^3.0.2 
+  
 dev_dependencies:
-  angel_test: #^2.0.0
-    path: ../test
-  logging: ^0.11.0
-  test: ^1.15.7
+  galileo_test: ^3.0.1  
+  logging: ^1.0.1 #Null safety
+  test: ^1.17.3 #Null safety

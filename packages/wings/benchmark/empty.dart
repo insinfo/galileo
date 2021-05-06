@@ -1,13 +1,13 @@
 import 'dart:async';
 import 'dart:io';
-import 'package:angel_framework/angel_framework.dart';
+import 'package:galileo_framework/galileo_framework.dart';
 import 'util.dart';
 
-const AngelBenchmark emptyBenchmark = _EmptyBenchmark();
+const GalileoBenchmark emptyBenchmark = _EmptyBenchmark();
 
 main() => runBenchmarks([emptyBenchmark]);
 
-class _EmptyBenchmark implements AngelBenchmark {
+class _EmptyBenchmark implements GalileoBenchmark {
   const _EmptyBenchmark();
 
   @override
@@ -19,5 +19,5 @@ class _EmptyBenchmark implements AngelBenchmark {
   }
 
   @override
-  void setupAngel(Angel app) {}
+  void setupGalileo(Galileo app) {}
 }

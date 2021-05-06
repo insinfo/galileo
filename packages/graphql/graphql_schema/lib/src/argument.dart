@@ -1,4 +1,4 @@
-part of graphql_schema.src.schema;
+part of galileo_graphql_schema.src.schema;
 
 /// An input to a GraphQL field. This is analogous to a function parameter in Dart.
 class GraphQLFieldInput<Value, Serialized> {
@@ -35,8 +35,7 @@ class GraphQLFieldInput<Value, Serialized> {
     }
   }
 
-  GraphQLFieldInput(this.name, this.type,
-      {this.defaultValue, this.defaultsToNull: false, this.description}) {
+  GraphQLFieldInput(this.name, this.type, {this.defaultValue, this.defaultsToNull: false, this.description}) {
     assert(_isInputTypeOrScalar(type),
         'All inputs to a GraphQL field must either be scalar types, or explicitly marked as INPUT_OBJECT. Call `GraphQLObjectType.asInputObject()` on any object types you are passing as inputs to a field.');
   }

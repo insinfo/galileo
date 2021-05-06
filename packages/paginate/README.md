@@ -1,16 +1,16 @@
 # paginate
-[![Pub](https://img.shields.io/pub/v/angel_paginate.svg)](https://pub.dartlang.org/packages/angel_paginate)
-[![build status](https://travis-ci.org/angel-dart/paginate.svg)](https://travis-ci.org/angel-dart/paginate)
+[![Pub](https://img.shields.io/pub/v/galileo_paginate.svg)](https://pub.dartlang.org/packages/galileo_paginate)
+[![build status](https://travis-ci.org/galileo-dart/paginate.svg)](https://travis-ci.org/galileo-dart/paginate)
 
 Platform-agnostic pagination library, with custom support for the
-[Angel framework](https://github.com/angel-dart/angel).
+[Galileo framework](https://github.com/galileo-dart/galileo).
 
 # Installation
 In your `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  angel_paginate: ^2.0.0
+  galileo_paginate: ^2.0.0
 ```
 
 # Usage
@@ -37,7 +37,7 @@ serialized via their `toJson()` method.
 To create a paginator:
 
 ```dart
-import 'package:angel_paginate/angel_paginate.dart';
+import 'package:galileo_paginate/galileo_paginate.dart';
 
 main() {
   var p = new Paginator(iterable);

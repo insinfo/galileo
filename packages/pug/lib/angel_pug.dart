@@ -1,5 +1,5 @@
 import 'dart:io';
-import 'package:angel_framework/angel_framework.dart';
+import 'package:galileo_framework/galileo_framework.dart';
 import 'package:jaded/jaded.dart' as jade;
 
 /// Configures your application to render Pug (nee Jade) views out of a given directory.
@@ -11,7 +11,7 @@ import 'package:jaded/jaded.dart' as jade;
 
 /// If you set it to an empty iterable, then extensions
 /// will not be added. This is a rare case, and only is necessary if your template files have no extensions.
-AngelConfigurer pug(Directory source, {Iterable<String> extensions}) {
+GalileoConfigurer pug(Directory source, {Iterable<String> extensions}) {
   List<String> ext;
 
   if (!(extensions?.isEmpty == true))
@@ -19,7 +19,7 @@ AngelConfigurer pug(Directory source, {Iterable<String> extensions}) {
         ? extensions.toList()
         : ['.pug', '.jade'];
 
-  return (Angel app) async {
+  return (Galileo app) async {
     app.viewGenerator = (String name, [Map locals]) async {
       // Resolve filenames
       List<String> filenames = [name];

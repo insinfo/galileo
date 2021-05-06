@@ -1,4 +1,4 @@
-import 'package:graphql_parser/graphql_parser.dart';
+import 'package:galileo_graphql_parser/galileo_graphql_parser.dart';
 import 'package:test/test.dart';
 import 'common.dart';
 import 'argument_test.dart';
@@ -12,10 +12,8 @@ main() {
     expect(
         '... on foo {bar, baz: quux}',
         isInlineFragment('foo',
-            selectionSet: isSelectionSet([
-              isField(fieldName: isFieldName('bar')),
-              isField(fieldName: isFieldName('baz', alias: 'quux'))
-            ])));
+            selectionSet: isSelectionSet(
+                [isField(fieldName: isFieldName('bar')), isField(fieldName: isFieldName('baz', alias: 'quux'))])));
   });
 
   test('with directives', () {
@@ -42,11 +40,9 @@ main() {
   });
 }
 
-InlineFragmentContext parseInlineFragment(String text) =>
-    parse(text).parseInlineFragment();
+InlineFragmentContext parseInlineFragment(String text) => parse(text).parseInlineFragment();
 
-Matcher isInlineFragment(String name,
-        {Matcher directives, Matcher selectionSet}) =>
+Matcher isInlineFragment(String name, {Matcher directives, Matcher selectionSet}) =>
     _IsInlineFragment(name, directives, selectionSet);
 
 class _IsInlineFragment extends Matcher {
@@ -62,15 +58,11 @@ class _IsInlineFragment extends Matcher {
 
   @override
   bool matches(item, Map matchState) {
-    var fragment = item is InlineFragmentContext
-        ? item
-        : parseInlineFragment(item.toString());
+    var fragment = item is InlineFragmentContext ? item : parseInlineFragment(item.toString());
     if (fragment == null) return false;
     if (fragment.typeCondition.typeName.name != name) return false;
-    if (directives != null &&
-        !directives.matches(fragment.directives, matchState)) return false;
-    if (selectionSet != null &&
-        !selectionSet.matches(fragment.selectionSet, matchState)) return false;
+    if (directives != null && !directives.matches(fragment.directives, matchState)) return false;
+    if (selectionSet != null && !selectionSet.matches(fragment.selectionSet, matchState)) return false;
     return true;
   }
 }

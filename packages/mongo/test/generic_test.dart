@@ -1,15 +1,12 @@
-import 'package:angel_framework/angel_framework.dart';
-import 'package:angel_framework/http.dart';
-import 'package:angel_mongo/angel_mongo.dart';
+import 'package:galileo_framework/galileo_framework.dart';
+import 'package:galileo_framework/http.dart';
+import 'package:galileo_mongo/galileo_mongo.dart';
 import 'package:http/http.dart' as http;
-import 'package:json_god/json_god.dart' as god;
+import 'package:galileo_json_god/galileo_json_god.dart' as god;
 import 'package:mongo_dart/mongo_dart.dart';
 import 'package:test/test.dart';
 
-final headers = {
-  'accept': 'application/json',
-  'content-type': 'application/json'
-};
+final headers = {'accept': 'application/json', 'content-type': 'application/json'};
 
 final Map testGreeting = {'to': 'world'};
 
@@ -22,17 +19,17 @@ void wireHooked(HookedService hooked) {
 
 void main() {
   group('Generic Tests', () {
-    Angel app;
-    AngelHttp transport;
+    Galileo app;
+    GalileoHttp transport;
     http.Client client;
-    var db = Db('mongodb://localhost:27017/angel_mongo');
+    var db = Db('mongodb://localhost:27017/galileo_mongo');
     DbCollection testData;
     String url;
     HookedService<String, Map<String, dynamic>, MongoService> greetingService;
 
     setUp(() async {
-      app = Angel();
-      transport = AngelHttp(app);
+      app = Galileo();
+      transport = GalileoHttp(app);
       client = http.Client();
       await db.open();
       testData = db.collection('test_data');
@@ -74,20 +71,17 @@ void main() {
     });
 
     test('insert items', () async {
-      var response = await client.post("$url/api",
-          body: god.serialize(testGreeting), headers: headers);
+      var response = await client.post("$url/api", body: god.serialize(testGreeting), headers: headers);
       expect(response.statusCode, isIn([200, 201]));
 
       response = await client.get("$url/api");
       expect(response.statusCode, isIn([200, 201]));
-      var users = god.deserialize(response.body,
-          outputType: <Map>[].runtimeType) as List<Map>;
+      var users = god.deserialize(response.body, outputType: <Map>[].runtimeType) as List<Map>;
       expect(users.length, equals(1));
     });
 
     test('read item', () async {
-      var response = await client.post("$url/api",
-          body: god.serialize(testGreeting), headers: headers);
+      var response = await client.post("$url/api", body: god.serialize(testGreeting), headers: headers);
       expect(response.statusCode, isIn([200, 201]));
       var created = god.deserialize(response.body) as Map;
 
@@ -100,8 +94,7 @@ void main() {
     });
 
     test('findOne', () async {
-      var response = await client.post("$url/api",
-          body: god.serialize(testGreeting), headers: headers);
+      var response = await client.post("$url/api", body: god.serialize(testGreeting), headers: headers);
       expect(response.statusCode, isIn([200, 201]));
       var created = god.deserialize(response.body) as Map;
 
@@ -113,8 +106,7 @@ void main() {
     });
 
     test('readMany', () async {
-      var response = await client.post("$url/api",
-          body: god.serialize(testGreeting), headers: headers);
+      var response = await client.post("$url/api", body: god.serialize(testGreeting), headers: headers);
       expect(response.statusCode, isIn([200, 201]));
       var created = god.deserialize(response.body) as Map;
 
@@ -125,13 +117,11 @@ void main() {
     });
 
     test('modify item', () async {
-      var response = await client.post("$url/api",
-          body: god.serialize(testGreeting), headers: headers);
+      var response = await client.post("$url/api", body: god.serialize(testGreeting), headers: headers);
       expect(response.statusCode, isIn([200, 201]));
       var created = god.deserialize(response.body) as Map;
 
-      response = await client.patch("$url/api/${created['id']}",
-          body: god.serialize({"to": "Mom"}), headers: headers);
+      response = await client.patch("$url/api/${created['id']}", body: god.serialize({"to": "Mom"}), headers: headers);
       var modified = god.deserialize(response.body) as Map;
       expect(response.statusCode, isIn([200, 201]));
       expect(modified['id'], equals(created['id']));
@@ -140,13 +130,12 @@ void main() {
     });
 
     test('update item', () async {
-      var response = await client.post("$url/api",
-          body: god.serialize(testGreeting), headers: headers);
+      var response = await client.post("$url/api", body: god.serialize(testGreeting), headers: headers);
       expect(response.statusCode, isIn([200, 201]));
       var created = god.deserialize(response.body) as Map;
 
-      response = await client.post("$url/api/${created['id']}",
-          body: god.serialize({"to": "Updated"}), headers: headers);
+      response =
+          await client.post("$url/api/${created['id']}", body: god.serialize({"to": "Updated"}), headers: headers);
       var modified = god.deserialize(response.body) as Map;
       expect(response.statusCode, isIn([200, 201]));
       expect(modified['id'], equals(created['id']));
@@ -155,8 +144,7 @@ void main() {
     });
 
     test('remove item', () async {
-      var response = await client.post("$url/api",
-          body: god.serialize(testGreeting), headers: headers);
+      var response = await client.post("$url/api", body: god.serialize(testGreeting), headers: headers);
       var created = god.deserialize(response.body) as Map;
 
       int lastCount = (await greetingService.index()).length;
@@ -178,8 +166,7 @@ void main() {
 
       var response = await client.get("$url/api?to=world");
       print(response.body);
-      var queried = god.deserialize(response.body,
-          outputType: <Map>[].runtimeType) as List<Map>;
+      var queried = god.deserialize(response.body, outputType: <Map>[].runtimeType) as List<Map>;
       expect(queried.length, equals(1));
       expect(queried[0].keys.length, equals(2));
       expect(queried[0]["id"], equals(world["id"]));
@@ -194,9 +181,7 @@ void main() {
       expect(queried[2]["id"], equals(world["id"]));*/
 
       queried = await greetingService.index({
-        "\$query": {
-          "_id": where.id(ObjectId.fromHexString(world["id"] as String))
-        }
+        "\$query": {"_id": where.id(ObjectId.fromHexString(world["id"] as String))}
       });
       print(queried);
       expect(queried.length, equals(1));

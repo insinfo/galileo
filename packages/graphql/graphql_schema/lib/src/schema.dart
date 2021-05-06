@@ -1,4 +1,4 @@
-library graphql_schema.src.schema;
+library galileo_graphql_schema.src.schema;
 
 import 'dart:async';
 
@@ -44,13 +44,8 @@ class GraphQLSchema {
 
 /// A shorthand for creating a [GraphQLSchema].
 GraphQLSchema graphQLSchema(
-        {@required GraphQLObjectType queryType,
-        GraphQLObjectType mutationType,
-        GraphQLObjectType subscriptionType}) =>
-    new GraphQLSchema(
-        queryType: queryType,
-        mutationType: mutationType,
-        subscriptionType: subscriptionType);
+        {@required GraphQLObjectType queryType, GraphQLObjectType mutationType, GraphQLObjectType subscriptionType}) =>
+    new GraphQLSchema(queryType: queryType, mutationType: mutationType, subscriptionType: subscriptionType);
 
 /// A default resolver that always returns `null`.
 resolveToNull(_, __) => null;
@@ -119,8 +114,7 @@ class GraphExceptionErrorLocation {
 
   GraphExceptionErrorLocation(this.line, this.column);
 
-  factory GraphExceptionErrorLocation.fromSourceLocation(
-      SourceLocation location) {
+  factory GraphExceptionErrorLocation.fromSourceLocation(SourceLocation location) {
     return new GraphExceptionErrorLocation(location.line, location.column);
   }
 
@@ -146,8 +140,7 @@ class GraphQLDocumentation {
   /// The name of an explicit type for the annotated field, rather than having it be assumed.
   final Symbol typeName;
 
-  const GraphQLDocumentation(
-      {this.description, this.deprecationReason, this.type, this.typeName});
+  const GraphQLDocumentation({this.description, this.deprecationReason, this.type, this.typeName});
 }
 
 /// The canonical instance.

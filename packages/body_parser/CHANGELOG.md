@@ -1,5 +1,3 @@
-# 1.1.1
-* Dart 2 updates; should fix Angel in Travis.
+#  3.0.0
 
-# 1.1.0
-* Add `parseBodyFromStream`
+- update dependencies

@@ -1,8 +1,8 @@
 # sembast
-[![Pub](https://img.shields.io/pub/v/angel_sembast.svg)](https://pub.dartlang.org/packages/angel_sembast)
-[![build status](https://travis-ci.org/angel-dart/sembast.svg)](https://travis-ci.org/angel-dart/sembast)
+[![Pub](https://img.shields.io/pub/v/galileo_sembast.svg)](https://pub.dartlang.org/packages/galileo_sembast)
+[![build status](https://travis-ci.org/galileo-dart/sembast.svg)](https://travis-ci.org/galileo-dart/sembast)
 
-package:sembast-powered CRUD services for the Angel framework.
+package:sembast-powered CRUD services for the Galileo framework.
 
 # Installation
 
@@ -10,7 +10,7 @@ Add the following to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  angel_sembast: ^1.0.0
+  galileo_sembast: ^1.0.0
 ```
 
 # Usage

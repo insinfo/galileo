@@ -1,4 +1,4 @@
-import 'package:graphql_parser/graphql_parser.dart';
+import 'package:galileo_graphql_parser/galileo_graphql_parser.dart';
 import 'package:test/test.dart';
 
 import 'common.dart';
@@ -7,15 +7,12 @@ import 'value_test.dart';
 
 main() {
   test('no default value', () {
-    expect(r'$foo: bar',
-        isVariableDefinition('foo', type: isType('bar', isNullable: true)));
+    expect(r'$foo: bar', isVariableDefinition('foo', type: isType('bar', isNullable: true)));
   });
 
   test('default value', () {
-    expect(
-        r'$foo: int! = 2',
-        isVariableDefinition('foo',
-            type: isType('int', isNullable: false), defaultValue: isValue(2)));
+    expect(r'$foo: int! = 2',
+        isVariableDefinition('foo', type: isType('int', isNullable: false), defaultValue: isValue(2)));
   });
 
   test('exceptions', () {
@@ -37,11 +34,9 @@ main() {
   });
 }
 
-VariableDefinitionContext parseVariableDefinition(String text) =>
-    parse(text).parseVariableDefinition();
+VariableDefinitionContext parseVariableDefinition(String text) => parse(text).parseVariableDefinition();
 
-Matcher isVariableDefinition(String name,
-        {Matcher type, Matcher defaultValue}) =>
+Matcher isVariableDefinition(String name, {Matcher type, Matcher defaultValue}) =>
     _IsVariableDefinition(name, type, defaultValue);
 
 class _IsVariableDefinition extends Matcher {
@@ -67,9 +62,7 @@ class _IsVariableDefinition extends Matcher {
 
   @override
   bool matches(item, Map matchState) {
-    var def = item is VariableDefinitionContext
-        ? item
-        : parseVariableDefinition(item.toString());
+    var def = item is VariableDefinitionContext ? item : parseVariableDefinition(item.toString());
     if (def == null) return false;
     if (def.variable.name != name) return false;
     bool result = true;
@@ -79,8 +72,7 @@ class _IsVariableDefinition extends Matcher {
     }
 
     if (defaultValue != null) {
-      result =
-          result && defaultValue.matches(def.defaultValue.value, matchState);
+      result = result && defaultValue.matches(def.defaultValue.value, matchState);
     }
 
     return result;

@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module type="WEB_MODULE" version="4">
   <component name="NewModuleRootManager">
-    <content url="file://$MODULE_DIR$/angel_orm">
-      <excludeFolder url="file://$MODULE_DIR$/angel_orm/.dart_tool" />
-      <excludeFolder url="file://$MODULE_DIR$/angel_orm/.pub" />
-      <excludeFolder url="file://$MODULE_DIR$/angel_orm/build" />
+    <content url="file://$MODULE_DIR$/galileo_orm">
+      <excludeFolder url="file://$MODULE_DIR$/galileo_orm/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/galileo_orm/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/galileo_orm/build" />
     </content>
-    <content url="file://$MODULE_DIR$/angel_orm_generator">
-      <excludeFolder url="file://$MODULE_DIR$/angel_orm_generator/.dart_tool" />
-      <excludeFolder url="file://$MODULE_DIR$/angel_orm_generator/.pub" />
-      <excludeFolder url="file://$MODULE_DIR$/angel_orm_generator/build" />
+    <content url="file://$MODULE_DIR$/galileo_orm_generator">
+      <excludeFolder url="file://$MODULE_DIR$/galileo_orm_generator/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/galileo_orm_generator/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/galileo_orm_generator/build" />
     </content>
     <content url="file://$MODULE_DIR$/external">
       <excludeFolder url="file://$MODULE_DIR$/external/.pub" />

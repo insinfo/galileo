@@ -1,19 +1,19 @@
 # jinja
-Angel support for the Jinja2 templating engine, ported from Python to Dart.
+Galileo support for the Jinja2 templating engine, ported from Python to Dart.
 
-[![Pub](https://img.shields.io/pub/v/angel_jinja.svg)](https://pub.dartlang.org/packages/angel_jinja)
+[![Pub](https://img.shields.io/pub/v/galileo_jinja.svg)](https://pub.dartlang.org/packages/galileo_jinja)
 
 # Example
 ```dart
 import 'dart:io';
-import 'package:angel_framework/angel_framework.dart';
-import 'package:angel_framework/http.dart';
-import 'package:angel_jinja/angel_jinja.dart';
+import 'package:galileo_framework/galileo_framework.dart';
+import 'package:galileo_framework/http.dart';
+import 'package:galileo_jinja/galileo_jinja.dart';
 import 'package:path/path.dart' as p;
 
 main() async {
-  var app = Angel();
-  var http = AngelHttp(app);
+  var app = Galileo();
+  var http = GalileoHttp(app);
   var viewsDir = p.join(
     p.dirname(
       p.fromUri(Platform.script),

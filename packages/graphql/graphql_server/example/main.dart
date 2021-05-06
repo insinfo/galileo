@@ -1,5 +1,5 @@
-import 'package:graphql_schema/graphql_schema.dart';
-import 'package:graphql_server/graphql_server.dart';
+import 'package:galileo_graphql_schema/galileo_graphql_schema.dart';
+import 'package:galileo_graphql_server/galileo_graphql_server.dart';
 import 'package:test/test.dart';
 
 void main() {

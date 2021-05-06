@@ -1,4 +1,4 @@
-library graphql_parser.language.parser;
+library galileo_graphql_parser.language.parser;
 
 import 'ast/ast.dart';
 import 'syntax_error.dart';
@@ -63,29 +63,23 @@ class Parser {
     return DocumentContext()..definitions.addAll(defs);
   }
 
-  DefinitionContext parseDefinition() =>
-      parseOperationDefinition() ?? parseFragmentDefinition();
+  DefinitionContext parseDefinition() => parseOperationDefinition() ?? parseFragmentDefinition();
 
   OperationDefinitionContext parseOperationDefinition() {
     var selectionSet = parseSelectionSet();
     if (selectionSet != null) {
       return OperationDefinitionContext(null, null, null, selectionSet);
     } else {
-      if (nextName('mutation') ||
-          nextName('query') ||
-          nextName('subscription')) {
+      if (nextName('mutation') || nextName('query') || nextName('subscription')) {
         var TYPE = current;
         Token NAME = next(TokenType.NAME) ? current : null;
         var variables = parseVariableDefinitions();
         var dirs = parseDirectives();
         var selectionSet = parseSelectionSet();
         if (selectionSet != null) {
-          return OperationDefinitionContext(TYPE, NAME, variables, selectionSet)
-            ..directives.addAll(dirs);
+          return OperationDefinitionContext(TYPE, NAME, variables, selectionSet)..directives.addAll(dirs);
         } else {
-          errors.add(SyntaxError(
-              'Missing selection set in fragment definition.',
-              NAME?.span ?? TYPE.span));
+          errors.add(SyntaxError('Missing selection set in fragment definition.', NAME?.span ?? TYPE.span));
           return null;
         }
       } else {
@@ -106,31 +100,22 @@ class Parser {
             var dirs = parseDirectives();
             var selectionSet = parseSelectionSet();
             if (selectionSet != null) {
-              return FragmentDefinitionContext(
-                  FRAGMENT, NAME, ON, typeCondition, selectionSet)
+              return FragmentDefinitionContext(FRAGMENT, NAME, ON, typeCondition, selectionSet)
                 ..directives.addAll(dirs);
             } else {
-              errors.add(SyntaxError(
-                  'Expected selection set in fragment definition.',
-                  typeCondition.span));
+              errors.add(SyntaxError('Expected selection set in fragment definition.', typeCondition.span));
               return null;
             }
           } else {
-            errors.add(SyntaxError(
-                'Expected type condition after "on" in fragment definition.',
-                ON.span));
+            errors.add(SyntaxError('Expected type condition after "on" in fragment definition.', ON.span));
             return null;
           }
         } else {
-          errors.add(SyntaxError(
-              'Expected "on" after name "${NAME.text}" in fragment definition.',
-              NAME.span));
+          errors.add(SyntaxError('Expected "on" after name "${NAME.text}" in fragment definition.', NAME.span));
           return null;
         }
       } else {
-        errors.add(SyntaxError(
-            'Expected name after "fragment" in fragment definition.',
-            FRAGMENT.span));
+        errors.add(SyntaxError('Expected name after "fragment" in fragment definition.', FRAGMENT.span));
         return null;
       }
     } else {
@@ -143,8 +128,7 @@ class Parser {
       var ELLIPSIS = current;
       if (next(TokenType.NAME, exclude: ['on'])) {
         var NAME = current;
-        return FragmentSpreadContext(ELLIPSIS, NAME)
-          ..directives.addAll(parseDirectives());
+        return FragmentSpreadContext(ELLIPSIS, NAME)..directives.addAll(parseDirectives());
       } else {
         _index--;
         return null;
@@ -164,26 +148,18 @@ class Parser {
           var directives = parseDirectives();
           var selectionSet = parseSelectionSet();
           if (selectionSet != null) {
-            return InlineFragmentContext(
-                ELLIPSIS, ON, typeCondition, selectionSet)
-              ..directives.addAll(directives);
+            return InlineFragmentContext(ELLIPSIS, ON, typeCondition, selectionSet)..directives.addAll(directives);
           } else {
-            errors.add(SyntaxError(
-                'Missing selection set in inline fragment.',
-                directives.isEmpty
-                    ? typeCondition.span
-                    : directives.last.span));
+            errors.add(SyntaxError('Missing selection set in inline fragment.',
+                directives.isEmpty ? typeCondition.span : directives.last.span));
             return null;
           }
         } else {
-          errors.add(SyntaxError(
-              'Missing type condition after "on" in inline fragment.',
-              ON.span));
+          errors.add(SyntaxError('Missing type condition after "on" in inline fragment.', ON.span));
           return null;
         }
       } else {
-        errors.add(SyntaxError(
-            'Missing "on" after "..." in inline fragment.', ELLIPSIS.span));
+        errors.add(SyntaxError('Missing "on" after "..." in inline fragment.', ELLIPSIS.span));
         return null;
       }
     } else {
@@ -205,11 +181,10 @@ class Parser {
 
       eatCommas();
       if (next(TokenType.RBRACE)) {
-        return SelectionSetContext(LBRACE, current)
-          ..selections.addAll(selections);
+        return SelectionSetContext(LBRACE, current)..selections.addAll(selections);
       } else {
-        errors.add(SyntaxError('Missing "}" after selection set.',
-            selections.isEmpty ? LBRACE.span : selections.last.span));
+        errors.add(
+            SyntaxError('Missing "}" after selection set.', selections.isEmpty ? LBRACE.span : selections.last.span));
         return null;
       }
     } else {
@@ -252,8 +227,7 @@ class Parser {
         if (next(TokenType.NAME)) {
           return FieldNameContext(null, AliasContext(NAME1, COLON, current));
         } else {
-          errors.add(
-              SyntaxError('Missing name after colon in alias.', COLON.span));
+          errors.add(SyntaxError('Missing name after colon in alias.', COLON.span));
           return null;
         }
       } else {
@@ -277,11 +251,9 @@ class Parser {
       }
 
       if (next(TokenType.RPAREN)) {
-        return VariableDefinitionsContext(LPAREN, current)
-          ..variableDefinitions.addAll(defs);
+        return VariableDefinitionsContext(LPAREN, current)..variableDefinitions.addAll(defs);
       } else {
-        errors.add(SyntaxError(
-            'Missing ")" after variable definitions.', LPAREN.span));
+        errors.add(SyntaxError('Missing ")" after variable definitions.', LPAREN.span));
         return null;
       }
     } else {
@@ -299,13 +271,11 @@ class Parser {
           var defaultValue = parseDefaultValue();
           return VariableDefinitionContext(variable, COLON, type, defaultValue);
         } else {
-          errors.add(
-              SyntaxError('Missing type in variable definition.', COLON.span));
+          errors.add(SyntaxError('Missing type in variable definition.', COLON.span));
           return null;
         }
       } else {
-        errors.add(
-            SyntaxError('Missing ":" in variable definition.', variable.span));
+        errors.add(SyntaxError('Missing ":" in variable definition.', variable.span));
         return null;
       }
     } else {
@@ -370,9 +340,7 @@ class Parser {
           if (val != null) {
             return DirectiveContext(ARROBA, NAME, COLON, null, null, null, val);
           } else {
-            errors.add(SyntaxError(
-                'Missing value or variable in directive after colon.',
-                COLON.span));
+            errors.add(SyntaxError('Missing value or variable in directive after colon.', COLON.span));
             return null;
           }
         } else if (next(TokenType.LPAREN)) {
@@ -380,15 +348,13 @@ class Parser {
           var arg = parseArgument();
           if (arg != null) {
             if (next(TokenType.RPAREN)) {
-              return DirectiveContext(
-                  ARROBA, NAME, null, LPAREN, current, arg, null);
+              return DirectiveContext(ARROBA, NAME, null, LPAREN, current, arg, null);
             } else {
               errors.add(SyntaxError('Missing \')\'', arg.value.span));
               return null;
             }
           } else {
-            errors.add(
-                SyntaxError('Missing argument in directive.', LPAREN.span));
+            errors.add(SyntaxError('Missing argument in directive.', LPAREN.span));
             return null;
           }
         } else {
@@ -435,13 +401,11 @@ class Parser {
         if (val != null) {
           return ArgumentContext(NAME, COLON, val);
         } else {
-          errors.add(SyntaxError(
-              'Missing value or variable in argument.', COLON.span));
+          errors.add(SyntaxError('Missing value or variable in argument.', COLON.span));
           return null;
         }
       } else {
-        errors.add(
-            SyntaxError('Missing colon after name in argument.', NAME.span));
+        errors.add(SyntaxError('Missing colon after name in argument.', NAME.span));
         return null;
       }
     } else {
@@ -459,9 +423,7 @@ class Parser {
       if (next(TokenType.NAME)) {
         return VariableContext(DOLLAR, current);
       } else {
-        errors.add(SyntaxError(
-            'Missing name for variable; found a lone "\$" instead.',
-            DOLLAR.span));
+        errors.add(SyntaxError('Missing name for variable; found a lone "\$" instead.', DOLLAR.span));
         return null;
       }
     } else {
@@ -518,23 +480,16 @@ class Parser {
 
   StringValueContext parseStringValue() => next(TokenType.STRING)
       ? StringValueContext(current)
-      : (next(TokenType.BLOCK_STRING)
-          ? StringValueContext(current, isBlockString: true)
-          : null);
+      : (next(TokenType.BLOCK_STRING) ? StringValueContext(current, isBlockString: true) : null);
 
-  NumberValueContext parseNumberValue() =>
-      next(TokenType.NUMBER) ? NumberValueContext(current) : null;
+  NumberValueContext parseNumberValue() => next(TokenType.NUMBER) ? NumberValueContext(current) : null;
 
   BooleanValueContext parseBooleanValue() =>
-      (nextName('true') || nextName('false'))
-          ? BooleanValueContext(current)
-          : null;
+      (nextName('true') || nextName('false')) ? BooleanValueContext(current) : null;
 
-  EnumValueContext parseEnumValue() =>
-      next(TokenType.NAME) ? EnumValueContext(current) : null;
+  EnumValueContext parseEnumValue() => next(TokenType.NAME) ? EnumValueContext(current) : null;
 
-  NullValueContext parseNullValue() =>
-      nextName('null') ? NullValueContext(current) : null;
+  NullValueContext parseNullValue() => nextName('null') ? NullValueContext(current) : null;
 
   ListValueContext parseListValue() {
     if (next(TokenType.LBRACKET)) {
@@ -604,8 +559,7 @@ class Parser {
           return null;
         }
       } else {
-        errors.add(SyntaxError(
-            'Missing ":" after name "${NAME.span.text}".', NAME.span));
+        errors.add(SyntaxError('Missing ":" after name "${NAME.span.text}".', NAME.span));
         return null;
       }
     } else {

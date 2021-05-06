@@ -1,9 +1,9 @@
 /// Custom plugins go here.
-library angel.src.config.plugins;
+library galileo.src.config.plugins;
 
 import 'dart:async';
-import 'package:angel_framework/angel_framework.dart';
+import 'package:galileo_framework/galileo_framework.dart';
 
-Future configureServer(Angel app) async {
+Future configureServer(Galileo app) async {
   // Include any plugins you have made here.
 }

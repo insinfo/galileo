@@ -1,5 +1,5 @@
 <extend src="layout.jael">
     <block name="content">
-        <div class="title">Angel</div>
+        <div class="title">Galileo</div>
     </block>
 </extend>

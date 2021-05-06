@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'dart:io';
-import 'package:angel_cache/angel_cache.dart';
-import 'package:angel_framework/angel_framework.dart';
-import 'package:angel_test/angel_test.dart';
+import 'package:galileo_cache/galileo_cache.dart';
+import 'package:galileo_framework/galileo_framework.dart';
+import 'package:galileo_test/galileo_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:glob/glob.dart';
 import 'package:test/test.dart';
@@ -14,7 +14,7 @@ main() async {
     http.Response response1, response2;
 
     setUp(() async {
-      var app = new Angel();
+      var app = new Galileo();
       var cache = new ResponseCache()
         ..patterns.addAll([
           new Glob('/*.txt'),

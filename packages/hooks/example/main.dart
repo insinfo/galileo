@@ -1,11 +1,11 @@
-import 'package:angel_framework/angel_framework.dart';
-import 'package:angel_framework/http.dart';
-import 'package:angel_hooks/angel_hooks.dart' as hooks;
-import 'package:angel_hooks/mirrors.dart' as hooks;
+import 'package:galileo_framework/galileo_framework.dart';
+import 'package:galileo_framework/http.dart';
+import 'package:galileo_hooks/galileo_hooks.dart' as hooks;
+import 'package:galileo_hooks/mirrors.dart' as hooks;
 
 main() async {
-  var app = Angel();
-  var http = AngelHttp(app);
+  var app = Galileo();
+  var http = GalileoHttp(app);
 
   // Set the service up, and hook it.
   var service = app.use('/api/todos', MapService());

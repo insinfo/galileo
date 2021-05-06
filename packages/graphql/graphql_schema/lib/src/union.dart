@@ -1,10 +1,9 @@
-part of graphql_schema.src.schema;
+part of galileo_graphql_schema.src.schema;
 
 /// A special [GraphQLType] that indicates that an input value may be valid against one or more [possibleTypes].
 ///
 /// All provided types must be [GraphQLObjectType]s.
-class GraphQLUnionType
-    extends GraphQLType<Map<String, dynamic>, Map<String, dynamic>>
+class GraphQLUnionType extends GraphQLType<Map<String, dynamic>, Map<String, dynamic>>
     with _NonNullableMixin<Map<String, dynamic>, Map<String, dynamic>> {
   /// The name of this type.
   final String name;
@@ -12,14 +11,10 @@ class GraphQLUnionType
   /// A list of all types that conform to this union.
   final List<GraphQLObjectType> possibleTypes = [];
 
-  GraphQLUnionType(
-      this.name,
-      Iterable<GraphQLType<Map<String, dynamic>, Map<String, dynamic>>>
-          possibleTypes) {
+  GraphQLUnionType(this.name, Iterable<GraphQLType<Map<String, dynamic>, Map<String, dynamic>>> possibleTypes) {
     assert(possibleTypes.every((t) => t is GraphQLObjectType),
         'The member types of a Union type must all be Object base types; Scalar, Interface and Union types must not be member types of a Union. Similarly, wrapping types must not be member types of a Union.');
-    assert(possibleTypes.isNotEmpty,
-        'A Union type must define one or more member types.');
+    assert(possibleTypes.isNotEmpty, 'A Union type must define one or more member types.');
 
     for (var t in possibleTypes.toSet()) {
       this.possibleTypes.add(t as GraphQLObjectType);
@@ -30,10 +25,8 @@ class GraphQLUnionType
   String get description => possibleTypes.map((t) => t.name).join(' | ');
 
   @override
-  GraphQLType<Map<String, dynamic>, Map<String, dynamic>>
-      coerceToInputObject() {
-    return new GraphQLUnionType(
-        '${name}Input', possibleTypes.map((t) => t.coerceToInputObject()));
+  GraphQLType<Map<String, dynamic>, Map<String, dynamic>> coerceToInputObject() {
+    return new GraphQLUnionType('${name}Input', possibleTypes.map((t) => t.coerceToInputObject()));
   }
 
   @override
@@ -61,8 +54,7 @@ class GraphQLUnionType
   }
 
   @override
-  ValidationResult<Map<String, dynamic>> validate(
-      String key, Map<String, dynamic> input) {
+  ValidationResult<Map<String, dynamic>> validate(String key, Map<String, dynamic> input) {
     List<String> errors = [];
 
     for (var type in possibleTypes) {
@@ -83,6 +75,5 @@ class GraphQLUnionType
       other is GraphQLUnionType &&
       other.name == name &&
       other.description == description &&
-      const ListEquality<GraphQLObjectType>()
-          .equals(other.possibleTypes, possibleTypes);
+      const ListEquality<GraphQLObjectType>().equals(other.possibleTypes, possibleTypes);
 }

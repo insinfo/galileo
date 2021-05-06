@@ -1,4 +1,4 @@
-import 'package:angel_orm_generator/angel_orm_generator.dart';
+import 'package:galileo_orm_generator/galileo_orm_generator.dart';
 import 'package:build_runner/build_runner.dart';
 import 'package:source_gen/source_gen.dart';
 

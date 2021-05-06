@@ -1,5 +1,5 @@
 /// Easy helper hooks.
-library angel_hooks;
+library galileo_hooks;
 
 export 'src/chain_listeners.dart';
 export 'src/date.dart';

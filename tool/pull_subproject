@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# Simple tool script that pulls an angel-dart/<name> project into ./packages/<name>.
+# Simple tool script that pulls an galileo-dart/<name> project into ./packages/<name>.
 
 if [ "$#" == "0" ]; then
   echo "usage: pull_subproject <names...>"
@@ -10,5 +10,5 @@ fi
 set -ex
 
 for project in $*; do
-  git subtree add --prefix="packages/$project" "https://github.com/angel-dart/$project.git" master
+  git subtree add --prefix="packages/$project" "https://github.com/galileo-dart/$project.git" master
 done

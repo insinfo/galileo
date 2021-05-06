@@ -8,9 +8,4 @@ part of 'main.dart';
 
 /// Auto-generated from [TodoItem].
 final GraphQLObjectType todoItemGraphQLType = objectType('TodoItem',
-    isInterface: false,
-    interfaces: [],
-    fields: [
-      field('text', graphQLString),
-      field('isComplete', graphQLBoolean)
-    ]);
+    isInterface: false, interfaces: [], fields: [field('text', graphQLString), field('isComplete', graphQLBoolean)]);

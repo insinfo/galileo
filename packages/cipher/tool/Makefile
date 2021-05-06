@@ -69,7 +69,7 @@ bundle-package-drone:
 	-rm ../out/bundle/cipher.tar.gz
 	mkdir -p ../out/bundle
 
-	tar -c -z -C .. --exclude packages -f ../out/bundle/cipher.tar.gz LICENSE README.md changelog.md pubspec.yaml benchmark/ lib/ licenses/ test/ tool/
+	tar -c -z -C .. --exclude packages -f ../out/bundle/cipher.tar.gz LICENSE README.md chgalileoog.md pubspec.yaml benchmark/ lib/ licenses/ test/ tool/
 
 
 bundle-doc: doc

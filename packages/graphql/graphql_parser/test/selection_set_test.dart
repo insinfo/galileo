@@ -1,4 +1,4 @@
-import 'package:graphql_parser/graphql_parser.dart';
+import 'package:galileo_graphql_parser/galileo_graphql_parser.dart';
 import 'package:test/test.dart';
 import 'common.dart';
 import 'field_test.dart';
@@ -11,12 +11,8 @@ main() {
   });
 
   test('with commas', () {
-    expect(
-        '{foo, bar: baz}',
-        isSelectionSet([
-          isField(fieldName: isFieldName('foo')),
-          isField(fieldName: isFieldName('bar', alias: 'baz'))
-        ]));
+    expect('{foo, bar: baz}',
+        isSelectionSet([isField(fieldName: isFieldName('foo')), isField(fieldName: isFieldName('bar', alias: 'baz'))]));
   });
 
   test('no commas', () {
@@ -52,8 +48,7 @@ main() {
   });
 }
 
-SelectionSetContext parseSelectionSet(String text) =>
-    parse(text).parseSelectionSet();
+SelectionSetContext parseSelectionSet(String text) => parse(text).parseSelectionSet();
 
 Matcher isSelectionSet(List<Matcher> selections) => _IsSelectionSet(selections);
 
@@ -64,14 +59,12 @@ class _IsSelectionSet extends Matcher {
 
   @override
   Description describe(Description description) {
-    return description
-        .add('is selection set with ${selections.length} selection(s)');
+    return description.add('is selection set with ${selections.length} selection(s)');
   }
 
   @override
   bool matches(item, Map matchState) {
-    var set =
-        item is SelectionSetContext ? item : parseSelectionSet(item.toString());
+    var set = item is SelectionSetContext ? item : parseSelectionSet(item.toString());
 
     // if (set != null) {
     //   print('Item: $set has ${set.selections.length} selection(s):');
@@ -85,8 +78,7 @@ class _IsSelectionSet extends Matcher {
 
     for (int i = 0; i < set.selections.length; i++) {
       var sel = set.selections[i];
-      if (!selections[i].matches(
-          sel.field ?? sel.fragmentSpread ?? sel.inlineFragment, matchState)) {
+      if (!selections[i].matches(sel.field ?? sel.fragmentSpread ?? sel.inlineFragment, matchState)) {
         return false;
       }
     }

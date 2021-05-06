@@ -1,4 +1,4 @@
-/// WebSocket plugin for Angel.
+/// WebSocket plugin for Galileo.
 library galileo_websocket;
 
 /// A notification from the server that something has occurred.

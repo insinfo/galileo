@@ -18,7 +18,7 @@ but instead throw an exception.
 * Removed the `ConfigurationTransformer` class.
 * Use `Map` casting to prevent runtime cast errors.
 
-# 1.1.0 (Retroactive changelog)
+# 1.1.0 (Retroactive chgalileoog)
 * Use `package:file`.
 
 # 1.0.5

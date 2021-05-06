@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:angel_framework/angel_framework.dart';
+import 'package:galileo_framework/galileo_framework.dart';
 import 'exception.dart';
 import 'pkce.dart';
 import 'response.dart';
@@ -287,7 +287,7 @@ abstract class AuthorizationServer<Client, User> {
             state,
           ),
           statusCode: 400);
-    } on AngelHttpException {
+    } on GalileoHttpException {
       rethrow;
     } catch (e, st) {
       throw AuthorizationException(
@@ -456,7 +456,7 @@ abstract class AuthorizationServer<Client, User> {
         ),
         statusCode: 400,
       );
-    } on AngelHttpException {
+    } on GalileoHttpException {
       rethrow;
     } catch (e, st) {
       throw AuthorizationException(

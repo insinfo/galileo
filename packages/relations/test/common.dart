@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:angel_framework/angel_framework.dart';
+import 'package:galileo_framework/galileo_framework.dart';
 //import 'package:json_god/json_god.dart' as god;
 
 @deprecated
@@ -28,7 +28,7 @@ class CustomMapService extends Service {
   @override
   read(id, [Map params]) async {
     return tailor(_items, params).firstWhere((m) => m['id'] == id,
-        orElse: () => throw new AngelHttpException.notFound());
+        orElse: () => throw new GalileoHttpException.notFound());
   }
 
   @override

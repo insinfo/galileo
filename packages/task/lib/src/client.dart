@@ -8,7 +8,7 @@ import 'task_result.dart';
 import 'task_result_impl.dart';
 
 /// Interacts with a remote task engine, whether over isolates or TCP sockets.
-class AngelTaskClient {
+class GalileoTaskClient {
   final Completer _connect = new Completer();
   final Map<String, Completer<Message>> _awaiting = {};
   String _id;
@@ -25,10 +25,10 @@ class AngelTaskClient {
   /// A [SendPort] that points back to a master isolate.
   final SendPort server;
 
-  AngelTaskClient(this.server);
+  GalileoTaskClient(this.server);
 
   /// Connects a task client to a TCP socket.
-  static Future<AngelTaskClient> fromSocket(Socket socket) async {
+  static Future<GalileoTaskClient> fromSocket(Socket socket) async {
     return new _SocketTaskClientImpl(socket).._listen();
   }
 
@@ -116,7 +116,7 @@ class AngelTaskClient {
   }
 }
 
-class _SocketTaskClientImpl extends AngelTaskClient {
+class _SocketTaskClientImpl extends GalileoTaskClient {
   final Socket socket;
 
   _SocketTaskClientImpl(this.socket) : super(null);

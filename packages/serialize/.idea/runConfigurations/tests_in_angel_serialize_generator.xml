@@ -1,6 +1,6 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="tests in angel_serialize_generator" type="DartTestRunConfigurationType" factoryName="Dart Test" singleton="true" nameIsGenerated="true">
-    <option name="filePath" value="$PROJECT_DIR$/angel_serialize_generator" />
+  <configuration default="false" name="tests in galileo_serialize_generator" type="DartTestRunConfigurationType" factoryName="Dart Test" singleton="true" nameIsGenerated="true">
+    <option name="filePath" value="$PROJECT_DIR$/galileo_serialize_generator" />
     <option name="scope" value="FOLDER" />
     <option name="testRunnerOptions" value="-j 4" />
     <method />

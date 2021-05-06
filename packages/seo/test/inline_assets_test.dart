@@ -1,13 +1,14 @@
-import 'package:angel_framework/angel_framework.dart';
-import 'package:angel_seo/angel_seo.dart';
-import 'package:angel_static/angel_static.dart';
-import 'package:angel_test/angel_test.dart';
+import 'package:galileo_framework/galileo_framework.dart';
+import 'package:galileo_seo/galileo_seo.dart';
+import 'package:galileo_static/galileo_static.dart';
+import 'package:galileo_test/galileo_test.dart';
 import 'package:file/file.dart';
 import 'package:file/memory.dart';
 import 'package:html/dom.dart' as html;
 import 'package:html/parser.dart' as html;
 import 'package:http_parser/http_parser.dart';
 import 'package:logging/logging.dart';
+import 'package:path/path.dart';
 import 'package:test/test.dart';
 
 void main() {
@@ -26,22 +27,21 @@ void main() {
     }));
 
     group('virtual_directory', inlineAssetsTests((app, dir) {
-      var vDir = inlineAssetsFromVirtualDirectory(
-          VirtualDirectory(app, dir.fileSystem, source: dir));
+      var vDir = inlineAssetsFromVirtualDirectory(VirtualDirectory(app, dir.fileSystem, source: dir));
       app.fallback(vDir.handleRequest);
     }));
   });
 }
 
 /// Typedef for backwards-compatibility with Dart 1.
-typedef void InlineAssetTest(Angel app, Directory dir);
+typedef void InlineAssetTest(Galileo app, Directory dir);
 
 void Function() inlineAssetsTests(InlineAssetTest f) {
   return () {
     TestClient client;
 
     setUp(() async {
-      var app = Angel();
+      var app = Galileo();
       var fs = MemoryFileSystem();
       var dir = fs.currentDirectory;
       f(app, dir);
@@ -52,7 +52,7 @@ void Function() inlineAssetsTests(InlineAssetTest f) {
         await file.writeAsString(contents[path].trim());
       }
 
-      app.logger = Logger('angel_seo')
+      app.logger = Logger('galileo_seo')
         ..onRecord.listen((rec) {
           print(rec);
           if (rec.error != null) print(rec.error);
@@ -66,7 +66,7 @@ void Function() inlineAssetsTests(InlineAssetTest f) {
       html.Document doc;
 
       setUp(() async {
-        var res = await client.get('/', headers: {'accept': 'text/html'});
+        var res = await client.get(Uri.parse('/'), headers: {'accept': 'text/html'});
         print(res.body);
         doc = html.parse(res.body);
       });
@@ -133,10 +133,10 @@ var contents = <String, String>{
     <link data-foo="bar" rel="stylesheet" href="not-inlined.css" data-no-inline>
     <script data-foo="bar" src="site.js"></script>
     <script type="text/javascript" src="not-inlined.js" data-no-inline></script>
-    <title>Angel SEO</title>
+    <title>Galileo SEO</title>
 </head>
 <body>
-<h1>Angel SEO</h1>
+<h1>Galileo SEO</h1>
 <p>Embrace the power of inlined styles, etc.</p>
 </body>
 </html>''',

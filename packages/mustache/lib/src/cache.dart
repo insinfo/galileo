@@ -2,8 +2,8 @@ import 'dart:async';
 import 'dart:collection';
 import 'package:file/file.dart';
 
-import 'package:angel_framework/angel_framework.dart';
-import 'package:angel_mustache/src/mustache_context.dart';
+import 'package:galileo_framework/galileo_framework.dart';
+import 'package:galileo_mustache/src/mustache_context.dart';
 
 class MustacheViewCache {
   /**
@@ -17,7 +17,7 @@ class MustacheViewCache {
 
   MustacheViewCache([this.context]);
 
-  Future<String> getView(String viewName, Angel app) async {
+  Future<String> getView(String viewName, Galileo app) async {
     if (app.isProduction) {
       if (viewCache.containsKey(viewName)) {
         return viewCache[viewName];
@@ -37,7 +37,7 @@ class MustacheViewCache {
           'View "$viewName" was not found.', viewFile.path);
   }
 
-  String getPartialSync(String partialName, Angel app) {
+  String getPartialSync(String partialName, Galileo app) {
     if (app.isProduction) {
       if (partialCache.containsKey(partialName)) {
         return partialCache[partialName];

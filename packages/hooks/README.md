@@ -1,2 +1,2 @@
 # hooks
-Common service hooks for use within the Angel framework.
+Common service hooks for use within the Galileo framework.

@@ -1,7 +1,7 @@
 library {{ project_name }}.src.models.auth_token;
 
-import 'package:angel_model/angel_model.dart';
-import 'package:angel_serialize/angel_serialize.dart';
+import 'package:galileo_model/galileo_model.dart';
+import 'package:galileo_serialize/galileo_serialize.dart';
 part 'auth_token.g.dart';
 
 @serializable

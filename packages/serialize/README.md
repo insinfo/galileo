@@ -1,11 +1,11 @@
 # serialize
 
-[![Pub](https://img.shields.io/pub/v/angel_serialize.svg)](https://pub.dartlang.org/packages/angel_serialize)
-[![build status](https://travis-ci.org/angel-dart/serialize.svg)](https://travis-ci.org/angel-dart/serialize)
+[![Pub](https://img.shields.io/pub/v/galileo_serialize.svg)](https://pub.dartlang.org/packages/galileo_serialize)
+[![build status](https://travis-ci.org/galileo-dart/serialize.svg)](https://travis-ci.org/galileo-dart/serialize)
 
 Source-generated serialization for Dart objects. This package uses `package:source_gen` to eliminate
 the time you spend writing boilerplate serialization code for your models.
-`package:angel_serialize` also powers `package:angel_orm`.
+`package:galileo_serialize` also powers `package:galileo_orm`.
 
 - [Usage](#usage)
   - [Models](#models)
@@ -28,10 +28,10 @@ In your `pubspec.yaml`, you need to install the following dependencies:
 
 ```yaml
 dependencies:
-  angel_model: ^1.0.0
-  angel_serialize: ^2.0.0
+  galileo_model: ^1.0.0
+  galileo_serialize: ^2.0.0
 dev_dependencies:
-  angel_serialize_generator: ^2.0.0
+  galileo_serialize_generator: ^2.0.0
   build_runner: ^1.0.0
 ```
 
@@ -54,16 +54,16 @@ with a leading underscore.
 In addition, you may consider using an `abstract` class to ensure immutability
 of models.
 
-Rather you writing the public class, `angel_serialize` does it for you. This means that the main class can have
+Rather you writing the public class, `galileo_serialize` does it for you. This means that the main class can have
 its constructors automatically generated, in addition into serialization functions.
 
 For example, say we have a `Book` model. Create a class named `_Book`:
 
 ```dart
-library angel_serialize.test.models.book;
+library galileo_serialize.test.models.book;
 
-import 'package:angel_model/angel_model.dart';
-import 'package:angel_serialize/angel_serialize.dart';
+import 'package:galileo_model/galileo_model.dart';
+import 'package:galileo_serialize/galileo_serialize.dart';
 import 'package:collection/collection.dart';
 part 'book.g.dart';
 
@@ -160,12 +160,12 @@ class _MyClass extends Model {}
 ```
 
 ## Subclasses
-`angel_serialize` pulls in fields from parent classes, as well as
+`galileo_serialize` pulls in fields from parent classes, as well as
 implemented interfaces, so it is extremely easy to share attributes among
 model classes:
 
 ```dart
-import 'package:angel_serialize/angel_serialize.dart';
+import 'package:galileo_serialize/galileo_serialize.dart';
 part 'subclass.g.dart';
 
 @serializable
@@ -195,7 +195,7 @@ Whereas Dart fields conventionally are camelCased, most database columns
 tend to be snake_cased. This is not a problem, because we can define an alias
 for a field.
 
-By default `angel_serialize` will transform keys into snake case. Use `alias` to
+By default `galileo_serialize` will transform keys into snake case. Use `alias` to
 provide a custom name, or pass `autoSnakeCaseNames`: `false` to the builder;
 
 ```dart
@@ -287,7 +287,7 @@ abstract class _Foo extends Model {}
 ```
 
 ## Custom Serializers
-`package:angel_serialize` does not cover every known Dart data type; you can add support for your own.
+`package:galileo_serialize` does not cover every known Dart data type; you can add support for your own.
 Provide `serializer` and `deserializer` arguments to `@SerializableField()` as you see fit.
 
 They are typically used together. Note that the argument to `deserializer` will always be
@@ -313,7 +313,7 @@ abstract class _HttpRequest {
 
 # Nesting
 
-`angel_serialize` also supports a few types of nesting of `@serializable` classes:
+`galileo_serialize` also supports a few types of nesting of `@serializable` classes:
 
 - As a class member, ex. `Book myField`
 - As the type argument to a `List`, ex. `List<Book>`
@@ -339,12 +339,12 @@ then you will need to generate `book.g.dart` before, `author.g.dart`,
 # ID and Dates
 
 This package will automatically generate `id`, `createdAt`, and `updatedAt` fields for you,
-in the style of an Angel `Model`. This will automatically be generated, **only** for classes
+in the style of an Galileo `Model`. This will automatically be generated, **only** for classes
 extending `Model`.
 
 # Binary Data
 
-`package:angel_serialize` also handles `Uint8List` fields, by means of serialization to
+`package:galileo_serialize` also handles `Uint8List` fields, by means of serialization to
 and from `base64` encoding.
 
 # TypeScript Definitions
@@ -389,7 +389,7 @@ never be sent to the client, the client shouldn't even know the field exists.
 # Constructor Parameters
 
 Sometimes, you may need to have custom constructor parameters, for example, when
-using depedency injection frameworks. For these cases, `angel_serialize` can forward
+using depedency injection frameworks. For these cases, `galileo_serialize` can forward
 custom constructor parameters.
 
 The following:

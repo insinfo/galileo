@@ -1,8 +1,8 @@
 # cache
-[![Pub](https://img.shields.io/pub/v/angel_cache.svg)](https://pub.dartlang.org/packages/angel_cache)
-[![build status](https://travis-ci.org/angel-dart/cache.svg)](https://travis-ci.org/angel-dart/cache)
+[![Pub](https://img.shields.io/pub/v/galileo_cache.svg)](https://pub.dartlang.org/packages/galileo_cache)
+[![build status](https://travis-ci.org/galileo-dart/cache.svg)](https://travis-ci.org/galileo-dart/cache)
 
-Support for server-side caching in [Angel](https://angel-dart.github.io).
+Support for server-side caching in [Galileo](https://galileo-dart.github.io).
 
 ## `CacheService`
 
@@ -18,7 +18,7 @@ You can pass a [shouldCache] callback to determine which values should be cached
 
 ```dart
 main() async {
-    var app = new Angel()..lazyParseBodies = true;
+    var app = new Galileo()..lazyParseBodies = true;
     
     app.use(
       '/api/todos',
@@ -38,7 +38,7 @@ main() async {
 ```
 
 ## `ResponseCache`
-A flexible response cache for Angel.
+A flexible response cache for Galileo.
 
 Use this to improve real and perceived response of Web applications,
 as well as to memoize expensive responses.
@@ -49,7 +49,7 @@ response buffers in memory.
 To initialize a simple cache:
 
 ```dart
-Future configureServer(Angel app) async {
+Future configureServer(Galileo app) async {
   // Simple instance.
   var cache = new ResponseCache();
   
@@ -82,10 +82,10 @@ If this is your case, make sure to include some sort of validation (maybe IP-bas
 to ensure no arbitrary attacker can hack your cache:
 
 ```dart
-Future configureServer(Angel app) async {
+Future configureServer(Galileo app) async {
   app.addRoute('PURGE', '*', (req, res) {
     if (req.ip != '127.0.0.1')
-      throw new AngelHttpException.forbidden();
+      throw new GalileoHttpException.forbidden();
     return cache.purge(req.uri.path);
   });
 }

@@ -1,5 +1,5 @@
 # auth_local
-This add-on generates a simple boilerplate for using `package:angel_auth` to perform
+This add-on generates a simple boilerplate for using `package:galileo_auth` to perform
 username+password authentication.
 
 ## Parameters
@@ -13,16 +13,16 @@ username+password authentication.
 ```dart
 library <project-name>.src.auth.local;
 
-import 'package:angel_auth/angel_auth.dart';
-import 'package:angel_framework/angel_framework.dart';
+import 'package:galileo_auth/galileo_auth.dart';
+import 'package:galileo_framework/galileo_framework.dart';
 import 'package:collection/collection.dart';
 import '../models/user.dart';
 
 /// Configures the server to perform username+password authentication.
 ///
 /// [computePassword] should be a function that generates a list of bytes, ex. a SHA256 hash.
-AngelConfigurer configureServer(AngelAuth<User> auth, List<int> computePassword(String password, User user)) {
-  return (Angel app) async {
+GalileoConfigurer configureServer(GalileoAuth<User> auth, List<int> computePassword(String password, User user)) {
+  return (Galileo app) async {
     var strategy = new LocalAuthStrategy((username, password) async {
       var userService = app.service('api/users');
       Iterable<User> users = await userService.index({

@@ -1,6 +1,6 @@
 import 'package:galileo_model/galileo_model.dart';
 import 'package:galileo_serialize/galileo_serialize.dart';
-import 'package:graphql_schema/graphql_schema.dart';
+import 'package:galileo_graphql_schema/galileo_graphql_schema.dart';
 part 'starship.g.dart';
 
 @serializable

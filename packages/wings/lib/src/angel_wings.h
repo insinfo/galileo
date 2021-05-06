@@ -1,7 +1,7 @@
 #ifndef ANGEL_WINGS_WINGS_H
 #define ANGEL_WINGS_WINGS_H
 
-#include "angel_wings.h"
+#include "galileo_wings.h"
 #include <dart_api.h>
 #include <dart_native_api.h>
 

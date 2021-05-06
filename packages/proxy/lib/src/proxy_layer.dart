@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'dart:io';
 import 'dart:convert';
-import 'package:angel_framework/angel_framework.dart';
-import 'package:angel_framework/http.dart';
+import 'package:galileo_framework/galileo_framework.dart';
+import 'package:galileo_framework/http.dart';
 import 'package:http_parser/http_parser.dart';
 import 'package:http/http.dart' as http;
 import 'package:path/path.dart' as p;
@@ -112,7 +112,7 @@ class Proxy {
           scheduleMicrotask(() => remote.pipe(local));
           return false;
         } catch (e, st) {
-          throw AngelHttpException(e,
+          throw GalileoHttpException(e,
               message: 'Could not connect WebSocket', stackTrace: st);
         }
       }
@@ -158,7 +158,7 @@ class Proxy {
     } on TimeoutException catch (e, st) {
       if (recoverFromDead) return true;
 
-      throw AngelHttpException(
+      throw GalileoHttpException(
         e,
         stackTrace: st,
         statusCode: 504,
@@ -166,7 +166,7 @@ class Proxy {
             'Connection to remote host "$uri" timed out after ${timeout.inMilliseconds}ms.',
       );
     } catch (e) {
-      if (recoverFromDead && e is! AngelHttpException) return true;
+      if (recoverFromDead && e is! GalileoHttpException) return true;
       rethrow;
     }
 
@@ -180,7 +180,7 @@ class Proxy {
       } on FormatException catch (e, st) {
         if (recoverFromDead) return true;
 
-        throw AngelHttpException(
+        throw GalileoHttpException(
           e,
           stackTrace: st,
           statusCode: 504,

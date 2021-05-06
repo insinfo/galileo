@@ -1,4 +1,4 @@
-import 'package:angel_migration/angel_migration.dart';
+import 'package:galileo_migration/galileo_migration.dart';
 
 class FooMigration extends Migration {
   @override

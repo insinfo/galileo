@@ -17,19 +17,19 @@ for basename in os.listdir(packages_dir):
     path = os.path.join(packages_dir, basename)
     if os.path.isdir(path):
         print("===Entering repo `" + basename + "`")
-        repo = gh.get_repo("angel-dart/" + basename)
-        if repo.owner.login != "angel-dart-archive":
+        repo = gh.get_repo("galileo-dart/" + basename)
+        if repo.owner.login != "galileo-dart-archive":
             # Manually do the transfer...
-            params = {"new_owner": "angel-dart-archive"}
+            params = {"new_owner": "galileo-dart-archive"}
             repo._requester.requestJsonAndCheck(
                     "POST", repo.url + "/transfer", input=params,
             )
-            print("======Transferred `" + basename + "` to angel-dart-archive")
+            print("======Transferred `" + basename + "` to galileo-dart-archive")
         if repo.archived:
             print("======SKIPPED ARCHIVED REPO")
             continue
-        new_desc = "moved to angel-dart/angel/packages/" + basename
-        new_homepage = "https://github.com/angel-dart/angel/tree/master/packages/" + basename
+        new_desc = "moved to galileo-dart/galileo/packages/" + basename
+        new_homepage = "https://github.com/galileo-dart/galileo/tree/master/packages/" + basename
         if (repo.description != new_desc) or (repo.homepage != new_homepage):
             repo.edit(description=new_desc, homepage=new_homepage)
             print("======Changed description+homepage")
@@ -46,13 +46,13 @@ for basename in os.listdir(packages_dir):
                 issue.edit(labels=[label_name])
                 print("======Labeled issue \"" + issue.title + "\"")
 
-            # Duplicate the issue in angel-dart/angel...
-            angel = gh.get_repo("angel-dart/angel")
+            # Duplicate the issue in galileo-dart/galileo...
+            galileo = gh.get_repo("galileo-dart/galileo")
             body = "*This issue was originally created by @" + issue.user.login
             body += " here, before being automatically moved: "
             body += "\n" + issue.html_url
             body += "*\n\n---\n" + issue.body
-            new_issue = angel.create_issue(title=issue.title, labels=[label_name], body=body)
+            new_issue = galileo.create_issue(title=issue.title, labels=[label_name], body=body)
             for comment in issue.get_comments():
                 comment_body = "@" + comment.user.login + " commented:\n\n" + comment.body
                 new_issue.create_comment(comment_body)
@@ -63,8 +63,8 @@ for basename in os.listdir(packages_dir):
         open_pulls = repo.get_pulls(state="open")
         for pull in open_pulls:
             msg = "Hi, @" + pull.user.login + "! Thanks again for this PR."
-            msg += "\n\nAll Angel subprojects have been consolidated into a single monorepo: "
-            msg += "https://github.com/angel-dart/angel."
+            msg += "\n\nAll Galileo subprojects have been consolidated into a single monorepo: "
+            msg += "https://github.com/galileo-dart/galileo."
             msg += "\n\nPlease fork the monorepo, and open a new PR there instead."
             pull.create_issue_comment(msg)
             pull.edit(state='closed')

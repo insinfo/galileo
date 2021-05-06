@@ -1,12 +1,12 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
-import 'package:angel_framework/angel_framework.dart';
+import 'package:galileo_framework/galileo_framework.dart';
 import 'package:shelf/shelf.dart' as shelf;
 import 'shelf_request.dart';
 
 class ShelfResponseContext extends ResponseContext<ShelfResponseContext> {
-  final Angel app;
+  final Galileo app;
   final StreamController<List<int>> _ctrl = StreamController();
   bool _isOpen = true,
       _isDetached = false,

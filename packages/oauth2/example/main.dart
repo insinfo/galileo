@@ -1,10 +1,10 @@
 // ignore_for_file: todo
 import 'dart:async';
-import 'package:angel_framework/angel_framework.dart';
-import 'package:angel_oauth2/angel_oauth2.dart';
+import 'package:galileo_framework/galileo_framework.dart';
+import 'package:galileo_oauth2/galileo_oauth2.dart';
 
 main() async {
-  var app = Angel();
+  var app = Galileo();
   var oauth2 = _ExampleAuthorizationServer();
   var _rgxBearer = RegExp(r'^[Bb]earer ([^\n\s]+)$');
 
@@ -20,11 +20,11 @@ main() async {
         req.headers.value('authorization')?.replaceAll(_rgxBearer, '')?.trim();
 
     if (authToken == null) {
-      throw AngelHttpException.forbidden();
+      throw GalileoHttpException.forbidden();
     } else {
       // TODO: The user has a token, now verify it.
       // It is up to you how to store and retrieve auth tokens within your application.
-      // The purpose of `package:angel_oauth2` is to provide the transport
+      // The purpose of `package:galileo_oauth2` is to provide the transport
       // across which you distribute these tokens in the first place.
     }
   });

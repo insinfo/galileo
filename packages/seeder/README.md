@@ -1,9 +1,9 @@
-# angel_seeder
+# galileo_seeder
 
-[![version 1.0.](https://img.shields.io/pub/v/angel_seeder.svg)](https://pub.dartlang.org/packages/angel_seeder)
-[![build status](https://travis-ci.org/angel-dart/seeder.svg?branch=master)](https://travis-ci.org/angel-dart/seeder)
+[![version 1.0.](https://img.shields.io/pub/v/galileo_seeder.svg)](https://pub.dartlang.org/packages/galileo_seeder)
+[![build status](https://travis-ci.org/galileo-dart/seeder.svg?branch=master)](https://travis-ci.org/galileo-dart/seeder)
 
-Straightforward data seeder for Angel services.
+Straightforward data seeder for Galileo services.
 This is an almost exact port of [feathers-seeder](https://github.com/thosakwe/feathers-seeder),
 so its documentation should almost exactly match up here.
 Fortunately, I was also the one who made `feathers-seeder`, so if you ever need assistance,
@@ -11,7 +11,7 @@ file an issue.
 
 # Example
 ```dart
-var app = new Angel()..use('/todos', new TodoService());
+var app = new Galileo()..use('/todos', new TodoService());
 
 await app.configure(seed(
     'todos',

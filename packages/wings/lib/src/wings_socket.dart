@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:io';
 import 'dart:isolate';
 import 'dart:typed_data';
-import 'dart-ext:angel_wings';
+import 'dart-ext:galileo_wings';
 
 int bindWingsIPv4ServerSocket(
     String address,

@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:angel_framework/angel_framework.dart';
+import 'package:galileo_framework/galileo_framework.dart';
 import 'rate_limiter.dart';
 import 'rate_limiting_window.dart';
 
@@ -27,7 +27,7 @@ class ServiceRateLimiter<Id> extends RateLimiter<Id> {
         return RateLimitingWindow.fromJson(data);
       }
     } catch (e) {
-      if (e is AngelHttpException) {
+      if (e is GalileoHttpException) {
         if (e.statusCode == 404) {
         } else {
           rethrow;

@@ -84,7 +84,7 @@ crashlytics.properties
 crashlytics-build.properties
 fabric.properties
 
-# Angel
+# Galileo
 .env
 log.txt
 

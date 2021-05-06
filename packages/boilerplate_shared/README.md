@@ -6,7 +6,7 @@ Example setup:
 Run:
 
 ```bash
-angel init
+galileo init
 ```
 
 Structure:
@@ -21,7 +21,7 @@ foo/
 
 Where:
 * `foo/` is the "shared" project that contains things like model files or validators
-* `foo_server/` is also created by `angel init`
+* `foo_server/` is also created by `galileo init`
 * `foo_mobile/` is a Flutter project
 * `foo_web/` is a Dart web project, perhaps created via `stagehand`.
 

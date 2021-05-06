@@ -1,16 +1,16 @@
-# angel_mongo
+# galileo_mongo
 
-[![Pub](https://img.shields.io/pub/v/angel_mongo.svg)](https://pub.dartlang.org/packages/angel_mongo)
-[![build status](https://travis-ci.org/angel-dart/mongo.svg)](https://travis-ci.org/angel-dart/mongo)
+[![Pub](https://img.shields.io/pub/v/galileo_mongo.svg)](https://pub.dartlang.org/packages/galileo_mongo)
+[![build status](https://travis-ci.org/galileo-dart/mongo.svg)](https://travis-ci.org/galileo-dart/mongo)
 
-MongoDB-enabled services for the Angel framework.
+MongoDB-enabled services for the Galileo framework.
 
 # Installation
 Add the following to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  angel_mongo: ^2.0.0
+  galileo_mongo: ^2.0.0
 ```
 
 # Usage
@@ -18,7 +18,7 @@ This library exposes one main class: `MongoService`.
 
 ## Model
 `Model` is class with no real functionality; however, it represents a basic document, and your services should host inherited classes.
-Other Angel service providers host `Model` as well, so you will easily be able to modify your application if you ever switch databases.
+Other Galileo service providers host `Model` as well, so you will easily be able to modify your application if you ever switch databases.
 
 ```dart
 class User extends Model {

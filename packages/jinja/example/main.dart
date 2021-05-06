@@ -1,12 +1,12 @@
 import 'dart:io';
-import 'package:angel_framework/angel_framework.dart';
-import 'package:angel_framework/http.dart';
-import 'package:angel_jinja/angel_jinja.dart';
+import 'package:galileo_framework/galileo_framework.dart';
+import 'package:galileo_framework/http.dart';
+import 'package:galileo_jinja/galileo_jinja.dart';
 import 'package:path/path.dart' as p;
 
 main() async {
-  var app = Angel();
-  var http = AngelHttp(app);
+  var app = Galileo();
+  var http = GalileoHttp(app);
   var viewsDir = p.join(
     p.dirname(
       p.fromUri(Platform.script),

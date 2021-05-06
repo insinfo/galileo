@@ -1,4 +1,4 @@
-library graphql_parser.language.ast;
+library galileo_graphql_parser.language.ast;
 
 export 'alias.dart';
 export 'array_value.dart';

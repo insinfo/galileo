@@ -1,6 +1,6 @@
-import 'package:angel_framework/angel_framework.dart' as srv;
-import 'package:angel_poll/angel_poll.dart';
-import 'package:angel_test/angel_test.dart';
+import 'package:galileo_framework/galileo_framework.dart' as srv;
+import 'package:galileo_poll/galileo_poll.dart';
+import 'package:galileo_test/galileo_test.dart';
 import 'package:async/async.dart';
 import 'package:logging/logging.dart';
 import 'package:test/test.dart';
@@ -11,8 +11,8 @@ void main() {
   PollingService pollingService;
 
   setUp(() async {
-    var app = new srv.Angel();
-    app.logger = new Logger.detached('angel_poll')
+    var app = new srv.Galileo();
+    app.logger = new Logger.detached('galileo_poll')
       ..onRecord.listen((rec) {
         print(rec);
         if (rec.error != null) {

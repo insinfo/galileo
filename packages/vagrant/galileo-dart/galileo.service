@@ -1,0 +1,12 @@
+[Unit]
+Description=`galileo` server
+
+[Service]
+Environment=GALILEO_ENV=production
+User=vagrant
+WorkingDirectory=/home/vagrant/app # Path to `galileo` project
+ExecStart=/usr/lib/dart/bin/dart bin/prod.dart
+Restart=always # Restart process on crash
+
+[Install]
+WantedBy=multi-user.target

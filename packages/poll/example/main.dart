@@ -1,5 +1,5 @@
-import 'package:angel_client/io.dart';
-import 'package:angel_poll/angel_poll.dart';
+import 'package:galileo_client/io.dart';
+import 'package:galileo_poll/galileo_poll.dart';
 
 main() {
   var app = new Rest('http://localhost:3000');

@@ -1,9 +1,9 @@
 # oauth2
-[![Pub](https://img.shields.io/pub/v/angel_oauth2.svg)](https://pub.dartlang.org/packages/angel_oauth2)
-[![build status](https://travis-ci.org/angel-dart/oauth2.svg)](https://travis-ci.org/angel-dart/oauth2)
+[![Pub](https://img.shields.io/pub/v/galileo_oauth2.svg)](https://pub.dartlang.org/packages/galileo_oauth2)
+[![build status](https://travis-ci.org/galileo-dart/oauth2.svg)](https://travis-ci.org/galileo-dart/oauth2)
 
 A class containing handlers that can be used within
-[Angel](https://angel-dart.github.io/) to build a spec-compliant
+[Galileo](https://galileo-dart.github.io/) to build a spec-compliant
 OAuth 2.0 server, including PKCE support.
 
 * [Installation](#installation)
@@ -16,8 +16,8 @@ In your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  angel_framework: ^2.0.0-alpha
-  angel_oauth2: ^2.0.0
+  galileo_framework: ^2.0.0-alpha
+  galileo_oauth2: ^2.0.0
 ```
 
 # Usage
@@ -28,7 +28,7 @@ Your server needs to have definitions of at least two types:
 Define a server class as such:
 
 ```dart
-import 'package:angel_oauth2/angel_oauth2.dart' as oauth2;
+import 'package:galileo_oauth2/galileo_oauth2.dart' as oauth2;
 
 class MyServer extends oauth2.AuthorizationServer<Client, User> {}
 ```

@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:data_loader/data_loader.dart';
+import 'package:galileo_data_loader/galileo_data_loader.dart';
 import 'package:test/test.dart';
 
 void main() {
@@ -35,10 +35,18 @@ void main() {
     expect(
       batch,
       [
-        { 0: [0, 1, 2]},
-        { 1: [0, 1, 2]},
-        { 2: [0, 1, 2]},
-        { 0: [0, 1, 2]},
+        {
+          0: [0, 1, 2]
+        },
+        {
+          1: [0, 1, 2]
+        },
+        {
+          2: [0, 1, 2]
+        },
+        {
+          0: [0, 1, 2]
+        },
       ],
     );
   });

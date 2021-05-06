@@ -1,12 +1,12 @@
-import 'package:angel_framework/angel_framework.dart';
-import 'package:angel_framework/http.dart';
-import 'package:angel_html/angel_html.dart';
+import 'package:galileo_framework/galileo_framework.dart';
+import 'package:galileo_framework/http.dart';
+import 'package:galileo_html/galileo_html.dart';
 import 'package:html_builder/elements.dart';
 import 'package:logging/logging.dart';
 
 main() async {
-  var app = Angel(), http = AngelHttp(app);
-  app.logger = Logger('angel_html')
+  var app = Galileo(), http = GalileoHttp(app);
+  app.logger = Logger('galileo_html')
     ..onRecord.listen((rec) {
       print(rec);
       if (rec.error != null) print(rec.error);
@@ -39,7 +39,7 @@ main() async {
     ]),
   );
 
-  app.fallback((req, res) => throw AngelHttpException.notFound());
+  app.fallback((req, res) => throw GalileoHttpException.notFound());
 
   await http.startServer('127.0.0.1', 3000);
   print('Listening at ${http.uri}');

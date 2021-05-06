@@ -1,11 +1,11 @@
-import 'package:angel_redis/angel_redis.dart';
+import 'package:galileo_redis/galileo_redis.dart';
 import 'package:resp_client/resp_client.dart';
-import 'package:resp_client/resp_commands.dart';
+import 'package:resp_client/resp_server.dart';
 
 main() async {
   var connection = await connectSocket('localhost');
   var client = new RespClient(connection);
-  var service = new RedisService(new RespCommands(client), prefix: 'example');
+  var service = new RedisService(client, prefix: 'example');
 
   // Create an object
   await service.create({'id': 'a', 'hello': 'world'});

@@ -1,13 +1,14 @@
-name: angel_wings
+name: galileo_wings
+
 environment:
-  sdk: ">=2.10.0-dev <2.12.0"
+  sdk: ">=2.10.0 <3.0.0"
+
 dependencies:
-  angel_framework: #^2.0.0-alpha
-    path: ../framework
-  mock_request: ^1.0.0
+  galileo_framework: ^3.0.0    
+  galileo_mock_request: ^1.0.8 
+
 dev_dependencies:
-  angel_static: #^2.0.0
-    path: ../static
-  io: ^0.3.2
-  pedantic: ^1.0.0
-  pretty_logging: ^1.0.0
+  galileo_static: ^3.0.1 
+  io: ^1.0.0 #Null safety
+  pedantic: ^1.11.0 #Null safety
+  galileo_pretty_logging: ^3.0.0 #Null safety

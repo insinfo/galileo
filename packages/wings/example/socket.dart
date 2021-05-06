@@ -1,10 +1,10 @@
 import 'dart:convert';
 import 'dart:typed_data';
-import 'package:angel_framework/angel_framework.dart';
-import 'package:angel_wings/angel_wings.dart';
+import 'package:galileo_framework/galileo_framework.dart';
+import 'package:galileo_wings/galileo_wings.dart';
 
 main() async {
-  var app = Angel();
+  var app = Galileo();
   var socket = await WingsSocket.bind('127.0.0.1', 3000);
   print('Listening at http://localhost:3000');
 

@@ -1,21 +1,21 @@
-name: angel_seo
-description: Helper infrastructure for building SEO-friendly Web backends in Angel.
-author: Tobe O <thosakwe@gmail.com>
-homepage: https://github.com/angel-dart/seo
-version: 2.0.0
+name: galileo_seo
+description: Helper infrastructure for building SEO-friendly Web backends in Galileo.
+author: Isaque Neves <insinfo2008@gmail.com>
+homepage: https://github.com/insinfo/galileo/tree/master/packages/seo
+version: 3.0.0
+
 environment:
-  sdk: ">=2.10.0 <2.12.0"
+  sdk: ">=2.10.0 <3.0.0"
+
 dependencies:
-  angel_framework: #^2.0.0-alpha
-    path: ../framework
-  angel_static: #^2.0.0-alpha
-    path: ../static
-  file: ^5.0.0
-  html: ^0.13.0
-  http_parser: ^3.0.0
-  path: ^1.0.0
+  galileo_framework: ^3.0.2 
+  galileo_static: ^3.0.1 
+  file: ^6.1.0 #Null safety
+  html: ^0.15.0 #Null safety
+  http_parser: ^4.0.0  #Null safety
+  path: ^1.8.0 #Null safety
+
 dev_dependencies:
-  angel_test: #^2.0.0-alpha
-    path: ../test
-  logging:
-  test: ^1.15.7
+  galileo_test: ^3.0.1  
+  logging: ^1.0.1 #Null safety
+  test: ^1.17.3 #Null safety

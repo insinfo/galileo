@@ -1,6 +1,6 @@
 # pub_serve_proxy
 Example of how to reverse proxy over `pub run build_runner serve`.
-`package:angel_proxy` supports proxying over any HTTP server, including WebSocket
+`package:galileo_proxy` supports proxying over any HTTP server, including WebSocket
 support, so it can be used with `webpack-dev-server` and co. as well.
 
 ## Development

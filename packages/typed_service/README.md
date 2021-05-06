@@ -1,15 +1,15 @@
 # typed_service
-Angel services that use reflection (via mirrors or codegen) to (de)serialize PODO's.
+Galileo services that use reflection (via mirrors or codegen) to (de)serialize PODO's.
 Useful for quick prototypes.
 
-Typically, [`package:angel_serialize`](https://github.com/angel-dart/serialize)
+Typically, [`package:galileo_serialize`](https://github.com/galileo-dart/serialize)
 is recommended.
 
 ## Brief Example
 ```dart
 main() async {
-  var app = Angel();
-  var http = AngelHttp(app);
+  var app = Galileo();
+  var http = GalileoHttp(app);
   var service = TypedService<String, Todo>(MapService());
   hierarchicalLoggingEnabled = true;
   app.use('/api/todos', service);

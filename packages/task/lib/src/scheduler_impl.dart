@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'dart:isolate';
-import 'package:angel_framework/angel_framework.dart';
+import 'package:galileo_framework/galileo_framework.dart';
 import 'package:uuid/uuid.dart';
 import 'protocol.dart';
 import 'scheduler.dart';
@@ -10,19 +10,19 @@ import 'task.dart';
 import 'task_result_impl.dart';
 
 /// Schedules and runs tasks within the context of a loaded application.
-class AngelTaskScheduler extends TaskScheduler {
+class GalileoTaskScheduler extends TaskScheduler {
   final Map<String, SendPort> _clients = {};
   bool _closed = false;
   final List<Socket> _clientSockets = [];
   bool _started = false;
   final List<_TaskImpl> _tasks = [];
   final Uuid _uuid = new Uuid();
-  final Angel app;
+  final Galileo app;
   final bool sendReturnValues;
   final ServerSocket socket;
   final ReceivePort receivePort = new ReceivePort();
 
-  AngelTaskScheduler(this.app, {this.sendReturnValues: false, this.socket});
+  GalileoTaskScheduler(this.app, {this.sendReturnValues: false, this.socket});
 
   /// Sends an arbitrary message to all connected clients.
   void broadcast(message) {
@@ -75,7 +75,7 @@ class AngelTaskScheduler extends TaskScheduler {
   @override
   Future start() {
     if (_started || _closed)
-      throw new StateError('Cannot restart an AngelTaskScheduler.');
+      throw new StateError('Cannot restart an GalileoTaskScheduler.');
 
     receivePort.listen((data) {
       handleMessage(data, (message) {
@@ -179,7 +179,7 @@ class _TaskImpl implements Task {
   bool _closed = false;
   final StreamController _results = new StreamController();
   Timer _timer;
-  final Angel app;
+  final Galileo app;
   final Function callback;
   final Duration frequency;
   final String name;
@@ -229,7 +229,7 @@ class _TaskImpl implements Task {
 
 class _OnceTaskImpl extends _TaskImpl {
   _OnceTaskImpl(
-      Angel app, Duration delay, Function callback, InjectionRequest injection)
+      Galileo app, Duration delay, Function callback, InjectionRequest injection)
       : super(app, delay ?? new Duration(), callback, injection);
 
   run([List args, Map<Symbol, dynamic> named]) async {
@@ -239,7 +239,7 @@ class _OnceTaskImpl extends _TaskImpl {
   }
 }
 
-_run(Function callback, InjectionRequest injection, Angel app,
+_run(Function callback, InjectionRequest injection, Galileo app,
     [List arguments, Map<Symbol, dynamic> namedParams]) {
   List args = []..addAll(arguments ?? []);
   Map<Symbol, dynamic> named = {}..addAll(namedParams ?? {});

@@ -1,16 +1,16 @@
 import 'dart:io';
-import 'package:angel/src/pretty_logging.dart';
-import 'package:angel/angel.dart';
-import 'package:angel_framework/angel_framework.dart';
-import 'package:angel_hot/angel_hot.dart';
+import 'package:galileo/src/pretty_logging.dart';
+import 'package:galileo/galileo.dart';
+import 'package:galileo_framework/galileo_framework.dart';
+import 'package:galileo_hot/galileo_hot.dart';
 import 'package:logging/logging.dart';
 
 main() async {
   // Watch the config/ and web/ directories for changes, and hot-reload the server.
   var hot = new HotReloader(() async {
-    var app = new Angel()..lazyParseBodies = true;
+    var app = new Galileo()..lazyParseBodies = true;
     await app.configure(configureServer);
-    app.logger = new Logger('angel')
+    app.logger = new Logger('galileo')
       ..onRecord.listen(prettyLog);
     return app;
   }, [

@@ -1,3 +1,3 @@
-/// Use `angel_task.dart` instead.
+/// Use `galileo_task.dart` instead.
 @deprecated
-library angel_task.server;
+library galileo_task.server;

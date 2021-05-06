@@ -1,26 +1,26 @@
-import 'package:angel_diagnostics/angel_diagnostics.dart';
-import 'package:angel_framework/angel_framework.dart';
-import 'package:angel_test/angel_test.dart';
-import 'package:angel_toggle/angel_toggle.dart';
+import 'package:galileo_diagnostics/galileo_diagnostics.dart';
+import 'package:galileo_framework/galileo_framework.dart';
+import 'package:galileo_test/galileo_test.dart';
+import 'package:galileo_toggle/galileo_toggle.dart';
 import 'package:test/test.dart';
 
 main() {
-  Angel testApp, jimApp, normalApp;
+  Galileo testApp, jimApp, normalApp;
   TestClient testAppClient, jimAppClient, normalAppClient;
 
   setUp(() async {
     var gregPlugin = toggleService('api/greg', () => new GregService());
 
-    testApp = new Angel();
+    testApp = new Galileo();
     await testApp.configure(gregPlugin);
     testAppClient = await connectTo(testApp);
 
-    jimApp = new Angel();
+    jimApp = new Galileo();
     await jimApp.configure(toggleService(
         'api/greg', () => new GregService(), () => new JimService()));
     jimAppClient = await connectTo(jimApp);
 
-    normalApp = new Angel()
+    normalApp = new Galileo()
       ..properties['testMode'] = false;
     await normalApp.configure(gregPlugin);
     normalAppClient = await connectTo(normalApp);

@@ -1,6 +1,6 @@
-library angel_mustache;
+library galileo_mustache;
 
-import 'package:angel_framework/angel_framework.dart';
+import 'package:galileo_framework/galileo_framework.dart';
 import 'package:file/file.dart';
 import 'package:mustache4dart/mustache4dart.dart' show render;
 import 'package:path/path.dart' as p;
@@ -17,7 +17,7 @@ mustache(Directory viewsDirectory,
 
   MustacheViewCache cache = new MustacheViewCache(context);
 
-  return (Angel app) async {
+  return (Galileo app) async {
     app.viewGenerator = (String name, [Map data]) async {
       var partialsProvider;
       partialsProvider = (String name) {

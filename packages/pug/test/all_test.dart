@@ -1,15 +1,15 @@
 import 'dart:io';
-import 'package:angel_framework/angel_framework.dart';
-import 'package:angel_pug/angel_pug.dart';
-import 'package:angel_test/angel_test.dart';
+import 'package:galileo_framework/galileo_framework.dart';
+import 'package:galileo_pug/galileo_pug.dart';
+import 'package:galileo_test/galileo_test.dart';
 import 'package:test/test.dart';
 
 main() {
-  Angel app;
+  Galileo app;
   TestClient client;
 
   setUp(() async {
-    app = new Angel()
+    app = new Galileo()
       ..get('/foo', (req, res) => res.render('foo'))
       ..get('/bar', (req, res) => res.render('bar/baz'));
     await app.configure(pug(new Directory('test/views')));

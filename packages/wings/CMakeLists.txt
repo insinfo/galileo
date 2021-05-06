@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0)
-project(angel_wings)
+project(galileo_wings)
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake_dart_utils/cmake")
 find_package(Dart REQUIRED)
 set(CMAKE_CXX_STANDARD 11)

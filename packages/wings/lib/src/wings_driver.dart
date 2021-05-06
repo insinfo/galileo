@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io' show Cookie;
 import 'dart:typed_data';
-import 'package:angel_framework/angel_framework.dart';
+import 'package:galileo_framework/galileo_framework.dart';
 import 'wings_request.dart';
 import 'wings_response.dart';
 import 'wings_socket.dart';
@@ -11,14 +11,14 @@ Future<WingsSocket> startSharedWings(dynamic addr, int port) {
   return WingsSocket.bind(addr, port, shared: true);
 }
 
-class AngelWings extends Driver<WingsClientSocket, int, WingsSocket,
+class GalileoWings extends Driver<WingsClientSocket, int, WingsSocket,
     WingsRequestContext, WingsResponseContext> {
-  factory AngelWings(Angel app) {
-    return AngelWings.custom(app, WingsSocket.bind);
+  factory GalileoWings(Galileo app) {
+    return GalileoWings.custom(app, WingsSocket.bind);
   }
 
-  AngelWings.custom(
-      Angel app, Future<WingsSocket> Function(dynamic, int) serverGenerator)
+  GalileoWings.custom(
+      Galileo app, Future<WingsSocket> Function(dynamic, int) serverGenerator)
       : super(app, serverGenerator);
 
   @override

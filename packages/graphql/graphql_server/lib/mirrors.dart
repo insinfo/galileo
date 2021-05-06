@@ -1,12 +1,11 @@
 // ignore_for_file: deprecated_member_use_from_same_package
 import 'dart:mirrors';
 import 'package:galileo_serialize/galileo_serialize.dart';
-import 'package:graphql_schema/graphql_schema.dart';
+import 'package:galileo_graphql_schema/galileo_graphql_schema.dart';
 import 'package:recase/recase.dart';
 
 /// Uses `dart:mirrors` to read field names from items. If they are Maps, performs a regular lookup.
-T mirrorsFieldResolver<T>(objectValue, String fieldName,
-    [Map<String, dynamic> objectValues]) {
+T mirrorsFieldResolver<T>(objectValue, String fieldName, [Map<String, dynamic> objectValues]) {
   if (objectValue is Map) {
     return objectValue[fieldName] as T;
   } else {
@@ -43,8 +42,7 @@ GraphQLType _objectTypeFromDartType(Type type, [List<Type> typeArguments]) {
   } else if (type == double) {
     return graphQLFloat;
   } else if (type == num) {
-    throw UnsupportedError(
-        'Cannot convert `num` to a GraphQL type. Choose `int` or `float` instead.');
+    throw UnsupportedError('Cannot convert `num` to a GraphQL type. Choose `int` or `float` instead.');
   } else if (type == Null) {
     throw UnsupportedError('Cannot convert `Null` to a GraphQL type.');
   } else if (type == String) {
@@ -53,12 +51,10 @@ GraphQLType _objectTypeFromDartType(Type type, [List<Type> typeArguments]) {
     return graphQLDate;
   }
 
-  var mirror = reflectType(
-      type, typeArguments?.isNotEmpty == true ? typeArguments : null);
+  var mirror = reflectType(type, typeArguments?.isNotEmpty == true ? typeArguments : null);
 
   if (mirror is! ClassMirror) {
-    throw StateError(
-        '$type is not a class, and therefore cannot be converted into a GraphQL object type.');
+    throw StateError('$type is not a class, and therefore cannot be converted into a GraphQL object type.');
   }
 
   var clazz = mirror as ClassMirror;
@@ -95,10 +91,8 @@ GraphQLObjectType objectTypeFromClassMirror(ClassMirror mirror) {
     for (var name in map.keys) {
       var methodMirror = map[name];
       var exclude = _getExclude(name, methodMirror);
-      var canAdd = name != #hashCode &&
-          name != #runtimeType &&
-          !methodMirror.isPrivate &&
-          exclude?.canSerialize != true;
+      var canAdd =
+          name != #hashCode && name != #runtimeType && !methodMirror.isPrivate && exclude?.canSerialize != true;
 
       if (methodMirror.isGetter && canAdd) {
         fields.add(fieldFromGetter(name, methodMirror, exclude, mirror));
@@ -158,18 +152,7 @@ GraphQLObjectType objectTypeFromClassMirror(ClassMirror mirror) {
   }
 
   var inheritsFrom = <GraphQLObjectType>[];
-  var primitiveTypes = const <Type>[
-    String,
-    bool,
-    num,
-    int,
-    double,
-    Object,
-    dynamic,
-    Null,
-    Type,
-    Symbol
-  ];
+  var primitiveTypes = const <Type>[String, bool, num, int, double, Object, dynamic, Null, Type, Symbol];
 
   void walk(ClassMirror parent) {
     if (!primitiveTypes.contains(parent.reflectedType)) {
@@ -232,8 +215,7 @@ GraphQLEnumType enumTypeFromClassMirror(ClassMirror mirror) {
 }
 
 @deprecated
-GraphQLObjectField fieldFromGetter(
-    Symbol name, MethodMirror mirror, Exclude exclude, ClassMirror clazz) {
+GraphQLObjectField fieldFromGetter(Symbol name, MethodMirror mirror, Exclude exclude, ClassMirror clazz) {
   var type = _getProvidedType(mirror.metadata);
   var wasProvided = type != null;
 
@@ -241,8 +223,8 @@ GraphQLObjectField fieldFromGetter(
     var returnType = mirror.returnType;
 
     if (!clazz.isAssignableTo(returnType)) {
-      type = convertDartType(returnType.reflectedType,
-          mirror.returnType.typeArguments.map((t) => t.reflectedType).toList());
+      type = convertDartType(
+          returnType.reflectedType, mirror.returnType.typeArguments.map((t) => t.reflectedType).toList());
     }
   }
 

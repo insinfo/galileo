@@ -1,5 +1,5 @@
-import 'package:graphql_parser/graphql_parser.dart';
-import 'package:graphql_schema/graphql_schema.dart';
+import 'package:galileo_graphql_parser/galileo_graphql_parser.dart';
+import 'package:galileo_graphql_schema/galileo_graphql_schema.dart';
 
 /// Performs introspection over a GraphQL [schema], and returns a one, containing
 /// introspective information.
@@ -71,8 +71,7 @@ GraphQLSchema reflectSchema(GraphQLSchema schema, List<GraphQLType> allTypes) {
       resolve: (_, args) {
         var name = args['name'] as String;
         return allTypes.firstWhere((t) => t.name == name,
-            orElse: () => throw GraphQLException.fromMessage(
-                'No type named "$name" exists.'));
+            orElse: () => throw GraphQLException.fromMessage('No type named "$name" exists.'));
       },
     ),
   ];
@@ -136,8 +135,7 @@ GraphQLObjectType _reflectSchemaTypes() {
 
     var fieldType = _reflectFields();
     var inputValueType = _reflectInputValueType();
-    var typeField = fieldType.fields
-        .firstWhere((f) => f.name == 'type', orElse: () => null);
+    var typeField = fieldType.fields.firstWhere((f) => f.name == 'type', orElse: () => null);
 
     if (typeField == null) {
       fieldType.fields.add(
@@ -149,16 +147,14 @@ GraphQLObjectType _reflectSchemaTypes() {
       );
     }
 
-    typeField = inputValueType.fields
-        .firstWhere((f) => f.name == 'type', orElse: () => null);
+    typeField = inputValueType.fields.firstWhere((f) => f.name == 'type', orElse: () => null);
 
     if (typeField == null) {
       inputValueType.fields.add(
         field(
           'type',
           _reflectSchemaTypes(),
-          resolve: (f, _) =>
-              _fetchFromInputValue(f, (f) => f.type, (f) => f.type),
+          resolve: (f, _) => _fetchFromInputValue(f, (f) => f.type, (f) => f.type),
         ),
       );
     }
@@ -167,17 +163,8 @@ GraphQLObjectType _reflectSchemaTypes() {
   return _typeType;
 }
 
-final GraphQLEnumType<String> _typeKindType =
-    enumTypeFromStrings('__TypeKind', [
-  'SCALAR',
-  'OBJECT',
-  'INTERFACE',
-  'UNION',
-  'ENUM',
-  'INPUT_OBJECT',
-  'LIST',
-  'NON_NULL'
-]);
+final GraphQLEnumType<String> _typeKindType = enumTypeFromStrings(
+    '__TypeKind', ['SCALAR', 'OBJECT', 'INTERFACE', 'UNION', 'ENUM', 'INPUT_OBJECT', 'LIST', 'NON_NULL']);
 
 GraphQLObjectType _createTypeType() {
   var enumValueType = _reflectEnumValueType();
@@ -231,10 +218,7 @@ GraphQLObjectType _createTypeType() {
         ),
       ],
       resolve: (type, args) => type is GraphQLObjectType
-          ? type.fields
-              .where(
-                  (f) => !f.isDeprecated || args['includeDeprecated'] == true)
-              .toList()
+          ? type.fields.where((f) => !f.isDeprecated || args['includeDeprecated'] == true).toList()
           : null,
     ),
     field(
@@ -249,10 +233,7 @@ GraphQLObjectType _createTypeType() {
       ],
       resolve: (obj, args) {
         if (obj is GraphQLEnumType) {
-          return obj.values
-              .where(
-                  (f) => !f.isDeprecated || args['includeDeprecated'] == true)
-              .toList();
+          return obj.values.where((f) => !f.isDeprecated || args['includeDeprecated'] == true).toList();
         } else {
           return null;
         }
@@ -316,8 +297,7 @@ GraphQLObjectType _createFieldType() {
 
 GraphQLObjectType _inputValueType;
 
-T _fetchFromInputValue<T>(x, T Function(GraphQLFieldInput) ifInput,
-    T Function(GraphQLInputObjectField) ifObjectField) {
+T _fetchFromInputValue<T>(x, T Function(GraphQLFieldInput) ifInput, T Function(GraphQLInputObjectField) ifObjectField) {
   if (x is GraphQLFieldInput) {
     return ifInput(x);
   } else if (x is GraphQLInputObjectField) {
@@ -332,35 +312,26 @@ GraphQLObjectType _reflectInputValueType() {
     field(
       'name',
       graphQLString.nonNullable(),
-      resolve: (obj, _) =>
-          _fetchFromInputValue(obj, (f) => f.name, (f) => f.name),
+      resolve: (obj, _) => _fetchFromInputValue(obj, (f) => f.name, (f) => f.name),
     ),
     field(
       'description',
       graphQLString,
-      resolve: (obj, _) =>
-          _fetchFromInputValue(obj, (f) => f.description, (f) => f.description),
+      resolve: (obj, _) => _fetchFromInputValue(obj, (f) => f.description, (f) => f.description),
     ),
     field(
       'defaultValue',
       graphQLString,
-      resolve: (obj, _) => _fetchFromInputValue(obj,
-          (f) => f.defaultValue?.toString(), (f) => f.defaultValue?.toString()),
+      resolve: (obj, _) =>
+          _fetchFromInputValue(obj, (f) => f.defaultValue?.toString(), (f) => f.defaultValue?.toString()),
     ),
   ]);
 }
 
 GraphQLObjectType _directiveType;
 
-final GraphQLEnumType<String> _directiveLocationType =
-    enumTypeFromStrings('__DirectiveLocation', [
-  'QUERY',
-  'MUTATION',
-  'FIELD',
-  'FRAGMENT_DEFINITION',
-  'FRAGMENT_SPREAD',
-  'INLINE_FRAGMENT'
-]);
+final GraphQLEnumType<String> _directiveLocationType = enumTypeFromStrings(
+    '__DirectiveLocation', ['QUERY', 'MUTATION', 'FIELD', 'FRAGMENT_DEFINITION', 'FRAGMENT_SPREAD', 'INLINE_FRAGMENT']);
 
 GraphQLObjectType _reflectDirectiveType() {
   var inputValueType = _reflectInputValueType();
@@ -421,8 +392,7 @@ GraphQLObjectType _reflectEnumValueType() {
   );
 }
 
-List<GraphQLType> fetchAllTypes(
-    GraphQLSchema schema, List<GraphQLType> specifiedTypes) {
+List<GraphQLType> fetchAllTypes(GraphQLSchema schema, List<GraphQLType> specifiedTypes) {
   var data = Set<GraphQLType>()
     ..add(schema.queryType)
     ..addAll(specifiedTypes);

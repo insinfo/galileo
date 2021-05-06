@@ -1,16 +1,16 @@
-import 'package:angel_framework/angel_framework.dart';
-import 'package:angel_html/angel_html.dart';
-import 'package:angel_test/angel_test.dart';
+import 'package:galileo_framework/galileo_framework.dart';
+import 'package:galileo_html/galileo_html.dart';
+import 'package:galileo_test/galileo_test.dart';
 import 'package:html_builder/elements.dart';
 import 'package:html_builder/html_builder.dart';
 import 'package:test/test.dart';
 
 main() {
-  Angel app;
+  Galileo app;
   TestClient client;
 
   setUp(() async {
-    app = new Angel();
+    app = new Galileo();
 
     app.fallback(renderHtml());
 
@@ -77,7 +77,7 @@ main() {
           .get('/strict', headers: {'accept': 'application/json,text/xml'});
       print('Response: ${response.body}');
       expect(response,
-          isAngelHttpException(statusCode: 406, message: '406 Not Acceptable'));
+          isGalileoHttpException(statusCode: 406, message: '406 Not Acceptable'));
     });
   });
 }

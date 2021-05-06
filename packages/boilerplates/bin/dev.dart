@@ -1,9 +1,9 @@
 import 'dart:io';
-import 'package:angel/src/pretty_logging.dart';
-import 'package:angel/angel.dart';
-import 'package:angel_container/mirrors.dart';
-import 'package:angel_framework/angel_framework.dart';
-import 'package:angel_hot/angel_hot.dart';
+import 'package:galileo/src/pretty_logging.dart';
+import 'package:galileo/galileo.dart';
+import 'package:galileo_container/mirrors.dart';
+import 'package:galileo_framework/galileo_framework.dart';
+import 'package:galileo_hot/galileo_hot.dart';
 import 'package:logging/logging.dart';
 
 main() async {
@@ -11,10 +11,10 @@ main() async {
   hierarchicalLoggingEnabled = true;
 
   var hot = HotReloader(() async {
-    var logger = Logger.detached('{{angel}}')
+    var logger = Logger.detached('{{galileo}}')
       ..level = Level.ALL
       ..onRecord.listen(prettyLog);
-    var app = Angel(logger: logger, reflector: MirrorsReflector());
+    var app = Galileo(logger: logger, reflector: MirrorsReflector());
     await app.configure(configureServer);
     return app;
   }, [
@@ -24,5 +24,5 @@ main() async {
 
   var server = await hot.startServer('127.0.0.1', 3000);
   print(
-      '{{angel}} server listening at http://${server.address.address}:${server.port}');
+      '{{galileo}} server listening at http://${server.address.address}:${server.port}');
 }

@@ -1,4 +1,4 @@
-import 'package:graphql_parser/graphql_parser.dart';
+import 'package:galileo_graphql_parser/galileo_graphql_parser.dart';
 import 'package:test/test.dart';
 import 'common.dart';
 import 'argument_test.dart';
@@ -21,11 +21,9 @@ main() {
   });
 }
 
-FragmentSpreadContext parseFragmentSpread(String text) =>
-    parse(text).parseFragmentSpread();
+FragmentSpreadContext parseFragmentSpread(String text) => parse(text).parseFragmentSpread();
 
-Matcher isFragmentSpread(String name, {Matcher directives}) =>
-    _IsFragmentSpread(name, directives);
+Matcher isFragmentSpread(String name, {Matcher directives}) => _IsFragmentSpread(name, directives);
 
 class _IsFragmentSpread extends Matcher {
   final String name;
@@ -36,17 +34,14 @@ class _IsFragmentSpread extends Matcher {
   @override
   Description describe(Description description) {
     if (directives != null) {
-      return directives.describe(
-          description.add('is a fragment spread named "$name" that also '));
+      return directives.describe(description.add('is a fragment spread named "$name" that also '));
     }
     return description.add('is a fragment spread named "$name"');
   }
 
   @override
   bool matches(item, Map matchState) {
-    var spread = item is FragmentSpreadContext
-        ? item
-        : parseFragmentSpread(item.toString());
+    var spread = item is FragmentSpreadContext ? item : parseFragmentSpread(item.toString());
     if (spread == null) return false;
     if (spread.name != name) return false;
     if (directives != null) {

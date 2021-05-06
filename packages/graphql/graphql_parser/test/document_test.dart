@@ -1,4 +1,4 @@
-import 'package:graphql_parser/graphql_parser.dart';
+import 'package:galileo_graphql_parser/galileo_graphql_parser.dart';
 import 'package:test/test.dart';
 
 import 'common.dart';
@@ -29,8 +29,7 @@ main() {
           isField(fieldName: isFieldName('description')),
           isField(
               fieldName: isFieldName('comments'),
-              selectionSet:
-                  isSelectionSet([isField(fieldName: isFieldName('id'))])),
+              selectionSet: isSelectionSet([isField(fieldName: isFieldName('id'))])),
         ]));
   });
 
@@ -55,10 +54,8 @@ main() {
       expect(op.name, isNull);
       expect(
           op.selectionSet,
-          isSelectionSet([
-            isField(fieldName: isFieldName('foo')),
-            isField(fieldName: isFieldName('bar', alias: 'baz'))
-          ]));
+          isSelectionSet(
+              [isField(fieldName: isFieldName('foo')), isField(fieldName: isFieldName('bar', alias: 'baz'))]));
     });
 
     test('mutation', () {
@@ -69,16 +66,12 @@ main() {
       expect(op.name, isNull);
       expect(
           op.selectionSet,
-          isSelectionSet([
-            isField(fieldName: isFieldName('foo')),
-            isField(fieldName: isFieldName('bar', alias: 'baz'))
-          ]));
+          isSelectionSet(
+              [isField(fieldName: isFieldName('foo')), isField(fieldName: isFieldName('bar', alias: 'baz'))]));
     });
 
     test('with operation type', () {
-      var doc =
-          parse(r'query foo ($one: [int] = 2) @foo @bar: 2 {foo, bar: baz}')
-              .parseDocument();
+      var doc = parse(r'query foo ($one: [int] = 2) @foo @bar: 2 {foo, bar: baz}').parseDocument();
       print(doc.span.highlight());
       expect(doc.definitions, hasLength(1));
       expect(doc.definitions.first is OperationDefinitionContext, isTrue);
@@ -87,11 +80,8 @@ main() {
       expect(op.isQuery, isTrue);
 
       expect(op.variableDefinitions.variableDefinitions, hasLength(1));
-      expect(
-          op.variableDefinitions.variableDefinitions.first,
-          isVariableDefinition('one',
-              type: isListType(isType('int'), isNullable: true),
-              defaultValue: isValue(2)));
+      expect(op.variableDefinitions.variableDefinitions.first,
+          isVariableDefinition('one', type: isListType(isType('int'), isNullable: true), defaultValue: isValue(2)));
 
       expect(op.directives, hasLength(2));
       expect(op.directives[0], isDirective('foo'));
@@ -100,10 +90,8 @@ main() {
       expect(op.selectionSet, isNotNull);
       expect(
           op.selectionSet,
-          isSelectionSet([
-            isField(fieldName: isFieldName('foo')),
-            isField(fieldName: isFieldName('bar', alias: 'baz'))
-          ]));
+          isSelectionSet(
+              [isField(fieldName: isFieldName('foo')), isField(fieldName: isFieldName('bar', alias: 'baz'))]));
     });
 
     test('exceptions', () {

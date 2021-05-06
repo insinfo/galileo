@@ -1,11 +1,11 @@
-# graphql_generator
-[![Pub](https://img.shields.io/pub/v/graphql_generator.svg)](https://pub.dartlang.org/packages/graphql_generator)
-[![build status](https://travis-ci.org/galileo-dart/graphql.svg)](https://travis-ci.org/galileo-dart/graphql)
+# galileo_graphql_generator
+[![Pub](https://img.shields.io/pub/v/galileo_graphql_generator.svg)](https://pub.dartlang.org/packages/galileo_graphql_generator)
+[![build status](https://travis-ci.org/galileo-dart/graphql.svg)](https://travis-ci.org/insinfo/galileo/graphql)
 
-Generates `package:graphql_schema` schemas for
+Generates `package:galileo_graphql_schema` schemas for
 annotated class.
 
-Replaces `convertDartType` from `package:graphql_server`.
+Replaces `convertDartType` from `package:galileo_graphql_server`.
 
 ## Usage
 Usage is very simple. You just need a `@graphQLClass` or `@GraphQLClass()` annotation

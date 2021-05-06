@@ -1,16 +1,16 @@
-name: angel_poll
-version: 1.0.0
-description: package:angel_client support for "realtime" interactions with Angel via long polling.
-author: Tobe O <thosakwe@gmail.com>
+name: galileo_poll
+version: 3.0.0
+description: package:galileo_client support for "realtime" interactions with Galileo via long polling.
+author: Isaque Neves <insinfo2008@gmail.com>
 environment:
-  sdk: ">=2.7.0 <3.0.0"
-homepage: https://github.com/angel-dart/poll
+  sdk: ">=2.10.0 <3.0.0"
+homepage: https://github.com/insinfo/galileo/tree/master/packages/poll
+
 dependencies:
-  angel_client: # ^1.0.0
-    path: ../client
-  async: ">=1.10.0 <3.0.0"
-  collection: ^1.14.12
+  galileo_client: ^3.0.1   
+  async: ^2.6.1 #Null safety
+  collection: ^1.15.0 #Null safety
+
 dev_dependencies:
-  angel_test: # ^1.1.0
-    path: ../test
-  test: ^1.15.7
+  galileo_test: ^3.0.1  
+  test: ^1.17.3 #Null safety

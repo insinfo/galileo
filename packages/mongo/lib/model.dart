@@ -1,6 +1,6 @@
-library angel_mongo.model;
+library galileo_mongo.model;
 
-/// Use the `Model` class defined in `package:angel_framework/common.dart` instead.
+/// Use the `Model` class defined in `package:galileo_framework/common.dart` instead.
 @deprecated
 class Model {
   /// This instance's ID.

@@ -1,27 +1,28 @@
 name: star_wars
 publish_to: none
+
 environment:
-  sdk: ">=2.10.0 <2.12.0"
+  sdk: ">=2.10.0 <3.0.0"
+
 dependencies:
-  #galileo_file_service: ^1.0.0
-  galileo_graphql:
-    path: ../galileo_graphql
-  galileo_hot: #^2.0.0-alpha
-    path: ../../hot
-  galileo_serialize: #^2.0.0
-    path: ../../serialize/galileo_serialize
-  io: ^0.3.2
+  galileo_file_service: ^3.0.0 
+  galileo_graphql: ^3.0.0     
+  galileo_hot: ^3.0.1   
+  galileo_serialize: ^3.0.0   
+  io: ^1.0.0 # Null safety
+  galileo_graphql_parser: ^3.0.0 
+  galileo_graphql_schema: ^3.0.0  
+  galileo_graphql_server: ^3.0.0 
+  galileo_container: ^2.2.2
+
 dev_dependencies:
-  galileo_serialize_generator: #^2.0.0
-    path: ../../serialize/galileo_serialize_generator
-  build_runner: ^1.0.0
-  graphql_generator:
-    path: ../graphql_generator
-dependency_overrides:
-  graphql_parser:
-    path: ../graphql_parser
-  graphql_schema:
-    path: ../graphql_schema
-  graphql_server:
-    path: ../graphql_server
+  galileo_serialize_generator: ^3.0.0 
+  build_runner: ^2.0.2 # Null safety
+  galileo_graphql_generator: ^3.0.0  
+
+#dependency_overrides:
+ # graphql_parser:   
+ # graphql_schema:    
+ # graphql_server:
+   
     

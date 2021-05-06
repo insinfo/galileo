@@ -1,10 +1,10 @@
 import 'dart:async';
-import 'package:angel_framework/angel_framework.dart';
-import 'package:angel_task/angel_task.dart';
+import 'package:galileo_framework/galileo_framework.dart';
+import 'package:galileo_task/galileo_task.dart';
 
 main() async {
   var app = await createApp();
-  var scheduler = new AngelTaskScheduler(app);
+  var scheduler = new GalileoTaskScheduler(app);
 
   scheduler.once((Todo singleton) {
     print('3 seconds later, we found our Todo singleton: "${singleton.text}"');
@@ -25,8 +25,8 @@ main() async {
   await scheduler.start();
 }
 
-Future<Angel> createApp() async {
-  var app = new Angel();
+Future<Galileo> createApp() async {
+  var app = new Galileo();
   app.container.singleton(new Todo(text: 'Clean your room!'));
   return app;
 }

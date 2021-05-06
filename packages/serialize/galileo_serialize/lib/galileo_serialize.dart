@@ -106,7 +106,7 @@ class Serializable {
 
 const Serializable serializable = Serializable();
 
-/// Used by `package:angel_serialize_generator` to reliably identify generated models.
+/// Used by `package:galileo_serialize_generator` to reliably identify generated models.
 class GeneratedSerializable {
   const GeneratedSerializable();
 }

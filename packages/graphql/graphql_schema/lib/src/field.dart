@@ -1,4 +1,4 @@
-part of graphql_schema.src.schema;
+part of galileo_graphql_schema.src.schema;
 
 /// Typedef for a function that resolves the value of a [GraphQLObjectField], whether asynchronously or not.
 typedef FutureOr<Value> GraphQLFieldResolver<Value, Serialized>(

@@ -1,15 +1,15 @@
 import 'dart:convert';
-import 'package:angel_framework/angel_framework.dart';
-import 'package:angel_framework/http.dart';
-import 'package:angel_seo/angel_seo.dart';
-import 'package:angel_static/angel_static.dart';
+import 'package:galileo_framework/galileo_framework.dart';
+import 'package:galileo_framework/http.dart';
+import 'package:galileo_seo/galileo_seo.dart';
+import 'package:galileo_static/galileo_static.dart';
 import 'package:file/local.dart';
 import 'package:http_parser/http_parser.dart';
 
 main() async {
-  var app = new Angel();
+  var app = new Galileo();
   var fs = const LocalFileSystem();
-  var http = new AngelHttp(app);
+  var http = new GalileoHttp(app);
 
   // You can wrap a [VirtualDirectory]
   var vDir = inlineAssetsFromVirtualDirectory(
@@ -36,7 +36,7 @@ main() async {
       ..buffer.add(utf8.encode(contents));
   });
 
-  app.fallback((req, res) => throw new AngelHttpException.notFound());
+  app.fallback((req, res) => throw new GalileoHttpException.notFound());
 
   var server = await http.startServer('127.0.0.1', 3000);
   print('Listening at http://${server.address.address}:${server.port}');

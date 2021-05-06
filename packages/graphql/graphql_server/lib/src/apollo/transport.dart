@@ -1,4 +1,4 @@
-import 'package:graphql_schema/graphql_schema.dart';
+import 'package:galileo_graphql_schema/galileo_graphql_schema.dart';
 
 /// A basic message in the Apollo WebSocket protocol.
 class OperationMessage {
@@ -56,9 +56,8 @@ class OperationMessage {
 
     // TODO: This is technically a violation of the spec.
     // https://github.com/apollographql/subscriptions-transport-ws/issues/551
-    if (map.containsKey('query') ||
-        map.containsKey('operationName') ||
-        map.containsKey('variables')) payload = Map.from(map);
+    if (map.containsKey('query') || map.containsKey('operationName') || map.containsKey('variables'))
+      payload = Map.from(map);
     return OperationMessage(type as String, id: id as String, payload: payload);
   }
 

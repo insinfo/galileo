@@ -1,13 +1,13 @@
 import 'dart:async';
 import 'dart:io';
-import 'package:angel_container/angel_container.dart';
-import 'package:angel_framework/angel_framework.dart';
-import 'package:mock_request/mock_request.dart';
+import 'package:galileo_container/galileo_container.dart';
+import 'package:galileo_framework/galileo_framework.dart';
+import 'package:galileo_mock_request/galileo_mock_request.dart';
 import 'package:shelf/shelf.dart' as shelf;
 
 class ShelfRequestContext extends RequestContext {
   @override
-  final Angel app;
+  final Galileo app;
   @override
   final Container container;
   @override
@@ -56,8 +56,7 @@ class ShelfRequestContext extends RequestContext {
     if (!app.allowMethodOverrides) {
       return originalMethod;
     } else {
-      return headers.value('x-http-method-override')?.toUpperCase() ??
-          originalMethod;
+      return headers.value('x-http-method-override')?.toUpperCase() ?? originalMethod;
     }
   }
 

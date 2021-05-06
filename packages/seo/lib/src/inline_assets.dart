@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:angel_framework/angel_framework.dart';
-import 'package:angel_static/angel_static.dart';
+import 'package:galileo_framework/galileo_framework.dart';
+import 'package:galileo_static/galileo_static.dart';
 import 'package:file/file.dart';
 import 'package:html/dom.dart' as html;
 import 'package:html/parser.dart' as html;

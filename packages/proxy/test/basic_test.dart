@@ -1,30 +1,27 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:angel_framework/angel_framework.dart';
-import 'package:angel_framework/http.dart';
-import 'package:angel_proxy/angel_proxy.dart';
+import 'package:galileo_framework/galileo_framework.dart';
+import 'package:galileo_framework/http.dart';
+import 'package:galileo_proxy/galileo_proxy.dart';
 import 'package:http/io_client.dart' as http;
 import 'package:logging/logging.dart';
 import 'package:test/test.dart';
 import 'common.dart';
 
 void main() {
-  Angel app;
+  Galileo app;
   var client = http.IOClient();
   HttpServer server, testServer;
   String url;
 
   setUp(() async {
-    app = Angel();
-    var appHttp = AngelHttp(app);
+    app = Galileo();
+    var appHttp = GalileoHttp(app);
 
     testServer = await startTestServer();
 
     var proxy1 = Proxy(
-      Uri(
-          scheme: 'http',
-          host: testServer.address.address,
-          port: testServer.port),
+      Uri(scheme: 'http', host: testServer.address.address, port: testServer.port),
       publicPath: '/proxy',
     );
 
@@ -40,7 +37,7 @@ void main() {
       res.write('intercept empty');
     });
 
-    app.logger = Logger('angel');
+    app.logger = Logger('galileo');
 
     Logger.root.onRecord.listen((rec) {
       print(rec);
@@ -60,27 +57,26 @@ void main() {
   });
 
   test('publicPath', () async {
-    final response = await client.get('$url/proxy/hello');
+    final response = await client.get(Uri.parse('$url/proxy/hello'));
     print('Response: ${response.body}');
     expect(response.body, equals('world'));
   });
 
   test('empty', () async {
-    var response = await client.get('$url/proxy/empty');
+    var response = await client.get(Uri.parse('$url/proxy/empty'));
     print('Response: ${response.body}');
     expect(response.body, 'intercept empty');
   });
 
   test('mapTo', () async {
-    final response = await client.get('$url/bar');
+    final response = await client.get(Uri.parse('$url/bar'));
     print('Response: ${response.body}');
     expect(response.body, equals('baz'));
   });
 
   test('original buffer', () async {
-    var response = await client.post('$url/proxy/body',
-        body: json.encode({'foo': 'bar'}),
-        headers: {'content-type': 'application/json'});
+    var response = await client.post(Uri.parse('$url/proxy/body'),
+        body: json.encode({'foo': 'bar'}), headers: {'content-type': 'application/json'});
     print('Response: ${response.body}');
     expect(response.body, isNotEmpty);
     expect(response.body, isNot('intercept empty'));

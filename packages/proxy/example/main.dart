@@ -1,13 +1,13 @@
 import 'dart:io';
-import 'package:angel_framework/angel_framework.dart';
-import 'package:angel_framework/http.dart';
-import 'package:angel_proxy/angel_proxy.dart';
+import 'package:galileo_framework/galileo_framework.dart';
+import 'package:galileo_framework/http.dart';
+import 'package:galileo_proxy/galileo_proxy.dart';
 import 'package:logging/logging.dart';
 
 final Duration timeout = Duration(seconds: 5);
 
 main() async {
-  var app = Angel();
+  var app = Galileo();
 
   // Forward any /api requests to pub.
   // By default, if the host throws a 404, the request will fall through to the next handler.
@@ -46,7 +46,7 @@ main() async {
   app.fallback(
       (req, res) => res.write('Couldn\'t connect to Pub or dartlang.'));
 
-  app.logger = Logger('angel')
+  app.logger = Logger('galileo')
     ..onRecord.listen(
       (rec) {
         print(rec);
@@ -56,8 +56,8 @@ main() async {
     );
 
   var server =
-      await AngelHttp(app).startServer(InternetAddress.loopbackIPv4, 8080);
+      await GalileoHttp(app).startServer(InternetAddress.loopbackIPv4, 8080);
   print('Listening at http://${server.address.address}:${server.port}');
   print(
-      'Check this out! http://${server.address.address}:${server.port}/pub/packages/angel_framework');
+      'Check this out! http://${server.address.address}:${server.port}/pub/packages/galileo_framework');
 }

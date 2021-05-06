@@ -1,4 +1,4 @@
-import 'package:graphql_parser/graphql_parser.dart';
+import 'package:galileo_graphql_parser/galileo_graphql_parser.dart';
 import 'package:test/test.dart';
 
 /// This is an *extremely* verbose test, but basically it
@@ -33,23 +33,18 @@ void main() {
 
       // Find $memberId
       var customerByCustomerId = queryDef.selectionSet.selections[0];
-      var customerMemberAttributesByCustomerId =
-          customerByCustomerId.field.selectionSet.selections[0];
-      var nodes0 =
-          customerMemberAttributesByCustomerId.field.selectionSet.selections[0];
+      var customerMemberAttributesByCustomerId = customerByCustomerId.field.selectionSet.selections[0];
+      var nodes0 = customerMemberAttributesByCustomerId.field.selectionSet.selections[0];
       var customerMemberAttributeId = nodes0.field.selectionSet.selections[0];
-      expect(customerMemberAttributeId.field.fieldName.name,
-          'customerMemberAttributeId');
+      expect(customerMemberAttributeId.field.fieldName.name, 'customerMemberAttributeId');
       var memberAttr = nodes0.field.selectionSet.selections[1];
-      expect(memberAttr.field.fieldName.name,
-          'memberAttributesByCustomerMemberAttributeId');
+      expect(memberAttr.field.fieldName.name, 'memberAttributesByCustomerMemberAttributeId');
       expect(memberAttr.field.arguments, hasLength(1));
       var condition = memberAttr.field.arguments[0];
       expect(condition.name, 'condition');
       expect(condition.value, TypeMatcher<ObjectValueContext>());
       var conditionValue = condition.value as ObjectValueContext;
-      var memberId = conditionValue.fields
-          .singleWhere((f) => f.nameToken.text == 'memberId');
+      var memberId = conditionValue.fields.singleWhere((f) => f.nameToken.text == 'memberId');
       expect(memberId.value, TypeMatcher<T>());
       print('Found \$memberId: Instance of $T');
     });

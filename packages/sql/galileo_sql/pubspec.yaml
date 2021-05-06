@@ -1,0 +1,13 @@
+name: galileo_sql
+version: 1.0.0
+description: SQL-backed services for the Galileo framework; generic backend.
+author: Isaque Neves <insinfo2008@gmail.com>
+homepage: https://github.com/galileo-dart/sql
+environment:
+  sdk: ">=2.0.0-dev <3.0.0"
+dependencies:
+  galileo_framework: ^2.0.0-alpha
+dev_dependencies:
+  galileo_test: ^2.0.0-alpha
+  http: ^0.12.0
+  test: ^1.0.0

@@ -1,4 +1,5 @@
-import 'package:dart2_constant/convert.dart';
+//import 'package:dart2_constant/convert.dart';
+import 'dart:convert';
 
 getValue(String value) {
   try {
@@ -9,9 +10,9 @@ getValue(String value) {
       return value;
   } on FormatException {
     if (value.startsWith('[') && value.endsWith(']'))
-      return json.decode(value);
+      return jsonDecode(value);
     else if (value.startsWith('{') && value.endsWith('}'))
-      return json.decode(value);
+      return jsonDecode(value);
     else if (value.trim().toLowerCase() == 'null')
       return null;
     else

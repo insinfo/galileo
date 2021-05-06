@@ -1,12 +1,12 @@
 # proxy
-[![Pub](https://img.shields.io/pub/v/angel_proxy.svg)](https://pub.dartlang.org/packages/angel_proxy)
-[![build status](https://travis-ci.org/angel-dart/proxy.svg)](https://travis-ci.org/angel-dart/proxy)
+[![Pub](https://img.shields.io/pub/v/galileo_proxy.svg)](https://pub.dartlang.org/packages/galileo_proxy)
+[![build status](https://travis-ci.org/galileo-dart/proxy.svg)](https://travis-ci.org/galileo-dart/proxy)
 
-Angel middleware to forward requests to another server (i.e. `webdev serve`).
+Galileo middleware to forward requests to another server (i.e. `webdev serve`).
 Also supports WebSockets.
 
 ```dart
-import 'package:angel_proxy/angel_proxy.dart';
+import 'package:galileo_proxy/galileo_proxy.dart';
 import 'package:http/http.dart' as http;
 
 main() async {

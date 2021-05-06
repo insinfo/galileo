@@ -1,14 +1,14 @@
-import 'package:angel_framework/angel_framework.dart';
-import 'package:angel_migration_runner/angel_migration_runner.dart';
-import 'package:angel_migration_runner/postgres.dart';
-import 'package:angel_orm/server.dart';
-import 'package:angel/angel.dart';
+import 'package:galileo_framework/galileo_framework.dart';
+import 'package:galileo_migration_runner/galileo_migration_runner.dart';
+import 'package:galileo_migration_runner/postgres.dart';
+import 'package:galileo_orm/server.dart';
+import 'package:galileo/galileo.dart';
 import 'migrations/foo.dart';
 
 main(List<String> args) async {
   // Get the application's connection pool, so that we can use the credentials
   // from our application configuration.
-  var app = new Angel();
+  var app = new Galileo();
   await app.configure(configureServer);
   var connectionPool =
       app.container.make(PostgreSQLConnectionPool) as PostgreSQLConnectionPool;

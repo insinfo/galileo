@@ -1,23 +1,23 @@
-# graphql_parser
-[![Pub](https://img.shields.io/pub/v/graphql_parser.svg)](https://pub.dartlang.org/packages/graphql_parser)
-[![build status](https://travis-ci.org/galileo-dart/graphql.svg)](https://travis-ci.org/galileo-dart/graphql)
+# galileo_graphql_parser
+[![Pub](https://img.shields.io/pub/v/galileo_graphql_parser.svg)](https://pub.dartlang.org/packages/galileo_graphql_parser)
+[![build status](https://travis-ci.org/galileo-dart/graphql.svg)](https://travis-ci.org/insinfo/galileo/graphql)
 
 Parses GraphQL queries and schemas.
 
 *This library is merely a parser/visitor*. Any sort of actual GraphQL API functionality must be implemented by you,
 or by a third-party package.
 
-[Galileo framework](https://galileo-dart.github.io)
+[Galileo framework](https://galileodart.com)
 users should consider 
 [`package:galileo_graphql`](https://pub.dartlang.org/packages/galileo_graphql)
 as a dead-simple way to add GraphQL functionality to their servers.
 
 # Installation
-Add `graphql_parser` as a dependency in your `pubspec.yaml` file:
+Add `galileo_graphql_parser` as a dependency in your `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  graphql_parser: ^1.0.0
+  galileo_graphql_parser: ^3.0.0
 ```
 
 # Usage
@@ -29,7 +29,7 @@ specification (
 [June 2018](https://facebook.github.io/graphql/June2018/)).
 
 ```dart
-import 'package:graphql_parser/graphql_parser.dart';
+import 'package:galileo_graphql_parser/galileo_graphql_parser.dart';
 
 doSomething(String text) {
   var tokens = scan(text);

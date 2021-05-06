@@ -1,7 +1,7 @@
 import 'dart:convert';
-import 'package:angel_framework/angel_framework.dart';
-import 'package:angel_paginate/angel_paginate.dart';
-import 'package:angel_test/angel_test.dart';
+import 'package:galileo_framework/galileo_framework.dart';
+import 'package:galileo_paginate/galileo_paginate.dart';
+import 'package:galileo_test/galileo_test.dart';
 import 'package:logging/logging.dart';
 import 'package:test/test.dart';
 
@@ -15,7 +15,7 @@ main() {
   TestClient client;
 
   setUp(() async {
-    var app = Angel();
+    var app = Galileo();
 
     app.get('/api/songs', (req, res) {
       var p = Paginator(mjAlbums, itemsPerPage: mjAlbums.length);
@@ -25,7 +25,7 @@ main() {
 
     client = await connectTo(app);
 
-    app.logger = Logger('angel_paginate')
+    app.logger = Logger('galileo_paginate')
       ..onRecord.listen((rec) {
         print(rec);
         if (rec.error != null) print(rec.error);

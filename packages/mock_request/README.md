@@ -8,7 +8,7 @@ This makes it possible to test server-side Dart applications without
 having to ever bind to a port.
 
 This package was originally designed to testing
-[Angel](https://github.com/angel-dart/angel/wiki)
+[Galileo](https://github.com/galileo-dart/galileo/wiki)
 applications smoother, but works with any Dart-based server. :)
 
 # Usage

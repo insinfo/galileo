@@ -1,4 +1,4 @@
-import 'package:graphql_parser/graphql_parser.dart';
+import 'package:galileo_graphql_parser/galileo_graphql_parser.dart';
 import 'package:matcher/matcher.dart';
 import 'package:test/test.dart';
 import 'argument_test.dart';
@@ -16,8 +16,7 @@ main() {
 
   test('with argument', () {
     expect('@foo (bar: 2)', isDirective('foo', argument: isArgument('bar', 2)));
-    expect(r'@foo (bar: $baz)',
-        isDirective('foo', argument: isArgument('bar', r'baz')));
+    expect(r'@foo (bar: $baz)', isDirective('foo', argument: isArgument('bar', r'baz')));
   });
 
   test('exceptions', () {
@@ -39,8 +38,7 @@ DirectiveContext parseDirective(String text) => parse(text).parseDirective();
 Matcher isDirective(String name, {Matcher valueOrVariable, Matcher argument}) =>
     _IsDirective(name, valueOrVariable: valueOrVariable, argument: argument);
 
-Matcher isDirectiveList(List<Matcher> directives) =>
-    _IsDirectiveList(directives);
+Matcher isDirectiveList(List<Matcher> directives) => _IsDirectiveList(directives);
 
 class _IsDirective extends Matcher {
   final String name;
@@ -63,8 +61,7 @@ class _IsDirective extends Matcher {
 
   @override
   bool matches(item, Map matchState) {
-    var directive =
-        item is DirectiveContext ? item : parseDirective(item.toString());
+    var directive = item is DirectiveContext ? item : parseDirective(item.toString());
     if (directive == null) return false;
     if (valueOrVariable != null) {
       if (directive.value == null) {
@@ -74,8 +71,7 @@ class _IsDirective extends Matcher {
         if (v is VariableContext) {
           return valueOrVariable.matches(v.name, matchState);
         } else {
-          return valueOrVariable.matches(
-              directive.value.computeValue({}), matchState);
+          return valueOrVariable.matches(directive.value.computeValue({}), matchState);
         }
       }
     } else if (argument != null) {
@@ -102,9 +98,7 @@ class _IsDirectiveList extends Matcher {
 
   @override
   bool matches(item, Map matchState) {
-    var args = item is List<DirectiveContext>
-        ? item
-        : parse(item.toString()).parseDirectives();
+    var args = item is List<DirectiveContext> ? item : parse(item.toString()).parseDirectives();
 
     if (args.length != directives.length) return false;
 

@@ -1,4 +1,4 @@
-part of graphql_schema.src.schema;
+part of galileo_graphql_schema.src.schema;
 
 /// Strictly dictates the structure of some input data in a GraphQL query.
 ///
@@ -36,13 +36,11 @@ abstract class GraphQLType<Value, Serialized> {
 }
 
 /// Shorthand to create a [GraphQLListType].
-GraphQLListType<Value, Serialized> listOf<Value, Serialized>(
-        GraphQLType<Value, Serialized> innerType) =>
+GraphQLListType<Value, Serialized> listOf<Value, Serialized>(GraphQLType<Value, Serialized> innerType) =>
     new GraphQLListType<Value, Serialized>(innerType);
 
 /// A special [GraphQLType] that indicates that input vales should be a list of another type, [ofType].
-class GraphQLListType<Value, Serialized>
-    extends GraphQLType<List<Value>, List<Serialized>>
+class GraphQLListType<Value, Serialized> extends GraphQLType<List<Value>, List<Serialized>>
     with _NonNullableMixin<List<Value>, List<Serialized>> {
   final GraphQLType<Value, Serialized> ofType;
 
@@ -61,14 +59,11 @@ class GraphQLListType<Value, Serialized>
   String get name => null;
 
   @override
-  String get description =>
-      'A list of items of type ${ofType.name ?? '(${ofType.description}).'}';
+  String get description => 'A list of items of type ${ofType.name ?? '(${ofType.description}).'}';
 
   @override
-  ValidationResult<List<Serialized>> validate(
-      String key, List<Serialized> input) {
-    if (input is! List)
-      return new ValidationResult._failure(['Expected "$key" to be a list.']);
+  ValidationResult<List<Serialized>> validate(String key, List<Serialized> input) {
+    if (input is! List) return new ValidationResult._failure(['Expected "$key" to be a list.']);
 
     List<Serialized> out = [];
     List<String> errors = [];
@@ -108,17 +103,15 @@ class GraphQLListType<Value, Serialized>
       new GraphQLListType<Value, Serialized>(ofType.coerceToInputObject());
 }
 
-abstract class _NonNullableMixin<Value, Serialized>
-    implements GraphQLType<Value, Serialized> {
+abstract class _NonNullableMixin<Value, Serialized> implements GraphQLType<Value, Serialized> {
   GraphQLType<Value, Serialized> _nonNullableCache;
 
-  GraphQLType<Value, Serialized> nonNullable() => _nonNullableCache ??=
-      new GraphQLNonNullableType<Value, Serialized>._(this);
+  GraphQLType<Value, Serialized> nonNullable() =>
+      _nonNullableCache ??= new GraphQLNonNullableType<Value, Serialized>._(this);
 }
 
 /// A special [GraphQLType] that indicates that input values should both be non-null, and be valid when asserted against another type, named [ofType].
-class GraphQLNonNullableType<Value, Serialized>
-    extends GraphQLType<Value, Serialized> {
+class GraphQLNonNullableType<Value, Serialized> extends GraphQLType<Value, Serialized> {
   final GraphQLType<Value, Serialized> ofType;
 
   GraphQLNonNullableType._(this.ofType);
@@ -127,20 +120,16 @@ class GraphQLNonNullableType<Value, Serialized>
   String get name => null; //innerType.name;
 
   @override
-  String get description =>
-      'A non-nullable binding to ${ofType.name ?? '(${ofType.description}).'}';
+  String get description => 'A non-nullable binding to ${ofType.name ?? '(${ofType.description}).'}';
 
   @override
   GraphQLType<Value, Serialized> nonNullable() {
-    throw new UnsupportedError(
-        'Cannot call nonNullable() on a non-nullable type.');
+    throw new UnsupportedError('Cannot call nonNullable() on a non-nullable type.');
   }
 
   @override
   ValidationResult<Serialized> validate(String key, Serialized input) {
-    if (input == null)
-      return new ValidationResult._failure(
-          ['Expected "$key" to be a non-null value.']);
+    if (input == null) return new ValidationResult._failure(['Expected "$key" to be a non-null value.']);
     return ofType.validate(key, input);
   }
 
@@ -160,8 +149,7 @@ class GraphQLNonNullableType<Value, Serialized>
   }
 
   @override
-  bool operator ==(other) =>
-      other is GraphQLNonNullableType && other.ofType == ofType;
+  bool operator ==(other) => other is GraphQLNonNullableType && other.ofType == ofType;
 
   @override
   GraphQLType<Value, Serialized> coerceToInputObject() {

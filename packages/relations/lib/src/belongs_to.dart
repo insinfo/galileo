@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'dart:mirrors';
-import 'package:angel_framework/angel_framework.dart';
+import 'package:galileo_framework/galileo_framework.dart';
 import 'plural.dart' as pluralize;
 import 'no_service.dart';
 

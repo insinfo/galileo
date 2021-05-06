@@ -1,16 +1,16 @@
-import 'package:angel_framework/angel_framework.dart';
-import 'package:angel_framework/http.dart';
-import 'package:angel_websocket/server.dart';
+import 'package:galileo_framework/galileo_framework.dart';
+import 'package:galileo_framework/http.dart';
+import 'package:galileo_websocket/server.dart';
 import 'package:common/common.dart';
 import 'package:logging/logging.dart';
 
 main() async {
-  var app = Angel(), http = AngelHttp(app);
-  var ws = AngelWebSocket(app, sendErrors: !app.isProduction);
+  var app = Galileo(), http = GalileoHttp(app);
+  var ws = GalileoWebSocket(app, sendErrors: !app.isProduction);
 
   // Mount the necessary routes
   app.get('/ws', ws.handleRequest);
-  app.fallback((req, res) => throw AngelHttpException.notFound());
+  app.fallback((req, res) => throw GalileoHttpException.notFound());
 
   // Think of socket.io - this callback is called whenever a client connects.
   //

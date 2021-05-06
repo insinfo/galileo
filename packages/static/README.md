@@ -1,8 +1,8 @@
 # static
-[![Pub](https://img.shields.io/pub/v/angel_static.svg)](https://pub.dartlang.org/packages/angel_static)
-[![build status](https://travis-ci.org/angel-dart/static.svg?branch=master)](https://travis-ci.org/angel-dart/static)
+[![Pub](https://img.shields.io/pub/v/galileo_static.svg)](https://pub.dartlang.org/packages/galileo_static)
+[![build status](https://travis-ci.org/galileo-dart/static.svg?branch=master)](https://travis-ci.org/galileo-dart/static)
 
-Static server infrastructure for Angel.
+Static server infrastructure for Galileo.
 
 *Can also handle `Range` requests now, making it suitable for media streaming, ex. music, video, etc.*
 
@@ -11,21 +11,21 @@ In `pubspec.yaml`:
 
 ```yaml
 dependencies:
-    angel_static: ^2.0.0-alpha
+    galileo_static: ^2.0.0-alpha
 ```
 
 # Usage
 To serve files from a directory, you need to create a `VirtualDirectory`.
-Keep in mind that `angel_static` uses `package:file` instead of `dart:io`.
+Keep in mind that `galileo_static` uses `package:file` instead of `dart:io`.
 
 ```dart
-import 'package:angel_framework/angel_framework.dart';
-import 'package:angel_framework/http.dart';
-import 'package:angel_static/angel_static.dart';
+import 'package:galileo_framework/galileo_framework.dart';
+import 'package:galileo_framework/http.dart';
+import 'package:galileo_static/galileo_static.dart';
 import 'package:file/local.dart';
 
 main() async {
-  var app = Angel();
+  var app = Galileo();
   var fs = const LocalFileSystem();
 
   // Normal static server
@@ -38,7 +38,7 @@ main() async {
   app.fallback(vDir.handleRequest);
 
   // Start your server!!!
-  await AngelHttp(app).startServer();
+  await GalileoHttp(app).startServer();
 }
 ```
 
@@ -60,11 +60,11 @@ app.fallback(vDir.pushState('index.html'));
 
 # Options
 The `VirtualDirectory` API accepts a few named parameters:
-- **source**: A `Directory` containing the files to be served. If left null, then Angel will serve either from `web` (in development) or
+- **source**: A `Directory` containing the files to be served. If left null, then Galileo will serve either from `web` (in development) or
     `build/web` (in production), depending on your `ANGEL_ENV`.
 - **indexFileNames**: A `List<String>` of filenames that should be served as index pages. Default is `['index.html']`.
 - **publicPath**: To serve index files, you need to specify the virtual path under which
-    angel_static is serving your files. If you are not serving static files at the site root,
+    galileo_static is serving your files. If you are not serving static files at the site root,
     please include this.
 - **callback**: Runs before sending a file to a client. Use this to set headers, etc. If it returns anything other than `null` or `true`,
 then the callback's result will be sent to the user, instead of the file contents.

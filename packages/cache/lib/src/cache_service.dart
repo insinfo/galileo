@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'package:collection/collection.dart';
-import 'package:angel_framework/angel_framework.dart';
+import 'package:galileo_framework/galileo_framework.dart';
 import 'package:meta/meta.dart';
 
-/// An Angel [Service] that caches data from another service.
+/// An Galileo [Service] that caches data from another service.
 ///
 /// This is useful for applications of scale, where network latency
 /// can have real implications on application performance.

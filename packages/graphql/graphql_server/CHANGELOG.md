@@ -1,3 +1,7 @@
+# 3.0.0
+
+- update dependencies
+
 # 1.1.0
 * Updates for `package:graphql_parser@1.2.0`.
 * Now that variables are `InputValueContext` descendants, handle them the

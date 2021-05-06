@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'dart:io';
 import 'dart:isolate';
-import 'package:angel_framework/angel_framework.dart';
-import 'package:angel_framework/http.dart';
-import 'package:angel_wings/angel_wings.dart';
+import 'package:galileo_framework/galileo_framework.dart';
+import 'package:galileo_framework/http.dart';
+import 'package:galileo_wings/galileo_wings.dart';
 import 'package:io/ansi.dart';
 import 'package:tuple/tuple.dart';
 
@@ -23,10 +23,10 @@ Future _10s() => Future.delayed(Duration(seconds: 10));
 
 const testPort = 8877;
 
-Future<void> runBenchmarks(Iterable<AngelBenchmark> benchmarks,
+Future<void> runBenchmarks(Iterable<GalileoBenchmark> benchmarks,
     {Iterable<String> factories = const [
-      // 'angel_http',
-      'angel_wings',
+      // 'galileo_http',
+      'galileo_wings',
     ]}) async {
   for (var benchmark in benchmarks) {
     print(magenta.wrap('Entering benchmark: ${benchmark.name}'));
@@ -50,14 +50,14 @@ Future<void> runBenchmarks(Iterable<AngelBenchmark> benchmarks,
     // await wrk.exitCode;
     // isolates.forEach((i) => i.kill(priority: Isolate.immediate));
 
-    // Run Angel HTTP, Wings
+    // Run Galileo HTTP, Wings
     for (var fac in factories) {
       print(lightGray.wrap('Booting $fac server...'));
 
       var isolates = <Isolate>[];
       for (int i = 0; i < Platform.numberOfProcessors; i++) {
         isolates
-            .add(await Isolate.spawn(_angelIsolate, Tuple2(benchmark, fac)));
+            .add(await Isolate.spawn(_galileoIsolate, Tuple2(benchmark, fac)));
       }
 
       await _10s();
@@ -75,7 +75,7 @@ Future<void> runBenchmarks(Iterable<AngelBenchmark> benchmarks,
   exit(0);
 }
 
-void _httpIsolate(AngelBenchmark benchmark) {
+void _httpIsolate(GalileoBenchmark benchmark) {
   Future(() async {
     var raw = await HttpServer.bind(InternetAddress.loopbackIPv4, testPort,
         shared: true);
@@ -83,28 +83,28 @@ void _httpIsolate(AngelBenchmark benchmark) {
   });
 }
 
-void _angelIsolate(Tuple2<AngelBenchmark, String> args) {
+void _galileoIsolate(Tuple2<GalileoBenchmark, String> args) {
   Future(() async {
-    var app = Angel();
+    var app = Galileo();
     Driver driver;
 
-    if (args.item2 == 'angel_http') {
-      driver = AngelHttp.custom(app, startShared);
-    } else if (args.item2 == 'angel_wings') {
-      driver = AngelWings.custom(app, startSharedWings);
+    if (args.item2 == 'galileo_http') {
+      driver = GalileoHttp.custom(app, startShared);
+    } else if (args.item2 == 'galileo_wings') {
+      driver = GalileoWings.custom(app, startSharedWings);
     }
 
-    await app.configure(args.item1.setupAngel);
+    await app.configure(args.item1.setupGalileo);
     await driver.startServer(InternetAddress.loopbackIPv4, testPort);
   });
 }
 
-abstract class AngelBenchmark {
-  const AngelBenchmark();
+abstract class GalileoBenchmark {
+  const GalileoBenchmark();
 
   String get name;
 
-  FutureOr<void> setupAngel(Angel app);
+  FutureOr<void> setupGalileo(Galileo app);
 
   FutureOr<void> rawHandler(HttpRequest req, HttpResponse res);
 }

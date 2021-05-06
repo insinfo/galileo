@@ -1,5 +1,5 @@
 # serialize
-This add-on generates boilerplate for using `package:angel_serialize`.
+This add-on generates boilerplate for using `package:galileo_serialize`.
 
 ## Parameters
 * `inputs`: The glob representing model files (default: `lib/src/models/*.dart`)
@@ -13,7 +13,7 @@ import 'build_actions.dart';
 main() => build(buildActions, deleteFilesByDefault: true);
 
 // tool/build_actions.dart
-import 'package:angel_serialize_generator/angel_serialize_generator.dart';
+import 'package:galileo_serialize_generator/galileo_serialize_generator.dart';
 import 'package:build_runner/build_runner.dart';
 import 'package:source_gen/source_gen.dart';
 

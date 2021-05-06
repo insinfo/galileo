@@ -1,5 +1,5 @@
 # auth
-This add-on generates a simple boilerplate for using `package:angel_auth` to perform
+This add-on generates a simple boilerplate for using `package:galileo_auth` to perform
 JWT authentication.
 
 Other `auth_*` addons can be plugged in here, simply by passing them the created `auth` object.
@@ -14,11 +14,11 @@ Other `auth_*` addons can be plugged in here, simply by passing them the created
 library <project-name>.src.auth;
 
 import 'dart:async';
-import 'package:angel_auth/angel_auth.dart';
-import 'package:angel_framework/angel_framework.dart';
+import 'package:galileo_auth/galileo_auth.dart';
+import 'package:galileo_framework/galileo_framework.dart';
 
-Future configureServer(Angel app) async {
-  var auth = new AngelAuth<User>(
+Future configureServer(Galileo app) async {
+  var auth = new GalileoAuth<User>(
     jwtKey: app.configuration['jwt_secret'],
     allowCookie: false,
   );

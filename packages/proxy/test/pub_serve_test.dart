@@ -1,20 +1,20 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:angel_framework/angel_framework.dart';
-import 'package:angel_framework/http.dart';
-import 'package:angel_proxy/angel_proxy.dart';
-import 'package:angel_test/angel_test.dart';
+import 'package:galileo_framework/galileo_framework.dart';
+import 'package:galileo_framework/http.dart';
+import 'package:galileo_proxy/galileo_proxy.dart';
+import 'package:galileo_test/galileo_test.dart';
 import 'package:logging/logging.dart';
-import 'package:mock_request/mock_request.dart';
+import 'package:galileo_mock_request/galileo_mock_request.dart';
 import 'package:test/test.dart';
 
 main() {
-  Angel app, testApp;
+  Galileo app, testApp;
   TestClient client;
   Proxy layer;
 
   setUp(() async {
-    testApp = Angel();
+    testApp = Galileo();
     testApp.get('/foo', (req, res) async {
       res.useBuffer();
       res.write('pub serve');
@@ -27,9 +27,9 @@ main() {
 
     testApp.encoders.addAll({'gzip': gzip.encoder});
 
-    var server = await AngelHttp(testApp).startServer();
+    var server = await GalileoHttp(testApp).startServer();
 
-    app = Angel();
+    app = Galileo();
     app.fallback((req, res) {
       res.useBuffer();
       return true;
@@ -44,9 +44,7 @@ main() {
     app.fallback(layer.handleRequest);
 
     app.responseFinalizers.add((req, res) async {
-      print('Normal. Buf: ' +
-          String.fromCharCodes(res.buffer.toBytes()) +
-          ', headers: ${res.headers}');
+      print('Normal. Buf: ' + String.fromCharCodes(res.buffer.toBytes()) + ', headers: ${res.headers}');
     });
 
     app.encoders.addAll({'gzip': gzip.encoder});
@@ -83,12 +81,12 @@ main() {
   });
 
   test('empty', () async {
-    var response = await client.get('/proxy/empty');
+    var response = await client.get(Uri.parse('/proxy/empty'));
     expect(response.body, isEmpty);
   });
 
   test('normal', () async {
-    var response = await client.get('/bar');
+    var response = await client.get(Uri.parse('/bar'));
     expect(response, hasBody('normal'));
   });
 }

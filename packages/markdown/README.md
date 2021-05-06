@@ -1,7 +1,7 @@
 # markdown
-[![Pub](https://img.shields.io/pub/v/angel_markdown.svg)](https://pub.dartlang.org/packages/angel_markdown)
+[![Pub](https://img.shields.io/pub/v/galileo_markdown.svg)](https://pub.dartlang.org/packages/galileo_markdown)
 
-Markdown view generator for Angel. 
+Markdown view generator for Galileo. 
 
 With this plug-in, you can easily serve
 static sites without doing more than writing simple Markdown. Thus, it is a friendly
@@ -12,16 +12,16 @@ In your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  angel_framework: ^1.0.0
-  angel_markdown: ^1.0.0
+  galileo_framework: ^1.0.0
+  galileo_markdown: ^1.0.0
 ```
 
 # Usage
-It's very straightforward to configure an Angel server to use Markdown.
+It's very straightforward to configure an Galileo server to use Markdown.
 Keep in mind to use `package:file` instead of `dart:io`:
 
 ```dart
-configureServer(Angel app) async {
+configureServer(Galileo app) async {
   var fs = LocalFileSystem();
   await app.configure(markdown(
     // The directory where your views are located.
@@ -35,16 +35,16 @@ Assuming your view directory contained a file named `hello.md`, the
 following would render it as an HTML response:
 
 ```dart
-configureServer(Angel app) async {
+configureServer(Galileo app) async {
   app.get('/hello', (res) => res.render('hello'));
 }
 ```
 
-`package:angel_markdown` by default searches for files with a `.md` extension; however,
+`package:galileo_markdown` by default searches for files with a `.md` extension; however,
 you can easily override this.
 
 ## Interpolation
-`angel_markdown` can interpolate the values of data from `locals` before building the Markdown.
+`galileo_markdown` can interpolate the values of data from `locals` before building the Markdown.
 
 For example, with the following template `species.md`:
 
@@ -71,7 +71,7 @@ You might want to wrap the content of pages in a custom template to apply pretty
 CSS and JS, etc:
 
 ```dart
-configureServer(Angel app) async {
+configureServer(Galileo app) async {
   await app.configure(
     markdown(
         // The directory where your views are located.

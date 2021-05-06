@@ -1,18 +1,18 @@
-name: angel_sync
-version: 2.0.0
-description: Easily synchronize and scale WebSockets using package:pub_sub.
-author: Tobe O <thosakwe@gmail.com>
-homepage: https://github.com/angel-dart/sync
+name: galileo_sync
+version: 3.0.0
+description: Easily synchronize and scale WebSockets using package:galileo_pub_sub.
+author: Isaque Neves <insinfo2008@gmail.com>
+homepage: https://github.com/insinfo/galileo/tree/master/packages/sync
+
 environment:
-  sdk: ">=2.10.0 <2.12.0"
+  sdk: ">=2.10.0 <3.0.0"
+
 dependencies:
-  angel_framework: #^2.0.0-alpha
-    path: ../framework
-  angel_websocket: #^2.0.0-alpha
-    path: ../websocket
-  pub_sub: ^2.0.0
-  stream_channel: ^2.0.0
+  galileo_framework: ^3.0.2   
+  galileo_websocket: ^3.0.2    
+  galileo_pub_sub : ^3.0.1
+  stream_channel: ^2.1.0 # Null safety
+
 dev_dependencies:
-  angel_test: #^2.0.0-alpha
-    path: ../test
-  test: ^1.15.7
+  galileo_test: ^3.0.1   
+  test: ^1.17.3 #Null safety

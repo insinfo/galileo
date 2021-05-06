@@ -1,13 +1,16 @@
-name: angel_toggle
-version: 1.0.0
+name: galileo_toggle
+version: 3.0.0
 description: Allows you to substitute one service for another while testing.
-author: Tobe O <thosakwe@gmail.com>
-homepage: https://github.com/angel-dart/toggle
+author: Isaque Neves <insinfo2008@gmail.com>
+homepage: https://github.com/galileo-dart/toggle
+
 environment:
-  sdk: ">=1.19.0"
+  sdk: ">=2.10.0 <3.0.0"
+
 dependencies:
-  angel_framework: ^1.0.0
+  galileo_framework: ^3.0.2 
+
 dev_dependencies:
-  angel_diagnostics: ^1.0.0
-  angel_test: ^1.0.0
-  test: ^0.12.15
+  #galileo_diagnostics: ^1.0.0
+  galileo_test: ^3.0.1
+  test: ^1.17.3 #Null safety

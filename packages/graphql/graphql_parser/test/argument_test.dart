@@ -1,4 +1,4 @@
-import 'package:graphql_parser/graphql_parser.dart';
+import 'package:galileo_graphql_parser/galileo_graphql_parser.dart';
 import 'package:matcher/matcher.dart';
 import 'package:test/test.dart';
 
@@ -29,8 +29,7 @@ main() {
 
 ArgumentContext parseArgument(String text) => parse(text).parseArgument();
 
-List<ArgumentContext> parseArgumentList(String text) =>
-    parse(text).parseArguments();
+List<ArgumentContext> parseArgumentList(String text) => parse(text).parseArguments();
 
 Matcher isArgument(String name, value) => _IsArgument(name, value);
 
@@ -72,9 +71,7 @@ class _IsArgumentList extends Matcher {
 
   @override
   bool matches(item, Map matchState) {
-    var args = item is List<ArgumentContext>
-        ? item
-        : parse(item.toString()).parseArguments();
+    var args = item is List<ArgumentContext> ? item : parse(item.toString()).parseArguments();
 
     if (args.length != arguments.length) return false;
 

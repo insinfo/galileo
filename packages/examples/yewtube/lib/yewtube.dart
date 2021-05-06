@@ -1,16 +1,16 @@
 import 'dart:async';
-import 'package:angel_configuration/angel_configuration.dart';
-import 'package:angel_file_service/angel_file_service.dart';
-import 'package:angel_framework/angel_framework.dart';
-import 'package:angel_jael/angel_jael.dart';
-import 'package:angel_static/angel_static.dart';
-import 'package:angel_validate/server.dart';
+import 'package:galileo_configuration/galileo_configuration.dart';
+import 'package:galileo_file_service/galileo_file_service.dart';
+import 'package:galileo_framework/galileo_framework.dart';
+import 'package:galileo_jael/galileo_jael.dart';
+import 'package:galileo_static/galileo_static.dart';
+import 'package:galileo_validate/server.dart';
 import 'package:file/local.dart';
 import 'package:path/path.dart' as p;
 import 'package:uuid/uuid.dart';
 import 'video.dart';
 
-Future<void> configureServer(Angel app) async {
+Future<void> configureServer(Galileo app) async {
   // Load app configuration
   var fs = LocalFileSystem();
   await app.configure(configuration(fs));
@@ -73,7 +73,7 @@ Future<void> configureServer(Angel app) async {
             orElse: () => null);
 
         if (file == null) {
-          throw AngelHttpException.badRequest(message: 'Missing video file.');
+          throw GalileoHttpException.badRequest(message: 'Missing video file.');
         }
 
         // Fetch the validated data from the body
@@ -123,5 +123,5 @@ Future<void> configureServer(Angel app) async {
   app.fallback(vDir.handleRequest);
 
   // Throw a 404 when page is not found
-  app.fallback((req, res) => throw AngelHttpException.notFound());
+  app.fallback((req, res) => throw GalileoHttpException.notFound());
 }

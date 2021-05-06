@@ -1,15 +1,15 @@
-import 'package:angel_framework/angel_framework.dart';
-import 'package:angel_task/angel_task.dart';
+import 'package:galileo_framework/galileo_framework.dart';
+import 'package:galileo_task/galileo_task.dart';
 import 'package:mock_request/mock_request.dart';
 import 'package:test/test.dart';
 
 main() {
-  Angel app;
-  AngelTaskScheduler scheduler;
+  Galileo app;
+  GalileoTaskScheduler scheduler;
 
   setUp(() async {
-    app = new Angel();
-    scheduler = new AngelTaskScheduler(app);
+    app = new Galileo();
+    scheduler = new GalileoTaskScheduler(app);
     await scheduler.start();
   });
 
@@ -88,8 +88,8 @@ main() {
   });
 
   test('run waiting tasks on start', () async {
-    var app = new Angel();
-    var scheduler = new AngelTaskScheduler(app);
+    var app = new Galileo();
+    var scheduler = new GalileoTaskScheduler(app);
     var task = scheduler.once(() => 34);
     await scheduler.start();
     expect(await task.results.first, 34);
@@ -103,8 +103,8 @@ main() {
     });
 
     test('restart', () async {
-      var app = new Angel();
-      var scheduler = new AngelTaskScheduler(app);
+      var app = new Galileo();
+      var scheduler = new GalileoTaskScheduler(app);
       await scheduler.start();
 
       try {

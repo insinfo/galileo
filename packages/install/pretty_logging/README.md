@@ -7,8 +7,8 @@ import 'dart:async';
 import 'package:<project-name>/<project-name>.dart';
 import 'package:<project-name>/src/pretty_logging.dart';
 
-Future configureServer(Angel app) async {
-  app.logger = new Logger('angel')
+Future configureServer(Galileo app) async {
+  app.logger = new Logger('galileo')
     ..onRecord.listen(prettyLog);
 }
 ```

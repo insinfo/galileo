@@ -1,3 +1,6 @@
+# 3.0.0
+- update dependencies
+
 # 1.0.1
 * Explicitly extend `Service<Id, T>`.
 * Override `readData`.

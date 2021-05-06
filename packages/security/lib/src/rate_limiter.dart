@@ -1,6 +1,6 @@
 import 'dart:async';
-import 'package:angel_framework/angel_framework.dart';
-import 'package:angel_security/angel_security.dart';
+import 'package:galileo_framework/galileo_framework.dart';
+import 'package:galileo_security/galileo_security.dart';
 import 'rate_limiting_window.dart';
 
 /// A base class that facilitates rate limiting API's or endpoints,
@@ -75,7 +75,7 @@ abstract class RateLimiter<User> {
   /// Signals to a user that they have exceeded the rate limit for the
   /// current window, and terminates execution of the current [RequestContext].
   ///
-  /// The default implementation is throw an [AngelHttpException] with
+  /// The default implementation is throw an [GalileoHttpException] with
   /// status code `429` and the given `errorMessage`, as well as sending
   /// a [`Retry-After`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429)
   /// header, and then returning `false`.
@@ -85,7 +85,7 @@ abstract class RateLimiter<User> {
       RateLimitingWindow<User> window, DateTime currentTime) {
     var retryAfter = window.resetTime.difference(currentTime);
     res.headers['retry-after'] = retryAfter.inSeconds.toString();
-    throw AngelHttpException(null, message: errorMessage, statusCode: 429);
+    throw GalileoHttpException(null, message: errorMessage, statusCode: 429);
   }
 
   /// A request middleware that returns `true` if the user has not yet

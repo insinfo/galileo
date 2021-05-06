@@ -1,4 +1,4 @@
-package com.angelframework.flutterchat.mobile;
+package com.galileoframework.flutterchat.mobile;
 
 import android.os.Bundle;
 import io.flutter.app.FlutterActivity;

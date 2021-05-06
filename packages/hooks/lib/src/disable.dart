@@ -1,4 +1,4 @@
-import 'package:angel_framework/angel_framework.dart';
+import 'package:galileo_framework/galileo_framework.dart';
 
 /// Disables a service method for client access from a provider.
 ///
@@ -8,9 +8,9 @@ import 'package:angel_framework/angel_framework.dart';
 ///
 /// If [provider] is `null`, then it will be disabled to all clients.
 HookedServiceEventListener disable({provider, String errorMessage}) {
-  AngelHttpException _exc() {
-    if (errorMessage == null) return AngelHttpException.methodNotAllowed();
-    return AngelHttpException(405, message: errorMessage);
+  GalileoHttpException _exc() {
+    if (errorMessage == null) return GalileoHttpException.methodNotAllowed();
+    return GalileoHttpException(405, message: errorMessage);
   }
 
   return (HookedServiceEvent e) {

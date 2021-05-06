@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'dart:typed_data';
-import 'package:angel_serialize/angel_serialize.dart';
+import 'package:galileo_serialize/galileo_serialize.dart';
 import 'package:collection/collection.dart';
 import 'package:meta/meta.dart';
 import 'user.dart';

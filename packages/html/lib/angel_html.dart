@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:angel_framework/angel_framework.dart';
+import 'package:galileo_framework/galileo_framework.dart';
 import 'package:html_builder/html_builder.dart';
 
 /// Returns a [RequestMiddleware] that allows you to return `html_builder` [Node]s as responses.
@@ -18,7 +18,7 @@ RequestHandler renderHtml({StringRenderer renderer, bool enforceAcceptHeader}) {
         return oldSerializer(data);
       else {
         if (enforceAcceptHeader == true && !req.accepts('text/html'))
-          throw new AngelHttpException.notAcceptable();
+          throw new GalileoHttpException.notAcceptable();
 
         var content = renderer.render(data as Node);
         res

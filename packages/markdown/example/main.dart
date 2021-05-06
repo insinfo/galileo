@@ -1,20 +1,20 @@
 import 'dart:async';
 import 'dart:io';
-import 'package:angel_framework/angel_framework.dart';
-import 'package:angel_framework/http.dart';
-import 'package:angel_markdown/angel_markdown.dart';
+import 'package:galileo_framework/galileo_framework.dart';
+import 'package:galileo_framework/http.dart';
+import 'package:galileo_markdown/galileo_markdown.dart';
 import 'package:file/local.dart';
 
 main() async {
   var app = await createServer();
-  var http = AngelHttp(app);
+  var http = GalileoHttp(app);
   var server = await http.startServer(InternetAddress.loopbackIPv4, 3000);
   print('Listening at http://${server.address.address}:${server.port}');
 }
 
-Future<Angel> createServer() async {
+Future<Galileo> createServer() async {
   // Create a new server, and install the Markdown renderer.
-  var app = new Angel();
+  var app = new Galileo();
   var fs = LocalFileSystem();
   await app
       .configure(markdown(fs.directory('views'), template: (content, locals) {

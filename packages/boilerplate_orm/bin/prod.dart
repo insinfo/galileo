@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'dart:isolate';
-import 'package:angel/angel.dart';
-import 'package:angel_framework/angel_framework.dart';
+import 'package:galileo/galileo.dart';
+import 'package:galileo_framework/galileo_framework.dart';
 import 'package:logging/logging.dart';
 
 const String hostname = '127.0.0.1';
@@ -21,12 +21,12 @@ void isolateMain(int id) {
   // instances of our application concurrently, listening on a single port.
   //
   // This effectively lets us multi-thread the application.
-  var app = new Angel.custom(startShared);
+  var app = new Galileo.custom(startShared);
 
   app.configure(configureServer).then((_) async {
     // In production, we'll want to log errors to a file.
     // Alternatives include sending logs to a service like Sentry.
-    app.logger = new Logger('angel')
+    app.logger = new Logger('galileo')
       ..onRecord.listen((rec) {
         if (rec.error != null) {
           var sink =

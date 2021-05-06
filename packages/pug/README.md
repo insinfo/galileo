@@ -1,13 +1,13 @@
 # DEPRECATED
 `package:jaded` seems to be all but abandoned. Regardless, its approach to templating is far from efficient, and stil doesn't allow for much flexibility in terms of executing code.
 
-Prefer [`jael`](https://github.com/angel-dart/jael), as it is *far* more expressive, works with Dart 2, and is much faster.
+Prefer [`jael`](https://github.com/galileo-dart/jael), as it is *far* more expressive, works with Dart 2, and is much faster.
 
 # pug
-[![version 1.0.0](https://img.shields.io/badge/pub-1.0.0-brightgreen.svg)](https://pub.dartlang.org/packages/angel_pug)
-[![build status](https://travis-ci.org/angel-dart/pug.svg)](https://travis-ci.org/angel-dart/pug)
+[![version 1.0.0](https://img.shields.io/badge/pub-1.0.0-brightgreen.svg)](https://pub.dartlang.org/packages/galileo_pug)
+[![build status](https://travis-ci.org/galileo-dart/pug.svg)](https://travis-ci.org/galileo-dart/pug)
 
-Pug (nee Jade) view generator for Angel.
+Pug (nee Jade) view generator for Galileo.
 
 **`package:jaded` currently is broken on Dart 1.0, so this repo
 is blocked until some fix or alternative library comes out.**
@@ -17,7 +17,7 @@ In your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  angel_pug: ^1.0.0
+  galileo_pug: ^1.0.0
 ```
 
 Also, consider adding the following to your `.gitignore`:
@@ -27,13 +27,13 @@ jaded.views.dart
 
 # Usage
 This package exports a simple
-[Angel plugin](https://github.com/angel-dart/angel/wiki/Using-Plug-ins)
+[Galileo plugin](https://github.com/galileo-dart/galileo/wiki/Using-Plug-ins)
 that configures your application to render views out of a given directory.
 
 ```dart
 import 'dart:io';
-import 'package:angel_framework/angel_framework.dart';
-import 'package:angel_pug/angel_pug.dart';
+import 'package:galileo_framework/galileo_framework.dart';
+import 'package:galileo_pug/galileo_pug.dart';
 
 main() async {
   // ...

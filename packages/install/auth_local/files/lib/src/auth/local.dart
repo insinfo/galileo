@@ -1,15 +1,15 @@
 library {{ project_name }}.src.auth.local;
 
-import 'package:angel_auth/angel_auth.dart';
-import 'package:angel_framework/angel_framework.dart';
+import 'package:galileo_auth/galileo_auth.dart';
+import 'package:galileo_framework/galileo_framework.dart';
 import 'package:collection/collection.dart';
 import '{{ model_path }}';
 
 /// Configures the server to perform {{ username_field }}+{{ password_field }} authentication.
 ///
 /// [computePassword] should be a function that generates a list of bytes, ex. a SHA256 hash.
-AngelConfigurer configureServer(AngelAuth<{{ model }}> auth, List<int> computePassword(String {{ password_field }}, {{ model }} user)) {
-  return (Angel app) async {
+GalileoConfigurer configureServer(GalileoAuth<{{ model }}> auth, List<int> computePassword(String {{ password_field }}, {{ model }} user)) {
+  return (Galileo app) async {
     var strategy = new LocalAuthStrategy(({{ username_field }}, {{ password_field }}) async {
       var userService = app.service('{{ service }}');
       Iterable<{{ model }}> users = await userService.index({

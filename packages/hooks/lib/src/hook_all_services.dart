@@ -1,8 +1,8 @@
-import 'package:angel_framework/angel_framework.dart';
+import 'package:galileo_framework/galileo_framework.dart';
 
 /// Runs a [callback] on every service, and listens for future services to run it again.
-AngelConfigurer hookAllServices(callback(Service service)) {
-  return (Angel app) {
+GalileoConfigurer hookAllServices(callback(Service service)) {
+  return (Galileo app) {
     var touched = <Service>[];
 
     for (var service in app.services.values) {

@@ -1,12 +1,12 @@
-import 'package:angel_framework/angel_framework.dart';
-import 'package:angel_wings/angel_wings.dart';
+import 'package:galileo_framework/galileo_framework.dart';
+import 'package:galileo_wings/galileo_wings.dart';
 
 main() async {
-  var app = Angel();
-  var wings1 = AngelWings.custom(app, startSharedWings);
-  var wings2 = AngelWings.custom(app, startSharedWings);
-  var wings3 = AngelWings.custom(app, startSharedWings);
-  var wings4 = AngelWings.custom(app, startSharedWings);
+  var app = Galileo();
+  var wings1 = GalileoWings.custom(app, startSharedWings);
+  var wings2 = GalileoWings.custom(app, startSharedWings);
+  var wings3 = GalileoWings.custom(app, startSharedWings);
+  var wings4 = GalileoWings.custom(app, startSharedWings);
   await wings1.startServer('127.0.0.1', 3000);
   await wings2.startServer('127.0.0.1', 3000);
   await wings3.startServer('127.0.0.1', 3000);

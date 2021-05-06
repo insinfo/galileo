@@ -1,6 +1,6 @@
 import 'dart:math' as math;
 
-import 'package:graphql_parser/graphql_parser.dart';
+import 'package:galileo_graphql_parser/galileo_graphql_parser.dart';
 import 'package:test/test.dart';
 
 import 'common.dart';
@@ -82,8 +82,7 @@ class _IsValue extends Matcher {
   _IsValue(this.value);
 
   @override
-  Description describe(Description description) =>
-      description.add('equals $value when parsed as a GraphQL value');
+  Description describe(Description description) => description.add('equals $value when parsed as a GraphQL value');
 
   @override
   bool matches(item, Map matchState) {

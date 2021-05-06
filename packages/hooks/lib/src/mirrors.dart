@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'dart:mirrors';
-import 'package:angel_framework/angel_framework.dart';
+import 'package:galileo_framework/galileo_framework.dart';
 import 'package:json_god/json_god.dart' as god;
 
 /// Transforms `e.data` or `e.result` into an instance of the given [type],

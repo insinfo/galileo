@@ -1,3 +1,7 @@
+# 3.0.0
+
+- update dependencies
+
 # 1.2.0
 * Combine `ValueContext` and `VariableContext` into a single `InputValueContext` supertype.
     * Add `T computeValue(Map<String, dynamic> variables);`

@@ -2,14 +2,14 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
-import 'package:angel_framework/angel_framework.dart';
+import 'package:galileo_framework/galileo_framework.dart';
 import 'package:charcode/ascii.dart';
 import 'wings_request.dart';
 import 'wings_socket.dart';
 
 class WingsResponseContext extends ResponseContext<int> {
   @override
-  final Angel app;
+  final Galileo app;
 
   @override
   final WingsRequestContext correspondingRequest;

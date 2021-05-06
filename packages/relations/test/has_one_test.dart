@@ -1,14 +1,14 @@
-import 'package:angel_framework/angel_framework.dart';
-import 'package:angel_relations/angel_relations.dart' as relations;
-import 'package:angel_seeder/angel_seeder.dart';
+import 'package:galileo_framework/galileo_framework.dart';
+import 'package:galileo_relations/galileo_relations.dart' as relations;
+import 'package:galileo_seeder/galileo_seeder.dart';
 import 'package:test/test.dart';
 import 'common.dart';
 
 main() {
-  Angel app;
+  Galileo app;
 
   setUp(() async {
-    app = Angel()..use('/authors', MapService())..use('/books', MapService());
+    app = Galileo()..use('/authors', MapService())..use('/books', MapService());
 
     await app.configure(seed(
         'authors',

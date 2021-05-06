@@ -5,7 +5,7 @@
 // **************************************************************************
 
 import 'dart:async';
-import 'package:angel_orm/angel_orm.dart';
+import 'package:galileo_orm/galileo_orm.dart';
 import 'package:postgres/postgres.dart';
 import 'user.dart';
 

@@ -1,0 +1,27 @@
+name: galileo_graphql
+version: 3.0.0
+description: The fastest + easiest way to get a GraphQL backend in Dart, using Galileo.
+homepage: https://github.com/galileo-dart/graphql
+author: Isaque Neves <insinfo2008@gmail.com>
+
+environment:
+  sdk: '>=2.10.0 <3.0.0'
+
+dependencies:
+  galileo_file_service: ^3.0.0   
+  galileo_framework: ^3.0.2 
+  galileo_websocket: ^3.0.1
+  galileo_validate: ^3.0.0   
+  galileo_graphql_parser: ^3.0.0  
+  galileo_graphql_schema: ^3.0.0   
+  galileo_graphql_server: ^3.0.0 
+  http_parser: ^4.0.0 #Null safety
+  web_socket_channel: ^2.1.0 #Null safety
+
+dev_dependencies:
+  galileo_serialize: ^3.0.0    
+  file: ^6.1.0 #Null safety
+  logging: ^1.0.1 #Null safety
+  pedantic: ^1.11.0  #Null safety
+
+ 

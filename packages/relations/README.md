@@ -1,8 +1,8 @@
 # relations
-[![version 1.0.1](https://img.shields.io/badge/pub-v1.0.1-brightgreen.svg)](https://pub.dartlang.org/packages/angel_relations)
-[![build status](https://travis-ci.org/angel-dart/relations.svg)](https://travis-ci.org/angel-dart/relations)
+[![version 1.0.1](https://img.shields.io/badge/pub-v1.0.1-brightgreen.svg)](https://pub.dartlang.org/packages/galileo_relations)
+[![build status](https://travis-ci.org/galileo-dart/relations.svg)](https://travis-ci.org/galileo-dart/relations)
 
-Database-agnostic relations between Angel services.
+Database-agnostic relations between Galileo services.
 
 ```dart
 // Authors owning one book

@@ -2,9 +2,9 @@ import 'dart:async';
 import 'dart:math';
 import 'package:galileo_framework/galileo_framework.dart';
 import 'package:galileo_graphql/galileo_graphql.dart';
-import 'package:graphql_schema/graphql_schema.dart';
-import 'package:graphql_server/graphql_server.dart';
-import 'package:graphql_server/mirrors.dart';
+import 'package:galileo_graphql_schema/galileo_graphql_schema.dart';
+import 'package:galileo_graphql_server/galileo_graphql_server.dart';
+import 'package:galileo_graphql_server/mirrors.dart';
 import 'src/models/models.dart';
 
 Future configureServer(Galileo app) async {
@@ -51,8 +51,7 @@ Future configureServer(Galileo app) async {
       field(
         'hero',
         heroType,
-        description:
-            'Finds a random hero within the known galaxy, whether a Droid or Human.',
+        description: 'Finds a random hero within the known galaxy, whether a Droid or Human.',
         inputs: [
           GraphQLFieldInput('ep', episodeGraphQLType),
         ],
@@ -101,7 +100,7 @@ Future configureServer(Galileo app) async {
   app.all('/graphql', graphQLHttp(graphQL));
 
   // In development, we'll want to mount GraphiQL, for easy management of the database.
-  if (!app.isProduction) {
+  if (!app.environment.isProduction) {
     app.get('/graphiql', graphiQL());
   }
 
@@ -134,8 +133,7 @@ Future configureServer(Galileo app) async {
   });
 }
 
-GraphQLFieldResolver randomHeroResolver(
-    Service droidService, Service humansService, Random rnd) {
+GraphQLFieldResolver randomHeroResolver(Service droidService, Service humansService, Random rnd) {
   return (_, args) async {
     var allHeroes = [];
     var allDroids = await droidService.index();
@@ -143,11 +141,8 @@ GraphQLFieldResolver randomHeroResolver(
     allHeroes..addAll(allDroids)..addAll(allHumans);
 
     // Ignore the annoying cast here, hopefully Dart 2 fixes cases like this
-    allHeroes = allHeroes
-        .where((m) =>
-            !args.containsKey('ep') ||
-            (m['appears_in'].contains(args['ep']) as bool))
-        .toList();
+    allHeroes =
+        allHeroes.where((m) => !args.containsKey('ep') || (m['appears_in'].contains(args['ep']) as bool)).toList();
 
     return allHeroes.isEmpty ? null : allHeroes[rnd.nextInt(allHeroes.length)];
   };

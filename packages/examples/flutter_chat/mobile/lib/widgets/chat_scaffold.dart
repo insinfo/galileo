@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:angel_websocket/flutter.dart';
+import 'package:galileo_websocket/flutter.dart';
 import 'package:common/common.dart';
 import 'package:flutter/material.dart';
 
@@ -47,7 +47,7 @@ class _ChatScaffoldState extends State<ChatScaffold> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Angel + Flutter'),
+        title: Text('Galileo + Flutter'),
       ),
     );
   }

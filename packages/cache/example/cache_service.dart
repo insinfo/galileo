@@ -1,9 +1,9 @@
-import 'package:angel_cache/angel_cache.dart';
-import 'package:angel_framework/angel_framework.dart';
-import 'package:angel_framework/http.dart';
+import 'package:galileo_cache/galileo_cache.dart';
+import 'package:galileo_framework/galileo_framework.dart';
+import 'package:galileo_framework/http.dart';
 
 main() async {
-  var app = Angel();
+  var app = Galileo();
 
   app.use(
     '/api/todos',
@@ -19,7 +19,7 @@ main() async {
     ),
   );
 
-  var http = AngelHttp(app);
+  var http = GalileoHttp(app);
   var server = await http.startServer('127.0.0.1', 3000);
   print('Listening at http://${server.address.address}:${server.port}');
 }

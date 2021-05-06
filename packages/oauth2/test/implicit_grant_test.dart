@@ -1,8 +1,8 @@
 import 'dart:async';
-import 'package:angel_framework/angel_framework.dart';
-import 'package:angel_test/angel_test.dart';
-import 'package:angel_oauth2/angel_oauth2.dart';
-import 'package:angel_validate/angel_validate.dart';
+import 'package:galileo_framework/galileo_framework.dart';
+import 'package:galileo_test/galileo_test.dart';
+import 'package:galileo_oauth2/galileo_oauth2.dart';
+import 'package:galileo_validate/galileo_validate.dart';
 import 'package:test/test.dart';
 import 'common.dart';
 
@@ -10,7 +10,7 @@ main() {
   TestClient client;
 
   setUp(() async {
-    var app = Angel();
+    var app = Galileo();
     var oauth2 = _AuthorizationServer();
 
     app.group('/oauth2', (router) {

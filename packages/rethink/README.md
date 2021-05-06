@@ -1,15 +1,15 @@
 # rethink
-[![version 1.0.7](https://img.shields.io/badge/pub-1.0.7-brightgreen.svg)](https://pub.dartlang.org/packages/angel_rethink)
-[![build status](https://travis-ci.org/angel-dart/rethink.svg?branch=master)](https://travis-ci.org/angel-dart/rethink)
+[![version 1.0.7](https://img.shields.io/badge/pub-1.0.7-brightgreen.svg)](https://pub.dartlang.org/packages/galileo_rethink)
+[![build status](https://travis-ci.org/galileo-dart/rethink.svg?branch=master)](https://travis-ci.org/galileo-dart/rethink)
 
-RethinkDB-enabled services for the Angel framework.
+RethinkDB-enabled services for the Galileo framework.
 
 # Installation
 Add the following to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  angel_rethink: ^1.0.0
+  galileo_rethink: ^1.0.0
 ```
 
 `package:rethinkdb_driver2` will be installed as well.
@@ -24,7 +24,7 @@ a problem, as it lowers the numbers of events you have to handle on the client s
 
 ## Model
 `Model` is class with no real functionality; however, it represents a basic document, and your services should host inherited classes.
-Other Angel service providers host `Model` as well, so you will easily be able to modify your application if you ever switch databases.
+Other Galileo service providers host `Model` as well, so you will easily be able to modify your application if you ever switch databases.
 
 ```dart
 class User extends Model {

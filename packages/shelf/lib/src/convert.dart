@@ -1,16 +1,16 @@
 import 'dart:async';
 import 'dart:io';
-import 'package:angel_framework/angel_framework.dart';
+import 'package:galileo_framework/galileo_framework.dart';
 import 'package:path/path.dart' as p;
 import 'package:shelf/shelf.dart' as shelf;
 import 'package:stream_channel/stream_channel.dart';
 
 /// Creates a [shelf.Request]  analogous to the input [req].
 ///
-/// The request's `context` will contain [req.container] as `angel_shelf.container`, as well as
+/// The request's `context` will contain [req.container] as `galileo_shelf.container`, as well as
 /// the provided [context], if any.
 ///
-/// The context will also have the original request available as `angel_shelf.request`.
+/// The context will also have the original request available as `galileo_shelf.request`.
 ///
 /// If you want to read the request body, you *must* set `keepRawRequestBuffers` to `true`
 /// on your application instance.
@@ -64,23 +64,23 @@ Future<shelf.Request> convertRequest(RequestContext req, ResponseContext res,
       handlerPath: handlerPath,
       url: url,
       body: req.body,
-      context: {'angel_shelf.request': req}
-        ..addAll({'angel_shelf.container': req.container})
+      context: {'galileo_shelf.request': req}
+        ..addAll({'galileo_shelf.container': req.container})
         ..addAll(context ?? {}),
       onHijack: onHijack);
 }
 
-/// Applies the state of the [shelfResponse] into the [angelResponse].
+/// Applies the state of the [shelfResponse] into the [galileoResponse].
 ///
 /// Merges all headers, sets the status code, and writes the body.
 ///
-/// In addition, the response's context will be available in `angelResponse.properties`
+/// In addition, the response's context will be available in `galileoResponse.properties`
 /// as `shelf_context`.
 Future mergeShelfResponse(
-    shelf.Response shelfResponse, ResponseContext angelResponse) {
-  angelResponse.headers.addAll(shelfResponse.headers);
-  angelResponse.statusCode = shelfResponse.statusCode;
-  angelResponse.properties['shelf_context'] = shelfResponse.context;
-  angelResponse.properties['shelf_response'] = shelfResponse;
-  return shelfResponse.read().pipe(angelResponse);
+    shelf.Response shelfResponse, ResponseContext galileoResponse) {
+  galileoResponse.headers.addAll(shelfResponse.headers);
+  galileoResponse.statusCode = shelfResponse.statusCode;
+  galileoResponse.properties['shelf_context'] = shelfResponse.context;
+  galileoResponse.properties['shelf_response'] = shelfResponse;
+  return shelfResponse.read().pipe(galileoResponse);
 }

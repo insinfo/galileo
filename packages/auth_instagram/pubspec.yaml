@@ -1,6 +1,6 @@
-name: angel_auth_instagram
+name: galileo_auth_instagram
 version: 3.0.0
-description: angel_auth strategy for Instagram OAuth2 login.
+description: galileo_auth strategy for Instagram OAuth2 login.
 author: Isaque Neves <insinfo2008@gmail.com>
 homepage: https://github.com/insinfo/galileo/tree/master/packages/auth_instagram
 

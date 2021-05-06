@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:angel_framework/angel_framework.dart';
+import 'package:galileo_framework/galileo_framework.dart';
 import 'package:crypto/crypto.dart';
 
 /// A utility that signs, and verifies, cookies using an [Hmac].

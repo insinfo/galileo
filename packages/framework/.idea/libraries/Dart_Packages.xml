@@ -9,31 +9,31 @@
             </list>
           </value>
         </entry>
-        <entry key="angel_container">
+        <entry key="galileo_container">
           <value>
             <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/angel_container-1.0.0-alpha.8/lib" />
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/galileo_container-1.0.0-alpha.8/lib" />
             </list>
           </value>
         </entry>
-        <entry key="angel_http_exception">
+        <entry key="galileo_http_exception">
           <value>
             <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/angel_http_exception-1.0.0+3/lib" />
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/galileo_http_exception-1.0.0+3/lib" />
             </list>
           </value>
         </entry>
-        <entry key="angel_model">
+        <entry key="galileo_model">
           <value>
             <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/angel_model-1.0.0+1/lib" />
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/galileo_model-1.0.0+1/lib" />
             </list>
           </value>
         </entry>
-        <entry key="angel_route">
+        <entry key="galileo_route">
           <value>
             <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/angel_route-3.0.0/lib" />
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/galileo_route-3.0.0/lib" />
             </list>
           </value>
         </entry>
@@ -454,10 +454,10 @@
     </properties>
     <CLASSES>
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/analyzer-0.32.4/lib" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/angel_container-1.0.0-alpha.8/lib" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/angel_http_exception-1.0.0+3/lib" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/angel_model-1.0.0+1/lib" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/angel_route-3.0.0/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/galileo_container-1.0.0-alpha.8/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/galileo_http_exception-1.0.0+3/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/galileo_model-1.0.0+1/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/galileo_route-3.0.0/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/args-1.5.0/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/async-2.0.8/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/body_parser-1.1.1/lib" />

@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of angel.src.models.user;
+part of galileo.src.models.user;
 
 // **************************************************************************
 // Generator: JsonModelGenerator

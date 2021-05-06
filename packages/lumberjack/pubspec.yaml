@@ -1,8 +1,8 @@
 name: lumberjack
 version: 1.0.0-rc.1
-author: Tobe O <thosakwe@gmail.com>
+author: Isaque Neves <insinfo2008@gmail.com>
 description: Hierarchical logging for Dart. Supports multiple transports, zones, and more.
-homepage: https://github.com/angel-dart/lumberjack
+homepage: https://github.com/galileo-dart/lumberjack
 environment:
   sdk: ">=2.0.0-dev <3.0.0"
 dependencies:

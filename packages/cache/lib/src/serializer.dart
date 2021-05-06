@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:angel_framework/angel_framework.dart';
+import 'package:galileo_framework/galileo_framework.dart';
 
 /// A middleware that enables the caching of response serialization.
 ///

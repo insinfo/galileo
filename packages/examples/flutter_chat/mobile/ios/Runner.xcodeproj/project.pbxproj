@@ -384,7 +384,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Flutter",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.angel_framework.flutter_chat.mobile;
+				PRODUCT_BUNDLE_IDENTIFIER = com.galileo_framework.flutter_chat.mobile;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -509,7 +509,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Flutter",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.angel_framework.flutter_chat.mobile;
+				PRODUCT_BUNDLE_IDENTIFIER = com.galileo_framework.flutter_chat.mobile;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -532,7 +532,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Flutter",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.angel_framework.flutter_chat.mobile;
+				PRODUCT_BUNDLE_IDENTIFIER = com.galileo_framework.flutter_chat.mobile;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VERSIONING_SYSTEM = "apple-generic";
 			};

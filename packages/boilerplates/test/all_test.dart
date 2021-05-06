@@ -1,11 +1,11 @@
-import 'package:angel/angel.dart';
-import 'package:angel_framework/angel_framework.dart';
-import 'package:angel_test/angel_test.dart';
+import 'package:galileo/galileo.dart';
+import 'package:galileo_framework/galileo_framework.dart';
+import 'package:galileo_test/galileo_test.dart';
 import 'package:test/test.dart';
 
-// Angel also includes facilities to make testing easier.
+// Galileo also includes facilities to make testing easier.
 //
-// `package:angel_test` ships a client that can test
+// `package:galileo_test` ships a client that can test
 // both plain HTTP and WebSockets.
 //
 // Tests do not require your server to actually be mounted on a port,
@@ -13,7 +13,7 @@ import 'package:test/test.dart';
 // would have to first bind a socket, and then account for network latency.
 //
 // See the documentation here:
-// https://github.com/angel-dart/test
+// https://github.com/galileo-dart/test
 //
 // If you are unfamiliar with Dart's advanced testing library, you can read up
 // here:
@@ -23,7 +23,7 @@ main() async {
   TestClient client;
 
   setUp(() async {
-    var app = Angel();
+    var app = Galileo();
     await app.configure(configureServer);
 
     client = await connectTo(app);

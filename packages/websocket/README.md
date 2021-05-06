@@ -1,12 +1,12 @@
-# angel_websocket
-[![Pub](https://img.shields.io/pub/v/angel_websocket.svg)](https://pub.dartlang.org/packages/angel_websocket)
-[![build status](https://travis-ci.org/angel-dart/websocket.svg)](https://travis-ci.org/angel-dart/websocket)
+# galileo_websocket
+[![Pub](https://img.shields.io/pub/v/galileo_websocket.svg)](https://pub.dartlang.org/packages/galileo_websocket)
+[![build status](https://travis-ci.org/galileo-dart/websocket.svg)](https://travis-ci.org/galileo-dart/websocket)
 
-WebSocket plugin for Angel.
+WebSocket plugin for Galileo.
 
 This plugin broadcasts events from hooked services via WebSockets. 
 
-In addition, it adds itself to the app's IoC container as `AngelWebSocket`, so that it can be used
+In addition, it adds itself to the app's IoC container as `GalileoWebSocket`, so that it can be used
 in controllers as well.
 
 WebSocket contexts are add to `req.properties` as `'socket'`.
@@ -17,13 +17,13 @@ WebSocket contexts are add to `req.properties` as `'socket'`.
 **Server-side**
 
 ```dart
-import "package:angel_framework/angel_framework.dart";
-import "package:angel_websocket/server.dart";
+import "package:galileo_framework/galileo_framework.dart";
+import "package:galileo_websocket/server.dart";
 
 main() async {
-  var app = new Angel();
+  var app = new Galileo();
 
-  var ws = new AngelWebSocket();
+  var ws = new GalileoWebSocket();
   
   // This is a plug-in. It hooks all your services,
   // to automatically broadcast events.
@@ -54,13 +54,13 @@ myService.index({
 
 ```dart
 import 'dart:async';
-import "package:angel_framework/angel_framework.dart";
-import "package:angel_websocket/server.dart";
+import "package:galileo_framework/galileo_framework.dart";
+import "package:galileo_websocket/server.dart";
 
 @Expose("/")
 class MyController extends WebSocketController {
   // A reference to the WebSocket plug-in is required.
-  MyController(AngelWebSocket ws):super(ws);
+  MyController(GalileoWebSocket ws):super(ws);
   
   @override
   void onConnect(WebSocketContext socket) {
@@ -86,7 +86,7 @@ class MyController extends WebSocketController {
 **Client Use**
 
 This repo also provides two client libraries `browser` and `io` that extend the base
-`angel_client` interface, and allow you to use a very similar API on the client to that of
+`galileo_client` interface, and allow you to use a very similar API on the client to that of
 the server.
 
 The provided clients also automatically try to reconnect their WebSockets when disconnected,
@@ -99,10 +99,10 @@ Clients can even perform authentication over WebSockets.
 **In the Browser**
 
 ```dart
-import "package:angel_websocket/browser.dart";
+import "package:galileo_websocket/browser.dart";
 
 main() async {
-  Angel app = new WebSockets("/ws");
+  Galileo app = new WebSockets("/ws");
   await app.connect();
 
   var Cars = app.service("api/cars");
@@ -127,8 +127,8 @@ main() async {
 **CLI Client**
 
 ```dart
-import "package:angel_framework/common.dart";
-import "package:angel_websocket/io.dart";
+import "package:galileo_framework/common.dart";
+import "package:galileo_websocket/io.dart";
 
 // You can include these in a shared file and access on both client and server
 class Car extends Model {
@@ -141,7 +141,7 @@ class Car extends Model {
 }
 
 main() async {
-  Angel app = new WebSockets("/ws");
+  Galileo app = new WebSockets("/ws");
 
   // Wait for WebSocket connection...
   await app.connect();

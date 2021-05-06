@@ -1,6 +1,6 @@
 import 'dart:async';
-import 'package:data_loader/data_loader.dart';
-import 'package:graphql_schema/graphql_schema.dart';
+import 'package:galileo_data_loader/galileo_data_loader.dart';
+import 'package:galileo_graphql_schema/galileo_graphql_schema.dart';
 
 external Future<List<Todo>> fetchTodos(Iterable<int> ids);
 

@@ -60,7 +60,7 @@ const String EVENT_UPDATED = updatedEvent;
 @deprecated
 const String EVENT_REMOVED = removedEvent;
 
-/// The standard Angel service actions.
+/// The standard Galileo service actions.
 const List<String> actions = <String>[
   indexAction,
   readAction,
@@ -73,7 +73,7 @@ const List<String> actions = <String>[
 @deprecated
 const List<String> ACTIONS = actions;
 
-/// The standard Angel service events.
+/// The standard Galileo service events.
 const List<String> events = <String>[
   indexedEvent,
   readEvent,

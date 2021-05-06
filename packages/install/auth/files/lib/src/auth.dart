@@ -1,13 +1,13 @@
 library {{ project_name }}.src.auth;
 
 import 'dart:async';
-import 'package:angel_auth/angel_auth.dart';
-import 'package:angel_framework/angel_framework.dart';
+import 'package:galileo_auth/galileo_auth.dart';
+import 'package:galileo_framework/galileo_framework.dart';
 import '{{ model_path }}';
 
 /// Configures the server to issue and verify JWT's.
-Future configureServer(Angel app) async {
-  var auth = new AngelAuth<{{ model }}>(
+Future configureServer(Galileo app) async {
+  var auth = new GalileoAuth<{{ model }}>(
     jwtKey: app.configuration['jwt_secret'],
     allowCookie: false,
   );

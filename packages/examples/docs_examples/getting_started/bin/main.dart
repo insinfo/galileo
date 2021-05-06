@@ -1,9 +1,9 @@
-import 'package:angel_framework/angel_framework.dart';
-import 'package:angel_framework/http.dart';
+import 'package:galileo_framework/galileo_framework.dart';
+import 'package:galileo_framework/http.dart';
 
 main() async {
-  var app = Angel();
-  var http = AngelHttp(app);
+  var app = Galileo();
+  var http = GalileoHttp(app);
   app.get('/', (req, res) => res.write('Hello, world!'));
 
   app.get('/headers', (req, res) {
@@ -19,7 +19,7 @@ main() async {
     var name = req.bodyAsMap['name'] as String;
 
     if (name == null) {
-      throw AngelHttpException.badRequest(message: 'Missing name.');
+      throw GalileoHttpException.badRequest(message: 'Missing name.');
     } else {
       res.write('Hello, $name!');
     }

@@ -1,4 +1,4 @@
-import 'package:graphql_schema/graphql_schema.dart';
+import 'package:galileo_graphql_schema/galileo_graphql_schema.dart';
 import 'package:test/test.dart';
 
 void main() {
@@ -19,13 +19,10 @@ void main() {
     ),
   ]);
 
-  var isValidPokemon = predicate(
-      (x) =>
-          pokemonType.validate('@root', x as Map<String, dynamic>).successful,
-      'is a valid Pokémon');
+  var isValidPokemon =
+      predicate((x) => pokemonType.validate('@root', x as Map<String, dynamic>).successful, 'is a valid Pokémon');
 
-  var throwsATypeError = throwsA(predicate(
-      (x) => x is TypeError || x is CastError, 'is a type or cast error'));
+  var throwsATypeError = throwsA(predicate((x) => x is TypeError || x is CastError, 'is a type or cast error'));
 
   test('object accepts valid input', () {
     expect({'name': 'Charmander', 'type': 'FIRE'}, isValidPokemon);
@@ -67,10 +64,7 @@ void main() {
 
     test('any of its types returns valid', () {
       expect(u.validate('@root', {'size': 32.0}).successful, true);
-      expect(
-          u.validate(
-              '@root', {'name': 'Charmander', 'type': 'FIRE'}).successful,
-          true);
+      expect(u.validate('@root', {'name': 'Charmander', 'type': 'FIRE'}).successful, true);
     });
   });
 
@@ -84,8 +78,7 @@ void main() {
     );
 
     test('accept valid input', () {
-      expect(type.validate('@root', {'bar': 'a', 'baz': 2.0}).value,
-          {'bar': 'a', 'baz': 2.0});
+      expect(type.validate('@root', {'bar': 'a', 'baz': 2.0}).value, {'bar': 'a', 'baz': 2.0});
     });
 
     test('error on missing non-null fields', () {
@@ -93,10 +86,7 @@ void main() {
     });
 
     test('error on unrecognized fields', () {
-      expect(
-          type.validate(
-              '@root', {'bar': 'a', 'baz': 2.0, 'franken': 'stein'}).successful,
-          false);
+      expect(type.validate('@root', {'bar': 'a', 'baz': 2.0, 'franken': 'stein'}).successful, false);
     });
   });
 }

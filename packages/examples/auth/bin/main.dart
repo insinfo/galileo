@@ -1,19 +1,19 @@
-import 'package:angel_auth/angel_auth.dart';
-import 'package:angel_framework/angel_framework.dart';
-import 'package:angel_framework/http.dart';
-import 'package:angel_static/angel_static.dart';
+import 'package:galileo_auth/galileo_auth.dart';
+import 'package:galileo_framework/galileo_framework.dart';
+import 'package:galileo_framework/http.dart';
+import 'package:galileo_static/galileo_static.dart';
 import 'package:auth/auth.dart';
 import 'package:file/local.dart';
 import 'package:logging/logging.dart';
 
 main() async {
-  var app = Angel();
+  var app = Galileo();
 
   // Note: the `secureCookies` flag is important during development,
   // IF you are using cookies.
   //
   // `localhost` cannot use `Secure` cookies, if it's not over HTTPS, which it often isn't.
-  var auth = AngelAuth<User>(
+  var auth = GalileoAuth<User>(
       jwtKey: 'abcdefghijklmnopqrstuvwxyz012345',
       secureCookies: app.isProduction);
 
@@ -24,7 +24,7 @@ main() async {
 
   var users = [
     User('thosakwe', 'foobar'),
-    User('angel-dart', 'framework'),
+    User('galileo-dart', 'framework'),
   ];
 
   // Add functions to (de)serialize a user for the purposes of representation within a token.
@@ -64,13 +64,13 @@ main() async {
     '/login',
     auth.authenticate(
       'pw',
-      AngelAuthOptions<User>(successRedirect: '/secret.html'),
+      GalileoAuthOptions<User>(successRedirect: '/secret.html'),
     ),
   );
 
   // The rest of the interface consists of static files; serve them.
   app.fallback(vDir.handleRequest);
-  app.fallback((req, res) => throw AngelHttpException.notFound());
+  app.fallback((req, res) => throw GalileoHttpException.notFound());
 
   // Error handling.
   var oldHandler = app.errorHandler;
@@ -95,7 +95,7 @@ main() async {
     });
 
   // Mount the server.
-  var http = AngelHttp(app);
+  var http = GalileoHttp(app);
   await http.startServer('127.0.0.1', 3000);
   print('Listening at http://127.0.0.1:3000');
 }

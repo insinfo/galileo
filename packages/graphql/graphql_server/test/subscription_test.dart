@@ -1,6 +1,6 @@
 import 'dart:async';
-import 'package:graphql_schema/graphql_schema.dart';
-import 'package:graphql_server/graphql_server.dart';
+import 'package:galileo_graphql_schema/galileo_graphql_schema.dart';
+import 'package:galileo_graphql_server/galileo_graphql_server.dart';
 import 'package:test/test.dart';
 
 void main() {
@@ -16,8 +16,7 @@ void main() {
   });
 
   Stream<Map<String, dynamic>> resolveEpisodes(_, __) =>
-      Stream.fromIterable(episodes)
-          .map((ep) => {'prequels': ep, 'not_selected': 1337});
+      Stream.fromIterable(episodes).map((ep) => {'prequels': ep, 'not_selected': 1337});
 
   var episodeType = objectType('Episode', fields: [
     field('name', graphQLString.nonNullable()),

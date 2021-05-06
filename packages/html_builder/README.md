@@ -84,15 +84,15 @@ Rendering to HTML:
 String html = new StringRenderer().render($dom);
 ```
 
-Example with the [Angel](https://github.com/angel-dart/angel) server-side framework,
-which has [dedicated html_builder support](https://github.com/angel-dart/html):
+Example with the [Galileo](https://github.com/galileo-dart/galileo) server-side framework,
+which has [dedicated html_builder support](https://github.com/galileo-dart/html):
 
 ```dart
 import 'dart:io';
-import 'package:angel_framework/angel_framework.dart';
+import 'package:galileo_framework/galileo_framework.dart';
 import 'package:html_builder/elements.dart';
 
-configureViews(Angel app) async {
+configureViews(Galileo app) async {
     app.get('/foo/:id', (req, res) async {
         var foo = await app.service('foo').read(req.params['id']);
         return html(c: [

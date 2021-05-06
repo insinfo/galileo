@@ -1,17 +1,17 @@
 import 'dart:async';
 import 'dart:io';
-import 'package:angel_framework/angel_framework.dart';
+import 'package:galileo_framework/galileo_framework.dart';
 import 'package:shelf/shelf.dart' as shelf;
 import 'shelf_request.dart';
 import 'shelf_response.dart';
 
-class AngelShelf extends Driver<shelf.Request, ShelfResponseContext,
+class GalileoShelf extends Driver<shelf.Request, ShelfResponseContext,
     Stream<shelf.Request>, ShelfRequestContext, ShelfResponseContext> {
   final StreamController<shelf.Request> incomingRequests = StreamController();
 
   final FutureOr<shelf.Response> Function() notFound;
 
-  AngelShelf(Angel app, {FutureOr<shelf.Response> Function() notFound})
+  GalileoShelf(Galileo app, {FutureOr<shelf.Response> Function() notFound})
       : this.notFound =
             notFound ?? (() => shelf.Response.notFound('Not Found')),
         super(app, null, useZone: false) {
@@ -34,7 +34,7 @@ class AngelShelf extends Driver<shelf.Request, ShelfResponseContext,
       (_, __) async => incomingRequests.stream;
 
   static UnsupportedError _unsupported() => UnsupportedError(
-      'AngelShelf cannot mount a standalone server, or return a URI.');
+      'GalileoShelf cannot mount a standalone server, or return a URI.');
 
   Future<shelf.Response> handler(shelf.Request request) async {
     var response = ShelfResponseContext(app);
@@ -64,15 +64,15 @@ class AngelShelf extends Driver<shelf.Request, ShelfResponseContext,
   }
 
   @override
-  Future<shelf.Response> handleAngelHttpException(
-      AngelHttpException e,
+  Future<shelf.Response> handleGalileoHttpException(
+      GalileoHttpException e,
       StackTrace st,
       RequestContext req,
       ResponseContext res,
       shelf.Request request,
       ShelfResponseContext response,
       {bool ignoreFinalizers = false}) async {
-    await super.handleAngelHttpException(e, st, req, res, request, response,
+    await super.handleGalileoHttpException(e, st, req, res, request, response,
         ignoreFinalizers: ignoreFinalizers);
     return response.shelfResponse;
   }

@@ -1,8 +1,8 @@
-import 'package:angel_http_exception/angel_http_exception.dart';
-import 'package:angel_redis/angel_redis.dart';
+import 'package:galileo_http_exception/galileo_http_exception.dart';
+import 'package:galileo_redis/galileo_redis.dart';
 import 'package:resp_client/resp_client.dart';
-import 'package:resp_client/resp_commands.dart';
 import 'package:test/test.dart';
+import 'package:resp_client/resp_server.dart';
 
 main() async {
   RespServerConnection connection;
@@ -10,15 +10,14 @@ main() async {
 
   setUp(() async {
     connection = await connectSocket('localhost');
-    service = RedisService(RespCommands(RespClient(connection)),
-        prefix: 'angel_redis_test');
+    service = RedisService(RespClient(connection), prefix: 'galileo_redis_test');
   });
 
   tearDown(() => connection.close());
 
   test('index', () async {
     // Wipe
-    await service.respCommands.flushDb();
+    await service.respCommands2.flushDb();
     await service.create({'id': '0', 'name': 'Tobe'});
     await service.create({'id': '1', 'name': 'Osakwe'});
 
@@ -68,11 +67,10 @@ main() async {
     var id = 'gelatin${DateTime.now().millisecondsSinceEpoch}';
     var input = await service.create({'id': id, 'bar': 'baz'});
     expect(await service.remove(id), input);
-    expect(await service.respCommands.exists([id]), 0);
+    expect(await service.respCommands2.exists([id]), 0);
   });
 
   test('remove nonexistent', () async {
-    expect(() => service.remove('definitely_does_not_exist'),
-        throwsA(const TypeMatcher<AngelHttpException>()));
+    expect(() => service.remove('definitely_does_not_exist'), throwsA(const TypeMatcher<GalileoHttpException>()));
   });
 }

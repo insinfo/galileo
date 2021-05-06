@@ -1,4 +1,4 @@
-import 'package:graphql_schema/graphql_schema.dart';
+import 'package:galileo_graphql_schema/galileo_graphql_schema.dart';
 
 final GraphQLSchema todoSchema = new GraphQLSchema(
   queryType: objectType('Todo', fields: [
@@ -34,8 +34,6 @@ main() {
   }
 
   // Serialization
-  print(todoSchema.queryType.serialize({
-    'text': 'Clean your room!',
-    'created_at': new DateTime.now().subtract(new Duration(days: 10))
-  }));
+  print(todoSchema.queryType
+      .serialize({'text': 'Clean your room!', 'created_at': new DateTime.now().subtract(new Duration(days: 10))}));
 }

@@ -1,8 +1,8 @@
 /// Declare services here!
-library angel.services;
+library galileo.services;
 
 import 'dart:async';
-import 'package:angel_framework/angel_framework.dart';
+import 'package:galileo_framework/galileo_framework.dart';
 
 /// Configure our application to use *services*.
 /// Services must be wired to the app via `app.use`.
@@ -11,5 +11,5 @@ import 'package:angel_framework/angel_framework.dart';
 /// and respond to both REST and WebSockets.
 ///
 /// Read more here:
-/// https://github.com/angel-dart/angel/wiki/Service-Basics
-Future configureServer(Angel app) async {}
+/// https://github.com/galileo-dart/galileo/wiki/Service-Basics
+Future configureServer(Galileo app) async {}

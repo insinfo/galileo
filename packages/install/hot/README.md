@@ -1,19 +1,19 @@
 # hot
-Generates boilerplate for hot-reloading via `package:angel_hot`.
+Generates boilerplate for hot-reloading via `package:galileo_hot`.
 
 ## Generated Code
 In `bin/hot.dart`:
 
 ```dart
 import 'dart:io';
-import 'package:angel_framework/angel_framework.dart';
-import 'package:angel_hot/angel_hot.dart';
+import 'package:galileo_framework/galileo_framework.dart';
+import 'package:galileo_hot/galileo_hot.dart';
 import 'package:<project_name>/<project_name>.dart';
 
 /// Auto-reloads the server on file changes.
 main() async {
   var hot = new HotReloader(() async {
-    var app = new Angel()..lazyParseBodies = true;
+    var app = new Galileo()..lazyParseBodies = true;
     await app.configure(configureServer);
     return app;
   }, [

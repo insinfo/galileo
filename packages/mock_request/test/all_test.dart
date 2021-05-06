@@ -1,13 +1,13 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:angel_framework/angel_framework.dart';
-import 'package:angel_framework/http.dart';
+import 'package:galileo_framework/galileo_framework.dart';
+import 'package:galileo_framework/http.dart';
 import 'package:galileo_mock_request/galileo_mock_request.dart';
 import 'package:test/test.dart';
 
 void main() {
   var uri = Uri.parse('http://localhost:3000');
-  var app = Angel()
+  var app = Galileo()
     ..get('/foo', (req, res) => 'Hello, world!')
     ..post('/body', (req, res) => req.parseBody().then((_) => req.bodyAsMap.length))
     ..get('/session', (req, res) async {
@@ -17,7 +17,7 @@ void main() {
       return res.serialize(req.ip == InternetAddress.loopbackIPv4.address);
     });
 
-  var http = AngelHttp(app);
+  var http = GalileoHttp(app);
 
   test('receive a response', () async {
     var rq = MockHttpRequest('GET', uri.resolve('/foo'));

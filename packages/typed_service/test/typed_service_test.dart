@@ -1,5 +1,5 @@
-import 'package:angel_framework/angel_framework.dart';
-import 'package:angel_typed_service/angel_typed_service.dart';
+import 'package:galileo_framework/galileo_framework.dart';
+import 'package:galileo_typed_service/galileo_typed_service.dart';
 import 'package:test/test.dart';
 
 void main() {

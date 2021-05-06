@@ -1,6 +1,6 @@
 # html
-[![Pub](https://img.shields.io/pub/v/angel_html.svg)](https://pub.dartlang.org/packages/angel_html)
-[![build status](https://travis-ci.org/angel-dart/html.svg)](https://travis-ci.org/angel-dart/html)
+[![Pub](https://img.shields.io/pub/v/galileo_html.svg)](https://pub.dartlang.org/packages/galileo_html)
+[![build status](https://travis-ci.org/galileo-dart/html.svg)](https://travis-ci.org/galileo-dart/html)
 
 A plug-in that allows you to return html_builder AST's from request handlers, and have them sent as HTML automatically.
 
@@ -27,9 +27,9 @@ Node myDom = html(lang: 'en', c: [
 ]);
 ```
 
-This plug-in means that you can now `return` these AST's, and Angel will automatically send them to
+This plug-in means that you can now `return` these AST's, and Galileo will automatically send them to
 clients. Ultimately, the implication is that you can use `html_builder` as a substitute for a
-templating system within Dart. With [hot reloading](https://github.com/angel-dart/hot), you won't
+templating system within Dart. With [hot reloading](https://github.com/galileo-dart/hot), you won't
 even need to reload your server (as it should be).
 
 # Installation
@@ -37,14 +37,14 @@ In your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  angel_html: ^1.0.0
+  galileo_html: ^1.0.0
 ```
 
 # Usage
 The `renderHtml` function does all the magic for you.
 
 ```dart
-configureServer(Angel app) async {
+configureServer(Galileo app) async {
   // Wire it up!
   app.fallback(renderHtml());
   
@@ -74,7 +74,7 @@ By default, `renderHtml` will ignore the client's `Accept` header. However, if y
 client doesn't accept `*/*` or `text/html`.
 
 ```dart
-configureServer(Angel app) async {
+configureServer(Galileo app) async {
   // Wire it up!
   app.fallback(renderHtml(enforceAcceptHeader: true));
   

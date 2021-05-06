@@ -1,9 +1,9 @@
-name: angel
+name: galileo
 publish_to: none
 environment:
   sdk: '>=2.0.0-dev <3.0.0'
 dependencies:
-  angel_serialize: ^2.0.0
+  galileo_serialize: ^2.0.0
 dev_dependencies:
-  angel_serialize_generator: ^2.0.0
+  galileo_serialize_generator: ^2.0.0
   build_runner: ^1.0.0

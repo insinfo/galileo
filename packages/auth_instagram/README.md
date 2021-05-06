@@ -1,2 +1,2 @@
 # auth_instagram
-angel_auth strategy for Instagram OAuth2 login.
+galileo_auth strategy for Instagram OAuth2 login.

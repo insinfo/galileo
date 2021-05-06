@@ -1,4 +1,4 @@
-#include "angel_wings.h"
+#include "galileo_wings.h"
 #include <cstdlib>
 #include <dart_api.h>
 #include <iostream>
@@ -6,7 +6,7 @@
 
 // The name of the initialization function is the extension name followed
 // by _Init.
-DART_EXPORT Dart_Handle angel_wings_Init(Dart_Handle parent_library) {
+DART_EXPORT Dart_Handle galileo_wings_Init(Dart_Handle parent_library) {
   if (Dart_IsError(parent_library))
     return parent_library;
 

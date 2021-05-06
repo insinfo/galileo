@@ -1,8 +1,8 @@
-name: graphql_parser
-version: 1.1.4
+name: galileo_graphql_parser
+version: 3.0.0
 description: Parses GraphQL queries and schemas. Also includes classes for the GraphQL AST.
 author: Isaque Neves <insinfo2008@gmail.com>
-homepage: https://github.com/galileo-dart/graphql
+homepage: https://github.com/insinfo/galileo/tree/master/packages/graphql
 
 environment:
   sdk: '>=2.10.0 <3.0.0'
@@ -11,7 +11,7 @@ dependencies:
   charcode: ^1.2.0 #Null safety
   source_span: ^1.8.1 #Null safety
   string_scanner: ^1.1.0 #Null safety
-  
+
 dev_dependencies:
   matcher: ^0.12.10 #Null safety
   pedantic: ^1.11.0  #Null safety

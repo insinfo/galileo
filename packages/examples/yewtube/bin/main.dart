@@ -1,10 +1,10 @@
-import 'package:angel_framework/angel_framework.dart';
-import 'package:angel_framework/http.dart';
+import 'package:galileo_framework/galileo_framework.dart';
+import 'package:galileo_framework/http.dart';
 import 'package:logging/logging.dart';
 import 'package:yewtube/yewtube.dart' as yewtube;
 
 main() async {
-  var app = Angel(), http = AngelHttp(app);
+  var app = Galileo(), http = GalileoHttp(app);
   app.logger = Logger('yewtube')
     ..onRecord.listen((rec) {
       print(rec);

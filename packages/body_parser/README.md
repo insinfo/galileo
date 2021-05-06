@@ -1,12 +1,12 @@
 # body_parser
 [![Pub](https://img.shields.io/pub/v/body_parser.svg)](https://pub.dartlang.org/packages/body_parser)
-[![build status](https://travis-ci.org/angel-dart/body_parser.svg)](https://travis-ci.org/angel-dart/body_parser)
+[![build status](https://travis-ci.org/galileo-dart/body_parser.svg)](https://travis-ci.org/galileo-dart/body_parser)
 
 Parse request bodies and query strings in Dart, as well multipart/form-data uploads. No external
 dependencies required.
 
 This is the request body parser powering the
-[Angel](https://angel-dart.github.io)
+[galileo](https://galileo-dart.github.io)
 framework. If you are looking for a server-side solution with dependency injection,
 WebSockets, and more, then I highly recommend it as your first choice. Bam!
 
@@ -70,7 +70,7 @@ on its own. However, you can use the `originalBuffer` property of a `BodyParseRe
 request buffer. To get this functionality, pass `storeOriginalBuffer` as `true` when calling `parseBody`.
 
 For example, if you wanted to
-[parse GraphQL queries within your server](https://github.com/angel-dart/graphql)...
+[parse GraphQL queries within your server](https://github.com/galileo-dart/graphql)...
 
 ```dart
 app.get('/graphql', (req, res) async {

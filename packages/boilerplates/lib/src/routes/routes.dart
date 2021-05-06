@@ -1,18 +1,18 @@
 /// This app's route configuration.
-library angel.src.routes;
+library galileo.src.routes;
 
-import 'package:angel_framework/angel_framework.dart';
-import 'package:angel_static/angel_static.dart';
+import 'package:galileo_framework/galileo_framework.dart';
+import 'package:galileo_static/galileo_static.dart';
 import 'package:file/file.dart';
 import 'controllers/controllers.dart' as controllers;
 
 /// Put your app routes here!
 ///
 /// See the wiki for information about routing, requests, and responses:
-/// * https://github.com/angel-dart/angel/wiki/Basic-Routing
-/// * https://github.com/angel-dart/angel/wiki/Requests-&-Responses
-AngelConfigurer configureServer(FileSystem fileSystem) {
-  return (Angel app) async {
+/// * https://github.com/galileo-dart/galileo/wiki/Basic-Routing
+/// * https://github.com/galileo-dart/galileo/wiki/Requests-&-Responses
+GalileoConfigurer configureServer(FileSystem fileSystem) {
+  return (Galileo app) async {
     // Typically, you want to mount controllers first, after any global middleware.
     await app.configure(controllers.configureServer);
 
@@ -26,8 +26,8 @@ AngelConfigurer configureServer(FileSystem fileSystem) {
     // similar reverse proxy.
     //
     // Read the following two sources for documentation:
-    // * https://medium.com/the-angel-framework/serving-static-files-with-the-angel-framework-2ddc7a2b84ae
-    // * https://github.com/angel-dart/static
+    // * https://medium.com/the-galileo-framework/serving-static-files-with-the-galileo-framework-2ddc7a2b84ae
+    // * https://github.com/galileo-dart/static
     if (!app.environment.isProduction) {
       var vDir = VirtualDirectory(
         app,
@@ -38,12 +38,12 @@ AngelConfigurer configureServer(FileSystem fileSystem) {
     }
 
     // Throw a 404 if no route matched the request.
-    app.fallback((req, res) => throw AngelHttpException.notFound());
+    app.fallback((req, res) => throw GalileoHttpException.notFound());
 
     // Set our application up to handle different errors.
     //
     // Read the following for documentation:
-    // * https://github.com/angel-dart/angel/wiki/Error-Handling
+    // * https://github.com/galileo-dart/galileo/wiki/Error-Handling
 
     var oldErrorHandler = app.errorHandler;
     app.errorHandler = (e, req, res) async {

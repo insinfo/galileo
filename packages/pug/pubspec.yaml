@@ -1,13 +1,13 @@
-author: "Tobe O <thosakwe@gmail.com>"
-description: "Pug (nee Jade) view generator for Angel."
-homepage: "https://github.com/angel-dart/pug.git"
-name: "angel_pug"
+author: "Isaque Neves <insinfo2008@gmail.com>"
+description: "Pug (nee Jade) view generator for Galileo."
+homepage: "https://github.com/galileo-dart/pug.git"
+name: "galileo_pug"
 version: "1.0.0"
 environment:
   sdk: ">=1.19.0"
 dependencies:
-  angel_framework: ^1.0.0-dev
+  galileo_framework: ^1.0.0-dev
   jaded: ^0.1.9
 dev_dependencies:
-  angel_test: ^1.0.0
+  galileo_test: ^1.0.0
   test: ^0.12.0

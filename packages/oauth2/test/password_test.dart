@@ -1,18 +1,18 @@
 import 'dart:async';
-import 'package:angel_framework/angel_framework.dart';
-import 'package:angel_framework/http.dart';
-import 'package:angel_oauth2/angel_oauth2.dart';
+import 'package:galileo_framework/galileo_framework.dart';
+import 'package:galileo_framework/http.dart';
+import 'package:galileo_oauth2/galileo_oauth2.dart';
 import 'package:logging/logging.dart';
 import 'package:oauth2/oauth2.dart' as oauth2;
 import 'package:test/test.dart';
 import 'common.dart';
 
 main() {
-  Angel app;
+  Galileo app;
   Uri tokenEndpoint;
 
   setUp(() async {
-    app = Angel();
+    app = Galileo();
     var auth = _AuthorizationServer();
 
     app.group('/oauth2', (router) {
@@ -27,7 +27,7 @@ main() {
 
     app.logger = Logger('password_test')..onRecord.listen(print);
 
-    var http = AngelHttp(app);
+    var http = GalileoHttp(app);
     var server = await http.startServer();
     var url = 'http://${server.address.address}:${server.port}';
     tokenEndpoint = Uri.parse('$url/oauth2/token');

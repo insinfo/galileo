@@ -18,7 +18,7 @@ optional parameter.
 
 # 2.0.0
 
-- Updates for Angel 2. Big thanks to @denkuy!
+- Updates for Galileo 2. Big thanks to @denkuy!
 - Use `package:path` for better path resolution.
 
 # 1.1.1

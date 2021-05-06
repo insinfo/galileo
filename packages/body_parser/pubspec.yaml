@@ -1,15 +1,18 @@
-name: body_parser
-author: Tobe O <thosakwe@gmail.com>
-version: 1.1.1
+name: galileo_body_parser
+author: Isaque Neves <insinfo2008@gmail.com>
+version: 3.0.0
 description: Parse request bodies and query strings in Dart. Supports JSON, URL-encoded, and multi-part bodies.
-homepage: https://github.com/angel-dart/body_parser
+homepage: https://github.com/insinfo/galileo/tree/master/packages/body_parser
+
 environment:
-  sdk: ">=2.10.0 <2.12.0"
+  sdk: ">=2.10.0 <3.0.0"
+
 dependencies:
-  dart2_constant: ^1.0.0
-  http_parser: ">=3.1.1 <4.0.0"
-  http_server: ">=0.9.6 <1.0.0"
-  mime: ">=0.9.3 <1.0.0"
+  #dart2_constant: ^1.0.0
+  http_parser: ^4.0.0 #Null safety
+  galileo_http_server: ^1.0.1 #Null safety
+  mime: ^1.0.0  #Null safety
+
 dev_dependencies:
-  http: ">=0.11.3 <0.12.0"
-  test: ^1.15.7
+  http: ^0.13.3 #Null safety
+  test: ^1.17.3 #Null safety

@@ -1,2 +1,2 @@
-# 2.0.0
-* Angel 2 + Dart 2 updates
+# 3.0.0
+* Galileo 3 updates

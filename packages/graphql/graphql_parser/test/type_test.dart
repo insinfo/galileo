@@ -1,4 +1,4 @@
-import 'package:graphql_parser/graphql_parser.dart';
+import 'package:galileo_graphql_parser/galileo_graphql_parser.dart';
 import 'package:test/test.dart';
 import 'common.dart';
 
@@ -24,13 +24,11 @@ main() {
 
     group('non-nullable list type', () {
       test('with nullable', () {
-        expect('[foo]!',
-            isListType(isType('foo', isNullable: true), isNullable: false));
+        expect('[foo]!', isListType(isType('foo', isNullable: true), isNullable: false));
       });
 
       test('with non-nullable', () {
-        expect('[foo!]!',
-            isListType(isType('foo', isNullable: false), isNullable: false));
+        expect('[foo!]!', isListType(isType('foo', isNullable: false), isNullable: false));
       });
     });
 
@@ -48,11 +46,9 @@ main() {
 
 TypeContext parseType(String text) => parse(text).parseType();
 
-Matcher isListType(Matcher innerType, {bool isNullable}) =>
-    _IsListType(innerType, isNullable: isNullable != false);
+Matcher isListType(Matcher innerType, {bool isNullable}) => _IsListType(innerType, isNullable: isNullable != false);
 
-Matcher isType(String name, {bool isNullable}) =>
-    _IsType(name, nonNull: isNullable != true);
+Matcher isType(String name, {bool isNullable}) => _IsType(name, nonNull: isNullable != true);
 
 class _IsListType extends Matcher {
   final Matcher innerType;

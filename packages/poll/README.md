@@ -1,10 +1,10 @@
 # poll
-[![Pub](https://img.shields.io/pub/v/angel_poll.svg)](https://pub.dartlang.org/packages/angel_poll)
-[![build status](https://travis-ci.org/angel-dart/poll.svg?branch=master)](https://travis-ci.org/angel-dart/poll)
+[![Pub](https://img.shields.io/pub/v/galileo_poll.svg)](https://pub.dartlang.org/packages/galileo_poll)
+[![build status](https://travis-ci.org/galileo-dart/poll.svg?branch=master)](https://travis-ci.org/galileo-dart/poll)
 
-`package:angel_client` support for "realtime" interactions with Angel via long polling.
+`package:galileo_client` support for "realtime" interactions with Galileo via long polling.
 
-Angel supports [WebSockets](https://github.com/angel-dart/websocket) on the server and client, which
+Galileo supports [WebSockets](https://github.com/galileo-dart/websocket) on the server and client, which
 makes it very straightforward to implement realtime collections. However, not every user's browser
 supports WebSockets. In such a case, applications might *gracefully degrade* to long-polling
 the server for changes.
@@ -18,8 +18,8 @@ A common use-case would be passing this service to `ServiceList`, a class that m
 of a collection managed in real-time.
 
 ```dart
-import 'package:angel_client/io.dart';
-import 'package:angel_poll/angel_poll.dart';
+import 'package:galileo_client/io.dart';
+import 'package:galileo_poll/galileo_poll.dart';
 
 main() {
   var app = new Rest('http://localhost:3000');

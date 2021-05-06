@@ -1,14 +1,14 @@
-import 'package:angel_framework/angel_framework.dart';
+import 'package:galileo_framework/galileo_framework.dart';
 import 'package:jinja/jinja.dart';
 
-/// Configures an Angel server to use Jinja2 to render templates.
+/// Configures an Galileo server to use Jinja2 to render templates.
 ///
 /// By default, templates are loaded from the filesystem;
 /// pass your own [createLoader] callback to override this.
 ///
 /// All options other than [createLoader] are passed to either [FileSystemLoader]
 /// or [Environment].
-AngelConfigurer jinja({
+GalileoConfigurer jinja({
   Iterable<String> ext = const ['html'],
   String path = 'lib/src/templates',
   bool followLinks = true,

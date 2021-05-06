@@ -1,14 +1,14 @@
 import 'dart:async';
-import 'package:angel_framework/angel_framework.dart';
-import 'package:angel_production/angel_production.dart';
-import 'package:angel_proxy/angel_proxy.dart';
-import 'package:angel_static/angel_static.dart';
+import 'package:galileo_framework/galileo_framework.dart';
+import 'package:galileo_production/galileo_production.dart';
+import 'package:galileo_proxy/galileo_proxy.dart';
+import 'package:galileo_static/galileo_static.dart';
 import 'package:file/local.dart';
 import 'package:http/io_client.dart' as http;
 
 main(List<String> args) => Runner('examples-v2', configureServer).run(args);
 
-Future configureServer(Angel app) async {
+Future configureServer(Galileo app) async {
   // In development, proxy to localhost:8080 (pub serve).
   //
   // The proxy also supports WebSockets, so it works with webpack-dev-server, etc.
@@ -31,5 +31,5 @@ Future configureServer(Angel app) async {
   }
 
   // Throw a 404 if no route was matched.
-  app.fallback((req, res) => throw AngelHttpException.notFound());
+  app.fallback((req, res) => throw GalileoHttpException.notFound());
 }

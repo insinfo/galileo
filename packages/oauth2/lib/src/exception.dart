@@ -1,7 +1,7 @@
-import 'package:angel_http_exception/angel_http_exception.dart';
+import 'package:galileo_http_exception/galileo_http_exception.dart';
 
-/// An Angel-friendly wrapper around OAuth2 [ErrorResponse] instances.
-class AuthorizationException extends AngelHttpException {
+/// An Galileo-friendly wrapper around OAuth2 [ErrorResponse] instances.
+class AuthorizationException extends GalileoHttpException {
   final ErrorResponse errorResponse;
 
   AuthorizationException(this.errorResponse,

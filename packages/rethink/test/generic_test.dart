@@ -1,14 +1,14 @@
-import 'package:angel_client/angel_client.dart' as c;
-import 'package:angel_framework/angel_framework.dart';
-import 'package:angel_rethink/angel_rethink.dart';
-import 'package:angel_test/angel_test.dart';
+import 'package:galileo_client/galileo_client.dart' as c;
+import 'package:galileo_framework/galileo_framework.dart';
+import 'package:galileo_rethink/galileo_rethink.dart';
+import 'package:galileo_test/galileo_test.dart';
 import 'package:logging/logging.dart';
 import 'package:rethinkdb_dart/rethinkdb_dart.dart';
 import 'package:test/test.dart';
 import 'common.dart';
 
 main() {
-  Angel app;
+  Galileo app;
   TestClient client;
   Rethinkdb r;
   c.Service todoService;
@@ -17,14 +17,14 @@ main() {
     r = Rethinkdb();
     var conn = await r.connect();
 
-    app = Angel();
+    app = Galileo();
     app.use('/todos', RethinkService(conn, r.table('todos')));
 
     app.errorHandler = (e, req, res) async {
       print('Whoops: $e');
     };
 
-    app.logger = Logger.detached('angel')..onRecord.listen(print);
+    app.logger = Logger.detached('galileo')..onRecord.listen(print);
 
     client = await connectTo(app);
     todoService = client.service('todos');

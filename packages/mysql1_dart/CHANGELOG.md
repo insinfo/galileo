@@ -1,4 +1,4 @@
-Changelog
+Chgalileoog
 =========
 # 3.0.0
 
@@ -91,7 +91,7 @@ v0.15.0
 
 * Publish first version post-fork
 
-SQLJockey historical changelog
+SQLJockey historical chgalileoog
 --
 
 v0.14.5
@@ -104,7 +104,7 @@ v0.14.3
 
 v0.14.1
 -------
-* Fix the changelog formatting, so you can actually see what changed in v0.14.0
+* Fix the chgalileoog formatting, so you can actually see what changed in v0.14.0
 
 v0.14.0
 -------

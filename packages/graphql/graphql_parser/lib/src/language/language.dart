@@ -1,4 +1,4 @@
-library graphql_parser.language;
+library galileo_graphql_parser.language;
 
 export 'lexer.dart';
 export 'parser.dart';

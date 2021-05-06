@@ -2,9 +2,9 @@ import 'dart:async';
 import 'dart:io';
 import 'dart:isolate';
 import 'dart:typed_data';
-import 'package:angel_container/angel_container.dart';
-import 'package:angel_framework/angel_framework.dart';
-import 'package:mock_request/mock_request.dart';
+import 'package:galileo_container/galileo_container.dart';
+import 'package:galileo_framework/galileo_framework.dart';
+import 'package:galileo_mock_request/galileo_mock_request.dart';
 import 'wings_socket.dart';
 
 enum _ParseState { method, url, headerField, headerValue, body }
@@ -24,10 +24,9 @@ class WingsRequestContext extends RequestContext<WingsClientSocket> {
   Uri _uri;
 
   @override
-  Angel app;
+  Galileo app;
 
-  WingsRequestContext._(this.app, this.rawRequest, this._recv)
-      : container = app.container.createChild();
+  WingsRequestContext._(this.app, this.rawRequest, this._recv) : container = app.container.createChild();
 
   Future<void> close() async {
     await _body.close();
@@ -95,7 +94,7 @@ class WingsRequestContext extends RequestContext<WingsClientSocket> {
     }
   }
 
-  static Future<WingsRequestContext> from(Angel app, WingsClientSocket socket) {
+  static Future<WingsRequestContext> from(Galileo app, WingsClientSocket socket) {
     // var state = _ParseState.url;
     var c = Completer<WingsRequestContext>();
     var recv = RawReceivePort();
@@ -194,8 +193,7 @@ class WingsRequestContext extends RequestContext<WingsClientSocket> {
   String get hostname => headers.value('host');
 
   @override
-  String get method => _override ??=
-      (headers.value('x-http-method-override')?.toUpperCase() ?? _method);
+  String get method => _override ??= (headers.value('x-http-method-override')?.toUpperCase() ?? _method);
 
   @override
   String get originalMethod => _method;

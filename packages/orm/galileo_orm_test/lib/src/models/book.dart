@@ -22,6 +22,6 @@ class _Book extends Model {
 @orm
 abstract class _Author extends Model {
   @Column(length: 255, indexType: IndexType.unique)
-  @SerializableField(defaultValue: 'Tobe Osakwe')
+  @SerializableField(defaultValue: 'Isaque Neves')
   String get name;
 }

@@ -1,4 +1,4 @@
-import 'package:angel_websocket/flutter.dart';
+import 'package:galileo_websocket/flutter.dart';
 import 'package:common/common.dart';
 import 'package:flutter/material.dart' hide State;
 import 'package:flutter/material.dart' as f show State;

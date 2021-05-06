@@ -1,2 +1,2 @@
-# 1.0.0
-* Initial version.
+# 3.0.0
+* update dependencies 

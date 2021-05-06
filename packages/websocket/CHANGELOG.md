@@ -4,7 +4,7 @@
 
 # 2.0.2
 * Update `stream_channel` to `2.0.0`.
-* Use `angel_framework^@2.0.0-rc.0`.
+* Use `galileo_framework^@2.0.0-rc.0`.
 
 # 2.0.1
 * Add `reconnectOnClose` and `reconnectinterval` parameters in top-level `WebSockets` constructors.
@@ -32,22 +32,22 @@
 * Strong typing updates.
 
 # 2.0.0-alpha.3
-* Directly import Angel HTTP.
+* Directly import Galileo HTTP.
 
 # 2.0.0-alpha.2
-* Updated for the next version of `angel_client`.
+* Updated for the next version of `galileo_client`.
 
 # 2.0.0-alpha.1
-* Refactorings for updated Angel 2 versions.
+* Refactorings for updated Galileo 2 versions.
 * Remove `package:dart2_constant`.
 
 # 2.0.0-alpha
-* Depend on Dart 2 and Angel 2.
+* Depend on Dart 2 and Galileo 2.
 
 # 1.1.2
 * Dart 2 updates.
 * Added `handleClient`, which is nice for external implementations
-that plug into `AngelWebSocket`.
+that plug into `GalileoWebSocket`.
 
 # 1.1.1
 * Deprecated `unwrap`.

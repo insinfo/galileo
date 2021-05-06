@@ -1,6 +1,6 @@
 import 'dart:async';
-import 'package:angel_auth/angel_auth.dart';
-import 'package:angel_framework/angel_framework.dart';
+import 'package:galileo_auth/galileo_auth.dart';
+import 'package:galileo_framework/galileo_framework.dart';
 import 'package:http/http.dart' as http;
 import 'package:instagram/instagram.dart';
 
@@ -26,7 +26,7 @@ class InstagramAuthStrategy extends AuthStrategy {
 
   @override
   Future authenticate(RequestContext req, ResponseContext res,
-      [AngelAuthOptions options]) {
+      [GalileoAuthOptions options]) {
     if (options != null) return authenticateCallback(req, res, options);
     return new Future.sync(() {
       if (stateGenerator == null)
@@ -41,9 +41,9 @@ class InstagramAuthStrategy extends AuthStrategy {
   }
 
   Future authenticateCallback(
-      RequestContext req, ResponseContext res, AngelAuthOptions options) async {
+      RequestContext req, ResponseContext res, GalileoAuthOptions options) async {
     if (!req.query.containsKey('code'))
-      throw new AngelHttpException.badRequest(
+      throw new GalileoHttpException.badRequest(
           message: 'Expected "code" in query.');
 
     var code = req.query['code'] as String;

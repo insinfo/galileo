@@ -1,6 +1,9 @@
+# deprecated
+
 # toggle
-[![version 1.0.0](https://img.shields.io/badge/pub-v1.0.0-brightgreen.svg)](https://pub.dartlang.org/packages/angel_toggle)
-[![build status](https://travis-ci.org/angel-dart/toggle.svg)](https://travis-ci.org/angel-dart/toggle)
+
+[![version 1.0.0](https://img.shields.io/badge/pub-v1.0.0-brightgreen.svg)](https://pub.dartlang.org/packages/galileo_toggle)
+[![build status](https://travis-ci.org/galileo-dart/toggle.svg)](https://travis-ci.org/galileo-dart/toggle)
 ![coverage: 100%](https://img.shields.io/badge/coverage-100%25-green.svg)
 
 Allows you to substitute one service for another while testing.
@@ -12,11 +15,11 @@ that you don't have to write any boilerplate code to clean up a database between
 In your `pubspec.yaml` file:
 ```yaml
 dependencies:
-  angel_toggle: ^1.0.0
+  galileo_toggle: ^1.0.0
 ```
 
 # Usage
-Within `angel_toggle`, there are two ways to specify that your application is running
+Within `galileo_toggle`, there are two ways to specify that your application is running
 in "test mode":
   1. `app.properties` contains a key `testMode`, the value of which is `true`.
   2. `Platform.script` contains the string `test` (case-insensitive). This means you have
@@ -33,10 +36,10 @@ If you really need to delay the mounting of the service, add this plug-in to
 default to a `MapService`.
 
 ```dart
-import 'package:angel_framework/angel_framework.dart';
-import 'package:angel_toggle/angel_toggle.dart';
+import 'package:galileo_framework/galileo_framework.dart';
+import 'package:galileo_toggle/galileo_toggle.dart';
 
-configureServer(Angel app) async {
+configureServer(Galileo app) async {
   await app.configure(toggleService('/api/todos', () => new MongoService(...)));
 }
 ```

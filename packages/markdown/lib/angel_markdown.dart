@@ -1,12 +1,12 @@
 import 'dart:async';
 import 'dart:mirrors';
-import 'package:angel_framework/angel_framework.dart';
+import 'package:galileo_framework/galileo_framework.dart';
 import 'package:file/file.dart';
 import 'package:markdown/markdown.dart';
 
 final RegExp _braces = new RegExp(r'@?{{(((\\})|([^}]))+)}}');
 
-/// Configures an [Angel] instance to render Markdown templates from the specified [viewsDirectory].
+/// Configures an [Galileo] instance to render Markdown templates from the specified [viewsDirectory].
 ///
 /// The default [extension] is `.md`. To search for a different file extension, provide a new one.
 /// By default, an [extensionSet] is provided that renders Github-flavored Markdown. This can also be overridden.
@@ -14,7 +14,7 @@ final RegExp _braces = new RegExp(r'@?{{(((\\})|([^}]))+)}}');
 /// In many cases, Markdown content will be rendered within a larger [template] that styles the entire website.
 /// To wrap generated Markdown content in a template, provide a function that accepts a generated HTML String,
 /// and returns a String, or a `Future<String>`.
-AngelConfigurer markdown(
+GalileoConfigurer markdown(
   Directory viewsDirectory, {
   String extension,
   ExtensionSet extensionSet,
@@ -23,7 +23,7 @@ AngelConfigurer markdown(
   extension ??= '.md';
   extensionSet ??= ExtensionSet.gitHubWeb;
 
-  return (Angel app) async {
+  return (Galileo app) async {
     app.viewGenerator = (String name, [Map<String, dynamic> locals]) async {
       var file = viewsDirectory.childFile(
           viewsDirectory.fileSystem.path.setExtension(name, extension));

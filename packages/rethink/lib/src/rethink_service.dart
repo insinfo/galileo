@@ -1,7 +1,7 @@
 import 'dart:async';
 //import 'dart:io';
-import 'package:angel_framework/angel_framework.dart';
-import 'package:json_god/json_god.dart' as god;
+import 'package:galileo_framework/galileo_framework.dart';
+import 'package:galileo_json_god/galileo_json_god.dart' as god;
 import 'package:rethinkdb_dart/rethinkdb_dart.dart';
 
 // Extends a RethinkDB query.
@@ -33,22 +33,16 @@ class RethinkService extends Service {
   final RqlQuery table;
 
   RethinkService(this.connection, this.table,
-      {this.allowRemoveAll: false,
-      this.allowQuery: true,
-      this.debug: false,
-      this.listenForChanges: true})
+      {this.allowRemoveAll: false, this.allowQuery: true, this.debug: false, this.listenForChanges: true})
       : super() {}
 
   RqlQuery buildQuery(RqlQuery initialQuery, Map params) {
     if (params != null)
-      params['broadcast'] = params.containsKey('broadcast')
-          ? params['broadcast']
-          : (listenForChanges != true);
+      params['broadcast'] = params.containsKey('broadcast') ? params['broadcast'] : (listenForChanges != true);
 
     var q = _getQueryInner(initialQuery, params);
 
-    if (params?.containsKey('reql') == true && params['reql'] is QueryCallback)
-      q = params['reql'](q);
+    if (params?.containsKey('reql') == true && params['reql'] is QueryCallback) q = params['reql'](q);
 
     return q ?? initialQuery;
   }
@@ -68,10 +62,7 @@ class RethinkService extends Service {
         return q.keys.fold<RqlQuery>(query, (out, key) {
           var val = q[key];
 
-          if (val is RequestContext ||
-              val is ResponseContext ||
-              key == 'provider' ||
-              val is Providers)
+          if (val is RequestContext || val is ResponseContext || key == 'provider' || val is Providers)
             return out;
           else {
             return out.filter({key.toString(): val});
@@ -87,8 +78,7 @@ class RethinkService extends Service {
     if (result is Cursor)
       return await result.toList();
     else if (result is Map && result['generated_keys'] is List) {
-      if (result['generated_keys'].length == 1)
-        return await read(result['generated_keys'].first);
+      if (result['generated_keys'].length == 1) return await read(result['generated_keys'].first);
       return await Future.wait(result['generated_keys'].map(read));
     } else
       return result;
@@ -127,24 +117,19 @@ class RethinkService extends Service {
 
       if (type == 'add') {
         // Create
-        hookedService.fireEvent(
-            hookedService.afterCreated,
-            new HookedServiceEvent(
-                true, null, null, this, HookedServiceEvent.created,
-                result: newVal));
+        hookedService.fireEvent(hookedService.afterCreated,
+            new HookedServiceEvent(true, null, null, this, HookedServiceEvent.created, result: newVal));
       } else if (type == 'change') {
         // Update
         hookedService.fireEvent(
             hookedService.afterCreated,
-            new HookedServiceEvent(
-                true, null, null, this, HookedServiceEvent.updated,
+            new HookedServiceEvent(true, null, null, this, HookedServiceEvent.updated,
                 result: newVal, id: oldVal['id'], data: newVal));
       } else if (type == 'remove') {
         // Remove
         hookedService.fireEvent(
             hookedService.afterCreated,
-            new HookedServiceEvent(
-                true, null, null, this, HookedServiceEvent.removed,
+            new HookedServiceEvent(true, null, null, this, HookedServiceEvent.removed,
                 result: oldVal, id: oldVal['id']));
       }
     });
@@ -165,15 +150,14 @@ class RethinkService extends Service {
     //print('Found for $id: $found');
 
     if (found == null) {
-      throw new AngelHttpException.notFound(
-          message: 'No record found for ID $id');
+      throw new GalileoHttpException.notFound(message: 'No record found for ID $id');
     } else
       return found;
   }
 
   @override
   Future create(data, [Map params]) async {
-    if (table is! Table) throw new AngelHttpException.methodNotAllowed();
+    if (table is! Table) throw new GalileoHttpException.methodNotAllowed();
 
     var d = _serialize(data);
     var q = table as Table;
@@ -188,7 +172,7 @@ class RethinkService extends Service {
     if (d is Map && d.containsKey('id')) {
       try {
         await read(d['id'], params);
-      } on AngelHttpException catch (e) {
+      } on GalileoHttpException catch (e) {
         if (e.statusCode == 404)
           return await create(data, params);
         else
@@ -208,7 +192,7 @@ class RethinkService extends Service {
     if (d is Map && d.containsKey('id')) {
       try {
         await read(d['id'], params);
-      } on AngelHttpException catch (e) {
+      } on GalileoHttpException catch (e) {
         if (e.statusCode == 404)
           return await create(data, params);
         else
@@ -224,10 +208,7 @@ class RethinkService extends Service {
 
   @override
   Future remove(id, [Map params]) async {
-    if (id == null ||
-        id == 'null' &&
-            (allowRemoveAll == true ||
-                params?.containsKey('provider') != true)) {
+    if (id == null || id == 'null' && (allowRemoveAll == true || params?.containsKey('provider') != true)) {
       return await _sendQuery(table.delete());
     } else {
       var prior = await read(id, params);

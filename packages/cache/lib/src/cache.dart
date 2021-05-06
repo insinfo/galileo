@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'dart:io' show HttpDate;
-import 'package:angel_framework/angel_framework.dart';
+import 'package:galileo_framework/galileo_framework.dart';
 import 'package:pool/pool.dart';
 
-/// A flexible response cache for Angel.
+/// A flexible response cache for Galileo.
 ///
 /// Use this to improve real and perceived response of Web applications,
 /// as well as to memoize expensive responses.

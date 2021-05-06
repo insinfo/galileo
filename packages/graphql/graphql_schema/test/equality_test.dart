@@ -1,14 +1,12 @@
-import 'package:graphql_schema/graphql_schema.dart';
+import 'package:galileo_graphql_schema/galileo_graphql_schema.dart';
 import 'package:test/test.dart';
 
 /// Note: this doesn't test for scalar types, which are final, and therefore use built-in equality.
 void main() {
   group('equality', () {
     test('enums', () {
-      expect(enumTypeFromStrings('A', ['B', 'C']),
-          enumTypeFromStrings('A', ['B', 'C']));
-      expect(enumTypeFromStrings('A', ['B', 'C']),
-          isNot(enumTypeFromStrings('B', ['B', 'C'])));
+      expect(enumTypeFromStrings('A', ['B', 'C']), enumTypeFromStrings('A', ['B', 'C']));
+      expect(enumTypeFromStrings('A', ['B', 'C']), isNot(enumTypeFromStrings('B', ['B', 'C'])));
     });
 
     test('objects', () {

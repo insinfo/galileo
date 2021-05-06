@@ -1,4 +1,4 @@
-/// Flutter-compatible WebSocket client library for the Angel framework.
+/// Flutter-compatible WebSocket client library for the Galileo framework.
 library galileo_websocket.flutter;
 
 import 'dart:async';
@@ -13,7 +13,7 @@ export 'galileo_websocket.dart';
 
 // final RegExp _straySlashes = new RegExp(r"(^/)|(/+$)");
 
-/// Queries an Angel server via WebSockets.
+/// Queries an Galileo server via WebSockets.
 class WebSockets extends BaseWebSocketClient {
   final List<WebSocketsService> _services = [];
 

@@ -1,0 +1,24 @@
+name: vs_twig_language_server
+version: 3.0.0
+description: Language Server Protocol implementation for the twig_dart templating engine.
+author: Isaque Neves <insinfo2008@gmail.com>
+homepage: https://github.com/galileo-dart/vscode
+
+environment:
+  sdk: ">=2.10.0 <3.0.0"
+dependencies:
+  args: ^2.1.0 #Null safety
+#  dart_language_server: ^0.1.16
+  file: ^6.1.0 #Null safety
+  io: ^1.0.0 #Null safety
+  twig_dart: ^2.0.0   
+  twig_dart_preprocessor: ^2.0.1
+  json_rpc_2: ^3.0.0 #Null safety
+  logging: ^1.0.1  #Null safety
+  path: ^1.8.0 #Null safety
+  source_span: ^1.8.1 #Null safety
+  string_scanner: ^1.1.0 #Null safety
+  essential_symbol_table: ^2.0.1
+
+executables:
+  twig_language_server: twig_language_server

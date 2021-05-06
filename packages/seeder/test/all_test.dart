@@ -1,12 +1,12 @@
 import 'dart:async';
 
-import 'package:angel_framework/angel_framework.dart';
-import 'package:angel_seeder/angel_seeder.dart';
+import 'package:galileo_framework/galileo_framework.dart';
+import 'package:galileo_seeder/galileo_seeder.dart';
 import 'package:test/test.dart';
 
 main() {
   test('create one', () async {
-    var app = new Angel()..use('/todos', new TodoService());
+    var app = new Galileo()..use('/todos', new TodoService());
 
     await app.configure(seed(
         'todos',
@@ -44,7 +44,7 @@ class TodoService extends Service {
       todos.add(new Todo.fromJson(data)..id = todos.length.toString());
       return data;
     } else
-      throw new AngelHttpException.badRequest();
+      throw new GalileoHttpException.badRequest();
   }
 }
 

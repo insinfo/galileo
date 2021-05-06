@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:angel_framework/angel_framework.dart';
+import 'package:galileo_framework/galileo_framework.dart';
 import 'transform.dart';
 
 /// Serializes the current time to `e.data` or `e.result`.

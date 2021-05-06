@@ -2,7 +2,7 @@
 Most of the boilerplate that this repo intended to resolve has been solved, because `package:build_config` allows users to use `build.yaml` files to simplify builder configuration. Adding things like the ORM and model serialization is really now as simple as installing dependencies.
 
 # install
-The repository for `angel install` add-ons.
+The repository for `galileo install` add-ons.
 
 The goal of the add-on system is to eliminate virtually all boilerplate from the development cycle.
 Feel free to submit a PR; the more add-ons, the better.
@@ -11,7 +11,7 @@ Feel free to submit a PR; the more add-ons, the better.
 Each add-on should:
 * Include adequate documentation, i.e. explain what it generates.
 * Accomplish **one** thing.
-* Be modular. Ideally, an add-on is implemented as an Angel plug-in, or some other function (i.e. a request handler).
+* Be modular. Ideally, an add-on is implemented as an Galileo plug-in, or some other function (i.e. a request handler).
 * Be formatted cleanly, using `dartfmt`.
 * Not conflict with any other add-ons. Users **must** be able to install your add-on without it breaking their project.
 * Generate IntelliJ run configurations, if need be.
@@ -21,9 +21,9 @@ Your add-on **must** have a `pubspec.yaml` with a `name`, `version`, and `descri
 
 Any files to be copied into the project directory must be placed in a directory called `files/`.
 
-Add-ons installation can also be interactive, and prompt the user for input `values`. To achieve this, create an `angel_cli.yaml` file:
+Add-ons installation can also be interactive, and prompt the user for input `values`. To achieve this, create an `galileo_cli.yaml` file:
 
-## Example `angel_cli.yaml`
+## Example `galileo_cli.yaml`
 
 ```yaml
 templates:

@@ -1,4 +1,4 @@
-import 'package:graphql_schema/graphql_schema.dart';
+import 'package:galileo_graphql_schema/galileo_graphql_schema.dart';
 import 'package:test/test.dart';
 
 import 'common.dart';
@@ -40,8 +40,7 @@ main() {
 
     var today = new DateTime.now();
     var tomorrow = today.add(new Duration(days: 1));
-    expect(listOf(graphQLDate).serialize([today, tomorrow]),
-        [today.toIso8601String(), tomorrow.toIso8601String()]);
+    expect(listOf(graphQLDate).serialize([today, tomorrow]), [today.toIso8601String(), tomorrow.toIso8601String()]);
   });
 
   group('input object', () {
@@ -54,8 +53,7 @@ main() {
     );
 
     test('serializes valid input', () {
-      expect(
-          type.serialize({'bar': 'a', 'baz': 2.0}), {'bar': 'a', 'baz': 2.0});
+      expect(type.serialize({'bar': 'a', 'baz': 2.0}), {'bar': 'a', 'baz': 2.0});
     });
   });
 
@@ -64,8 +62,7 @@ main() {
 
     var pikachu = {'species': 'Pikachu', 'catch_date': catchDate};
 
-    expect(pokemonType.serialize(pikachu),
-        {'species': 'Pikachu', 'catch_date': catchDate.toIso8601String()});
+    expect(pokemonType.serialize(pikachu), {'species': 'Pikachu', 'catch_date': catchDate.toIso8601String()});
   });
 
   test('union type lets any of its types serialize', () {
@@ -96,18 +93,16 @@ main() {
     var u = new GraphQLUnionType('Monster', [pokemonType, digimonType]);
 
     expect(u.serialize({'size': 10.0}), {'size': 10.0});
-    expect(u.serialize({'name': 'Charmander', 'type': 'FIRE'}),
-        {'name': 'Charmander', 'type': 'FIRE'});
+    expect(u.serialize({'name': 'Charmander', 'type': 'FIRE'}), {'name': 'Charmander', 'type': 'FIRE'});
   });
 
   test('nested object', () {
-    var pikachuDate = new DateTime.now(),
-        charizardDate = pikachuDate.subtract(new Duration(days: 10));
+    var pikachuDate = new DateTime.now(), charizardDate = pikachuDate.subtract(new Duration(days: 10));
 
     var pikachu = {'species': 'Pikachu', 'catch_date': pikachuDate};
     var charizard = {'species': 'Charizard', 'catch_date': charizardDate};
 
-    var trainer = {'name': 'Tobe O'};
+    var trainer = {'name': 'Isaque Neves'};
 
     var region = pokemonRegionType.serialize({
       'trainer': trainer,

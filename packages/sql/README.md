@@ -1,10 +1,12 @@
+# deprecated
+
 # sql
-Infrastructure for interacting with SQL databases, while still using the Angel `Service` API.
+Infrastructure for interacting with SQL databases, while still using the Galileo `Service` API.
 
 ## Why not a dedicated ORM?
-A better question, is *why* have an ORM dedicated to just one database, when Angel supports multiple databases?
+A better question, is *why* have an ORM dedicated to just one database, when Galileo supports multiple databases?
 
-`package:angel_sql` was the compromise between having an ORM,
+`package:galileo_sql` was the compromise between having an ORM,
 and not having an ORM.
 
 ### Advantages of this Approach
@@ -18,7 +20,7 @@ including:
     own request handlers
 
 ### Disadvantages
-* `angel_sql`'s base `SqlService` doesn't provide fine-grained
+* `galileo_sql`'s base `SqlService` doesn't provide fine-grained
 control on the default CRUD methods.
     * However, if you need specific queries, you can use a hook,
     a custom route, extend the service, or wrap it with an

@@ -1,4 +1,4 @@
-import 'package:graphql_parser/graphql_parser.dart';
+import 'package:galileo_graphql_parser/galileo_graphql_parser.dart';
 import 'package:test/test.dart';
 
 import 'argument_test.dart';
@@ -29,8 +29,7 @@ main() {
   test('arguments', () {
     expect('()', isArgumentList([]));
     expect(r'(a: 2)', isArgumentList([isArgument('a', 2)]));
-    expect(r'(a: 2, b: $c)',
-        isArgumentList([isArgument('a', 2), isArgument('b', 'c')]));
+    expect(r'(a: 2, b: $c)', isArgumentList([isArgument('a', 2), isArgument('b', 'c')]));
   });
 
   group('field tests', () {
@@ -46,9 +45,7 @@ main() {
       expect(
           r'foo (a: 2, b: $c)',
           isField(
-              fieldName: isFieldName('foo'),
-              arguments:
-                  isArgumentList([isArgument('a', 2), isArgument('b', 'c')])));
+              fieldName: isFieldName('foo'), arguments: isArgumentList([isArgument('a', 2), isArgument('b', 'c')])));
     });
 
     test('with directives', () {
@@ -69,10 +66,7 @@ main() {
           'foo: bar {baz, ...quux}',
           isField(
               fieldName: isFieldName('foo', alias: 'bar'),
-              selectionSet: isSelectionSet([
-                isField(fieldName: isFieldName('baz')),
-                isFragmentSpread('quux')
-              ])));
+              selectionSet: isSelectionSet([isField(fieldName: isFieldName('baz')), isFragmentSpread('quux')])));
     });
   });
 }
@@ -81,11 +75,7 @@ FieldContext parseField(String text) => parse(text).parseField();
 
 FieldNameContext parseFieldName(String text) => parse(text).parseFieldName();
 
-Matcher isField(
-        {Matcher fieldName,
-        Matcher arguments,
-        Matcher directives,
-        Matcher selectionSet}) =>
+Matcher isField({Matcher fieldName, Matcher arguments, Matcher directives, Matcher selectionSet}) =>
     _IsField(fieldName, arguments, directives, selectionSet);
 
 Matcher isFieldName(String name, {String alias}) => _IsFieldName(name, alias);
@@ -123,19 +113,16 @@ class _IsFieldName extends Matcher {
   @override
   Description describe(Description description) {
     if (realName != null) {
-      return description
-          .add('is field with name "$name" and alias "$realName"');
+      return description.add('is field with name "$name" and alias "$realName"');
     }
     return description.add('is field with name "$name"');
   }
 
   @override
   bool matches(item, Map matchState) {
-    var fieldName =
-        item is FieldNameContext ? item : parseFieldName(item.toString());
+    var fieldName = item is FieldNameContext ? item : parseFieldName(item.toString());
     if (realName != null) {
-      return fieldName.alias?.alias == name &&
-          fieldName.alias?.name == realName;
+      return fieldName.alias?.alias == name && fieldName.alias?.name == realName;
     } else {
       return fieldName.name == name;
     }

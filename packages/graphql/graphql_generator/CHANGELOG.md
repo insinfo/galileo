@@ -1,3 +1,7 @@
+# 3.0.0
+
+- update dependencies
+
 # 1.0.0+1
 * Replace `snakeCase` with `camelCase`.
 
