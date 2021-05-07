@@ -1,6 +1,4 @@
-# Galileo_framework
-
-
+# galileo_framework
 
 A high-powered HTTP server with support for dependency injection, sophisticated routing and more.
 

@@ -23,7 +23,7 @@ Parser jsonGrammar() {
     string.space(),
     match(':').space(),
     expr.error(errorMessage: 'Missing expression.'),
-  ]).castDynamic().cast<Map>().value((r) => {r.value[0]: r.value[2]});
+  ]).castDynamic().value((r) => {r.value[0]: r.value[2]});
 
   // Parse an object.
   var object = keyValuePair.separatedByComma().castDynamic().surroundedByCurlyBraces(defaultValue: {});
