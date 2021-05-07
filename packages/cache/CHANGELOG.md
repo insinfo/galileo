@@ -1,3 +1,6 @@
+# 3.0.0
+- 
+
 # 2.0.1
 * Add `ignoreQueryAndFragment` to `ResponseCache`.
 * Rename `CacheService.ignoreQuery` to `ignoreParams`.

@@ -1,0 +1,15 @@
+SomeMapMessage:
+  intMap:
+    mapType: int
+  messageMap:
+    mapType: AnotherMessage
+  listMap:
+    mapType:
+      listType: int
+  mapMap:
+    mapType:
+      mapType: String
+
+AnotherMessage:
+  innerMessageMap:
+    mapType: String

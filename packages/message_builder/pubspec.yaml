@@ -1,0 +1,23 @@
+name: galileo_message_builder
+version: 3.0.1
+description: >-
+  Generate immutable Dart classes serializable to json from a schema.
+homepage: https://github.com/insinfo/galileo/tree/master/packages/message_builder
+author: Isaque Neves <insinfo2008@gmail.com>
+
+environment:
+  sdk: ">=2.10.0 <3.0.0"
+
+dependencies: 
+  build: ^2.0.1 #Null safety
+  build_config: ^1.0.0 #Null safety
+  code_builder: ^4.0.0 #Null safety
+  dart_style: ^2.0.1 #Null safety
+  yaml: ^3.1.0 #Null safety
+
+dev_dependencies:
+  build_runner: ^2.0.2 #Null safety
+  build_test: ^2.1.0 #Null safety
+  path: ^1.8.0 #Null safety
+  pedantic: ^1.11.0  #Null safety
+  test: ^1.17.3 #Null safety

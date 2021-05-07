@@ -13,11 +13,10 @@ main() async {
     ]);
 
   // Handle `if-modified-since` header, and also send cached content
-  app.fallback(cache.handleRequest);
+  app.all('*', cache.handleRequest);
 
   // A simple handler that returns a different result every time.
-  app.get(
-      '/date.txt', (req, res) => res.write(DateTime.now().toIso8601String()));
+  app.get('/date.txt', (req, res) => res.write('2021-05-07T11:07:58.616014' /*DateTime.now().toIso8601String() */));
 
   // Support purging the cache.
   app.addRoute('PURGE', '*', (req, res) {

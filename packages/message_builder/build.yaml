@@ -1,0 +1,24 @@
+targets:
+  message_builder:
+    sources: ["lib/**"]
+  tests:
+    sources: ["test/**"]
+    builders:
+      ":message_builder":
+        generate_for: ["test/goldens/**"]
+  example:
+    sources: ["example/**"]
+    builders:
+      ":message_builder":
+        generate_for: ["example/messages.yaml"]
+
+builders:
+  message_builder:
+    target: message_builder
+    import: "package:message_builder/message_builder.dart"
+    builder_factories: ["messageBuilder"]
+    build_extensions: {".yaml": [".dart"]}
+    auto_apply: dependents
+    build_to: source
+    defaults:
+      generate_for: ["lib/**"]

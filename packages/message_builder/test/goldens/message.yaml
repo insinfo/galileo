@@ -1,0 +1,3 @@
+SomeMessage:
+  stringField: String
+  intField: int

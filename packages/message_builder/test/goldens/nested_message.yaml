@@ -1,0 +1,6 @@
+OuterMessage:
+  innerField: InnerMessage
+  stringField: String
+
+InnerMessage:
+  anotherField: String

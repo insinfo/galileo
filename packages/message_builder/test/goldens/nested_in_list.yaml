@@ -1,0 +1,6 @@
+OuterMessageWithList:
+  innerField:
+    listType: InnerMessageInList
+
+InnerMessageInList:
+  anotherField: String

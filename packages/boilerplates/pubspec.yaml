@@ -1,20 +1,23 @@
 name: galileo
 description: An app that's going to be amazing pretty soon.
+homepage: https://github.com/insinfo/galileo/tree/master/packages/boilerplates
 publish_to: none # Ensure we don't accidentally publish our private code! ;)
+
 environment:
-  sdk: '>=2.0.0-dev <3.0.0'
-homepage: https://github.com/galileo-dart/galileo
+  sdk: '>=2.10.0 <3.0.0'
+
 dependencies:
-  galileo_auth: ^2.0.0 # Supports stateless authentication via JWT
-  galileo_configuration: ^2.0.0 # Loads application configuration, along with support for .env files.
-  galileo_framework: ^2.0.0 # The core server library.
-  galileo_jael: ^2.0.0 # Server-side templating engine
-  galileo_production: ^1.0.0 # Production application runner.
-  galileo_static: ^2.0.0 # Static file server
-  galileo_validate: ^2.0.0 # Allows for validation of input data
+  galileo_auth: ^3.0.1 # Supports stateless authentication via JWT
+  galileo_configuration: ^3.0.2 # Loads application configuration, along with support for .env files.
+  galileo_framework: ^3.0.2 # The core server library.
+  galileo_twig_dart: ^3.0.1 # Server-side templating engine
+  galileo_production: ^2.0.3 # Production application runner.
+  galileo_static: ^3.0.1  # Static file server
+  galileo_validate: ^3.0.1 # Allows for validation of input data
+
 dev_dependencies:
-  galileo_hot: ^2.0.0 # Hot-reloading support. :)
-  galileo_test: ^2.0.0 # Utilities for testing Galileo servers.
-  io: ^0.3.2 # For pretty printing.
-  pedantic: ^1.0.0 # Enforces Dart style conventions.
-  test: ^1.0.0 # For unit testing.
+  galileo_hot: ^3.0.1 # Hot-reloading support. :)
+  galileo_test: ^3.0.1 # Utilities for testing Galileo servers.
+  io: ^1.0.0 #Null safety # For pretty printing. 
+  pedantic: ^1.11.0 #Null safety # Enforces Dart style conventions.
+  test: ^1.17.3 #Null safety # For unit testing.

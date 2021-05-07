@@ -13,7 +13,7 @@ import 'package:test/test.dart';
 // would have to first bind a socket, and then account for network latency.
 //
 // See the documentation here:
-// https://github.com/galileo-dart/test
+// https://github.com/insinfo/galileo/test
 //
 // If you are unfamiliar with Dart's advanced testing library, you can read up
 // here:
@@ -35,7 +35,7 @@ main() async {
 
   test('index returns 200', () async {
     // Request a resource at the given path.
-    var response = await client.get('/');
+    var response = await client.get(Uri.parse('/'));
 
     // Expect a 200 response.
     expect(response, hasStatus(200));

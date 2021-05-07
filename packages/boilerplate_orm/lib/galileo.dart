@@ -4,11 +4,11 @@ import 'dart:async';
 import 'dart:io';
 import 'package:galileo_configuration/galileo_configuration.dart';
 import 'package:galileo_framework/galileo_framework.dart';
-import 'package:galileo_orm/server.dart';
+
 import 'package:galileo_static/galileo_static.dart';
 import 'package:file/file.dart';
 import 'package:file/local.dart';
-import 'package:postgres/postgres.dart';
+
 import 'src/models/user.orm.g.dart';
 
 const FileSystem fs = const LocalFileSystem();
@@ -29,11 +29,8 @@ Future configureServer(Galileo app) async {
   // from anywhere.
   Map postgresConfig = app.configuration['postgres'];
   var pool = new PostgreSQLConnectionPool(() => new PostgreSQLConnection(
-      postgresConfig['host'],
-      postgresConfig['port'],
-      postgresConfig['database'],
-      username: postgresConfig['username'],
-      password: postgresConfig['password']));
+      postgresConfig['host'], postgresConfig['port'], postgresConfig['database'],
+      username: postgresConfig['username'], password: postgresConfig['password']));
   app.container.singleton(pool);
 
   // This is a simple route.
@@ -49,8 +46,7 @@ Future configureServer(Galileo app) async {
       '/users',
       // Our connection pool is dependency injected. We could place this route
       // anywhere in our project, and it would run the same.
-      (PostgreSQLConnectionPool pool) =>
-          pool.run((connection) => UserQuery.getAll(connection)));
+      (PostgreSQLConnectionPool pool) => pool.run((connection) => UserQuery.getAll(connection)));
 
   // Sets up a static server (with caching support).
   // Defaults to serving out of 'web/'.

@@ -1,0 +1,14 @@
+ParentMessage:
+  subclassBy:
+    selectField: String
+  subclasses:
+    FirstChildMessage:
+      selectOn: firstValue
+      fields:
+        firstField: int
+    SecondChildMessage:
+      selectOn: secondValue
+      fields:
+        secondField: String
+    ThirdChildMessage:
+      selectOn: thirdValue

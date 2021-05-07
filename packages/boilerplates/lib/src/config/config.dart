@@ -3,7 +3,7 @@ library galileo.src.config;
 
 import 'package:galileo_configuration/galileo_configuration.dart';
 import 'package:galileo_framework/galileo_framework.dart';
-import 'package:galileo_jael/galileo_jael.dart';
+import 'package:galileo_twig_dart/galileo_twig_dart.dart';
 import 'package:file/file.dart';
 import 'plugins/plugins.dart' as plugins;
 
@@ -18,7 +18,7 @@ GalileoConfigurer configureServer(FileSystem fileSystem) {
     // Configure our application to render Jael templates from the `views/` directory.
     //
     // See: https://github.com/galileo-dart/jael
-    await app.configure(jael(fileSystem.directory('views')));
+    await app.configure(twig(fileSystem.directory('views')));
 
     // Apply another plug-ins, i.e. ones that *you* have written.
     //
