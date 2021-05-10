@@ -116,7 +116,7 @@ void main() {
     });
 
     test('type returns empty', () {
-      expect(mirror.type.name, '(empty)');
+      expect(mirror.type!.name, '(empty)');
     });
 
     test('clazz returns empty', () {

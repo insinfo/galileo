@@ -1,5 +1,5 @@
 name: galileo_combinator
-version: 1.1.1
+version: 4.0.3
 description: Packrat parser combinators that support static typing, generics, file spans, memoization, and more.
 author: Isaque Neves <insinfo2008@gmail.com>
 homepage: https://github.com/insinfo/galileo.git

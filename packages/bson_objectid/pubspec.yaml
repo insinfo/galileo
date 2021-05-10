@@ -1,0 +1,11 @@
+name: galileo_bson_objectid
+description: Cross-platform BSON ObjectId implementation in Dart
+version: 3.0.0
+author: Isaque Neves <insinfo2008@gmail.com>
+homepage: https://github.com/insinfo/galileo/blob/master/packages/bson_objectid
+
+environment:
+  sdk: '>=2.12.0 <3.0.0'
+
+dev_dependencies:
+  test: ^1.17.3 #Null safety

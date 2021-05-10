@@ -17,21 +17,20 @@ class MockHttpResponse extends Stream<List<int>> implements HttpResponse {
 
   @override
   HttpConnectionInfo connectionInfo =
-      MockHttpConnectionInfo(remoteAddress: InternetAddress.anyIPv4);
+      MockHttpConnectionInfo(remoteAddress: InternetAddress.anyIPv4, localPort: -1, remotePort: -1);
 
   /// [copyBuffer] corresponds to `copy` on the [BytesBuilder] constructor.
   MockHttpResponse(
       {bool copyBuffer = true,
-      this.statusCode,
-      this.reasonPhrase,
-      this.contentLength,
+      this.statusCode = 200,
+      this.reasonPhrase = '',
+      this.contentLength = 0,
       this.deadline,
-      this.encoding,
-      this.persistentConnection,
-      bool bufferOutput}) {
+      this.encoding = utf8,
+      this.persistentConnection = false,
+      bool? bufferOutput}) {
     _buf = BytesBuilder(copy: copyBuffer != false);
     _bufferOutput = bufferOutput != false;
-    statusCode ??= 200;
   }
 
   @override
@@ -44,7 +43,7 @@ class MockHttpResponse extends Stream<List<int>> implements HttpResponse {
   int contentLength;
 
   @override
-  Duration deadline;
+  Duration? deadline;
 
   @override
   bool persistentConnection;
@@ -79,7 +78,7 @@ class MockHttpResponse extends Stream<List<int>> implements HttpResponse {
   }
 
   @override
-  void addError(error, [StackTrace stackTrace]) {
+  void addError(error, [StackTrace? stackTrace]) {
     if (_done.isCompleted) {
       throw StateError('Cannot add to closed MockHttpResponse.');
     } else {
@@ -114,19 +113,18 @@ class MockHttpResponse extends Stream<List<int>> implements HttpResponse {
   }
 
   @override
-  Future redirect(Uri location,
-      {int status = HttpStatus.movedTemporarily}) async {
-    statusCode = status ?? HttpStatus.movedTemporarily;
+  Future redirect(Uri location, {int status = HttpStatus.movedTemporarily}) async {
+    statusCode = status;
   }
 
   @override
-  void write(Object obj) {
-    obj?.toString()?.codeUnits?.forEach(writeCharCode);
+  void write(Object? obj) {
+    obj?.toString().codeUnits.forEach(writeCharCode);
   }
 
   @override
   void writeAll(Iterable objects, [String separator = '']) {
-    write(objects.join(separator ?? ''));
+    write(objects.join(separator));
   }
 
   @override
@@ -135,16 +133,13 @@ class MockHttpResponse extends Stream<List<int>> implements HttpResponse {
   }
 
   @override
-  void writeln([Object obj = '']) {
+  void writeln([Object? obj = '']) {
     write(obj ?? '');
     add([$cr, $lf]);
   }
 
   @override
-  StreamSubscription<List<int>> listen(void Function(List<int> event) onData,
-          {Function onError, void Function() onDone, bool cancelOnError}) =>
-      _stream.stream.listen(onData,
-          onError: onError,
-          onDone: onDone,
-          cancelOnError: cancelOnError == true);
+  StreamSubscription<List<int>> listen(void Function(List<int> event)? onData,
+          {Function? onError, void Function()? onDone, bool? cancelOnError}) =>
+      _stream.stream.listen(onData, onError: onError, onDone: onDone, cancelOnError: cancelOnError == true);
 }

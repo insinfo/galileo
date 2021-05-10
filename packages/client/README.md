@@ -1,7 +1,7 @@
 # galileo_client
 
 [![Pub](https://img.shields.io/pub/v/galileo_client.svg)](https://pub.dartlang.org/packages/galileo_client)
-[![build status](https://travis-ci.org/galileo-dart/client.svg)](https://travis-ci.org/galileo-dart/client)
+[![build status](https://travis-ci.org/galileo-dart/client.svg)](https://travis-ci.org/galileo/galileo_client)
 
 Client library for the galileo framework.
 This library provides virtually the same API as an galileo server.

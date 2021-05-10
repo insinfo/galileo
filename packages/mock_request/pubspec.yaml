@@ -1,16 +1,16 @@
 name: galileo_mock_request
-version: 1.0.8
+version: 4.0.0
 description: Manufacture dart:io HttpRequests, HttpResponses, HttpHeaders, etc.
 author: Isaque Neves <insinfo2008@gmail.com>
 homepage: https://github.com/insinfo/galileo.git
 
 environment:
-    sdk: ">=2.10.0 <3.0.0"
+    sdk: '>=2.12.0 <3.0.0'
 
 dependencies:
   charcode: ^1.2.0 #Null safety
 
 dev_dependencies:
-  galileo_framework: ^3.0.1
+  #galileo_framework: ^3.0.1
   http: ^0.13.2  #Null safety
   test: ^1.17.3 #Null safety

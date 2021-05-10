@@ -1,12 +1,11 @@
 name: galileo_container 
-#galileo #perola 
-version: 2.2.2
+version: 4.0.4
 author: Isaque Neves <insinfo2008@gmail.com>
 description: A hierarchical DI container, and pluggable backends for reflection.
 homepage: https://github.com/insinfo/galileo.git
 
 environment:
-  sdk: ">=2.10.0 <3.0.0"
+  sdk: '>=2.12.0 <3.0.0'
 
 dependencies:
   collection: ^1.15.0 #Null safety

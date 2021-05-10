@@ -1,3 +1,7 @@
+# 4.0.0
+
+- migrate to null safety
+
 # 1.0.7
 * Prepare for upcoming Dart SDK change where `HttpHeaders` methods
 `add` and `set` take an additional optional parameter `preserveHeaderCase` (thanks @domesticmouse!).

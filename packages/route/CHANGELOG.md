@@ -45,3 +45,7 @@ an `Iterable<RoutingResult>`, instead of just a `List`.
 # 5.0.0
 
 - change combinator to galileo_combinator
+
+# 6.0.1
+
+- revert to dart 2.10 compatibility

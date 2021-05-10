@@ -1,3 +1,6 @@
+# 4.0.3
+revent to dart 2.10 compatibility
+
 # 1.1.0
 * Add `tupleX` parsers. Hooray for strong typing!
 

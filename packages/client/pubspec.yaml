@@ -1,5 +1,5 @@
 name: galileo_client
-version: 3.0.1
+version: 3.0.2
 description: Support for querying galileo servers in the browser, Flutter, and command-line.
 author: Isaque Neves <insinfo2008@gmail.com>
 homepage: https://github.com/insinfo/galileo/tree/master/packages/client
@@ -19,6 +19,7 @@ dependencies:
 dev_dependencies:
   galileo_framework: ^3.0.2 
   galileo_model: ^2.0.0   
+  galileo_container: ^2.2.2
   async: ^2.6.1 #Null safety
   build_runner: ^2.0.2 #Null safety
   build_web_compilers: ^3.0.0 #Null safety

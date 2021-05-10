@@ -1,10 +1,12 @@
 import 'package:async/async.dart';
 import 'dart:io';
 import 'package:galileo_client/io.dart' as c;
+
 import 'package:galileo_framework/galileo_framework.dart' as s;
 import 'package:galileo_framework/http.dart' as s;
 import 'package:pedantic/pedantic.dart';
 import 'package:test/test.dart';
+import 'package:galileo_container/mirrors.dart' as di;
 
 main() {
   HttpServer server;
@@ -13,7 +15,7 @@ main() {
   StreamQueue queue;
 
   setUp(() async {
-    var serverApp = s.Galileo();
+    var serverApp = s.Galileo(reflector: di.MirrorsReflector());
     var http = s.GalileoHttp(serverApp);
     serverApp.use('/api/todos', s.MapService(autoIdAndDateFields: false));
 

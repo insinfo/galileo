@@ -30,7 +30,7 @@ void main() {
     test('create', () async {
       await todoService.create({});
       expect(app.client.spec.method, 'POST');
-      expect(app.client.spec.headers['content-type'], startsWith('application/json'));
+      expect(app.client.spec.headers['content-type'], startsWith('application/json; charset=utf-8'));
       expect(app.client.spec.path, '/api/todos');
       expect(await read(app.client.spec.request.finalize()), '{}');
     });
@@ -38,7 +38,7 @@ void main() {
     test('modify', () async {
       await todoService.modify('sleep', {});
       expect(app.client.spec.method, 'PATCH');
-      expect(app.client.spec.headers['content-type'], startsWith('application/json'));
+      expect(app.client.spec.headers['content-type'], startsWith('application/json; charset=utf-8'));
       expect(app.client.spec.path, '/api/todos/sleep');
       expect(await read(app.client.spec.request.finalize()), '{}');
     });
@@ -46,7 +46,7 @@ void main() {
     test('update', () async {
       await todoService.update('sleep', {});
       expect(app.client.spec.method, 'POST');
-      expect(app.client.spec.headers['content-type'], startsWith('application/json'));
+      expect(app.client.spec.headers['content-type'], startsWith('application/json; charset=utf-8'));
       expect(app.client.spec.path, '/api/todos/sleep');
       expect(await read(app.client.spec.request.finalize()), '{}');
     });

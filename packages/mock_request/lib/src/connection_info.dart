@@ -6,5 +6,5 @@ class MockHttpConnectionInfo implements HttpConnectionInfo {
   @override
   final int localPort, remotePort;
 
-  MockHttpConnectionInfo({this.remoteAddress, this.localPort, this.remotePort});
+  MockHttpConnectionInfo({required this.remoteAddress, this.localPort = -1, this.remotePort = -1});
 }

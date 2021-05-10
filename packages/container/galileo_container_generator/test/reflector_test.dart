@@ -10,7 +10,7 @@ import 'reflector_test.reflectable.dart';
 void main() {
   initializeReflectable();
   var reflector = const GeneratedReflector();
-  Container container;
+  late Container container;
 
   setUp(() {
     container = new Container(reflector);
@@ -26,7 +26,7 @@ void main() {
   });
 
   test('inject constructor parameters', () {
-    var album = container.make<Album>();
+    var album = container.make<Album>()!;
     print(album.title);
     expect(album.title, 'flowers by stevie wonder');
   });
@@ -39,7 +39,7 @@ void returnVoidFromAFunction(int x) {}
 
 void testReflector(Reflector reflector) {
   var blaziken = new Pokemon('Blaziken', PokemonType.fire);
-  Container container;
+  late Container container;
 
   setUp(() {
     container = new Container(reflector);
@@ -47,7 +47,7 @@ void testReflector(Reflector reflector) {
   });
 
   test('get field', () {
-    var blazikenMirror = reflector.reflectInstance(blaziken);
+    var blazikenMirror = reflector.reflectInstance(blaziken)!;
     expect(blazikenMirror.getField('type').reflectee, blaziken.type);
   });
 
@@ -92,12 +92,12 @@ void testReflector(Reflector reflector) {
   });
 
   test('constructor injects singleton', () {
-    var lower = container.make<LowerPokemon>();
+    var lower = container.make<LowerPokemon>()!;
     expect(lower.lowercaseName, blaziken.name.toLowerCase());
   });
 
   test('newInstance works', () {
-    var type = container.reflector.reflectType(Pokemon);
+    var type = container.reflector.reflectType(Pokemon)!;
     var instance = type.newInstance('changeName', [blaziken, 'Charizard']).reflectee as Pokemon;
     print(instance);
     expect(instance.name, 'Charizard');
@@ -106,7 +106,7 @@ void testReflector(Reflector reflector) {
 
   test('isAssignableTo', () {
     var pokemonType = container.reflector.reflectType(Pokemon);
-    var kantoPokemonType = container.reflector.reflectType(KantoPokemon);
+    var kantoPokemonType = container.reflector.reflectType(KantoPokemon)!;
 
     expect(kantoPokemonType.isAssignableTo(pokemonType), true);
     expect(kantoPokemonType.isAssignableTo(container.reflector.reflectType(String)), false);
@@ -147,12 +147,12 @@ enum PokemonType { water, fire, grass, ice, poison, flying }
 
 @contained
 class Artist {
-  final String name;
+  final String? name;
 
   Artist({this.name});
 
   String get lowerName {
-    return name.toLowerCase();
+    return name!.toLowerCase();
   }
 }
 
@@ -172,5 +172,5 @@ class AlbumLength {
 
   AlbumLength(this.artist, this.album);
 
-  int get totalLength => artist.name.length + album.title.length;
+  int get totalLength => artist.name!.length + album.title.length;
 }

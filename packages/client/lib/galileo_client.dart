@@ -28,7 +28,7 @@ abstract class Galileo extends http.BaseClient {
   /// The root URL at which the target server.
   final Uri baseUrl;
 
-  Galileo(baseUrl) : this.baseUrl = baseUrl is Uri ? baseUrl : Uri.parse(baseUrl.toString());
+  Galileo(paramBaseUrl) : baseUrl = paramBaseUrl is Uri ? paramBaseUrl : Uri.parse(paramBaseUrl.toString());
 
   /// Prefer to use [baseUrl] instead.
   @deprecated

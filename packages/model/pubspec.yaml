@@ -1,11 +1,11 @@
 name: galileo_model
-version: 2.0.0
+version: 4.0.0
 description: galileo's basic data model class, no longer with the added weight of the whole framework.
 author: Isaque Neves <insifo2008@gmail.com>
 homepage: https://github.com/insinfo/galileo.git
 
 environment:
-  sdk: ">=2.10.0 <3.0.0"
+  sdk: '>=2.12.0 <3.0.0'
   
 dev_dependencies:
-  pedantic: ^1.11.0
+  #pedantic: ^1.11.0

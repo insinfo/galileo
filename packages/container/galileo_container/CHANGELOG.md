@@ -71,3 +71,11 @@ a generic type argument instead.
 # 2.2.1
 
 -  update quiver 2.1.5 to 3.0.1 Null safety
+
+# 4.0.0
+
+-  update to Null safety
+
+# 4.0.1 
+
+-  fix update to Null safety

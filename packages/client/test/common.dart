@@ -14,7 +14,7 @@ class MockGalileo extends BaseGalileoClient {
   MockGalileo() : super(null, 'http://localhost:3000');
 
   @override
-  authenticateViaPopup(String url, {String eventName = 'token'}) {
+  Stream<String> authenticateViaPopup(String url, {String eventName = 'token'}) {
     throw UnsupportedError('Nope');
   }
 }
@@ -25,8 +25,9 @@ class SpecClient extends http.BaseClient {
   Spec get spec => _spec;
 
   @override
-  send(http.BaseRequest request) {
+  Future<http.StreamedResponse> send(http.BaseRequest request) {
     _spec = Spec(request, request.method, request.url.path, request.headers, request.contentLength);
+
     dynamic data = {'text': 'Clean your room!', 'completed': true};
 
     if (request.url.path.contains('auth')) {
@@ -39,10 +40,10 @@ class SpecClient extends http.BaseClient {
     }
 
     return Future<http.StreamedResponse>.value(http.StreamedResponse(
-      new Stream<List<int>>.fromIterable([utf8.encode(json.encode(data))]),
+      Stream<List<int>>.fromIterable([utf8.encode(json.encode(data))]),
       200,
       headers: {
-        'content-type': 'application/json',
+        'content-type': 'application/json; charset=utf-8',
       },
     ));
   }

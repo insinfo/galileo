@@ -10,8 +10,13 @@ import 'package:http/src/streamed_response.dart' as http;
 import 'package:path/path.dart' as p;
 import 'galileo_client.dart';
 
-const Map<String, String> _readHeaders = {'Accept': 'application/json'};
-const Map<String, String> _writeHeaders = {'Accept': 'application/json', 'Content-Type': 'application/json'};
+var pathContext = p.Context(style: p.Style.url);
+
+const Map<String, String> _readHeaders = {'Accept': 'application/json; charset=utf-8'};
+const Map<String, String> _writeHeaders = {
+  'Accept': 'application/json; charset=utf-8',
+  'Content-Type': 'application/json; charset=utf-8'
+};
 
 Map<String, String> _buildQuery(Map<String, dynamic> params) {
   return params?.map((k, v) => MapEntry(k, v.toString()));
@@ -20,7 +25,7 @@ Map<String, String> _buildQuery(Map<String, dynamic> params) {
 bool _invalid(http.Response response) =>
     response.statusCode == null || response.statusCode < 200 || response.statusCode >= 300;
 
-GalileoHttpException failure(http.Response response, {error, String message, StackTrace stack}) {
+GalileoHttpException failure(http.Response response, {dynamic error, String message, StackTrace stack}) {
   try {
     var v = json.decode(response.body);
 
@@ -58,10 +63,10 @@ abstract class BaseGalileoClient extends Galileo {
       @deprecated String reviveEndpoint = '/auth/token'}) async {
     type ??= 'token';
 
-    var segments = baseUrl.pathSegments.followedBy(p.split(authEndpoint)).followedBy([type]);
+    var segments = baseUrl.pathSegments.followedBy(pathContext.split(authEndpoint)).followedBy([type]);
 
     // TODO: convert windows path to proper url
-    var p1 = p.joinAll(segments).replaceAll('\\', '/');
+    var p1 = pathContext.joinAll(segments); //.replaceAll('\\', '/');
 
     var url = baseUrl.replace(path: p1);
     http.Response response;
@@ -141,7 +146,8 @@ abstract class BaseGalileoClient extends Galileo {
 
   @override
   Service<Id, Data> service<Id, Data>(String path, {Type type, GalileoDeserializer<Data> deserializer}) {
-    var url = baseUrl.replace(path: p.join(baseUrl.path, path));
+    //TODO: verificar baseUrl.path.replaceAll('\\', '/')
+    var url = baseUrl.replace(path: pathContext.join(baseUrl.path, path));
     var s = BaseGalileoService<Id, Data>(client, this, url, deserializer: deserializer);
     _services.add(s);
     return s;
@@ -150,7 +156,7 @@ abstract class BaseGalileoClient extends Galileo {
   Uri _join(url) {
     var u = url is Uri ? url : Uri.parse(url.toString());
     if (u.hasScheme || u.hasAuthority) return u;
-    return u.replace(path: p.join(baseUrl.path, u.path));
+    return u.replace(path: pathContext.join(baseUrl.path, u.path));
   }
 
   //@override
@@ -226,8 +232,8 @@ class BaseGalileoService<Id, Data> extends Service<Id, Data> {
     await _onRemoved.close();
   }
 
-  BaseGalileoService(this.client, this.app, baseUrl, {this.deserializer})
-      : this.baseUrl = baseUrl is Uri ? baseUrl : Uri.parse(baseUrl.toString());
+  BaseGalileoService(this.client, this.app, parambaseUrl, {this.deserializer})
+      : baseUrl = parambaseUrl is Uri ? parambaseUrl : Uri.parse(parambaseUrl.toString());
 
   /// Use [baseUrl] instead.
   @deprecated
@@ -281,26 +287,29 @@ class BaseGalileoService<Id, Data> extends Service<Id, Data> {
 
   @override
   Future<Data> read(id, [Map<String, dynamic> params]) async {
-    var url = baseUrl.replace(path: p.join(baseUrl.path, id.toString()), queryParameters: _buildQuery(params));
+    var url =
+        baseUrl.replace(path: pathContext.join(baseUrl.path, id.toString()), queryParameters: _buildQuery(params));
 
     var response = await app.sendUnstreamed('GET', url, _readHeaders);
 
     try {
       if (_invalid(response)) {
-        if (_onRead.hasListener)
+        if (_onRead.hasListener) {
           _onRead.addError(failure(response));
-        else
+        } else {
           throw failure(response);
+        }
       }
 
       var r = deserialize(json.decode(response.body));
       _onRead.add(r);
       return r;
     } catch (e, st) {
-      if (_onRead.hasListener)
+      if (_onRead.hasListener) {
         _onRead.addError(e, st);
-      else
+      } else {
         throw failure(response, error: e, stack: st);
+      }
     }
 
     return null;
@@ -313,20 +322,22 @@ class BaseGalileoService<Id, Data> extends Service<Id, Data> {
 
     try {
       if (_invalid(response)) {
-        if (_onCreated.hasListener)
+        if (_onCreated.hasListener) {
           _onCreated.addError(failure(response));
-        else
+        } else {
           throw failure(response);
+        }
       }
 
       var r = deserialize(json.decode(response.body));
       _onCreated.add(r);
       return r;
     } catch (e, st) {
-      if (_onCreated.hasListener)
+      if (_onCreated.hasListener) {
         _onCreated.addError(e, st);
-      else
+      } else {
         throw failure(response, error: e, stack: st);
+      }
     }
 
     return null;
@@ -334,26 +345,29 @@ class BaseGalileoService<Id, Data> extends Service<Id, Data> {
 
   @override
   Future<Data> modify(id, data, [Map<String, dynamic> params]) async {
-    var url = baseUrl.replace(path: p.join(baseUrl.path, id.toString()), queryParameters: _buildQuery(params));
+    var url =
+        baseUrl.replace(path: pathContext.join(baseUrl.path, id.toString()), queryParameters: _buildQuery(params));
 
     var response = await app.sendUnstreamed('PATCH', url, _writeHeaders, makeBody(data));
 
     try {
       if (_invalid(response)) {
-        if (_onModified.hasListener)
+        if (_onModified.hasListener) {
           _onModified.addError(failure(response));
-        else
+        } else {
           throw failure(response);
+        }
       }
 
       var r = deserialize(json.decode(response.body));
       _onModified.add(r);
       return r;
     } catch (e, st) {
-      if (_onModified.hasListener)
+      if (_onModified.hasListener) {
         _onModified.addError(e, st);
-      else
+      } else {
         throw failure(response, error: e, stack: st);
+      }
     }
 
     return null;
@@ -361,26 +375,29 @@ class BaseGalileoService<Id, Data> extends Service<Id, Data> {
 
   @override
   Future<Data> update(id, data, [Map<String, dynamic> params]) async {
-    var url = baseUrl.replace(path: p.join(baseUrl.path, id.toString()), queryParameters: _buildQuery(params));
+    var url =
+        baseUrl.replace(path: pathContext.join(baseUrl.path, id.toString()), queryParameters: _buildQuery(params));
 
     var response = await app.sendUnstreamed('POST', url, _writeHeaders, makeBody(data));
 
     try {
       if (_invalid(response)) {
-        if (_onUpdated.hasListener)
+        if (_onUpdated.hasListener) {
           _onUpdated.addError(failure(response));
-        else
+        } else {
           throw failure(response);
+        }
       }
 
       var r = deserialize(json.decode(response.body));
       _onUpdated.add(r);
       return r;
     } catch (e, st) {
-      if (_onUpdated.hasListener)
+      if (_onUpdated.hasListener) {
         _onUpdated.addError(e, st);
-      else
+      } else {
         throw failure(response, error: e, stack: st);
+      }
     }
 
     return null;
@@ -388,26 +405,29 @@ class BaseGalileoService<Id, Data> extends Service<Id, Data> {
 
   @override
   Future<Data> remove(id, [Map<String, dynamic> params]) async {
-    var url = baseUrl.replace(path: p.join(baseUrl.path, id.toString()), queryParameters: _buildQuery(params));
+    var url =
+        baseUrl.replace(path: pathContext.join(baseUrl.path, id.toString()), queryParameters: _buildQuery(params));
 
     var response = await app.sendUnstreamed('DELETE', url, _readHeaders);
 
     try {
       if (_invalid(response)) {
-        if (_onRemoved.hasListener)
+        if (_onRemoved.hasListener) {
           _onRemoved.addError(failure(response));
-        else
+        } else {
           throw failure(response);
+        }
       }
 
       var r = deserialize(json.decode(response.body));
       _onRemoved.add(r);
       return r;
     } catch (e, st) {
-      if (_onRemoved.hasListener)
+      if (_onRemoved.hasListener) {
         _onRemoved.addError(e, st);
-      else
+      } else {
         throw failure(response, error: e, stack: st);
+      }
     }
 
     return null;
