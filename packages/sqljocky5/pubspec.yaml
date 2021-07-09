@@ -1,5 +1,5 @@
 name: galileo_sqljocky5
-version: 3.0.0
+version: 3.0.1
 description: MySQL driver for Dart with support for prepared statements, transactions and connection pooling.
 documentation:
 homepage: https://github.com/insinfo/galileo

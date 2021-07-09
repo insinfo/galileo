@@ -11,3 +11,7 @@
 ## 3.0.0
 
 - migrated to null security and dependency updates
+
+## 3.0.1
+
+- Fixed cast bug in MySqlConnectionImpl.prepare.
