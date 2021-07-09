@@ -69,7 +69,7 @@ class MySqlConnectionImpl implements MySqlConnection {
 
   @override
   Future<Prepared> prepare(String sql) async {
-    PreparedQuery query = await (_socket.execHandler(PrepareHandler(sql), _timeout) as FutureOr<PreparedQuery>);
+    final query = await _socket.execHandler(PrepareHandler(sql), _timeout);
     return PreparedImpl._(this, query);
   }
 
