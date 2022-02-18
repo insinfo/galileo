@@ -32,7 +32,7 @@ class MySqlConnectionImpl implements MySqlConnection {
     var prepared;
     try {
       prepared = await (_socket.execHandler(PrepareHandler(sql), _timeout));
-      var handler = ExecuteQueryHandler(prepared, false, values as List<dynamic>);
+      var handler = ExecuteQueryHandler(prepared, false, List<dynamic>.of(values));
       return _socket.execResultHandler(handler, _timeout);
     } catch (e) {
       if (prepared != null) {
